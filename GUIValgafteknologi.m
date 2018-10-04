@@ -61,7 +61,6 @@ guidata(hObject, handles);
 % UIWAIT makes GUIstartS wait for user response (see UIRESUME)
 % uiwait(handles.figure1);
 
-
 % --- Outputs from this function are returned to the command line.
 function varargout = GUIstartS_OutputFcn(hObject, eventdata, handles) 
 % varargout  cell array for returning output args (see VARARGOUT);
