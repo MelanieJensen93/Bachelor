@@ -58,6 +58,8 @@ handles.output = hObject;
 % Update handles structure
 guidata(hObject, handles);
 
+
+
 % UIWAIT makes GUIValgafteknologi wait for user response (see UIRESUME)
 % uiwait(handles.figure1);
 
@@ -72,6 +74,8 @@ function varargout = GUIValgafteknologi_OutputFcn(hObject, eventdata, handles)
 % Get default command line output from handles structure
 varargout{1} = handles.output;
 
+set(gcf, 'units','normalized','outerposition',[0 0 1 1]);
+set(gcf, 'Toolbar', 'none', 'Menu', 'none');
 
 % --- Executes on button press in pushbutton3.
 function pushbutton3_Callback(hObject, eventdata, handles)
