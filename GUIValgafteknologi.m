@@ -22,7 +22,7 @@ function varargout = GUIValgafteknologi(varargin)
 
 % Edit the above text to modify the response to help GUIValgafteknologi
 
-% Last Modified by GUIDE v2.5 04-Oct-2018 10:37:09
+% Last Modified by GUIDE v2.5 08-Oct-2018 08:56:52
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -77,15 +77,15 @@ varargout{1} = handles.output;
 set(gcf, 'units','normalized','outerposition',[0 0 1 1]);
 set(gcf, 'Toolbar', 'none', 'Menu', 'none');
 
-% --- Executes on button press in pushbutton3.
-function pushbutton3_Callback(hObject, eventdata, handles)
-% hObject    handle to pushbutton3 (see GCBO)
+% --- Executes on button press in btnLunaValgafteknologi.
+function btnLunaValgafteknologi_Callback(hObject, eventdata, handles)
+% hObject    handle to btnLunaValgafteknologi (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
 
-% --- Executes on button press in pushbutton4.
-function pushbutton4_Callback(hObject, eventdata, handles)
-% hObject    handle to pushbutton4 (see GCBO)
+% --- Executes on button press in btnCarendoValgafteknologi.
+function btnCarendoValgafteknologi_Callback(hObject, eventdata, handles)
+% hObject    handle to btnCarendoValgafteknologi (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
