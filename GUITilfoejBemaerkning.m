@@ -22,7 +22,7 @@ function varargout = GUITilfoejBemaerkning(varargin)
 
 % Edit the above text to modify the response to help GUITilfoejBemaerkning
 
-% Last Modified by GUIDE v2.5 08-Oct-2018 09:39:46
+% Last Modified by GUIDE v2.5 08-Oct-2018 09:54:55
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -78,6 +78,11 @@ function btnVealgDatoTilfoejBemearkning_Callback(hObject, eventdata, handles)
 % hObject    handle to btnVealgDatoTilfoejBemearkning (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
+
+uicalendar('Weekend',[1 0 0 0 0 0 1], ...  
+'SelectionType', 1, ...  
+'DestinationUI', @etDatoTilfoejBemaerkning);
+
 
 
 % --- Executes on button press in btnTilfoejBemaerkningTilfoejBemaerkning.
@@ -189,3 +194,28 @@ function cbEftermiddagTilfoejBemaerkning_Callback(hObject, eventdata, handles)
 % handles    structure with handles and user data (see GUIDATA)
 
 % Hint: get(hObject,'Value') returns toggle state of cbEftermiddagTilfoejBemaerkning
+
+
+
+function etDatoTilfoejBemaerkning_Callback(hObject, eventdata, handles)
+% hObject    handle to etDatoTilfoejBemaerkning (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hints: get(hObject,'String') returns contents of etDatoTilfoejBemaerkning as text
+%        str2double(get(hObject,'String')) returns contents of etDatoTilfoejBemaerkning as a double
+
+
+% --- Executes during object creation, after setting all properties.
+function etDatoTilfoejBemaerkning_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to etDatoTilfoejBemaerkning (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+% Hint: edit controls usually have a white background on Windows.
+%       See ISPC and COMPUTER.
+if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor','white');
+end
+
+
