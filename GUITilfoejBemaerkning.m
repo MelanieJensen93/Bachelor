@@ -81,7 +81,7 @@ function btnVealgDatoTilfoejBemearkning_Callback(hObject, eventdata, handles)
 
 uicalendar('Weekend',[1 0 0 0 0 0 1], ...  
 'SelectionType', 1, ...  
-'DestinationUI', @etDatoTilfoejBemaerkning);
+'DestinationUI', handles.etDatoTilfoejBemaerkning);
 
 
 
