@@ -22,7 +22,7 @@ function varargout = GUIValgafteknologi(varargin)
 
 % Edit the above text to modify the response to help GUIValgafteknologi
 
-% Last Modified by GUIDE v2.5 08-Oct-2018 08:56:52
+% Last Modified by GUIDE v2.5 10-Oct-2018 11:42:34
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -61,7 +61,7 @@ guidata(hObject, handles);
 
 
 % UIWAIT makes GUIValgafteknologi wait for user response (see UIRESUME)
-% uiwait(handles.figure1);
+% uiwait(handles.GUIValgAfTeknologi);
 
 
 % --- Outputs from this function are returned to the command line.
@@ -82,6 +82,9 @@ function btnLunaValgafteknologi_Callback(hObject, eventdata, handles)
 % hObject    handle to btnLunaValgafteknologi (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
+handles.Velfaerdsteknologi.Luna = 1; 
+guidata(hObject, handles);
+GUIBrugermanual(handles);
 
 
 % --- Executes on button press in btnCarendoValgafteknologi.
@@ -89,5 +92,7 @@ function btnCarendoValgafteknologi_Callback(hObject, eventdata, handles)
 % hObject    handle to btnCarendoValgafteknologi (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-handles = Brugermanual(handles); 
+handles.Velfaerdsteknologi.Carendo = 1;
 guidata(hObject, handles);
+GUIBrugermanual(handles);
+
