@@ -22,7 +22,7 @@ function varargout = GUISensordataoverblik(varargin)
 
 % Edit the above text to modify the response to help GUISensordataoverblik
 
-% Last Modified by GUIDE v2.5 04-Oct-2018 11:41:19
+% Last Modified by GUIDE v2.5 08-Oct-2018 14:02:48
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -78,3 +78,26 @@ function btnTilojbemaerkningSensordatavindue_Callback(hObject, eventdata, handle
 % hObject    handle to btnTilojbemaerkningSensordatavindue (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
+
+
+% --- Executes on selection change in lbBemaerkning.
+function lbBemaerkning_Callback(hObject, eventdata, handles)
+% hObject    handle to lbBemaerkning (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hints: contents = cellstr(get(hObject,'String')) returns lbBemaerkning contents as cell array
+%        contents{get(hObject,'Value')} returns selected item from lbBemaerkning
+
+
+% --- Executes during object creation, after setting all properties.
+function lbBemaerkning_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to lbBemaerkning (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+% Hint: listbox controls usually have a white background on Windows.
+%       See ISPC and COMPUTER.
+if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor','white');
+end

@@ -22,7 +22,7 @@ function varargout = GUITilfoejBemaerkning(varargin)
 
 % Edit the above text to modify the response to help GUITilfoejBemaerkning
 
-% Last Modified by GUIDE v2.5 08-Oct-2018 09:54:55
+% Last Modified by GUIDE v2.5 10-Oct-2018 12:56:25
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -160,13 +160,13 @@ function cbFormiddagTilfoejBemaerkning_Callback(hObject, eventdata, handles)
 % Hint: get(hObject,'Value') returns toggle state of cbFormiddagTilfoejBemaerkning
 
 
-% --- Executes on button press in cbMiddagTilfoejBemaerkning.
-function cbMiddagTilfoejBemaerkning_Callback(hObject, eventdata, handles)
-% hObject    handle to cbMiddagTilfoejBemaerkning (see GCBO)
+% --- Executes on button press in rbMiddagTilfoejBemaerkning.
+function rbMiddagTilfoejBemaerkning_Callback(hObject, eventdata, handles)
+% hObject    handle to rbMiddagTilfoejBemaerkning (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
-% Hint: get(hObject,'Value') returns toggle state of cbMiddagTilfoejBemaerkning
+% Hint: get(hObject,'Value') returns toggle state of rbMiddagTilfoejBemaerkning
 
 
 % --- Executes on button press in cbAftenTilfoejBemaerkning.
@@ -178,13 +178,13 @@ function cbAftenTilfoejBemaerkning_Callback(hObject, eventdata, handles)
 % Hint: get(hObject,'Value') returns toggle state of cbAftenTilfoejBemaerkning
 
 
-% --- Executes on button press in cbNatTilfoejBemaerkning.
-function cbNatTilfoejBemaerkning_Callback(hObject, eventdata, handles)
-% hObject    handle to cbNatTilfoejBemaerkning (see GCBO)
+% --- Executes on button press in rbNatTilfoejBemaerkning.
+function rbNatTilfoejBemaerkning_Callback(hObject, eventdata, handles)
+% hObject    handle to rbNatTilfoejBemaerkning (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
-% Hint: get(hObject,'Value') returns toggle state of cbNatTilfoejBemaerkning
+% Hint: get(hObject,'Value') returns toggle state of rbNatTilfoejBemaerkning
 
 
 % --- Executes on button press in cbEftermiddagTilfoejBemaerkning.
@@ -219,3 +219,39 @@ if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgr
 end
 
 
+
+
+% --- Executes on button press in rbMorgenTilfoejBemearkning.
+function rbMorgenTilfoejBemearkning_Callback(hObject, eventdata, handles)
+% hObject    handle to rbMorgenTilfoejBemearkning (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hint: get(hObject,'Value') returns toggle state of rbMorgenTilfoejBemearkning
+
+
+% --- Executes on button press in rbEftermiddagTilfoejBemaerkning.
+function rbEftermiddagTilfoejBemaerkning_Callback(hObject, eventdata, handles)
+% hObject    handle to rbEftermiddagTilfoejBemaerkning (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hint: get(hObject,'Value') returns toggle state of rbEftermiddagTilfoejBemaerkning
+
+
+% --- Executes on button press in rbFormiddagTilfoejBemaerkning.
+function rbFormiddagTilfoejBemaerkning_Callback(hObject, eventdata, handles)
+% hObject    handle to rbFormiddagTilfoejBemaerkning (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hint: get(hObject,'Value') returns toggle state of rbFormiddagTilfoejBemaerkning
+
+
+% --- Executes on button press in rbAftenTilfoejBemaerkning.
+function rbAftenTilfoejBemaerkning_Callback(hObject, eventdata, handles)
+% hObject    handle to rbAftenTilfoejBemaerkning (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hint: get(hObject,'Value') returns toggle state of rbAftenTilfoejBemaerkning
