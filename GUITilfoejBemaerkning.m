@@ -93,10 +93,38 @@ function btnTilfoejBemaerkningTilfoejBemaerkning_Callback(hObject, eventdata, ha
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
-if isfield(handles.TB.bemaerkning,get(get(handles.bgBemaerkningTilfoejBemaerkning,'SelectedObject'),'String'))
-    set(handles.TB.bemaerkning,'String', get(handles.etAndetTilfoejBemaerkning,'String'));
+if ~isfield(handles,'TB')
+    msgbox('Du mangler alt');
+    return 
+end 
+
+if ~isfield(handles.TB, 'dato')
+    msgbox('Vælg venligst en dato"');
+    return;
 end
+
+if ~isfield(handles.TB, 'tidspunkt')
+    msgbox('Vælg venligst et tidspunkt!"');
+    return;
+end
+
+if ~isfield(handles.TB, 'bemaerkning')
+    msgbox('Vælg venligst en bemærkning!"');
+    return;
+end
+
+
+
+
+
+
+if isfield(handles.TB.bemaerkning(1),get(get(handles.bgBemaerkningTilfoejBemaerkning,'SelectedObject'),'String'))
+    handles.TB.bemaerkning(1) =  get(handles.etAndetTilfoejBemaerkning,'String');
+end
+handles.TB(1).Dato = get(handles.etDatoTilfoejBemaerkning,'String')
 guidata(hObject,eventdata)
+
+    
 d=1; 
 % --- Executes on button press in cbBorgerkraevertopersonalerTilfoejBemaerning.
 
