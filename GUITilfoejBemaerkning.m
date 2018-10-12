@@ -254,5 +254,11 @@ function btnTilfoejBemaerkningTilfoejBemaerkning_Callback(hObject, eventdata, ha
 handles=Bemaerkning(handles);
 
 guidata(hObject,eventdata);
-
+close(GUITilfoejBemaerkning)
+GUISensordataoverblik;
+a= sprintf("%s %s %s"+handles.TB.B(idx).bemaerkning,handles.TB.B(idx).dato, handles.TB.B(idx).tidspunkt);
+str_part = a; 
+old_str = get(handles.lbBemaerkning,'String'); 
+new_str=strvcat(old_str,str_part);
+set(handles.lbBemaerkning,'String',new_str)
 d=1; 
