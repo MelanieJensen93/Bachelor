@@ -22,7 +22,7 @@ function varargout = GUISensordataoverblik(varargin)
 
 % Edit the above text to modify the response to help GUISensordataoverblik
 
-% Last Modified by GUIDE v2.5 12-Oct-2018 09:10:08
+% Last Modified by GUIDE v2.5 12-Oct-2018 12:49:04
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -52,6 +52,7 @@ function GUISensordataoverblik_OpeningFcn(hObject, eventdata, handles, varargin)
 % handles    structure with handles and user data (see GUIDATA)
 % varargin   command line arguments to GUISensordataoverblik (see VARARGIN)
 
+
 % Choose default command line output for GUISensordataoverblik
 handles.output = hObject;
 
@@ -79,6 +80,9 @@ function btnTilojbemaerkningSensordatavindue_Callback(hObject, eventdata, handle
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
+datatogo = handles.lbBemaerkning;
+GUITilfoejBemaerkning(datatogo);
+
 
 % --- Executes on selection change in lbBemaerkning.
 function lbBemaerkning_Callback(hObject, eventdata, handles)
@@ -101,3 +105,10 @@ function lbBemaerkning_CreateFcn(hObject, eventdata, handles)
 if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
     set(hObject,'BackgroundColor','white');
 end
+
+
+% --- Executes on button press in btnVaelgDatoSensorDataOverblik.
+function btnVaelgDatoSensorDataOverblik_Callback(hObject, eventdata, handles)
+% hObject    handle to btnVaelgDatoSensorDataOverblik (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)

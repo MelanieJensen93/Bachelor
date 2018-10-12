@@ -62,6 +62,7 @@ guidata(hObject, handles);
 % uiwait(handles.GUITilfoejBemaerkning);
 
 
+
 % --- Outputs from this function are returned to the command line.
 function varargout = GUITilfoejBemaerkning_OutputFcn(hObject, eventdata, handles) 
 % varargout  cell array for returning output args (see VARARGOUT);
@@ -87,52 +88,7 @@ uicalendar('Weekend',[1 0 0 0 0 0 1], ...
 
 
 
-% --- Executes on button press in btnTilfoejBemaerkningTilfoejBemaerkning.
-function btnTilfoejBemaerkningTilfoejBemaerkning_Callback(hObject, eventdata, handles)
-% hObject    handle to btnTilfoejBemaerkningTilfoejBemaerkning (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
 
-handles.TB(1).dato = get(handles.etDatoTilfoejBemaerkning,'String')
-if isfield(handles.TB.bemaerkning(1),get(get(handles.bgBemaerkningTilfoejBemaerkning,'SelectedObject'),'String'))
-    handles.TB.bemaerkning(1) =  get(handles.etAndetTilfoejBemaerkning,'String');
-end
-
-guidata(hObject,eventdata);
-
-d=1; 
-if ~isfield(handles,'TB')
-    msgbox('Du mangler alt');
-    return 
-end 
-
-if ~isfield(handles.TB, 'dato')
-    msgbox('Vælg venligst en dato"');
-    return;
-end
-
-if ~isfield(handles.TB, 'tidspunkt')
-    msgbox('Vælg venligst et tidspunkt!"');
-    return;
-end
-
-if ~isfield(handles.TB, 'bemaerkning')
-    msgbox('Vælg venligst en bemærkning!"');
-    return;
-end
-
-if isfield(handles, 'TB')
-    msgbox(sprintf('Vil du tilføje: %s %s %s ?',handles.TB(1).bemaerkning, handles.TB(1).dato, handles.TB(1).tidspunkt));
-    return;
-end
-
-
-
-
-
-
-    
-d=1; 
 % --- Executes on button press in cbBorgerkraevertopersonalerTilfoejBemaerning.
 
 
@@ -248,8 +204,8 @@ function bgTidspunktTilfoejBemaerkning_SelectionChangedFcn(hObject, eventdata, h
 % hObject    handle to the selected object in bgTidspunktTilfoejBemaerkning 
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-handles.TB(1).tidspunkt = get(get(handles.bgTidspunktTilfoejBemaerkning,'SelectedObject'),'String');
-guidata(hObject,handles)
+%handles.TB(1).tidspunkt = get(get(handles.bgTidspunktTilfoejBemaerkning,'SelectedObject'),'String');
+
 
 
 % --- Executes when selected object is changed in bgBemaerkningTilfoejBemaerkning.
@@ -257,13 +213,7 @@ function bgBemaerkningTilfoejBemaerkning_SelectionChangedFcn(hObject, eventdata,
 % hObject    handle to the selected object in bgBemaerkningTilfoejBemaerkning 
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-handles.TB(1).bemaerkning = get(get(handles.bgBemaerkningTilfoejBemaerkning,'SelectedObject'),'String');
-% if isfield(handles.TB(1).bemaerkning, 'Andet')
-%     handles.TB(1).bemaerkning == get(handles.etAndetTilfoejBemaerkning,'String');
-% end
-
-guidata(hObject,handles)
-
+%handles.TB(1).bemaerkning = get(get(handles.bgBemaerkningTilfoejBemaerkning,'SelectedObject'),'String');
 
 % --- Executes on button press in rbBorgerKraeverToPersonalerTilfoejBemaerkning.
 function rbBorgerKraeverToPersonalerTilfoejBemaerkning_Callback(hObject, eventdata, handles)
@@ -290,3 +240,19 @@ function rbAndetTilfoejBemaerkning_Callback(hObject, eventdata, handles)
 % handles    structure with handles and user data (see GUIDATA)
 
 % Hint: get(hObject,'Value') returns toggle state of rbAndetTilfoejBemaerkning
+
+% --- Executes on button press in btnTilfoejBemaerkningTilfoejBemaerkning.
+function btnTilfoejBemaerkningTilfoejBemaerkning_Callback(hObject, eventdata, handles)
+% hObject    handle to btnTilfoejBemaerkningTilfoejBemaerkning (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+%handles.TB.B.dato = get(handles.etDatoTilfoejBemaerkning,'String');
+%guidata(hObject,eventdata);
+%d=1; 
+
+handles=Bemaerkning(handles);
+
+guidata(hObject,eventdata);
+
+d=1; 
