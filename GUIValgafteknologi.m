@@ -84,7 +84,8 @@ function btnLunaValgafteknologi_Callback(hObject, eventdata, handles)
 % handles    structure with handles and user data (see GUIDATA)
 handles.Velfaerdsteknologi.Luna = 1; 
 guidata(hObject, handles);
-GUIBrugermanual(handles);
+datatogo = handles.Velfaerdsteknologi;
+GUIBrugermanual(datatogo);
 
 
 % --- Executes on button press in btnCarendoValgafteknologi.
@@ -94,5 +95,6 @@ function btnCarendoValgafteknologi_Callback(hObject, eventdata, handles)
 % handles    structure with handles and user data (see GUIDATA)
 handles.Velfaerdsteknologi.Carendo = 1;
 guidata(hObject, handles);
-GUIBrugermanual(handles);
+datatogo = handles.Velfaerdsteknologi;
+GUIBrugermanual(datatogo);
 

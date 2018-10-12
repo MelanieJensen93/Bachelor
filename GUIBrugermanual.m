@@ -22,7 +22,7 @@ function varargout = GUIBrugermanual(varargin)
 
 % Edit the above text to modify the response to help GUIBrugermanual
 
-% Last Modified by GUIDE v2.5 04-Oct-2018 13:19:24
+% Last Modified by GUIDE v2.5 12-Oct-2018 10:25:54
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -73,3 +73,20 @@ function varargout = GUIBrugermanual_OutputFcn(hObject, eventdata, handles)
 
 % Get default command line output from handles structure
 varargout{1} = handles.output;
+
+
+% --- Executes on button press in btnSeBrugermanualBrugermanualvindue.
+function btnSeBrugermanualBrugermanualvindue_Callback(hObject, eventdata, handles)
+% hObject    handle to btnSeBrugermanualBrugermanualvindue (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Inspiration til kode stammer fra: https://se.mathworks.com/help/matlab/ref/web.html
+if isfield(handles.Velfaerdsteknologi,'Carendo')
+    url = 'https://hmi-basen.dk/blobs/brugsvejl/9682.pdf';
+    web(url, '-browser');
+end 
+if isfield(handles.Velfaerdsteknologi, 'Luna')
+    url = 'https://www.aarhuskommune.dk/~/media/Subsites/Velfaerdsteknologi/Manualer-til-produkter/Ergolet-Luna-loftslift-brugermanual-ver-19.pdf';
+    web(url, '-browser');
+end

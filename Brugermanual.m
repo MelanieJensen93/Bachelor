@@ -3,11 +3,14 @@ function handles = Brugermanual(handles)
 %   Detailed explanation goes here
 
 if isfield(handles.Velfaerdsteknologi,'Carendo')
-    myString = sprintf('Test');
-    set(handles.txtValgtteknologiBrugermanualvindue,'String', myString); 
+    set(handles.txtValgtteknologiBrugermanualvindue,'String', 'Carendo');
+    axes(handles.axValgtteknologiBrugermanualVindue)
+    imshow('carendobrugermanual.png');
 end
 if isfield(handles.Velfaerdsteknologi,'Luna')
-    txtValgtteknologiBrugermanualvindue('Luna loftlift'); 
+    set(handles.txtValgtteknologiBrugermanualvindue,'String','Luna loftlift');
+    axes(handles.axValgtteknologiBrugermanualVindue)
+    imshow('lunaloftliftmanual.png');
     msgbox('Det er i øjeblikket ingen brugermanual til ', 'modal', 'error');
 end
 
