@@ -11,6 +11,6 @@ if isfield(handles.Velfaerdsteknologi,'Luna')
     set(handles.txtValgtteknologiBrugermanualvindue,'String','Luna loftlift');
     axes(handles.axValgtteknologiBrugermanualVindue)
     imshow('lunaloftliftmanual.png');
-    msgbox('Det er i øjeblikket ingen brugermanual til ', 'modal', 'error');
+    
 end
-
+msgbox('Det er i øjeblikket ingen brugermanual ', 'Brugermanul mangler', 'error');

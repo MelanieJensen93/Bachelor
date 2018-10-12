@@ -83,8 +83,8 @@ function btnSeBrugermanualBrugermanualvindue_Callback(hObject, eventdata, handle
 
 % Inspiration til kode stammer fra: https://se.mathworks.com/help/matlab/ref/web.html
 if isfield(handles.Velfaerdsteknologi,'Carendo')
-    url = 'https://hmi-basen.dk/blobs/brugsvejl/9682.pdf';
-    web(url, '-browser');
+    handles.Carendo.url = 'https://hmi-basen.dk/blobs/brugsvejl/9682.pdf';
+    web(handles.Carendo.url, '-browser');
 end 
 if isfield(handles.Velfaerdsteknologi, 'Luna')
     url = 'https://www.aarhuskommune.dk/~/media/Subsites/Velfaerdsteknologi/Manualer-til-produkter/Ergolet-Luna-loftslift-brugermanual-ver-19.pdf';
