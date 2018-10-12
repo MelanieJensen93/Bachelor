@@ -22,7 +22,7 @@ function varargout = GUISensordataoverblik(varargin)
 
 % Edit the above text to modify the response to help GUISensordataoverblik
 
-% Last Modified by GUIDE v2.5 08-Oct-2018 14:02:48
+% Last Modified by GUIDE v2.5 12-Oct-2018 09:10:08
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -59,7 +59,7 @@ handles.output = hObject;
 guidata(hObject, handles);
 
 % UIWAIT makes GUISensordataoverblik wait for user response (see UIRESUME)
-% uiwait(handles.figure1);
+% uiwait(handles.GUISensorDataOverbliksVindue);
 
 
 % --- Outputs from this function are returned to the command line.

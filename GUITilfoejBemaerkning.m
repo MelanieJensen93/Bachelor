@@ -22,7 +22,7 @@ function varargout = GUITilfoejBemaerkning(varargin)
 
 % Edit the above text to modify the response to help GUITilfoejBemaerkning
 
-% Last Modified by GUIDE v2.5 11-Oct-2018 09:26:34
+% Last Modified by GUIDE v2.5 12-Oct-2018 09:08:17
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -59,7 +59,7 @@ handles.output = hObject;
 guidata(hObject, handles);
 
 % UIWAIT makes GUITilfoejBemaerkning wait for user response (see UIRESUME)
-% uiwait(handles.figure1);
+% uiwait(handles.GUITilfoejBemaerkning);
 
 
 % --- Outputs from this function are returned to the command line.
@@ -93,6 +93,14 @@ function btnTilfoejBemaerkningTilfoejBemaerkning_Callback(hObject, eventdata, ha
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
+handles.TB(1).dato = get(handles.etDatoTilfoejBemaerkning,'String')
+if isfield(handles.TB.bemaerkning(1),get(get(handles.bgBemaerkningTilfoejBemaerkning,'SelectedObject'),'String'))
+    handles.TB.bemaerkning(1) =  get(handles.etAndetTilfoejBemaerkning,'String');
+end
+
+guidata(hObject,eventdata);
+
+d=1; 
 if ~isfield(handles,'TB')
     msgbox('Du mangler alt');
     return 
@@ -113,23 +121,19 @@ if ~isfield(handles.TB, 'bemaerkning')
     return;
 end
 
-
-
-
-
-
-if isfield(handles.TB.bemaerkning(1),get(get(handles.bgBemaerkningTilfoejBemaerkning,'SelectedObject'),'String'))
-    handles.TB.bemaerkning(1) =  get(handles.etAndetTilfoejBemaerkning,'String');
+if isfield(handles, 'TB')
+    msgbox(sprintf('Vil du tilføje: %s %s %s ?',handles.TB(1).bemaerkning, handles.TB(1).dato, handles.TB(1).tidspunkt));
+    return;
 end
-handles.TB(1).Dato = get(handles.etDatoTilfoejBemaerkning,'String')
-guidata(hObject,eventdata)
+
+
+
+
+
 
     
 d=1; 
 % --- Executes on button press in cbBorgerkraevertopersonalerTilfoejBemaerning.
-
-
-
 
 
 
@@ -257,6 +261,7 @@ handles.TB(1).bemaerkning = get(get(handles.bgBemaerkningTilfoejBemaerkning,'Sel
 % if isfield(handles.TB(1).bemaerkning, 'Andet')
 %     handles.TB(1).bemaerkning == get(handles.etAndetTilfoejBemaerkning,'String');
 % end
+
 guidata(hObject,handles)
 
 
