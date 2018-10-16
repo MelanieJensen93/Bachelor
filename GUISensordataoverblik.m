@@ -56,6 +56,19 @@ function GUISensordataoverblik_OpeningFcn(hObject, eventdata, handles, varargin)
 % Choose default command line output for GUISensordataoverblik
 handles.output = hObject;
 
+handles.TB = varargin{1}; %henter handles fra GUIBemaerkning
+guidata(hObject, handles);
+
+OpdaterListboxmedBemaerkning(handles);
+% idx=1;
+% a= sprintf("%s %s %s"+handles.TB.B(idx).bemaerkning,handles.TB.B(idx).dato, handles.TB.B(idx).tidspunkt);
+% str_part = a; 
+% old_str = get(handles.lbBemaerkning,'String'); 
+% new_str=strvcat(char(old_str),char(str_part));
+% set(handles.lbBemaerkning,'String',new_str);
+% set(handles.lbBemaerkning, 'Value', idx+1);
+
+
 % Update handles structure
 guidata(hObject, handles);
 
