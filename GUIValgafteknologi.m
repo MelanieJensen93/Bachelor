@@ -58,6 +58,10 @@ handles.output = hObject;
 % Update handles structure
 guidata(hObject, handles);
 
+handles = Brugermanual(handles); 
+% Update handles structure
+guidata(hObject, handles);
+
 
 
 % UIWAIT makes GUIValgafteknologi wait for user response (see UIRESUME)
@@ -82,6 +86,16 @@ function btnLunaValgafteknologi_Callback(hObject, eventdata, handles)
 % hObject    handle to btnLunaValgafteknologi (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
+if ~isfield(handles.Velfaerdsteknologi ,'Luna')
+    msgbox('Data for den valgte velfærdsteknologi eksisterer ikke');
+end 
+
+if isfield(handles.Velfaerdsteknologi ,'Luna')
+    field = 'Carendo';
+    handles.Velfaerdsteknologi = handles.Velfaerdsteknologi(s,field);
+end
+
+
 handles.Velfaerdsteknologi.Luna = 1; 
 guidata(hObject, handles);
 datatogo = handles.Velfaerdsteknologi;
@@ -93,6 +107,17 @@ function btnCarendoValgafteknologi_Callback(hObject, eventdata, handles)
 % hObject    handle to btnCarendoValgafteknologi (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
+
+if ~isfield(handles.Velfaerdsteknologi ,'Carendo')
+    msgbox('Data for den valgte velfærdsteknologi eksisterer ikke');
+end
+
+if isfield(handles.Velfaerdsteknologi ,'Luna')
+    field = 'Luna';
+    handles.Velfaerdsteknologi = handles.Velfaerdsteknologi(s,field);
+end
+
+    
 handles.Velfaerdsteknologi.Carendo = 1;
 guidata(hObject, handles);
 datatogo = handles.Velfaerdsteknologi;
