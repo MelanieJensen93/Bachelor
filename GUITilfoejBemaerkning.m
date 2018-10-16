@@ -247,18 +247,18 @@ function btnTilfoejBemaerkningTilfoejBemaerkning_Callback(hObject, eventdata, ha
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
-%handles.TB.B.dato = get(handles.etDatoTilfoejBemaerkning,'String');
-%guidata(hObject,eventdata);
-%d=1; 
-
 handles=Bemaerkning(handles);
+%guidata(hObject,handles);
 
-guidata(hObject,eventdata);
-close(GUITilfoejBemaerkning)
-GUISensordataoverblik;
-a= sprintf("%s %s %s"+handles.TB.B(idx).bemaerkning,handles.TB.B(idx).dato, handles.TB.B(idx).tidspunkt);
-str_part = a; 
-old_str = get(handles.lbBemaerkning,'String'); 
-new_str=strvcat(old_str,str_part);
-set(handles.lbBemaerkning,'String',new_str)
+
+
+%close(GUITilfoejBemaerkning)
+%GUISensordataoverblik;
+%close(GUITilfoejBemaerkning)
+%GUISensordataoverblik;
+%a= sprintf("%s %s %s"+handles.TB.B(idx).bemaerkning,handles.TB.B(idx).dato, handles.TB.B(idx).tidspunkt);
+%str_part = a; 
+%old_str = get(handles.lbBemaerkning,'String'); 
+%new_str=strvcat(old_str,str_part);
+%set(handles.lbBemaerkning,'String',new_str)
 d=1; 

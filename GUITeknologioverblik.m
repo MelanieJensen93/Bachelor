@@ -55,8 +55,11 @@ function GUITeknologioverblik_OpeningFcn(hObject, eventdata, handles, varargin)
 % Choose default command line output for GUITeknologioverblik
 handles.output = hObject;
 
+
 % Update handles structure
 guidata(hObject, handles);
+
+
 
 % UIWAIT makes GUITeknologioverblik wait for user response (see UIRESUME)
 % uiwait(handles.figure1);
