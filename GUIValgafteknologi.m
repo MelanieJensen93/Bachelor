@@ -58,7 +58,7 @@ handles.output = hObject;
 % Update handles structure
 guidata(hObject, handles);
 
-handles = Velfaerdsteknologi(handles);
+handles = SensorSortering(handles);
 guidata(hObject,handles);
 d=1; 
 
@@ -92,21 +92,31 @@ function btnLunaValgafteknologi_Callback(hObject, eventdata, handles)
 % hObject    handle to btnLunaValgafteknologi (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-if ~isfield(handles.Velfaerdsteknologi ,'Luna')
-    msgbox('Data for den valgte velfærdsteknologi eksisterer ikke');
-end 
-
-if isfield(handles.Velfaerdsteknologi ,'Luna')
-    field = 'Carendo';
-    handles.Velfaerdsteknologi = handles.Velfaerdsteknologi(s,field);
+d=1; 
+CntNr =1; 
+for i = 1:numel(fieldnames(handles.Velfaerdsteknologi.Sensorer))
+    %sensorname = fieldnames(handles.Velfaerdsteknologi.Sensorer);
+    fieldname = fieldnames(handles.Velfaerdsteknologi.Sensorer)
+    strfieldname = string(fieldname(i,1))
+    d=1; 
+    if strcmp(handles.Velfaerdsteknologi.Sensorer.(strfieldname)(1).Velfaerdsteknologi,'Luna')==1
+        d=1; 
+        CntNr = CntNr +1; 
+    end      %msgbox('Data for den valgte velfærdsteknologi eksisterer ikke');
+ 
 end
-
-
+if CntNr ~= 0 
+    datatogo = handles.Velfaerdsteknologi;
+    guidata(hObject, handles);
+    GUITeknologioverblik(datatogo);
+end
+ 
+d=1; 
 %handles.Velfaerdsteknologi.Luna = 1; 
-%guidata(hObject, handles);
-datatogo = handles.Velfaerdsteknologi;
-GUIBrugermanual(datatogo);
-GUITeknologioverblik(datatogo);
+guidata(hObject, handles);
+%datatogo = handles.Velfaerdsteknologi;
+
+%GUITeknologioverblik(datatogo);
 
 
 % --- Executes on button press in btnCarendoValgafteknologi.
@@ -115,6 +125,7 @@ function btnCarendoValgafteknologi_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
+d=1; 
 if ~isfield(handles.Velfaerdsteknologi ,'Carendo')
     msgbox('Data for den valgte velfærdsteknologi eksisterer ikke');
 end
