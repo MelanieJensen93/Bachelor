@@ -55,6 +55,8 @@ function GUITilfoejBemaerkning_OpeningFcn(hObject, eventdata, handles, varargin)
 % Choose default command line output for GUITilfoejBemaerkning
 handles.output = hObject;
 
+handles.vv = varargin{1}; %henter handles fra GUIBemaerkning
+
 % Update handles structure
 guidata(hObject, handles);
 
@@ -248,7 +250,11 @@ function btnTilfoejBemaerkningTilfoejBemaerkning_Callback(hObject, eventdata, ha
 % handles    structure with handles and user data (see GUIDATA)
 
 handles=Bemaerkning(handles);
-%guidata(hObject,handles);
+%guidata(hObject, handles);
+
+
+
+%OpdaterListboxmedBemaerkning(handles);
 
 
 
@@ -261,4 +267,4 @@ handles=Bemaerkning(handles);
 %old_str = get(handles.lbBemaerkning,'String'); 
 %new_str=strvcat(old_str,str_part);
 %set(handles.lbBemaerkning,'String',new_str)
-d=1; 
+ 

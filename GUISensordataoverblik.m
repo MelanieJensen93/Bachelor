@@ -56,10 +56,15 @@ function GUISensordataoverblik_OpeningFcn(hObject, eventdata, handles, varargin)
 % Choose default command line output for GUISensordataoverblik
 handles.output = hObject;
 
-handles.TB = varargin{1}; %henter handles fra GUIBemaerkning
+if ~isempty(varargin)
+    d=1;
+    handles.TB = varargin{1}; %henter handles fra GUIBemaerkning
+    %guidata(hObject, handles);
+end
+
 guidata(hObject, handles);
 
-OpdaterListboxmedBemaerkning(handles);
+%OpdaterListboxmedBemaerkning(handles);
 % idx=1;
 % a= sprintf("%s %s %s"+handles.TB.B(idx).bemaerkning,handles.TB.B(idx).dato, handles.TB.B(idx).tidspunkt);
 % str_part = a; 
@@ -71,6 +76,7 @@ OpdaterListboxmedBemaerkning(handles);
 
 % Update handles structure
 guidata(hObject, handles);
+
 
 % UIWAIT makes GUISensordataoverblik wait for user response (see UIRESUME)
 % uiwait(handles.GUISensorDataOverbliksVindue);
@@ -93,8 +99,12 @@ function btnTilojbemaerkningSensordatavindue_Callback(hObject, eventdata, handle
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
-datatogo = handles.lbBemaerkning;
-GUITilfoejBemaerkning(datatogo);
+%datatogo = handles.lbBemaerkning;
+%GUITilfoejBemaerkning(handles);
+handles.vv = 'kk';
+datatogo = handles.vv;
+Bemaerkning(datatogo);
+
 
 
 % --- Executes on selection change in lbBemaerkning.
