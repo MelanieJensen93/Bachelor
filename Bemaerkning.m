@@ -18,7 +18,7 @@ end
 
 if ~isfield(handles,'TB')
     if ~isfield(handles,'B')
-    msgbox('Du mangler alt');
+    msgbox('Vælg venligst dato, tidspunkt og type af bemærkning');
     return 
     end
 end 
@@ -29,12 +29,12 @@ if ~isfield(handles.TB.B, 'dato')
 end
 
 if ~isfield(handles.TB.B, 'tidspunkt')
-    msgbox('Vælg venligst et tidspunkt!"');
+    msgbox('Vælg venligst et tidspunkt');
     return;
 end
 
 if ~isfield(handles.TB.B, 'bemaerkning')
-    msgbox('Vælg venligst en bemærkning!"');
+    msgbox('Vælg venligst en bemærkning');
     return;
 end
 
@@ -54,6 +54,19 @@ if isfield(handles.TB,'B')
              
     end 
 end
+
+bemarkningsFil = fopen('bemarkningsFil.txt','w');
+for i = 1:length(handles.TB)
+    % strjoin: for at vi kan få værdien ud fra cellen: celleværdien
+    % laves om til en string
+    %str1 = strjoin(handles.TB.B.dato);
+    %str2 = strjoin(handles.TB.B.tidspunkt);
+    %str3 = strjoin(handles.TB.B.bemaerkning);    
+    
+    fprintf(bemarkningsFil, '%s %s %s', handles.TB.B.dato, handles.TB.B.tidspunkt, handles.TB.B.bemaerkning);
+end
+
+fclose(bemarkningsFil);
    
  
 
