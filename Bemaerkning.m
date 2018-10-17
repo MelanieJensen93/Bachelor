@@ -1,5 +1,7 @@
 function [handles,datatogo] = Bemaerkning(handles)
 
+GUITilfoejBemaerkning(handles);
+
 if ~isfield(handles,'TB')
     idx=1; 
     handles.TB.B(idx).dato= get(handles.etDatoTilfoejBemaerkning,'String');
@@ -46,14 +48,16 @@ if isfield(handles.TB,'B')
     switch svar
         case 'Gem'
             disp([svar ' gemt'])
-            close(GUITilfoejBemaerkning)
             datatogo = handles.TB;
             GUISensordataoverblik(datatogo);
+            close(GUITilfoejBemaerkning);
         case 'Annuller'
             disp([svar ' annulleret'])
              
     end 
 end
+
+%OpdaterListboxmedBemaerkning(handles);
 
 bemarkningsFil = fopen('bemarkningsFil.txt','w');
 for i = 1:length(handles.TB)
