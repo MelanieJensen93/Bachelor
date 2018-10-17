@@ -58,9 +58,15 @@ handles.output = hObject;
 % Update handles structure
 guidata(hObject, handles);
 
-handles = Brugermanual(handles); 
+handles = Velfaerdsteknologi(handles);
+guidata(hObject,handles);
+d=1; 
+
+%handles = Brugermanual(handles); 
 % Update handles structure
-guidata(hObject, handles);
+%guidata(hObject, handles);
+
+
 
 
 
@@ -96,10 +102,11 @@ if isfield(handles.Velfaerdsteknologi ,'Luna')
 end
 
 
-handles.Velfaerdsteknologi.Luna = 1; 
-guidata(hObject, handles);
+%handles.Velfaerdsteknologi.Luna = 1; 
+%guidata(hObject, handles);
 datatogo = handles.Velfaerdsteknologi;
 GUIBrugermanual(datatogo);
+GUITeknologioverblik(datatogo);
 
 
 % --- Executes on button press in btnCarendoValgafteknologi.
@@ -113,13 +120,17 @@ if ~isfield(handles.Velfaerdsteknologi ,'Carendo')
 end
 
 if isfield(handles.Velfaerdsteknologi ,'Luna')
-    field = 'Luna';
-    handles.Velfaerdsteknologi = handles.Velfaerdsteknologi(s,field);
+    handles.Velfaerdsteknologi.Luna = []; 
+    handles.Velfaerdsteknologi=rmfield(handles.Velfaerdsteknologi,'Luna');
 end
 
     
-handles.Velfaerdsteknologi.Carendo = 1;
-guidata(hObject, handles);
+%handles.Velfaerdsteknologi.Carendo = 1;
+%guidata(hObject, handles);
 datatogo = handles.Velfaerdsteknologi;
-GUIBrugermanual(datatogo);
+%GUIBrugermanual(datatogo);
+d=1;
+GUITeknologioverblik(datatogo);
+%close(GUIValgafteknologi);
+
 

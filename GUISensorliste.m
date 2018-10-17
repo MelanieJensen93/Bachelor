@@ -54,16 +54,12 @@ function GUISensorliste_OpeningFcn(hObject, eventdata, handles, varargin)
 
 % Choose default command line output for GUISensorliste
 handles.output = hObject;
-
-handles.TB = varargin{1}; %henter handles fra GUIBemaerkning
+d=1; 
+handles.Velfaerdsteknologi = varargin{1};
 guidata(hObject, handles);
+d=1; 
 
-a= sprintf("%s %s %s"+handles.TB.B(idx).bemaerkning,handles.TB.B(idx).dato, handles.TB.B(idx).tidspunkt);
-str_part = a; 
-old_str = get(handles.lbBemaerkning,'String'); 
-new_str=strvcat(old_str,str_part);
-set(handles.lbBemaerkning,'String',new_str)
-
+handles = Sensor(handles);
 % Update handles structure
 guidata(hObject, handles);
 
