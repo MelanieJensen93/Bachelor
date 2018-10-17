@@ -92,32 +92,21 @@ function btnLunaValgafteknologi_Callback(hObject, eventdata, handles)
 % hObject    handle to btnLunaValgafteknologi (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-d=1; 
 CntNr =1; 
 for i = 1:numel(fieldnames(handles.Velfaerdsteknologi.Sensorer))
-    %sensorname = fieldnames(handles.Velfaerdsteknologi.Sensorer);
     fieldname = fieldnames(handles.Velfaerdsteknologi.Sensorer)
     strfieldname = string(fieldname(i,1))
-    d=1; 
-    if strcmp(handles.Velfaerdsteknologi.Sensorer.(strfieldname)(1).Velfaerdsteknologi,'Luna')==1
-        d=1; 
+    if strcmp(handles.Velfaerdsteknologi.Sensorer.(strfieldname)(1).Velfaerdsteknologi,'Luna')==1 
         CntNr = CntNr +1; 
-    end      %msgbox('Data for den valgte velfærdsteknologi eksisterer ikke');
- 
+    end      
 end
 if CntNr ~= 0 
     datatogo = handles.Velfaerdsteknologi;
     guidata(hObject, handles);
     GUITeknologioverblik(datatogo);
+else
+    msgbox('Data for den valgte velfærdsteknologi eksisterer ikke');
 end
- 
-d=1; 
-%handles.Velfaerdsteknologi.Luna = 1; 
-guidata(hObject, handles);
-%datatogo = handles.Velfaerdsteknologi;
-
-%GUITeknologioverblik(datatogo);
-
 
 % --- Executes on button press in btnCarendoValgafteknologi.
 function btnCarendoValgafteknologi_Callback(hObject, eventdata, handles)
@@ -125,23 +114,18 @@ function btnCarendoValgafteknologi_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
-d=1; 
-if ~isfield(handles.Velfaerdsteknologi ,'Carendo')
+CntNr=1; 
+for i = 1:numel(fieldnames(handles.Velfaerdsteknologi.Sensorer))
+    fieldname = fieldnames(handles.Velfaerdsteknologi.Sensorer)
+    strfieldname = string(fieldname(i,1))
+    if strcmp(handles.Velfaerdsteknologi.Sensorer.(strfieldname)(1).Velfaerdsteknologi,'Carendo')==1 
+        CntNr = CntNr +1; 
+    end      
+end
+if CntNr ~= 0 
+    datatogo = handles.Velfaerdsteknologi;
+    guidata(hObject, handles);
+    GUITeknologioverblik(datatogo);
+else
     msgbox('Data for den valgte velfærdsteknologi eksisterer ikke');
 end
-
-if isfield(handles.Velfaerdsteknologi ,'Luna')
-    handles.Velfaerdsteknologi.Luna = []; 
-    handles.Velfaerdsteknologi=rmfield(handles.Velfaerdsteknologi,'Luna');
-end
-
-    
-%handles.Velfaerdsteknologi.Carendo = 1;
-%guidata(hObject, handles);
-datatogo = handles.Velfaerdsteknologi;
-%GUIBrugermanual(datatogo);
-d=1;
-GUITeknologioverblik(datatogo);
-%close(GUIValgafteknologi);
-
-

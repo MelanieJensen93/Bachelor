@@ -59,7 +59,7 @@ handles.Velfaerdsteknologi = varargin{1}; %henter handles fra GUIValgafteknologi
 
 % Update handles structure
 guidata(hObject, handles);
-d=1; 
+ 
 
 
 
