@@ -59,7 +59,7 @@ handles.Velfaerdsteknologi = varargin{1};
 guidata(hObject, handles);
 d=1; 
 
-handles = Sensor(handles);
+handles = SensorInddeling(handles);
 % Update handles structure
 guidata(hObject, handles);
 
