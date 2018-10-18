@@ -58,9 +58,9 @@ handles.output = hObject;
 % Update handles structure
 guidata(hObject, handles);
 
-handles = Velfaerdsteknologi(handles);
+handles = IndlaesVelfaerdsteknologi(handles);
 guidata(hObject,handles);
-d=1; 
+ 
 
 %handles = Brugermanual(handles); 
 % Update handles structure
@@ -93,10 +93,10 @@ function btnLunaValgafteknologi_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
-if isfield(handles.Velfaerdsteknologi ,'Carendo')
-    handles.Velfaerdsteknologi.Carendo = []; 
-    handles.Velfaerdsteknologi=rmfield(handles.Velfaerdsteknologi,'Carendo');
-end
+%if isfield(handles.Velfaerdsteknologi ,'Carendo')
+ %   handles.Velfaerdsteknologi.Carendo = []; 
+  %  handles.Velfaerdsteknologi=rmfield(handles.Velfaerdsteknologi,'Carendo');
+%end
 
 if isfield(handles.Velfaerdsteknologi ,'Luna')
     datatogo = handles.Velfaerdsteknologi;

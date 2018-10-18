@@ -97,8 +97,6 @@ function btnListoversensorerTeknologioverblik_Callback(hObject, eventdata, handl
 
 datatogo = handles.Velfaerdsteknologi;
 GUISensorliste(datatogo);
-close(GUITeknologioverblik);
-d=1;
 
 
 % --- Executes on button press in btnYderligeredataTeknologioverblik.

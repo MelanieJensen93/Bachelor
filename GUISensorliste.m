@@ -22,7 +22,7 @@ function varargout = GUISensorliste(varargin)
 
 % Edit the above text to modify the response to help GUISensorliste
 
-% Last Modified by GUIDE v2.5 04-Oct-2018 11:23:03
+% Last Modified by GUIDE v2.5 18-Oct-2018 11:26:11
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -54,12 +54,22 @@ function GUISensorliste_OpeningFcn(hObject, eventdata, handles, varargin)
 
 % Choose default command line output for GUISensorliste
 handles.output = hObject;
-d=1; 
 handles.Velfaerdsteknologi = varargin{1};
 guidata(hObject, handles);
-d=1; 
 
 handles = SensorInddeling(handles);
+% d=1;
+% for ii=1:length(handles.Velfaerdsteknologi.CarendoSensor)
+%     idx=1;
+%     udskrift = sprintf("Sensor nr. %s", num2str(handles.Velfaerdsteknologi.CarendoSensor.(ii).ID));
+%     str_part = udskrift; 
+%     old_str = get(handles.lbSensorliste,'String'); 
+%     new_str=strvcat(char(old_str),char(str_part));
+%     set(handles.lbSensorliste,'String',new_str);
+%     set(handles.lbSensorliste, 'Value', idx+1);
+% end 
+
+
 % Update handles structure
 guidata(hObject, handles);
 
@@ -85,19 +95,19 @@ function btnTilbageSensorliste_Callback(hObject, eventdata, handles)
 % handles    structure with handles and user data (see GUIDATA)
 
 
-% --- Executes on selection change in listboxSensorliste.
-function listboxSensorliste_Callback(hObject, eventdata, handles)
-% hObject    handle to listboxSensorliste (see GCBO)
+% --- Executes on selection change in lbSensorliste.
+function lbSensorliste_Callback(hObject, eventdata, handles)
+% hObject    handle to lbSensorliste (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
-% Hints: contents = cellstr(get(hObject,'String')) returns listboxSensorliste contents as cell array
-%        contents{get(hObject,'Value')} returns selected item from listboxSensorliste
+% Hints: contents = cellstr(get(hObject,'String')) returns lbSensorliste contents as cell array
+%        contents{get(hObject,'Value')} returns selected item from lbSensorliste
 
 
 % --- Executes during object creation, after setting all properties.
-function listboxSensorliste_CreateFcn(hObject, eventdata, handles)
-% hObject    handle to listboxSensorliste (see GCBO)
+function lbSensorliste_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to lbSensorliste (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    empty - handles not created until after all CreateFcns called
 
