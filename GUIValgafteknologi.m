@@ -114,20 +114,20 @@ function btnCarendoValgafteknologi_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 CntRow =1;
-CntNr=1; 
+%CntNr=1; 
 for i = 1:numel(fieldnames(handles.Velfaerdsteknologi.Sensorer))
     fieldname = fieldnames(handles.Velfaerdsteknologi.Sensorer);
     strfieldname = string(fieldname(i,1));
     if strcmp(handles.Velfaerdsteknologi.Sensorer.(strfieldname)(1).Velfaerdsteknologi,'Carendo')==1 
         d=1; 
-        handles.Velfaerdsteknologi.Carendo(CntRow).(strfieldname) = handles.Velfaerdsteknologi.Sensorer.(strfieldname);
-        CntNr = CntNr +1; 
+        handles.Velfaerdsteknologi.Carendo = handles.Velfaerdsteknologi.Sensorer.(strfieldname);
+        %CntNr = CntNr +1; 
         CntRow =CntRow+1; 
     end  
     
 end
 
-if CntNr ~= 0 
+if CntRow ~= 0 
     datatogo = handles.Velfaerdsteknologi.Carendo;
     guidata(hObject, handles);
     GUITeknologioverblik(datatogo);
