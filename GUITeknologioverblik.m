@@ -93,11 +93,12 @@ function btnListoversensorerTeknologioverblik_Callback(hObject, eventdata, handl
 % hObject    handle to btnListoversensorerTeknologioverblik (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-d=1; 
+
 
 datatogo = handles.Velfaerdsteknologi;
 GUISensorliste(datatogo);
 close(GUITeknologioverblik);
+d=1;
 
 
 % --- Executes on button press in btnYderligeredataTeknologioverblik.
