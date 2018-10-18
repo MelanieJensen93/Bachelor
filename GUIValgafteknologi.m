@@ -58,7 +58,7 @@ handles.output = hObject;
 % Update handles structure
 guidata(hObject, handles);
 
-handles = SensorSortering(handles);
+handles = Velfaerdsteknologi(handles);
 guidata(hObject,handles);
 d=1; 
 
@@ -135,3 +135,28 @@ if CntRow ~= 0
 else
     msgbox('Data for den valgte velfærdsteknologi eksisterer ikke');
 end
+datatogo = handles.Velfaerdsteknologi; 
+guidata(hObject,handles);
+GUITeknologioverblik(datatogo); 
+% CntRow =1;
+% %CntNr=1; 
+% for i = 1:numel(fieldnames(handles.Velfaerdsteknologi.Sensorer))
+%     fieldname = fieldnames(handles.Velfaerdsteknologi.Sensorer);
+%     strfieldname = string(fieldname(i,1));
+%     if strcmp(handles.Velfaerdsteknologi.Sensorer.(strfieldname)(1).Velfaerdsteknologi,'Carendo')==1 
+%         d=1; 
+%         handles.Velfaerdsteknologi.Carendo = handles.Velfaerdsteknologi.Sensorer.(strfieldname);
+%         %CntNr = CntNr +1; 
+%         CntRow =CntRow+1; 
+%     end  
+%     
+% end
+% 
+% if CntRow ~= 0 
+%     datatogo = handles.Velfaerdsteknologi.Carendo;
+%     guidata(hObject, handles);
+%     GUITeknologioverblik(datatogo);
+%     d=1;
+% else
+%     msgbox('Data for den valgte velfærdsteknologi eksisterer ikke');
+% end
