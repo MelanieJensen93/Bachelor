@@ -120,7 +120,7 @@ for i = 1:numel(fieldnames(handles.Velfaerdsteknologi.Sensorer))
     strfieldname = string(fieldname(i,1));
     if strcmp(handles.Velfaerdsteknologi.Sensorer.(strfieldname)(1).Velfaerdsteknologi,'Carendo')==1 
         d=1; 
-        handles.Velfaerdsteknologi.Carendo = handles.Velfaerdsteknologi.Sensorer.(strfieldname);
+        handles.Velfaerdsteknologi.Carendo(CntRow).(strfieldname) = handles.Velfaerdsteknologi.Sensorer.(strfieldname);
         %CntNr = CntNr +1; 
         CntRow =CntRow+1; 
     end  
