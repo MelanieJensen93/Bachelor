@@ -58,7 +58,7 @@ handles.output = hObject;
 % Update handles structure
 guidata(hObject, handles);
 
-handles = Velfaerdsteknologi(handles);
+handles = IndlaesVelfaerdsteknologi(handles);
 guidata(hObject,handles);
 d=1; 
 
