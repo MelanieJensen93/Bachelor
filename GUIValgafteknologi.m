@@ -92,18 +92,17 @@ function btnLunaValgafteknologi_Callback(hObject, eventdata, handles)
 % hObject    handle to btnLunaValgafteknologi (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-CntNr =1; 
-for i = 1:numel(fieldnames(handles.Velfaerdsteknologi.Sensorer))
-    fieldname = fieldnames(handles.Velfaerdsteknologi.Sensorer)
-    strfieldname = string(fieldname(i,1))
-    if strcmp(handles.Velfaerdsteknologi.Sensorer.(strfieldname)(1).Velfaerdsteknologi,'Luna')==1 
-        CntNr = CntNr +1; 
-    end      
+
+if isfield(handles.Velfaerdsteknologi ,'Carendo')
+    handles.Velfaerdsteknologi.Carendo = []; 
+    handles.Velfaerdsteknologi=rmfield(handles.Velfaerdsteknologi,'Carendo');
 end
-if CntNr ~= 0 
-    datatogo = handles.Velfaerdsteknologi;
+
+if isfield(handles.Velfaerdsteknologi ,'Luna')
+    datatogo = handles.Velfaerdsteknologi.Luna;
     guidata(hObject, handles);
     GUITeknologioverblik(datatogo);
+    d=1;
 else
     msgbox('Data for den valgte velfærdsteknologi eksisterer ikke');
 end
@@ -113,21 +112,26 @@ function btnCarendoValgafteknologi_Callback(hObject, eventdata, handles)
 % hObject    handle to btnCarendoValgafteknologi (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-CntRow =1;
-%CntNr=1; 
-for i = 1:numel(fieldnames(handles.Velfaerdsteknologi.Sensorer))
-    fieldname = fieldnames(handles.Velfaerdsteknologi.Sensorer);
-    strfieldname = string(fieldname(i,1));
-    if strcmp(handles.Velfaerdsteknologi.Sensorer.(strfieldname)(1).Velfaerdsteknologi,'Carendo')==1 
-        d=1; 
-        handles.Velfaerdsteknologi.Carendo(CntRow).(strfieldname) = handles.Velfaerdsteknologi.Sensorer.(strfieldname);
-        %CntNr = CntNr +1; 
-        CntRow =CntRow+1; 
-    end  
-    
-end
+%CntRow =1;
 
-if CntRow ~= 0 
+if isfield(handles.Velfaerdsteknologi ,'Luna')
+    handles.Velfaerdsteknologi.Luna = []; 
+    handles.Velfaerdsteknologi=rmfield(handles.Velfaerdsteknologi,'Luna');
+end
+%CntNr=1; 
+% for i = 1:numel(fieldnames(handles.Velfaerdsteknologi.Sensorer))
+%     fieldname = fieldnames(handles.Velfaerdsteknologi.Sensorer);
+%     strfieldname = string(fieldname(i,1));
+%     if strcmp(handles.Velfaerdsteknologi.Sensorer.(strfieldname)(1).Velfaerdsteknologi,'Carendo')==1 
+%         d=1; 
+%         handles.Velfaerdsteknologi.Carendo(CntRow).(strfieldname) = handles.Velfaerdsteknologi.Sensorer.(strfieldname);
+%         %CntNr = CntNr +1; 
+%         CntRow =CntRow+1; 
+%     end  
+%     
+% end
+
+if isfield(handles.Velfaerdsteknologi ,'Carendo')
     datatogo = handles.Velfaerdsteknologi.Carendo;
     guidata(hObject, handles);
     GUITeknologioverblik(datatogo);
@@ -135,9 +139,9 @@ if CntRow ~= 0
 else
     msgbox('Data for den valgte velfærdsteknologi eksisterer ikke');
 end
-datatogo = handles.Velfaerdsteknologi; 
-guidata(hObject,handles);
-GUITeknologioverblik(datatogo); 
+%datatogo = handles.Velfaerdsteknologi; 
+%guidata(hObject,handles);
+%GUITeknologioverblik(datatogo); 
 % CntRow =1;
 % %CntNr=1; 
 % for i = 1:numel(fieldnames(handles.Velfaerdsteknologi.Sensorer))
