@@ -1,6 +1,5 @@
 function handles = Sensor(handles)
 
-
 if isfield(handles.Velfaerdsteknologi,'Carendo')
    [uniqvalue,~, ~] = unique([handles.Velfaerdsteknologi.Carendo.ID]);
    

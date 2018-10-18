@@ -99,7 +99,7 @@ if isfield(handles.Velfaerdsteknologi ,'Carendo')
 end
 
 if isfield(handles.Velfaerdsteknologi ,'Luna')
-    datatogo = handles.Velfaerdsteknologi.Luna;
+    datatogo = handles.Velfaerdsteknologi;
     guidata(hObject, handles);
     GUITeknologioverblik(datatogo);
     d=1;
@@ -132,7 +132,7 @@ end
 % end
 
 if isfield(handles.Velfaerdsteknologi ,'Carendo')
-    datatogo = handles.Velfaerdsteknologi.Carendo;
+    datatogo = handles.Velfaerdsteknologi;
     guidata(hObject, handles);
     GUITeknologioverblik(datatogo);
     d=1;
