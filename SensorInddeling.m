@@ -4,7 +4,7 @@ teknologi = fieldnames(handles.Velfaerdsteknologi);
 teknologi = string(teknologi);
 
 if isfield(handles.Velfaerdsteknologi,teknologi)
-   [uniqvalue,~, ~] = unique([handles.Velfaerdsteknologi.(teknologi).ID]);
+   [uniqvalue,~, ~] = unique([handles.Velfaerdsteknologi.(teknologi).ID]);   
    
    CntRowSensor = 1; 
    
@@ -15,13 +15,9 @@ if isfield(handles.Velfaerdsteknologi,teknologi)
        
            id = ['Sensor' num2str(ii)];
            
-           idx=1;
-            udskrift = sprintf("Sensor nr. %s", id);
-            str_part = udskrift; 
-            old_str = get(handles.lbSensorliste,'String'); 
-            new_str=strvcat(char(old_str),char(str_part));
-            set(handles.lbSensorliste,'String',new_str);
-            set(handles.lbSensorliste, 'Value', idx+1);
+           %idx=1;
+           %udskrift = sprintf("Sensor nr. %s", id);
+            
            
            if  handles.Velfaerdsteknologi.(teknologi)(CntRow).ID == ii           
 
@@ -35,6 +31,9 @@ if isfield(handles.Velfaerdsteknologi,teknologi)
                handles.Velfaerdsteknologi.(teknologisensor).(id)(CntRowSensor).Arbejdsgang = handles.Velfaerdsteknologi.(teknologi)(CntRow).Arbejdsgang;
                handles.Velfaerdsteknologi.(teknologisensor).(id)(CntRowSensor).Medarbejdere= handles.Velfaerdsteknologi.(teknologi)(CntRow).Medarbejdere;
                handles.Velfaerdsteknologi.(teknologisensor).(id)(CntRowSensor).Tidmedborger = handles.Velfaerdsteknologi.(teknologi)(CntRow).Tidmedborger;
+               
+               
+               
 %                idx=1;
 %              
 %                 udskrift = sprintf("Sensor nr. %s", num2str(handles.Velfaerdsteknologi.(teknologisensor).(id).ID));
@@ -54,8 +53,17 @@ if isfield(handles.Velfaerdsteknologi,teknologi)
        
         
    end
-   
-   d=1;              
+   %Udskriver sensorer for valgt teknologi
+   for ii=1:length(uniqvalue)
+       idx=1;       
+       udskrift = sprintf("Sensor nr. %s", num2str(uniqvalue(ii)));
+       str_part = udskrift; 
+       old_str = get(handles.lbSensorliste,'String'); 
+       new_str=strvcat(char(old_str),char(str_part));
+       set(handles.lbSensorliste,'String',new_str);
+       set(handles.lbSensorliste, 'Value', idx+1);
+   end        
+       
 end
 %Sletter feltet Carendo eller Luna nu hvor det er oprettet CarendoSensor
 %eller LunaSensor

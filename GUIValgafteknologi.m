@@ -93,16 +93,16 @@ function btnLunaValgafteknologi_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
-%if isfield(handles.Velfaerdsteknologi ,'Carendo')
- %   handles.Velfaerdsteknologi.Carendo = []; 
-  %  handles.Velfaerdsteknologi=rmfield(handles.Velfaerdsteknologi,'Carendo');
-%end
+if isfield(handles.Velfaerdsteknologi ,'Carendo')
+   handles.Velfaerdsteknologi.Carendo = []; 
+   handles.Velfaerdsteknologi=rmfield(handles.Velfaerdsteknologi,'Carendo');
+end
 
 if isfield(handles.Velfaerdsteknologi ,'Luna')
     datatogo = handles.Velfaerdsteknologi;
     guidata(hObject, handles);
     GUITeknologioverblik(datatogo);
-    d=1;
+    
 else
     msgbox('Data for den valgte velfærdsteknologi eksisterer ikke');
 end
@@ -135,7 +135,7 @@ if isfield(handles.Velfaerdsteknologi ,'Carendo')
     datatogo = handles.Velfaerdsteknologi;
     guidata(hObject, handles);
     GUITeknologioverblik(datatogo);
-    d=1;
+    
 else
     msgbox('Data for den valgte velfærdsteknologi eksisterer ikke');
 end

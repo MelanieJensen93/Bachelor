@@ -58,16 +58,6 @@ handles.Velfaerdsteknologi = varargin{1};
 guidata(hObject, handles);
 
 handles = SensorInddeling(handles);
-% d=1;
-% for ii=1:length(handles.Velfaerdsteknologi.CarendoSensor)
-%     idx=1;
-%     udskrift = sprintf("Sensor nr. %s", num2str(handles.Velfaerdsteknologi.CarendoSensor.(ii).ID));
-%     str_part = udskrift; 
-%     old_str = get(handles.lbSensorliste,'String'); 
-%     new_str=strvcat(char(old_str),char(str_part));
-%     set(handles.lbSensorliste,'String',new_str);
-%     set(handles.lbSensorliste, 'Value', idx+1);
-% end 
 
 
 % Update handles structure
@@ -95,6 +85,7 @@ function btnTilbageSensorliste_Callback(hObject, eventdata, handles)
 % handles    structure with handles and user data (see GUIDATA)
 
 
+
 % --- Executes on selection change in lbSensorliste.
 function lbSensorliste_Callback(hObject, eventdata, handles)
 % hObject    handle to lbSensorliste (see GCBO)
@@ -104,6 +95,7 @@ function lbSensorliste_Callback(hObject, eventdata, handles)
 % Hints: contents = cellstr(get(hObject,'String')) returns lbSensorliste contents as cell array
 %        contents{get(hObject,'Value')} returns selected item from lbSensorliste
 
+GUISensordataoverblik(handles);
 
 % --- Executes during object creation, after setting all properties.
 function lbSensorliste_CreateFcn(hObject, eventdata, handles)
@@ -115,4 +107,5 @@ function lbSensorliste_CreateFcn(hObject, eventdata, handles)
 %       See ISPC and COMPUTER.
 if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
     set(hObject,'BackgroundColor','white');
+    
 end
