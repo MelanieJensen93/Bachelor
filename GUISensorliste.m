@@ -59,6 +59,13 @@ guidata(hObject, handles);
 
 handles = SensorInddeling(handles);
 
+if isfield(handles.Velfaerdsteknologi, 'CarendoSensor')
+   set(handles.txtValgtteknologiSensorliste, 'String', 'Carendo');
+end
+if isfield(handles.Velfaerdsteknologi, 'LunaSensor')
+    set(handles.txtValgtteknologiSensorliste, 'String', 'Luna');
+end
+
 
 % Update handles structure
 guidata(hObject, handles);

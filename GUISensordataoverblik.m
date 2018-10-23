@@ -56,6 +56,11 @@ function GUISensordataoverblik_OpeningFcn(hObject, eventdata, handles, varargin)
 % Choose default command line output for GUISensordataoverblik
 handles.output = hObject;
 
+handles.Velfaerdsteknologi = varargin{1};
+guidata(hObject, handles);
+
+
+
 if ~isempty(varargin)
     d=1;
     handles.TB = varargin{1}; %henter handles fra GUIBemaerkning

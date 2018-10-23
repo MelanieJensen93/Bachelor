@@ -55,10 +55,14 @@ function GUITeknologioverblik_OpeningFcn(hObject, eventdata, handles, varargin)
 % Choose default command line output for GUITeknologioverblik
 handles.output = hObject;
 handles.Velfaerdsteknologi = varargin{1}; %henter handles fra GUIValgafteknologi
-
-
+if isfield(handles.Velfaerdsteknologi, 'Carendo')
+   set(handles.txtValgtteknologiOverblik, 'String', 'Carendo');
+end
+if isfield(handles.Velfaerdsteknologi, 'Luna')
+    set(handles.txtValgtteknologiOverblik, 'String', 'Luna');
+end
 % Update handles structure
-guidata(hObject, handles);
+guidata(hObject, handles); 
  
 
 
