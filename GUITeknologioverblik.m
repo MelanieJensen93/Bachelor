@@ -55,8 +55,12 @@ function GUITeknologioverblik_OpeningFcn(hObject, eventdata, handles, varargin)
 % Choose default command line output for GUITeknologioverblik
 handles.output = hObject;
 handles.Velfaerdsteknologi = varargin{1}; %henter handles fra GUIValgafteknologi
-
-
+if isfield(handles.Velfaerdsteknologi, 'Carendo')
+   set(handles.txtValgtteknologiOverblik, 'String', 'Carendo');
+end
+if isfield(handles.Velfaerdsteknologi, 'Luna')
+    set(handles.txtValgtteknologiOverblik, 'String', 'Luna');
+end
 % Update handles structure
 guidata(hObject, handles);
 %handles = SortereTid(handles);
@@ -100,11 +104,10 @@ function btnListoversensorerTeknologioverblik_Callback(hObject, eventdata, handl
 % hObject    handle to btnListoversensorerTeknologioverblik (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-d=1; 
+
 
 datatogo = handles.Velfaerdsteknologi;
 GUISensorliste(datatogo);
-close(GUITeknologioverblik);
 
 
 % --- Executes on button press in btnYderligeredataTeknologioverblik.

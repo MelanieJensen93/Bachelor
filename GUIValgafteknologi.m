@@ -60,7 +60,7 @@ guidata(hObject, handles);
 
 handles = IndlaesVelfaerdsteknologi(handles);
 guidata(hObject,handles);
-d=1; 
+ 
 
 %handles = Brugermanual(handles); 
 % Update handles structure
@@ -94,15 +94,15 @@ function btnLunaValgafteknologi_Callback(hObject, eventdata, handles)
 % handles    structure with handles and user data (see GUIDATA)
 
 if isfield(handles.Velfaerdsteknologi ,'Carendo')
-    handles.Velfaerdsteknologi.Carendo = []; 
-    handles.Velfaerdsteknologi=rmfield(handles.Velfaerdsteknologi,'Carendo');
+   handles.Velfaerdsteknologi.Carendo = []; 
+   handles.Velfaerdsteknologi=rmfield(handles.Velfaerdsteknologi,'Carendo');
 end
 
 if isfield(handles.Velfaerdsteknologi ,'Luna')
     datatogo = handles.Velfaerdsteknologi;
     guidata(hObject, handles);
     GUITeknologioverblik(datatogo);
-    d=1;
+    
 else
     msgbox('Data for den valgte velfærdsteknologi eksisterer ikke');
 end
@@ -135,7 +135,7 @@ if isfield(handles.Velfaerdsteknologi ,'Carendo')
     datatogo = handles.Velfaerdsteknologi;
     guidata(hObject, handles);
     GUITeknologioverblik(datatogo);
-    d=1;
+    
 else
     msgbox('Data for den valgte velfærdsteknologi eksisterer ikke');
 end
