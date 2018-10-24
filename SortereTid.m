@@ -6,6 +6,7 @@ d=1;
 
 periode = get(get(handles.btngroupRedigerGrafTeknologioverblik,'SelectedObject'),'String');
 
+
 stringDato = get(handles.stDatoTeknologiOverblik,'String');
 dateTimeDatoLower = datetime(stringDato,'InputFormat','dd-MM-yyyy');
 
@@ -16,7 +17,8 @@ times.Format = 'dd-MM-yyyy';
 times = times';
 D= [handles.Velfaerdsteknologi.(teknologi).Medarbejdere]';
 tt = timetable(times,D,'VariableNames',{'Data'});
-rmmissing(retime(tt,'monthly',@mean))
+
+%rmmissing(retime(tt,'yearly',@mean))
 d=1; 
 % if strcmp(periode, 'Dag')==1
 %     d=1; 
@@ -46,7 +48,7 @@ if strcmp(periode, 'Dag')==0
             
         case 'Måned'
             dateTimeDatoUpper = datetime(dateTimeDatoLower.Year,dateTimeDatoLower.Month-1,dateTimeDatoLower.Day);
-            
+            tt = retime(tt,'monthly',@mean);
         case 'År'
             dateTimeDatoUpper = datetime(dateTimeDatoLower.Year-1,dateTimeDatoLower.Month,dateTimeDatoLower.Day);
     end 
@@ -58,16 +60,17 @@ if strcmp(periode, 'Dag')==0
     for i = 1:length(match)
         if match(i)==1
             Medarbejdere(CntRowMedarbejdere) = handles.Velfaerdsteknologi.(teknologi)(i).Medarbejdere;
-            CntRowMedarbejdere = 1+CntRowMedarbejdere; 
+            CntRowMedarbejdere = 1+CntRowMedarbejdere;
         end
     end
     d=1; 
     axes(handles.axesMedarbejdereTeknologiOverblik)
     bar(times,[handles.Velfaerdsteknologi.(teknologi).Medarbejdere]')
     
+    set(handles.txtAntalGangeTeknologioverblik,'String',mean(Medarbejdere));
     d=1;
 end
-set(handles.txtAntalGangeTeknologioverblik,'String',mean(Medarbejdere));
+
 %dateTimeDatoUpper = datetime(stringDato-year(dateTime,'InputFormat','dd-MM-yyyy';
 
 % days = caldays(between(handles.Velfaerdsteknologi.(teknologi).Tidspunkt,dateTimeDato,'days')) < 365;

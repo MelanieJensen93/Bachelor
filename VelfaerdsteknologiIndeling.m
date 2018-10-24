@@ -22,5 +22,6 @@ for CntRow = 1:size(SensorDataFil,1)
 end
 
 output = handles.Velfaerdsteknologi.(teknologi);
+d=1; 
 end
 
