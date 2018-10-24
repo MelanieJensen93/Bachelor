@@ -105,7 +105,9 @@ if isfield(handles.Velfaerdsteknologi ,'Luna')
     
 else
     msgbox('Data for den valgte velfærdsteknologi eksisterer ikke');
+
 end
+close(GUIValgafteknologi);
 
 % --- Executes on button press in btnCarendoValgafteknologi.
 function btnCarendoValgafteknologi_Callback(hObject, eventdata, handles)
@@ -139,6 +141,8 @@ if isfield(handles.Velfaerdsteknologi ,'Carendo')
 else
     msgbox('Data for den valgte velfærdsteknologi eksisterer ikke');
 end
+close(GUIValgafteknologi);
+
 %datatogo = handles.Velfaerdsteknologi; 
 %guidata(hObject,handles);
 %GUITeknologioverblik(datatogo); 

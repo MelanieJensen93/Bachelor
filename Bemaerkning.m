@@ -1,4 +1,4 @@
-function [handles,datatogo] = Bemaerkning(handles)
+function [handles,datatogo] = Bemaerkning(handles, datatogo)
 
 GUITilfoejBemaerkning(handles);
 

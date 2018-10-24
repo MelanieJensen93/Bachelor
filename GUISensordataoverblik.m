@@ -59,13 +59,26 @@ handles.output = hObject;
 handles.Velfaerdsteknologi = varargin{1};
 guidata(hObject, handles);
 
+ValgtSensor = handles.Velfaerdsteknologi.BrugerValgtSensor;
+if isfield(handles.Velfaerdsteknologi, 'LunaSensor')
+    f = fieldnames(handles.Velfaerdsteknologi.LunaSensor)
+    sensor = f(ValgtSensor)
+    set(handles.txtValgtteknologiSensorOverblik, 'String', sensor)
+end 
 
-
-if ~isempty(varargin)
-    d=1;
-    handles.TB = varargin{1}; %henter handles fra GUIBemaerkning
-    %guidata(hObject, handles);
+if isfield(handles.Velfaerdsteknologi, 'CarendoSensor')
+    f = fieldnames(handles.Velfaerdsteknologi.CarendoSensor)
+    sensor = f(ValgtSensor)
+    set(handles.txtValgtteknologiSensorOverblik, 'String' sensor)
 end
+
+ 
+
+% if ~isempty(varargin)
+%     d=1;
+%     handles.TB = varargin{1}; %henter handles fra GUIBemaerkning
+%     %guidata(hObject, handles);
+% end
 
 guidata(hObject, handles);
 

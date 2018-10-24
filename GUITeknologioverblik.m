@@ -54,13 +54,16 @@ function GUITeknologioverblik_OpeningFcn(hObject, eventdata, handles, varargin)
 
 % Choose default command line output for GUITeknologioverblik
 handles.output = hObject;
-handles.Velfaerdsteknologi = varargin{1}; %henter handles fra GUIValgafteknologi
+if ~isfield(handles, 'Velfaerdsteknologi')
+    handles.Velfaerdsteknologi = varargin{1}; %henter handles fra GUIValgafteknologi
+end 
 if isfield(handles.Velfaerdsteknologi, 'Carendo')
    set(handles.txtValgtteknologiOverblik, 'String', 'Carendo');
 end
 if isfield(handles.Velfaerdsteknologi, 'Luna')
-    set(handles.txtValgtteknologiOverblik, 'String', 'Luna');
+    set(handles.txtValgtteknologiOverblik, 'String', 'Luna loftlift');
 end
+
 % Update handles structure
 guidata(hObject, handles); 
  
@@ -90,6 +93,8 @@ function btnTilbage_Callback(hObject, eventdata, handles)
 % hObject    handle to btnTilbage (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
+GUIValgafteknologi;
+close(GUITeknologioverblik);
 
 
 % --- Executes on button press in btnListoversensorerTeknologioverblik.
@@ -101,6 +106,7 @@ function btnListoversensorerTeknologioverblik_Callback(hObject, eventdata, handl
 
 datatogo = handles.Velfaerdsteknologi;
 GUISensorliste(datatogo);
+
 
 
 % --- Executes on button press in btnYderligeredataTeknologioverblik.
@@ -115,7 +121,8 @@ function btnBrugermanualTeknologioverblik_Callback(hObject, eventdata, handles)
 % hObject    handle to btnBrugermanualTeknologioverblik (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-
+datatogo = handles.Velfaerdsteknologi;
+GUIBrugermanual(datatogo);
 
 % --- Executes on button press in btnSammenlignmedandreplejecentreTeknologioverblik.
 function btnSammenlignmedandreplejecentreTeknologioverblik_Callback(hObject, eventdata, handles)

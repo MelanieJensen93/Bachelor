@@ -63,7 +63,7 @@ if isfield(handles.Velfaerdsteknologi, 'CarendoSensor')
    set(handles.txtValgtteknologiSensorliste, 'String', 'Carendo');
 end
 if isfield(handles.Velfaerdsteknologi, 'LunaSensor')
-    set(handles.txtValgtteknologiSensorliste, 'String', 'Luna');
+    set(handles.txtValgtteknologiSensorliste, 'String', 'Luna loftlift');
 end
 
 
@@ -101,8 +101,10 @@ function lbSensorliste_Callback(hObject, eventdata, handles)
 
 % Hints: contents = cellstr(get(hObject,'String')) returns lbSensorliste contents as cell array
 %        contents{get(hObject,'Value')} returns selected item from lbSensorliste
-
-GUISensordataoverblik(handles);
+handles.Velfaerdsteknologi.BrugerValgtSensor = get(hObject, 'Value');
+datatogo = handles.Velfaerdsteknologi;
+guidata(hObject, handles);
+GUISensordataoverblik(datatogo);
 
 % --- Executes during object creation, after setting all properties.
 function lbSensorliste_CreateFcn(hObject, eventdata, handles)
