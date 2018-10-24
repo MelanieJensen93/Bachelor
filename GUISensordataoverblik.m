@@ -61,24 +61,17 @@ guidata(hObject, handles);
 
 ValgtSensor = handles.Velfaerdsteknologi.BrugerValgtSensor;
 if isfield(handles.Velfaerdsteknologi, 'LunaSensor')
-    f = fieldnames(handles.Velfaerdsteknologi.LunaSensor)
-    sensor = f(ValgtSensor)
-    set(handles.txtValgtteknologiSensorOverblik, 'String', sensor)
+    f = fieldnames(handles.Velfaerdsteknologi.LunaSensor);
+    sensor = f(ValgtSensor);
+    set(handles.txtValgtteknologiSensorOverblik, 'String', sensor);
 end 
 
 if isfield(handles.Velfaerdsteknologi, 'CarendoSensor')
-    f = fieldnames(handles.Velfaerdsteknologi.CarendoSensor)
-    sensor = f(ValgtSensor)
-    set(handles.txtValgtteknologiSensorOverblik, 'String' sensor)
+    f = fieldnames(handles.Velfaerdsteknologi.CarendoSensor);
+    sensor = f(ValgtSensor);
+    set(handles.txtValgtteknologiSensorOverblik, 'String', sensor);
 end
 
- 
-
-% if ~isempty(varargin)
-%     d=1;
-%     handles.TB = varargin{1}; %henter handles fra GUIBemaerkning
-%     %guidata(hObject, handles);
-% end
 
 guidata(hObject, handles);
 
@@ -119,8 +112,8 @@ function btnTilojbemaerkningSensordatavindue_Callback(hObject, eventdata, handle
 
 %datatogo = handles.lbBemaerkning;
 %GUITilfoejBemaerkning(handles);
-handles.vv = 'kk';
-datatogo = handles.vv;
+
+datatogo = handles.Velfaerdsteknologi;
 Bemaerkning(datatogo);
 
 
