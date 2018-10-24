@@ -22,7 +22,7 @@ function varargout = GUITeknologioverblik(varargin)
 
 % Edit the above text to modify the response to help GUITeknologioverblik
 
-% Last Modified by GUIDE v2.5 04-Oct-2018 10:54:58
+% Last Modified by GUIDE v2.5 22-Oct-2018 09:11:19
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -65,7 +65,14 @@ if isfield(handles.Velfaerdsteknologi, 'Luna')
 end
 
 % Update handles structure
-guidata(hObject, handles); 
+guidata(hObject, handles);
+%handles = SortereTid(handles);
+teknologi = fieldnames(handles.Velfaerdsteknologi);
+d=1; 
+teknologi = string(teknologi);
+
+set(handles.txtValgtteknologiOverblik,'String',teknologi); 
+set(handles.txtAntalGangeTeknologioverblik,'String',num2str(handles.Velfaerdsteknologi.(teknologi)(1).Medarbejdere))
  
 
 
@@ -129,3 +136,30 @@ function btnSammenlignmedandreplejecentreTeknologioverblik_Callback(hObject, eve
 % hObject    handle to btnSammenlignmedandreplejecentreTeknologioverblik (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
+
+
+% --- Executes on button press in btnVaelgDatoTeknologioverblik.
+function btnVaelgDatoTeknologioverblik_Callback(hObject, eventdata, handles)
+% hObject    handle to btnVaelgDatoTeknologioverblik (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+uicalendar('Weekend',[1 0 0 0 0 0 1], ...  
+'SelectionType', 1, ...  
+'DestinationUI', handles.stDatoTeknologiOverblik);
+
+
+% --- Executes when selected object is changed in btngroupRedigerGrafTeknologioverblik.
+function btngroupRedigerGrafTeknologioverblik_SelectionChangedFcn(hObject, eventdata, handles)
+% hObject    handle to the selected object in btngroupRedigerGrafTeknologioverblik 
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+handles = SortereTid(handles);
+d=1; 
+
+% --- Executes on button press in rbAarTeknologioverblik.
+function rbAarTeknologioverblik_Callback(hObject, eventdata, handles)
+% hObject    handle to rbAarTeknologioverblik (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hint: get(hObject,'Value') returns toggle state of rbAarTeknologioverblik
