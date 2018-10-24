@@ -1,13 +1,21 @@
 function handles = SortereTid(handles)
 
+% Finder den teknologi der er trykket på
 teknologi = fieldnames(handles.Velfaerdsteknologi);
 teknologi = string(teknologi);
-d=1; 
 
+% Den valgte periode
 periode = get(get(handles.btngroupRedigerGrafTeknologioverblik,'SelectedObject'),'String');
 
-
+% Den valgte dato
 stringDato = get(handles.stDatoTeknologiOverblik,'String');
+
+% Hvis dato ikke valgt, vælges seneste dato 
+if isempty(stringDato)
+    stringDato = handles.Velfaerdsteknologi.(teknologi)(1).Tidspunkt;
+end
+
+% 
 dateTimeDatoLower = datetime(stringDato,'InputFormat','dd-MM-yyyy');
 
 CntRowMedarbejdere = 1; 
@@ -45,18 +53,40 @@ if strcmp(periode, 'Dag')==0
     switch periode 
         case 'Uge'
             dateTimeDatoUpper = datetime(dateTimeDatoLower.Year,dateTimeDatoLower.Month,dateTimeDatoLower.Day-7);
-            
+            tt = retime(tt,'daily',@mean);
+            S = timerange ( dateTimeDatoUpper,dateTimeDatoLower);
+            tt = tt(S,:);
         case 'Måned'
             dateTimeDatoUpper = datetime(dateTimeDatoLower.Year,dateTimeDatoLower.Month-1,dateTimeDatoLower.Day);
-            tt = retime(tt,'monthly',@mean);
+            tt = retime(tt,'daily',@mean);
+            S = timerange ( dateTimeDatoUpper,dateTimeDatoLower);
+            tt = tt(S,:);
+            
         case 'År'
             dateTimeDatoUpper = datetime(dateTimeDatoLower.Year-1,dateTimeDatoLower.Month,dateTimeDatoLower.Day);
+            tt = retime(tt,'monthly',@mean);
+            S = timerange ( dateTimeDatoUpper,dateTimeDatoLower);
+            tt = tt(S,:);
+            
+% %             for i=1:12 
+% %                 d=1;
+% %                 for ii = 1:length(month(tt.Data))
+% %                     if i == month(tt.times(ii))
+% %                        d=1; 
+% %                        months(i) =  tt.Data(ii);
+% %                        d=1;
+% %                     else 
+% %                        months(i) = 0; 
+% %                     end
+% %                 end
+% %             end
     end 
+    d=1; 
 
     %dateTimeDatoUpper = datetime(dateTimeDatoLower.Year-1,dateTimeDatoLower.Month,dateTimeDatoLower.Day);
     d=1;  
     match =(times>=dateTimeDatoUpper & times<dateTimeDatoLower);
-    d=1; 
+    d=1;  
     for i = 1:length(match)
         if match(i)==1
             Medarbejdere(CntRowMedarbejdere) = handles.Velfaerdsteknologi.(teknologi)(i).Medarbejdere;
@@ -65,25 +95,10 @@ if strcmp(periode, 'Dag')==0
     end
     d=1; 
     axes(handles.axesMedarbejdereTeknologiOverblik)
-    bar(times,[handles.Velfaerdsteknologi.(teknologi).Medarbejdere]')
+    bar(tt.times,tt.Data)
+    %datetick('x','mmm','keepticks')
     
-    set(handles.txtAntalGangeTeknologioverblik,'String',mean(Medarbejdere));
+    set(handles.txtAntalGangeTeknologioverblik,'String',sum(Medarbejdere));
     d=1;
 end
 
-%dateTimeDatoUpper = datetime(stringDato-year(dateTime,'InputFormat','dd-MM-yyyy';
-
-% days = caldays(between(handles.Velfaerdsteknologi.(teknologi).Tidspunkt,dateTimeDato,'days')) < 365;
-% d=1; 
-% CntRowYear = 1; 
-%     for i=1:length(handles.Velfaerdsteknologi.(teknologi))
-%         d=1;
-%         if year(handles.Velfaerdsteknologi.(teknologi)(i).Tidspunkt) == year(handles.Velfaerdsteknologi.(teknologi)(1).Tidspunkt)
-%             YearMedarbejdere(CntRowYear) = handles.Velfaerdsteknologi.(teknologi)(i).Medarbejdere;
-%             CntRowYear = 1+CntRowYear; 
-%         end
-%         d=1;
-%     end 
-%     set(handles.txtAntalGangeTeknologioverblik,'String',sum(YearMedarbejdere));
-%     
-%     d=1;
