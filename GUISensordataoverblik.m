@@ -114,7 +114,8 @@ function btnTilojbemaerkningSensordatavindue_Callback(hObject, eventdata, handle
 %GUITilfoejBemaerkning(handles);
 
 datatogo = handles.Velfaerdsteknologi;
-Bemaerkning(datatogo);
+GUITilfoejBemaerkning(datatogo);
+%Bemaerkning(datatogo);
 
 
 
