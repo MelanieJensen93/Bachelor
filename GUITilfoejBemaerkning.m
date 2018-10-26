@@ -55,7 +55,7 @@ function GUITilfoejBemaerkning_OpeningFcn(hObject, eventdata, handles, varargin)
 % Choose default command line output for GUITilfoejBemaerkning
 handles.output = hObject;
 
-handles.vv = varargin{1}; %henter handles fra GUIBemaerkning
+handles.Velfaerdsteknologi = varargin{1}; %henter handles fra GUIBemaerkning
 
 % Update handles structure
 guidata(hObject, handles);
@@ -248,9 +248,9 @@ function btnTilfoejBemaerkningTilfoejBemaerkning_Callback(hObject, eventdata, ha
 % hObject    handle to btnTilfoejBemaerkningTilfoejBemaerkning (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-
-handles=Bemaerkning(handles);
-%guidata(hObject, handles);
+%datatogo = handles.Velfaerdsteknologi;
+Bemaerkning(handles);
+guidata(hObject, handles);
 
 
 
