@@ -9,7 +9,7 @@ hourOne = hours(1);
 periode = get(get(handles.btngroupRedigerGrafTeknologioverblik,'SelectedObject'),'String');
 
 % Den valgte dato
-stringDato = get(handles.stDatoTeknologiOverblik,'String');
+stringDato = get(handles.stDatoTeknozlogiOverblik,'String');
 
 % Hvis dato ikke valgt, vælges seneste dato 
 if isempty(stringDato)
