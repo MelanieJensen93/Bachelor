@@ -153,7 +153,10 @@ function btngroupRedigerGrafTeknologioverblik_SelectionChangedFcn(hObject, event
 % hObject    handle to the selected object in btngroupRedigerGrafTeknologioverblik 
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-handles = SortereTid(handles);
+%handles = SortereTid(handles, 'Medarbejdere',handles.axesMedarbejdereTeknologiOverblik);
+handles = SortereTid(handles, 'Medarbejdere',handles.axesMedarbejdereTeknologiOverblik);
+d=1; 
+handles = SortereTid(handles, 'Varighed',handles.axesVarighedTeknologiOverblik);
 d=1; 
 
 % --- Executes on button press in rbAarTeknologioverblik.
