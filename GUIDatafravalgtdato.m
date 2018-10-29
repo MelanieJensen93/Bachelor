@@ -55,6 +55,8 @@ function GUIDatafravalgtdato_OpeningFcn(hObject, eventdata, handles, varargin)
 % Choose default command line output for GUIDatafravalgtdato
 handles.output = hObject;
 
+%handles.Velfaerdsteknologi = varargin{1};
+
 % Update handles structure
 guidata(hObject, handles);
 

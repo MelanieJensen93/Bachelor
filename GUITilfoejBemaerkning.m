@@ -88,35 +88,41 @@ uicalendar('Weekend',[1 0 0 0 0 0 1], ...
 'SelectionType', 1, ...  
 'DestinationUI', handles.etDatoTilfoejBemaerkning);
 
-ValgtDato = get(handles.etDatoTilfoejBemaerkning, 'String');
-ValgtDatoDatetime = datetime(ValgtDato, 'InputFormat', 'dd-MM-yyyy');
+%ValgtDato = get(handles.etDatoTilfoejBemaerkning, 'String');
+%ValgtDatoDatetime = datetime(ValgtDato, 'InputFormat', 'dd-MM-yyyy');
 
-%Vi skal bruge navnet på den valgte teknologi og det står i række 1
-teknologi = fieldnames(handles.Velfaerdsteknologi(1));
-teknologi = string(teknologi(1));
+datatogo = handles.Velfaerdsteknologi;
+ValgAfDatapunkt(handles, datatogo);
 
-if isfield(handles.Velfaerdsteknologi,teknologi)
-    %sensor = fieldnames(handles.Velfaerdsteknologi.(teknologi))
-    %sensor = string(sensor)
-    Sensornr = getfield(handles.Velfaerdsteknologi, 'BrugerValgtSensor');
-    for i = 1:length(fieldnames(handles.Velfaerdsteknologi.(teknologi)))
-        d=1;
-        if Sensornr == i 
-          d=1;
-          Sensor = fieldnames(handles.Velfaerdsteknologi.(teknologi))
-          Sensornavn = string(Sensor(i));
-        for ii = 1:length(handles.Velfaerdsteknologi.(teknologi).(Sensornavn))
-            tidspunkt = handles.Velfaerdsteknologi.(teknologi).(Sensornavn)(ii).Tidspunkt;
-            tidspunkt.Format = 'dd-MMM-yyyy'; 
-            tidspunkt = string(tidspunkt);
-            if tidspunkt == ValgtDatoDatetime
-                d=1; 
-            end 
-            d=1;
-        end
-        end
-    end
-end
+% ValgtDato = get(handles.etDatoTilfoejBemaerkning, 'String');
+% ValgtDatoDatetime = datetime(ValgtDato, 'InputFormat', 'dd-MM-yyyy');
+% 
+% %Vi skal bruge navnet på den valgte teknologi og det står i række 1
+% teknologi = fieldnames(handles.Velfaerdsteknologi(1));
+% teknologi = string(teknologi(1));
+% 
+% if isfield(handles.Velfaerdsteknologi,teknologi)
+%     %sensor = fieldnames(handles.Velfaerdsteknologi.(teknologi))
+%     %sensor = string(sensor)
+%     Sensornr = getfield(handles.Velfaerdsteknologi, 'BrugerValgtSensor');
+%     for i = 1:length(fieldnames(handles.Velfaerdsteknologi.(teknologi)))
+%         d=1;
+%         if Sensornr == i 
+%           d=1;
+%           Sensor = fieldnames(handles.Velfaerdsteknologi.(teknologi))
+%           Sensornavn = string(Sensor(i));
+%         for ii = 1:length(handles.Velfaerdsteknologi.(teknologi).(Sensornavn))
+%             tidspunkt = handles.Velfaerdsteknologi.(teknologi).(Sensornavn)(ii).Tidspunkt;
+%             tidspunkt.Format = 'dd-MMM-yyyy'; 
+%             tidspunkt = string(tidspunkt);
+%             if tidspunkt == ValgtDatoDatetime
+%                 d=1; 
+%             end 
+%             d=1;
+%         end
+%         end
+%     end
+%end
 
 
 
@@ -192,6 +198,8 @@ function etDatoTilfoejBemaerkning_CreateFcn(hObject, eventdata, handles)
 if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
     set(hObject,'BackgroundColor','white');
 end
+
+
 
 
 
