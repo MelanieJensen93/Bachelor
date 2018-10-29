@@ -64,6 +64,7 @@ if isfield(handles.Velfaerdsteknologi, 'LunaSensor')
     f = fieldnames(handles.Velfaerdsteknologi.LunaSensor);
     sensor = f(ValgtSensor);
     set(handles.txtValgtteknologiSensorOverblik, 'String', sensor);
+    OpdaterListboxmedBemaerkning(handles);
 end 
 
 if isfield(handles.Velfaerdsteknologi, 'CarendoSensor')
@@ -72,6 +73,7 @@ if isfield(handles.Velfaerdsteknologi, 'CarendoSensor')
     set(handles.txtValgtteknologiSensorOverblik, 'String', sensor);
 end
 
+%close(GUITilfoejBemaerkning);
 
 guidata(hObject, handles);
 

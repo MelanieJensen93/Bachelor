@@ -88,6 +88,43 @@ uicalendar('Weekend',[1 0 0 0 0 0 1], ...
 'SelectionType', 1, ...  
 'DestinationUI', handles.etDatoTilfoejBemaerkning);
 
+%ValgtDato = get(handles.etDatoTilfoejBemaerkning, 'String');
+%ValgtDatoDatetime = datetime(ValgtDato, 'InputFormat', 'dd-MM-yyyy');
+
+datatogo = handles.Velfaerdsteknologi;
+ValgAfDatapunkt(handles, datatogo);
+
+% ValgtDato = get(handles.etDatoTilfoejBemaerkning, 'String');
+% ValgtDatoDatetime = datetime(ValgtDato, 'InputFormat', 'dd-MM-yyyy');
+% 
+% %Vi skal bruge navnet på den valgte teknologi og det står i række 1
+% teknologi = fieldnames(handles.Velfaerdsteknologi(1));
+% teknologi = string(teknologi(1));
+% 
+% if isfield(handles.Velfaerdsteknologi,teknologi)
+%     %sensor = fieldnames(handles.Velfaerdsteknologi.(teknologi))
+%     %sensor = string(sensor)
+%     Sensornr = getfield(handles.Velfaerdsteknologi, 'BrugerValgtSensor');
+%     for i = 1:length(fieldnames(handles.Velfaerdsteknologi.(teknologi)))
+%         d=1;
+%         if Sensornr == i 
+%           d=1;
+%           Sensor = fieldnames(handles.Velfaerdsteknologi.(teknologi))
+%           Sensornavn = string(Sensor(i));
+%         for ii = 1:length(handles.Velfaerdsteknologi.(teknologi).(Sensornavn))
+%             tidspunkt = handles.Velfaerdsteknologi.(teknologi).(Sensornavn)(ii).Tidspunkt;
+%             tidspunkt.Format = 'dd-MMM-yyyy'; 
+%             tidspunkt = string(tidspunkt);
+%             if tidspunkt == ValgtDatoDatetime
+%                 d=1; 
+%             end 
+%             d=1;
+%         end
+%         end
+%     end
+%end
+
+
 
 
 
@@ -161,6 +198,8 @@ function etDatoTilfoejBemaerkning_CreateFcn(hObject, eventdata, handles)
 if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
     set(hObject,'BackgroundColor','white');
 end
+
+
 
 
 
@@ -258,13 +297,5 @@ guidata(hObject, handles);
 
 
 
-%close(GUITilfoejBemaerkning)
-%GUISensordataoverblik;
-%close(GUITilfoejBemaerkning)
-%GUISensordataoverblik;
-%a= sprintf("%s %s %s"+handles.TB.B(idx).bemaerkning,handles.TB.B(idx).dato, handles.TB.B(idx).tidspunkt);
-%str_part = a; 
-%old_str = get(handles.lbBemaerkning,'String'); 
-%new_str=strvcat(old_str,str_part);
-%set(handles.lbBemaerkning,'String',new_str)
+
  
