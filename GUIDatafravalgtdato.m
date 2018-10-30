@@ -55,7 +55,14 @@ function GUIDatafravalgtdato_OpeningFcn(hObject, eventdata, handles, varargin)
 % Choose default command line output for GUIDatafravalgtdato
 handles.output = hObject;
 
-%handles.Velfaerdsteknologi = varargin{1};
+handles.Velfaerdsteknologi = varargin{1};
+
+% udskrift= sprintf("%s", handles.Velfaerdsteknologi.(teknologi).(Sensornavn)(ii).Tidspunkt);
+% str_part = udskrift; 
+% old_str = get(handles.lbDataforvalgtdag,'String'); 
+% new_str=strvcat(char(old_str),char(str_part));
+% set(handles.lbDataforvalgtdag,'String',new_str);
+% set(handles.lbDataforvalgtdag, 'Value', idx+1);
 
 % Update handles structure
 guidata(hObject, handles);
@@ -72,7 +79,8 @@ function varargout = GUIDatafravalgtdato_OutputFcn(hObject, eventdata, handles)
 % handles    structure with handles and user data (see GUIDATA)
 
 % Get default command line output from handles structure
-varargout{1} = handles.output;
+varargout{1} = handles.lbDataforvalgtdag; 
+%varargout{2} = handles.output;
 
 
 % --- Executes on selection change in lbDataforvalgtdag.
@@ -84,6 +92,11 @@ function lbDataforvalgtdag_Callback(hObject, eventdata, handles)
 % Hints: contents = cellstr(get(hObject,'String')) returns lbDataforvalgtdag contents as cell array
 %        contents{get(hObject,'Value')} returns selected item from lbDataforvalgtdag
 
+handles.Velfaerdsteknologi.ValgtTidspunkt = get(hObject, 'Value');
+datatogo = handles.Velfaerdsteknologi;
+guidata(hObject, handles);
+GUITilfoejBemaerkning(datatogo);
+%close(GUIDatafravalgtdato);
 
 % --- Executes during object creation, after setting all properties.
 function lbDataforvalgtdag_CreateFcn(hObject, eventdata, handles)
