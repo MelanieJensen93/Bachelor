@@ -1,6 +1,7 @@
 function handles = ValgAfDatapunkt(handles,datatogo)
 %UNTITLED Summary of this function goes here
 %   Detailed explanation goes here
+d=1; 
 ValgtDato = get(handles.etDatoTilfoejBemaerkning, 'String');
 ValgtDatoDatetime = datetime(ValgtDato, 'InputFormat', 'dd-MM-yyyy');
 
@@ -20,14 +21,18 @@ if isfield(handles.Velfaerdsteknologi,teknologi)
             tidspunkt = string(tidspunkt);
             if tidspunkt == ValgtDatoDatetime
                
-                GUIDatafravalgtdato(datatogo, handles);
+                a = GUIDatafravalgtdato(datatogo, handles);
+                d=1; 
                 udskrift= sprintf("%s", handles.Velfaerdsteknologi.(teknologi).(Sensornavn)(ii).Tidspunkt);
                 str_part = udskrift; 
-                old_str = get(handles.lbDataforvalgtdag,'String'); 
+                %old_str = get(handles.lbDataforvalgtdag,'String'); 
+                old_str = get(a,'String'); 
                 new_str=strvcat(char(old_str),char(str_part));
-                set(handles.lbDataforvalgtdag,'String',new_str);
-                set(handles.lbDataforvalgtdag, 'Value', idx+1);
+                %set(handles.lbDataforvalgtdag,'String',new_str);
+                %set(handles.lbDataforvalgtdag, 'Value', idx+1);
                 
+                set(a,'String',new_str);
+                %set(a, 'Value', idx+1);
             end 
             d=1;
         end

@@ -3,77 +3,85 @@ function handles = SortereTid(handles, data, axesTeknologi)
 % Finder den teknologi der er trykket på
 teknologi = fieldnames(handles.Velfaerdsteknologi);
 teknologi = string(teknologi);
-hourOne = hours(1);
+enTime = hours(1);
 
 % Den valgte periode
 periode = get(get(handles.btngroupRedigerGrafTeknologioverblik,'SelectedObject'),'String');
 
 % Den valgte dato
-stringDato = get(handles.stDatoTeknozlogiOverblik,'String');
+stringDato = get(handles.stDatoTeknologiOverblik,'String');
 
 % Hvis dato ikke valgt, vælges seneste dato 
 if isempty(stringDato)
     stringDato = handles.Velfaerdsteknologi.(teknologi)(1).Tidspunkt;
 end
 
-dateTimeDatoLower = datetime(stringDato,'InputFormat','dd-MM-yyyy');
+%Konvertere dato til en datetime 
+slutDato = datetime(stringDato,'InputFormat','dd-MM-yyyy');
 
-
-
-times = [handles.Velfaerdsteknologi.(teknologi).Tidspunkt];
-times.Format = 'dd-MM-yyyy HH:mm:ss';
-times = times';
-
+%Henter tiderne og udskriver i nedenstående format
+times = [handles.Velfaerdsteknologi.(teknologi).Tidspunkt]';
+%times.Format = 'dd-MM-yyyy HH:mm:ss';
+ 
+% Data hentes alt efter den data der skal vises. 
 switch data 
     case 'Medarbejdere'
         D= [handles.Velfaerdsteknologi.(teknologi).Medarbejdere]';
     case 'Varighed'
         D = [handles.Velfaerdsteknologi.(teknologi).Varighed]';
+        %Idet at det er en tid så skal det skrives ud i typen duration med
+        %følgende format. 
         infmt = 'mm:ss';
         D = duration(D,'InputFormat',infmt); 
 end
 
+%Opretter en timetable, som knytter data til tiderne. 
 tt = timetable(times,D,'VariableNames',{'Data'});
-d=1; 
-
+ 
+%Hvis den valgte periode er dag skal der ske følgende
 if strcmp(periode, 'Dag')==1
-    d=1; 
-    dateTimeDatoLower.Format  = 'dd-MM-yyy';
-    dateTimeDatoUpper = datetime(dateTimeDatoLower.Year,dateTimeDatoLower.Month,dateTimeDatoLower.Day-1);
-    first = dateTimeDatoUpper + '05:00:00';
-    last = dateTimeDatoLower + '05:00:00';
-    S = timerange(char(first),char(last));
-           
-    tt = tt(S,:);
+    slutDato.Format  = 'dd-MM-yyy';
+    % startDato findes vha. slutDato og trækker en dag fra. 
+    startDato = datetime(slutDato.Year,slutDato.Month,slutDato.Day-1);
+    %Definere data mellem startTidspunkt og slutTidspunkt
+    startTidspunkt = startDato + '05:00:00';
+    slutTidspunkt = slutDato + '05:00:00';
+    Begraensning = timerange(char(startTidspunkt),char(slutTidspunkt));    
+    tt = tt(Begraensning,:);
+    % Finder gennemsnittet af hver time og sletter rækker hvor der er ingen
+    % data
     tt = retime(tt,'hourly',@mean);
     tt = rmmissing(tt);
-           
-    x = first: hourOne:last;
-    d=1; 
+    
+    % Definere x-aksen
+    x = startTidspunkt: enTime:slutTidspunkt;
+    
     %hoursIntimes = hour(tt.times);
     %mins = minute(tt.times);
     %secs = second(tt.times);
+    
+    % Finder hvilke timer af x-aksen der er data for 
     matchDay = ismember(x,tt.times);
-    %matchDayVarig = ismember(x,tV.times);
+    
+    %Hvis der er data skal data ligges ind i et array eller skal det være lig med 0.  
     CntRowDag=1; 
     iiDag=1; 
-        for i=1:length(matchDay)
-            if matchDay(i) ==1 
-                d=1; 
-                if isduration(tt.Data) ==1
-                    Dag(CntRowDag)=minutes(tt.Data(iiDag));
-                else
-                    Dag(CntRowDag)=tt.Data(iiDag);
-                end
-                
-                iiDag = iiDag+1; 
+    for i=1:length(matchDay)
+        if matchDay(i) ==1 
+            d=1; 
+            if isduration(tt.Data) ==1
+                Dag(CntRowDag)=minutes(tt.Data(iiDag));
             else
-                Dag(CntRowDag)=0; 
+                Dag(CntRowDag)=tt.Data(iiDag);
             end
-            CntRowDag=CntRowDag +1; 
+
+            iiDag = iiDag+1; 
+        else
+            Dag(CntRowDag)=0; 
         end
+        CntRowDag=CntRowDag +1; 
+    end
         
-    d=1; 
     
     category_inteval = (categorical({'Morgen', 'Formiddag', 'Middag', 'Eftermiddag', 'Aften', 'Nat'}))';
     d=1; 
@@ -107,7 +115,6 @@ if strcmp(periode, 'Dag')==1
     tab_new_all = timetable(x',Dag',category_interval_data');
     
     d=1;    
-
     CntSum = 1;
     CntData=1; 
     for category=1:length(category_inteval)
@@ -120,11 +127,21 @@ if strcmp(periode, 'Dag')==1
             end
             d=1; 
         end
+        d=1;
             sumData(CntSum) = sum(data);
             CntSum = CntSum +1; 
     end
     d=1; 
+    A=find(tab_new_all.Var1~=0)
+    d=1;
     
+    Row = 1; 
+
+        for i=1:length(A)
+            Data(Row) = tab_new_all.Var2(A(i));
+            Row = Row+1; 
+        end
+d=1; 
     axes(axesTeknologi)
     x = reordercats(category_inteval,{'Morgen', 'Formiddag', 'Middag', 'Eftermiddag', 'Aften', 'Nat'});
     d=1; 
@@ -136,13 +153,19 @@ end
 if strcmp(periode, 'Dag')==0
     switch periode 
         case 'Uge'
-            dateTimeDatoUpper = datetime(dateTimeDatoLower.Year,dateTimeDatoLower.Month,dateTimeDatoLower.Day-7);
+            startDato = datetime(slutDato.Year,slutDato.Month,slutDato.Day-7);
+            d=1;
+            Begraensning = timerange ( startDato,slutDato);
+            tt = tt(Begraensning,:);
+            [C,~,ic]=unique(day(tt.times));
+            a_accounts = accumarray(ic,1);
+            value = [C,a_accounts];
             d=1; 
+            meanAnvendelse = mean(value(:,2));
+            
             tt = retime(tt,'daily',@mean);
-            S = timerange ( dateTimeDatoUpper,dateTimeDatoLower);
-            tt = tt(S,:);
             CntRowMedarbejdere = 1; 
-            match =(times>=dateTimeDatoUpper & times<dateTimeDatoLower);
+            match =(times>=startDato & times<slutDato);
             d=1;  
             ii = 1; 
 %             for i = 1:length(match)
@@ -161,27 +184,37 @@ if strcmp(periode, 'Dag')==0
             d=1; 
             axes(axesTeknologi)
             bar(tt.times,tt.Data)
-            set(handles.txtAntalGangeTeknologioverblik,'String',length(tt.Data));
+            set(handles.txtAntalGangeTeknologioverblik,'String',meanAnvendelse);
             
         case 'Måned'
-            dateTimeDatoUpper = datetime(dateTimeDatoLower.Year,dateTimeDatoLower.Month-1,dateTimeDatoLower.Day);
-            tt = retime(tt,'daily',@mean);
+            d=1; 
+            startDato = datetime(slutDato.Year,slutDato.Month-1,slutDato.Day);
+            d=1; 
+            Begraensning = timerange ( startDato,slutDato);
+            tt = tt(Begraensning,:);
+            [C,~,ic]=unique(day(tt.times));
+            a_accounts = accumarray(ic,1);
+            value = [C,a_accounts];
+            meanAnvendelse = mean(value(:,2));
+            
             d=1;  
-            S = timerange ( dateTimeDatoUpper,dateTimeDatoLower);
-            tt = tt(S,:);
-            match =(times>=dateTimeDatoUpper & times<dateTimeDatoLower);
+          
+            tt = retime(tt,'daily',@mean);
+            tt = rmmissing(tt);
+            
+            match =(times>=startDato & times<slutDato);
             d=1;  
             ii =1; 
             CntRow=1; 
-            for i = 1:length(match)
-                if match(i)==1
-                    DataMaaned(CntRow) = tt.Data(ii);
-                    ii=1+ii; 
-                else 
-                    DataMaaned(CntRow)=0; 
-                end 
-                CntRow=1+CntRow; 
-            end
+%             for i = 1:length(match)
+%                 if match(i)==1
+%                     DataMaaned(CntRow) = tt.Data(ii);
+%                     ii=1+ii; 
+%                 else 
+%                     DataMaaned(CntRow)=0; 
+%                 end 
+%                 CntRow=1+CntRow; 
+%             end
             d=1; 
             axes(axesTeknologi)
             bar(tt.times,tt.Data)
@@ -192,16 +225,22 @@ if strcmp(periode, 'Dag')==0
             else
                 meanValue = mean(tt.Data);
             end
-            set(handles.txtAntalGangeTeknologioverblik,'String',length(tt.Data));
-
-        case 'År'
-            dateTimeDatoUpper = datetime(dateTimeDatoLower.Year-1,dateTimeDatoLower.Month+1,dateTimeDatoLower.Day);
-            tt = retime(tt,'monthly',@mean);
-            S = timerange ( dateTimeDatoUpper,dateTimeDatoLower);
+            d=1;
+            set(handles.txtAntalGangeTeknologioverblik,'String',meanAnvendelse);
             
-            tt = tt(S,:);
+        case 'År'
+            startDato = datetime(slutDato.Year-1,slutDato.Month+1,slutDato.Day);
+            Begraensning = timerange ( startDato,slutDato);    
+            tt = tt(Begraensning,:);
+            
+            [C,~,ic]=unique(month(tt.times));
+            a_accounts = accumarray(ic,1);
+            value = [C,a_accounts];
+            d=1; 
+            meanAnvendelse = mean(value(:,2));
            
-            count =  [(month(dateTimeDatoLower))+1:12, 1:(month(dateTimeDatoLower))];
+            tt = retime(tt,'monthly',@mean);
+            count =  [(month(slutDato))+1:12, 1:(month(slutDato))];
             d=1;  
             matchYear = ismember(count,month(tt.times));
             d=1; 
@@ -226,17 +265,17 @@ if strcmp(periode, 'Dag')==0
 %             if month(tt.times(1))==1
 %                 sorteret=matchYear;
 %             else
-%                 months = month(dateTimeDatoLower);
+%                 months = month(slutDato);
 %                 sorteret=[matchYear(month(tt.times(1)):end),matchYear(1:month(tt.times(1))-1)];
 %             end
-            xData = linspace(dateTimeDatoUpper,dateTimeDatoLower,12);
+            xData = linspace(startDato,slutDato,12);
             d=1;
             axes(axesTeknologi)
             d=1;
             bar(xData,DataAar);  
             datetick('x','mmm-yy','keeplimits')
             d=1;           
-            set(handles.txtAntalGangeTeknologioverblik,'String',length(tt.Data));
+            set(handles.txtAntalGangeTeknologioverblik,'String',meanAnvendelse);
     end 
     d=1;
 end
