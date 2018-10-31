@@ -27,8 +27,11 @@ times = [handles.Velfaerdsteknologi.(teknologi).Tidspunkt]';
 switch data 
     case 'Medarbejdere'
         D= [handles.Velfaerdsteknologi.(teknologi).Medarbejdere]';
+        d=1;
     case 'Varighed'
-        D = [handles.Velfaerdsteknologi.(teknologi).Varighed]';
+        
+        D = [handles.Velfaerdsteknologi.(teknologi).Varighedforarbejdsgang]';
+        d=1; 
         %Idet at det er en tid så skal det skrives ud i typen duration med
         %følgende format. 
         infmt = 'mm:ss';
@@ -37,17 +40,16 @@ end
 
 %Opretter en timetable, som knytter data til tiderne. 
 tt = timetable(times,D,'VariableNames',{'Data'});
-d=1; 
- 
+
 %Hvis den valgte periode er dag skal der ske følgende
 if strcmp(periode, 'Dag')==1
     slutDato.Format  = 'dd-MM-yyy';
     % startDato findes vha. slutDato og trækker en dag fra. 
-    startDato = datetime(slutDato.Year,slutDato.Month,slutDato.Day-1);
+    startDato = datetime(slutDato.Year,slutDato.Month,slutDato.Day+1);
     %Definere data mellem startTidspunkt og slutTidspunkt
     startTidspunkt = startDato + '05:00:00';
     slutTidspunkt = slutDato + '05:00:00';
-    Begraensning = timerange(char(startTidspunkt),char(slutTidspunkt));    
+    Begraensning = timerange(char(slutTidspunkt),char(startTidspunkt));    
     tt = tt(Begraensning,:);
     Antal = length(tt.Data);
     d=1; 
@@ -58,7 +60,7 @@ if strcmp(periode, 'Dag')==1
       tt = rmmissing(tt);
     
     % Definere x-aksen
-    x = startTidspunkt: enTime:slutTidspunkt;
+    x = slutTidspunkt: enTime:startTidspunkt;
     
     %hoursIntimes = hour(tt.times);
     %mins = minute(tt.times);

@@ -3,19 +3,23 @@ function output = VelfaerdsteknologiIndeling(SensorDataFil,teknologi)
 %   Detailed explanation goes here
 CntRowTeknologi = 1; 
 
+
 for CntRow = 1:size(SensorDataFil,1)
+    d=1;
     if strcmp(SensorDataFil.Velfaerdsteknologi(CntRow),teknologi)==1
+        d=1;
         handles.Velfaerdsteknologi.(teknologi)(CntRowTeknologi).ID=SensorDataFil.ID(CntRow);
+        d=1;
         handles.Velfaerdsteknologi.(teknologi)(CntRowTeknologi).Tidspunkt=SensorDataFil.Tidspunkt(CntRow);
         handles.Velfaerdsteknologi.(teknologi)(CntRowTeknologi).Omsorgsfunktion=SensorDataFil.Omsorgsfunktion(CntRow);
         handles.Velfaerdsteknologi.(teknologi)(CntRowTeknologi).Komfortfunktion=SensorDataFil.Komfortfunktion(CntRow);
         handles.Velfaerdsteknologi.(teknologi)(CntRowTeknologi).Haevesaenkefunktion=SensorDataFil.Haevesaenkefunktion(CntRow);
-        handles.Velfaerdsteknologi.(teknologi)(CntRowTeknologi).Varighed=SensorDataFil.Varighed(CntRow);
-        handles.Velfaerdsteknologi.(teknologi)(CntRowTeknologi).LunaMedCarendo=SensorDataFil.LunaMedCarendo(CntRow);
+        handles.Velfaerdsteknologi.(teknologi)(CntRowTeknologi).Varighedforarbejdsgang=SensorDataFil.Varighedforarbejdsgang(CntRow);
+        %handles.Velfaerdsteknologi.(teknologi)(CntRowTeknologi).LunaMedCarendo=SensorDataFil.LunaMedCarendo(CntRow);
         handles.Velfaerdsteknologi.(teknologi)(CntRowTeknologi).Arbejdsgang=SensorDataFil.Arbejdsgang(CntRow);
         handles.Velfaerdsteknologi.(teknologi)(CntRowTeknologi).Medarbejdere=SensorDataFil.Medarbejdere(CntRow);
         handles.Velfaerdsteknologi.(teknologi)(CntRowTeknologi).Tidmedborger=SensorDataFil.Tidmedborger(CntRow);
-        handles.Velfaerdsteknologi.(teknologi)(CntRowTeknologi).Personalefaglighed=SensorDataFil.Personalefaglighed(CntRow);
+        handles.Velfaerdsteknologi.(teknologi)(CntRowTeknologi).Superbruger=SensorDataFil.Superbruger(CntRow);
         CntRowTeknologi= CntRowTeknologi+1; 
 
     end

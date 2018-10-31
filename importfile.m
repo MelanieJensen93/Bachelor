@@ -61,15 +61,32 @@ tableout.Komfortfunktion = data(:,3);
 tableout.Haevesaenkefunktion = data(:,4);
 tableout.LunaMedCarendo = data(:,5);
 tableout.Varighed = stringVectors(:,2);
-tableout.Arbejdsgang = stringVectors(:,3);
+tableout.VarighedTo = stringVectors(:,3);
+tableout.VarighedEn = stringVectors(:,4);
+tableout.VarighedNul = stringVectors(:,5);
+tableout.Arbejdsgang = stringVectors(:,7);
 tableout.Medarbejdere = data(:,6);
-tableout.Tidmedborger = stringVectors(:,4); 
-tableout.Personalefaglighed = stringVectors(:,5);
+tableout.Tidmedborger = stringVectors(:,7); 
+tableout.Superbruger = stringVectors(:,8);
+tableout.Almindelig= stringVectors(:,9);
+tableout.Afloser = stringVectors(:,10);
 
 %Ændre fra string til datetime
 tableout.Varighed  = datetime(tableout.Varighed(:),'InputFormat','mm.ss');
 tableout.Varighed.Format = 'mm:ss';
 tableout.Varighed  = cellstr(tableout.Varighed);
+
+tableout.VarighedEn  = datetime(tableout.VarighedEn(:),'InputFormat','mm.ss');
+tableout.VarighedEn.Format = 'mm:ss';
+tableout.VarighedEn  = cellstr(tableout.VarighedEn);
+
+tableout.VarighedTo  = datetime(tableout.VarighedTo(:),'InputFormat','mm.ss');
+tableout.VarighedTo.Format = 'mm:ss';
+tableout.VarighedTo  = cellstr(tableout.VarighedTo);
+
+tableout.VarighedNul  = datetime(tableout.VarighedNul(:),'InputFormat','mm.ss');
+tableout.VarighedNul.Format = 'mm:ss';
+tableout.VarighedNul  = cellstr(tableout.VarighedNul);
 
 tableout.Tidmedborger = datetime(tableout.Tidmedborger(:),'InputFormat','mm.ss');
 tableout.Tidmedborger.Format = 'mm:ss';

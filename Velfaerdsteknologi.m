@@ -5,6 +5,7 @@ function handles = Velfaerdsteknologi(handles)
 SensorDataFil = importfile('SensorDataFil.xlsx','Ark1');
 d=1;
 
+
 CntRowCarendo=1;
 CntRowLuna=1;
 %handles.Velfaerdsteknologi.Carendo = VelfaerdsteknologiIndeling(SensorDataFil,"Carendo");
@@ -26,6 +27,7 @@ for CntRow = 1:size(SensorDataFil,1)
         handles.Velfaerdsteknologi.Carendo(CntRowCarendo).Medarbejdere=SensorDataFil.Medarbejdere(CntRow);
         handles.Velfaerdsteknologi.Carendo(CntRowCarendo).Tidmedborger=SensorDataFil.Tidmedborger(CntRow);
         handles.Velfaerdsteknologi.Carendo(CntRowCarendo).Personalefaglighed=SensorDataFil.Personalefaglighed(CntRow);
+        
         CntRowCarendo= CntRowCarendo+1; 
 
     end
