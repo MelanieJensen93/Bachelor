@@ -30,7 +30,7 @@ if nargin <= 3
     startRow = 2;
     endRow = 16;
 end
-
+d=1; 
 %% Import the data, extracting spreadsheet dates in Excel serial date format
 [~, ~, raw, dates] = xlsread(workbookFile, sheetName, sprintf('A%d:L%d',startRow(1),endRow(1)),'' , @convertSpreadsheetExcelDates);
 for block=2:length(startRow)
@@ -79,4 +79,4 @@ tableout.Tidmedborger = cellstr(tableout.Tidmedborger);
 % the following line(s) below to return the imported dates as datenum(s).
 
 % tableout.Tidspunkt=datenum(tableout.Tidspunkt);
-
+ 

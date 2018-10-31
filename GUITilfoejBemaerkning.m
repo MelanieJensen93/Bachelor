@@ -56,6 +56,11 @@ function GUITilfoejBemaerkning_OpeningFcn(hObject, eventdata, handles, varargin)
 handles.output = hObject;
 
 handles.Velfaerdsteknologi = varargin{1}; %henter handles fra GUIBemaerkning
+if isfield(handles.Velfaerdsteknologi, 'ValgtTidspunkt')
+    %datatogo = handles.Velfaerdsteknologi; 
+    ValgtafTidspunkt(handles);
+end
+
 
 % Update handles structure
 guidata(hObject, handles);
@@ -86,73 +91,13 @@ function btnVealgDatoTilfoejBemearkning_Callback(hObject, eventdata, handles)
 % https://se.mathworks.com/help/finance/uicalendar-graphical-user-interface.html
  uicalendar('Weekend',[1 0 0 0 0 0 1], ...  
 'SelectionType', 1, ...  
-'DestinationUI', handles.etDatoTilfoejBemaerkning);
+'DestinationUI', handles.etDatoTilfoejBemaerkning));
 
-%ValgtDato = get(handles.etDatoTilfoejBemaerkning, 'String');
-%ValgtDatoDatetime = datetime(ValgtDato, 'InputFormat', 'dd-MM-yyyy');
+ValgtDato = get(handles.etDatoTilfoejBemaerkning, 'String');
+ValgtDatoDatetime = datetime(ValgtDato, 'InputFormat', 'dd-MM-yyyy');
 
 datatogo = handles.Velfaerdsteknologi;
-ValgAfDatapunkt(handles, datatogo);
-
-% ValgtDato = get(handles.etDatoTilfoejBemaerkning, 'String');
-% ValgtDatoDatetime = datetime(ValgtDato, 'InputFormat', 'dd-MM-yyyy');
-% 
-% %Vi skal bruge navnet på den valgte teknologi og det står i række 1
-% teknologi = fieldnames(handles.Velfaerdsteknologi(1));
-% teknologi = string(teknologi(1));
-% 
-% if isfield(handles.Velfaerdsteknologi,teknologi)
-%     %sensor = fieldnames(handles.Velfaerdsteknologi.(teknologi))
-%     %sensor = string(sensor)
-%     Sensornr = getfield(handles.Velfaerdsteknologi, 'BrugerValgtSensor');
-%     for i = 1:length(fieldnames(handles.Velfaerdsteknologi.(teknologi)))
-%         d=1;
-%         if Sensornr == i 
-%           d=1;
-%           Sensor = fieldnames(handles.Velfaerdsteknologi.(teknologi))
-%           Sensornavn = string(Sensor(i));
-%         for ii = 1:length(handles.Velfaerdsteknologi.(teknologi).(Sensornavn))
-%             tidspunkt = handles.Velfaerdsteknologi.(teknologi).(Sensornavn)(ii).Tidspunkt;
-%             tidspunkt.Format = 'dd-MMM-yyyy'; 
-%             tidspunkt = string(tidspunkt);
-%             if tidspunkt == ValgtDatoDatetime
-%                 d=1; 
-%             end 
-%             d=1;
-%         end
-%         end
-%     end
-%end
-
-
-
-
-
-% --- Executes on button press in cbBorgerkraevertopersonalerTilfoejBemaerning.
-
-
-
-function etAndetTilfoejBemaerkning_Callback(hObject, eventdata, handles)
-% hObject    handle to etAndetTilfoejBemaerkning (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
-
-% Hints: get(hObject,'String') returns contents of etAndetTilfoejBemaerkning as text
-%        str2double(get(hObject,'String')) returns contents of etAndetTilfoejBemaerkning as a double
-
-
-% --- Executes during object creation, after setting all properties.
-function etAndetTilfoejBemaerkning_CreateFcn(hObject, eventdata, handles)
-% hObject    handle to etAndetTilfoejBemaerkning (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    empty - handles not created until after all CreateFcns called
-
-% Hint: edit controls usually have a white background on Windows.
-%       See ISPC and COMPUTER.
-if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
-    set(hObject,'BackgroundColor','white');
-end
-
+ValgAfDatapunkt(handles,datatogo, ValgtDato, ValgtDatoDatetime);
 
 
 

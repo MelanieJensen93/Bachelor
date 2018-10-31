@@ -3,6 +3,7 @@ function handles = Velfaerdsteknologi(handles)
 %   Detailed explanation goes here
 
 SensorDataFil = importfile('SensorDataFil.xlsx','Ark1');
+d=1;
 
 CntRowCarendo=1;
 CntRowLuna=1;

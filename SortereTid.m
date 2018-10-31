@@ -50,8 +50,8 @@ if strcmp(periode, 'Dag')==1
     tt = tt(Begraensning,:);
     % Finder gennemsnittet af hver time og sletter rækker hvor der er ingen
     % data
-    tt = retime(tt,'hourly',@mean);
-    tt = rmmissing(tt);
+    %tt = retime(tt,'hourly',@mean);
+    %tt = rmmissing(tt);
     
     % Definere x-aksen
     x = startTidspunkt: enTime:slutTidspunkt;
@@ -74,7 +74,6 @@ if strcmp(periode, 'Dag')==1
             else
                 Dag(CntRowDag)=tt.Data(iiDag);
             end
-
             iiDag = iiDag+1; 
         else
             Dag(CntRowDag)=0; 
@@ -82,7 +81,6 @@ if strcmp(periode, 'Dag')==1
         CntRowDag=CntRowDag +1; 
     end
         
-    
     category_inteval = (categorical({'Morgen', 'Formiddag', 'Middag', 'Eftermiddag', 'Aften', 'Nat'}))';
     d=1; 
     for i = 1: length(x)
@@ -168,6 +166,7 @@ if strcmp(periode, 'Dag')==0
             match =(times>=startDato & times<slutDato);
             d=1;  
             ii = 1; 
+            tt = retime(tt,'daily',@mean);
 %             for i = 1:length(match)
 %                 d=1; 
 %                 if match(i)==1
@@ -192,6 +191,7 @@ if strcmp(periode, 'Dag')==0
             d=1; 
             Begraensning = timerange ( startDato,slutDato);
             tt = tt(Begraensning,:);
+            d=1; 
             [C,~,ic]=unique(day(tt.times));
             a_accounts = accumarray(ic,1);
             value = [C,a_accounts];
@@ -200,24 +200,31 @@ if strcmp(periode, 'Dag')==0
             d=1;  
           
             tt = retime(tt,'daily',@mean);
+            d=1; 
             tt = rmmissing(tt);
             
-            match =(times>=startDato & times<slutDato);
+           x = startDato: day(1):slutDato
+            %match =(times>=startDato & times<slutDato);
+            match = ismember(x,tt.times);
             d=1;  
             ii =1; 
             CntRow=1; 
-%             for i = 1:length(match)
-%                 if match(i)==1
-%                     DataMaaned(CntRow) = tt.Data(ii);
-%                     ii=1+ii; 
-%                 else 
-%                     DataMaaned(CntRow)=0; 
-%                 end 
-%                 CntRow=1+CntRow; 
-%             end
+            for i = 1:length(match)
+                if match(i)==1
+                    if isduration(tt.Data(ii))==1 
+                        DataMaaned(CntRow) = minutes(tt.Data(ii));
+                        ii=1+ii; 
+                    else 
+                        DataMaaned(CntRow) = tt.Data(ii); 
+                    end    
+                else 
+                    DataMaaned(CntRow)=0; 
+                end 
+                CntRow=1+CntRow; 
+            end
             d=1; 
             axes(axesTeknologi)
-            bar(tt.times,tt.Data)
+            bar(x,DataMaaned)
             d=1; 
             tt = rmmissing(tt);
             if isduration(tt.Data)==1
