@@ -37,6 +37,7 @@ end
 
 %Opretter en timetable, som knytter data til tiderne. 
 tt = timetable(times,D,'VariableNames',{'Data'});
+d=1; 
  
 %Hvis den valgte periode er dag skal der ske følgende
 if strcmp(periode, 'Dag')==1
@@ -48,10 +49,12 @@ if strcmp(periode, 'Dag')==1
     slutTidspunkt = slutDato + '05:00:00';
     Begraensning = timerange(char(startTidspunkt),char(slutTidspunkt));    
     tt = tt(Begraensning,:);
+    d=1; 
+    
     % Finder gennemsnittet af hver time og sletter rækker hvor der er ingen
     % data
-    %tt = retime(tt,'hourly',@mean);
-    %tt = rmmissing(tt);
+%     tt = retime(tt,'hourly',@mean);
+%     tt = rmmissing(tt);
     
     % Definere x-aksen
     x = startTidspunkt: enTime:slutTidspunkt;
@@ -160,7 +163,7 @@ if strcmp(periode, 'Dag')==0
             value = [C,a_accounts];
             d=1; 
             meanAnvendelse = mean(value(:,2));
-            
+            x=startDato:day(1):slutDato
             tt = retime(tt,'daily',@mean);
             CntRowMedarbejdere = 1; 
             match =(times>=startDato & times<slutDato);
@@ -203,7 +206,7 @@ if strcmp(periode, 'Dag')==0
             d=1; 
             tt = rmmissing(tt);
             
-           x = startDato: day(1):slutDato
+            x = startDato: day(1):slutDato;
             %match =(times>=startDato & times<slutDato);
             match = ismember(x,tt.times);
             d=1;  
