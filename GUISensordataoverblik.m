@@ -112,9 +112,6 @@ function btnTilojbemaerkningSensordatavindue_Callback(hObject, eventdata, handle
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
-%datatogo = handles.lbBemaerkning;
-%GUITilfoejBemaerkning(handles);
-
 datatogo = handles.Velfaerdsteknologi;
 GUITilfoejBemaerkning(datatogo);
 %Bemaerkning(datatogo);

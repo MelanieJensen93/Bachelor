@@ -55,7 +55,7 @@ function GUIDatafravalgtdato_OpeningFcn(hObject, eventdata, handles, varargin)
 % Choose default command line output for GUIDatafravalgtdato
 handles.output = hObject;
 
-%handles.Velfaerdsteknologi = varargin{1};
+handles.Velfaerdsteknologi = varargin{1};
 
 % Update handles structure
 guidata(hObject, handles);
@@ -84,6 +84,11 @@ function lbDataforvalgtdag_Callback(hObject, eventdata, handles)
 % Hints: contents = cellstr(get(hObject,'String')) returns lbDataforvalgtdag contents as cell array
 %        contents{get(hObject,'Value')} returns selected item from lbDataforvalgtdag
 
+handles.Velfaerdsteknologi.ValgtTidspunktPaaDato = get(hObject, 'value');
+datatogo = handles.Velfaerdsteknologi;
+guidata(hObject, handles);
+GUITilfoejBemaerkning(datatogo);
+%close(GUIDatafravalgtdato);
 
 % --- Executes during object creation, after setting all properties.
 function lbDataforvalgtdag_CreateFcn(hObject, eventdata, handles)

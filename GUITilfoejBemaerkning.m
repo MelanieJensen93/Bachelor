@@ -22,7 +22,7 @@ function varargout = GUITilfoejBemaerkning(varargin)
 
 % Edit the above text to modify the response to help GUITilfoejBemaerkning
 
-% Last Modified by GUIDE v2.5 12-Oct-2018 09:08:17
+% Last Modified by GUIDE v2.5 31-Oct-2018 10:50:47
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -56,8 +56,11 @@ function GUITilfoejBemaerkning_OpeningFcn(hObject, eventdata, handles, varargin)
 handles.output = hObject;
 
 handles.Velfaerdsteknologi = varargin{1}; %henter handles fra GUIBemaerkning
-if isfield(handles.Velfaerdsteknologi, 'ValgtTidspunkt')
+if isfield(handles.Velfaerdsteknologi, 'ValgtTidspunktPaaDato')
     %datatogo = handles.Velfaerdsteknologi; 
+    %tekst = string(handles.Velfaerdsteknologi.ValgtTidspunktPaaDato);
+    %ValgtTidspunkt = handles.Velfaerdsteknologi.ValgtTidspunktPaaDato; 
+    %set(handles.txtValgtteknologiSensorliste, 'String', tekst);
     ValgtafTidspunkt(handles);
 end
 
@@ -89,7 +92,7 @@ function btnVealgDatoTilfoejBemearkning_Callback(hObject, eventdata, handles)
 
 % Laver en kalaneder 
 % https://se.mathworks.com/help/finance/uicalendar-graphical-user-interface.html
- uicalendar('Weekend',[1 0 0 0 0 0 1], ...  
+ waitfor(uicalendar('Weekend',[1 0 0 0 0 0 1], ...  
 'SelectionType', 1, ...  
 'DestinationUI', handles.etDatoTilfoejBemaerkning));
 
@@ -244,3 +247,26 @@ guidata(hObject, handles);
 
 
  
+
+
+
+function etAndetTilfoejBemaerkning_Callback(hObject, eventdata, handles)
+% hObject    handle to etAndetTilfoejBemaerkning (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hints: get(hObject,'String') returns contents of etAndetTilfoejBemaerkning as text
+%        str2double(get(hObject,'String')) returns contents of etAndetTilfoejBemaerkning as a double
+
+
+% --- Executes during object creation, after setting all properties.
+function etAndetTilfoejBemaerkning_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to etAndetTilfoejBemaerkning (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+% Hint: edit controls usually have a white background on Windows.
+%       See ISPC and COMPUTER.
+if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor','white');
+end
