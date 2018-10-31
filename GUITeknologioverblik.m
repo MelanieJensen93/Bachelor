@@ -73,7 +73,9 @@ teknologi = string(teknologi);
 
 set(handles.txtValgtteknologiOverblik,'String',teknologi); 
 set(handles.txtAntalGangeTeknologioverblik,'String',num2str(handles.Velfaerdsteknologi.(teknologi)(1).Medarbejdere))
- 
+handles = SortereTid(handles, 'Medarbejdere',handles.axesMedarbejdereTeknologiOverblik);
+handles = SortereTid(handles, 'Varighed',handles.axesVarighedTeknologiOverblik);
+
 
 
 
@@ -147,6 +149,11 @@ uicalendar('Weekend',[1 0 0 0 0 0 1], ...
 'SelectionType', 1, ...  
 'DestinationUI', handles.stDatoTeknologiOverblik);
 
+waitfor(handles.stDatoTeknologiOverblik,'String');
+handles = SortereTid(handles, 'Medarbejdere',handles.axesMedarbejdereTeknologiOverblik);
+handles = SortereTid(handles, 'Varighed',handles.axesVarighedTeknologiOverblik);
+
+
 
 % --- Executes when selected object is changed in btngroupRedigerGrafTeknologioverblik.
 function btngroupRedigerGrafTeknologioverblik_SelectionChangedFcn(hObject, eventdata, handles)
@@ -155,9 +162,8 @@ function btngroupRedigerGrafTeknologioverblik_SelectionChangedFcn(hObject, event
 % handles    structure with handles and user data (see GUIDATA)
 %handles = SortereTid(handles, 'Medarbejdere',handles.axesMedarbejdereTeknologiOverblik);
 handles = SortereTid(handles, 'Medarbejdere',handles.axesMedarbejdereTeknologiOverblik);
-d=1; 
 handles = SortereTid(handles, 'Varighed',handles.axesVarighedTeknologiOverblik);
-d=1; 
+
 
 % --- Executes on button press in rbAarTeknologioverblik.
 function rbAarTeknologioverblik_Callback(hObject, eventdata, handles)

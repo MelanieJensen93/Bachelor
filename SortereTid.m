@@ -148,7 +148,7 @@ d=1;
     x = reordercats(category_inteval,{'Morgen', 'Formiddag', 'Middag', 'Eftermiddag', 'Aften', 'Nat'});
     d=1; 
     bar(x, sumData);
-    set(handles.txtAntalGangeTeknologioverblik,'String',length(tt.Data));
+    set(handles.txtAntalGangeTeknologioverblik,'String',Antal);
 
 end
 
