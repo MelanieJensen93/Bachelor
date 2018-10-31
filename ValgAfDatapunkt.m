@@ -21,17 +21,13 @@ if isfield(handles.Velfaerdsteknologi,teknologi)
             tidspunkt = string(tidspunkt);
             if tidspunkt == ValgtDatoDatetime
                
-                a = GUIDatafravalgtdato(datatogo, handles);
-                d=1; 
-                udskrift= sprintf("%s", handles.Velfaerdsteknologi.(teknologi).(Sensornavn)(ii).Tidspunkt);
+                listboxDataforvalgtdato = GUIDatafravalgtdato(datatogo, handles);
+                udskrift= sprintf("%s %s %s", teknologi, Sensornavn, handles.Velfaerdsteknologi.(teknologi).(Sensornavn)(ii).Tidspunkt);
                 str_part = udskrift; 
-                old_str = get(listboxDataforvalgtdat,'String'); 
+                old_str = get(listboxDataforvalgtdato,'String'); 
                 new_str=strvcat(char(old_str),char(str_part));
-                %set(handles.lbDataforvalgtdag,'String',new_str);
-                %set(handles.lbDataforvalgtdag, 'Value', idx+1);
+                set(listboxDataforvalgtdato,'String',new_str);
                 
-                set(a,'String',new_str);
-                %set(a, 'Value', idx+1);
             end 
             d=1;
         end
