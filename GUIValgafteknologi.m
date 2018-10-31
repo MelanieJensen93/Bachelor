@@ -58,11 +58,11 @@ handles.output = hObject;
 % Update handles structure
 guidata(hObject, handles);
 
-CarendoBillede = imread('Carendo2.png');
+CarendoBillede = imread('Carendo.png');
 axes(handles.axCarendoValgafteknologi);
 imshow(CarendoBillede);
 
-LunaBillede = imread('Lunaloftlift2.jpg');
+LunaBillede = imread('Lunaloftlift.jpg');
 axes(handles.axLunaValgafteknologi)
 imshow(LunaBillede);
 
