@@ -49,12 +49,13 @@ if strcmp(periode, 'Dag')==1
     slutTidspunkt = slutDato + '05:00:00';
     Begraensning = timerange(char(startTidspunkt),char(slutTidspunkt));    
     tt = tt(Begraensning,:);
+    Antal = length(tt.Data);
     d=1; 
     
     % Finder gennemsnittet af hver time og sletter rækker hvor der er ingen
     % data
-%     tt = retime(tt,'hourly',@mean);
-%     tt = rmmissing(tt);
+      tt = retime(tt,'hourly',@mean);
+      tt = rmmissing(tt);
     
     % Definere x-aksen
     x = startTidspunkt: enTime:slutTidspunkt;
