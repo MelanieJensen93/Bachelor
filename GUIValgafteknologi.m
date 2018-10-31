@@ -58,6 +58,14 @@ handles.output = hObject;
 % Update handles structure
 guidata(hObject, handles);
 
+CarendoBillede = imread('Carendo2.png');
+axes(handles.axCarendoValgafteknologi);
+imshow(CarendoBillede);
+
+LunaBillede = imread('Lunaloftlift2.jpg');
+axes(handles.axLunaValgafteknologi)
+imshow(LunaBillede);
+
 handles = IndlaesVelfaerdsteknologi(handles);
 guidata(hObject,handles);
  
@@ -120,18 +128,7 @@ if isfield(handles.Velfaerdsteknologi ,'Luna')
     handles.Velfaerdsteknologi.Luna = []; 
     handles.Velfaerdsteknologi=rmfield(handles.Velfaerdsteknologi,'Luna');
 end
-%CntNr=1; 
-% for i = 1:numel(fieldnames(handles.Velfaerdsteknologi.Sensorer))
-%     fieldname = fieldnames(handles.Velfaerdsteknologi.Sensorer);
-%     strfieldname = string(fieldname(i,1));
-%     if strcmp(handles.Velfaerdsteknologi.Sensorer.(strfieldname)(1).Velfaerdsteknologi,'Carendo')==1 
-%         d=1; 
-%         handles.Velfaerdsteknologi.Carendo(CntRow).(strfieldname) = handles.Velfaerdsteknologi.Sensorer.(strfieldname);
-%         %CntNr = CntNr +1; 
-%         CntRow =CntRow+1; 
-%     end  
-%     
-% end
+
 
 if isfield(handles.Velfaerdsteknologi ,'Carendo')
     datatogo = handles.Velfaerdsteknologi;
