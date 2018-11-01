@@ -71,7 +71,6 @@ axes(handles.axLunaValgafteknologi)
 imshow(LunaBillede);
 
 handles = IndlaesVelfaerdsteknologi(handles);
-d=1; 
 guidata(hObject,handles);
  
 
