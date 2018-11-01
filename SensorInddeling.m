@@ -26,11 +26,18 @@ if isfield(handles.Velfaerdsteknologi,teknologi)
                handles.Velfaerdsteknologi.(teknologisensor).(id)(CntRowSensor).Komfortfunktion = handles.Velfaerdsteknologi.(teknologi)(CntRow).Komfortfunktion;
                handles.Velfaerdsteknologi.(teknologisensor).(id)(CntRowSensor).Haevesaenkefunktion = handles.Velfaerdsteknologi.(teknologi)(CntRow).Haevesaenkefunktion;
                handles.Velfaerdsteknologi.(teknologisensor).(id)(CntRowSensor).Tidspunkt = handles.Velfaerdsteknologi.(teknologi)(CntRow).Tidspunkt;
-               handles.Velfaerdsteknologi.(teknologisensor).(id)(CntRowSensor).Varighed = handles.Velfaerdsteknologi.(teknologi)(CntRow).Varighed;
+               handles.Velfaerdsteknologi.(teknologisensor).(id)(CntRowSensor).Varighedforarbejdsgang = handles.Velfaerdsteknologi.(teknologi)(CntRow).Varighedforarbejdsgang;
+               handles.Velfaerdsteknologi.(teknologisensor).(id)(CntRowSensor).Varighedm2medarbejdere = handles.Velfaerdsteknologi.(teknologi)(CntRow).Varighedm2medarbejdere;
+               handles.Velfaerdsteknologi.(teknologisensor).(id)(CntRowSensor).Varighedm1medarbejdere = handles.Velfaerdsteknologi.(teknologi)(CntRow).Varighedm1medarbejdere;
+               handles.Velfaerdsteknologi.(teknologisensor).(id)(CntRowSensor).Varighedm0medarbejdere = handles.Velfaerdsteknologi.(teknologi)(CntRow).Varighedm0medarbejdere;
                handles.Velfaerdsteknologi.(teknologisensor).(id)(CntRowSensor).LunaMedCarendo = handles.Velfaerdsteknologi.(teknologi)(CntRow).LunaMedCarendo;
                handles.Velfaerdsteknologi.(teknologisensor).(id)(CntRowSensor).Arbejdsgang = handles.Velfaerdsteknologi.(teknologi)(CntRow).Arbejdsgang;
                handles.Velfaerdsteknologi.(teknologisensor).(id)(CntRowSensor).Medarbejdere= handles.Velfaerdsteknologi.(teknologi)(CntRow).Medarbejdere;
                handles.Velfaerdsteknologi.(teknologisensor).(id)(CntRowSensor).Tidmedborger = handles.Velfaerdsteknologi.(teknologi)(CntRow).Tidmedborger;
+               handles.Velfaerdsteknologi.(teknologisensor).(id)(CntRowSensor).Superbruger = handles.Velfaerdsteknologi.(teknologi)(CntRow).Superbruger;
+               handles.Velfaerdsteknologi.(teknologisensor).(id)(CntRowSensor).Almindeligtpersonale = handles.Velfaerdsteknologi.(teknologi)(CntRow).Almindeligtpersonale;
+               handles.Velfaerdsteknologi.(teknologisensor).(id)(CntRowSensor).Afloeser = handles.Velfaerdsteknologi.(teknologi)(CntRow).Afloeser;
+               
                
                
                
