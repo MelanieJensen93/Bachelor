@@ -77,7 +77,12 @@ teknologi = string(teknologi);
 
 %set(handles.txtValgtteknologiOverblik,'String',teknologi); 
 set(handles.txtAntalGangeTeknologioverblik,'String',num2str(handles.Velfaerdsteknologi.(teknologi)(1).Medarbejdere))
- 
+handles = SortereTid(handles, 'Medarbejdere',handles.axesMedarbejdereTeknologiOverblik);
+handles = SortereTid(handles, 'Varighed',handles.axesVarighedTeknologiOverblik);
+
+
+
+
 % UIWAIT makes GUITeknologioverblik wait for user response (see UIRESUME)
 % uiwait(handles.figure1);
 
@@ -145,6 +150,11 @@ function btnVaelgDatoTeknologioverblik_Callback(hObject, eventdata, handles)
 uicalendar('Weekend',[1 0 0 0 0 0 1], ...  
 'SelectionType', 1, ...  
 'DestinationUI', handles.stDatoTeknologiOverblik);
+
+waitfor(handles.stDatoTeknologiOverblik,'String');
+handles = SortereTid(handles, 'Medarbejdere',handles.axesMedarbejdereTeknologiOverblik);
+handles = SortereTid(handles, 'Varighed',handles.axesVarighedTeknologiOverblik);
+
 
 
 % --- Executes when selected object is changed in btngroupRedigerGrafTeknologioverblik.
