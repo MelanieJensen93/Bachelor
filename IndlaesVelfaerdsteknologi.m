@@ -3,7 +3,7 @@ function handles = IndlaesVelfaerdsteknologi(handles)
 %   Detailed explanation goes here
 
 %SensorDataFil = importfile('SensorDataFil.xlsx','Ark1');
-SensorDataFil = LoadFile('SensorDataFil.xlsx','Ark1');
+SensorDataFil = IndlaesFil('SensorDataFil.xlsx','Ark1');
 d=1; 
 
 handles.Velfaerdsteknologi.Carendo = VelfaerdsteknologiIndeling(SensorDataFil,"Carendo");

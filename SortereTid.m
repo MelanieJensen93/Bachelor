@@ -29,9 +29,7 @@ switch data
         D= [handles.Velfaerdsteknologi.(teknologi).Medarbejdere]';
         d=1;
     case 'Varighed'
-        
         D = [handles.Velfaerdsteknologi.(teknologi).Varighedforarbejdsgang]';
-        d=1; 
         %Idet at det er en tid så skal det skrives ud i typen duration med
         %følgende format. 
         infmt = 'mm:ss';
@@ -51,8 +49,9 @@ if strcmp(periode, 'Dag')==1
     slutTidspunkt = slutDato + '05:00:00';
     Begraensning = timerange(char(slutTidspunkt),char(startTidspunkt));    
     tt = tt(Begraensning,:);
+    % Antal angiver, antal gange systemet har været i brug om dagen. 
     Antal = length(tt.Data);
-    d=1; 
+    d=1;
     
     % Finder gennemsnittet af hver time og sletter rækker hvor der er ingen
     % data
@@ -62,19 +61,18 @@ if strcmp(periode, 'Dag')==1
     % Definere x-aksen
     x = slutTidspunkt: enTime:startTidspunkt;
     
-    %hoursIntimes = hour(tt.times);
-    %mins = minute(tt.times);
-    %secs = second(tt.times);
-    
     % Finder hvilke timer af x-aksen der er data for 
     matchDay = ismember(x,tt.times);
     
+    
+    Dag = zeros(1,length(x));
     %Hvis der er data skal data ligges ind i et array eller skal det være lig med 0.  
     CntRowDag=1; 
     iiDag=1; 
     for i=1:length(matchDay)
         if matchDay(i) ==1 
             d=1; 
+            %  Hvis det er en varighed, skal minutterne fra tiden hentes. 
             if isduration(tt.Data) ==1
                 Dag(CntRowDag)=minutes(tt.Data(iiDag));
             else
@@ -86,28 +84,31 @@ if strcmp(periode, 'Dag')==1
         end
         CntRowDag=CntRowDag +1; 
     end
-        
-    category_inteval = (categorical({'Morgen', 'Formiddag', 'Middag', 'Eftermiddag', 'Aften', 'Nat'}))';
+    
+    % Præallokere et categorical array med tidspunkterpådagen
+    TidspunktPaaDagen = (categorical({'Morgen', 'Formiddag', 'Middag', 'Eftermiddag', 'Aften', 'Nat'}))';
     d=1; 
+    
+    % Tiden bliver placeret indenfor de bestemte intervaller. 
     for i = 1: length(x)
         if hour(x(i))>=5 && hour(x(i))< 9
             d=1; 
-            category_interval_data(i)=category_inteval(1);
+            TidspunktPaaDagen_Data(i)=TidspunktPaaDagen(1);
         else if hour(x(i))>=9 && hour(x(i))<11
                 d=1; 
-                category_interval_data(i)= category_inteval(2);
+                TidspunktPaaDagen_Data(i)= TidspunktPaaDagen(2);
             else if hour(x(i))>=11 && hour(x(i))<14
                     d=1; 
-                    category_interval_data(i)= category_inteval(3);
+                    TidspunktPaaDagen_Data(i)= TidspunktPaaDagen(3);
                 else if hour(x(i))>=14 && hour(x(i))<17
                         d=1; 
-                        category_interval_data(i)= category_inteval(4);
+                        TidspunktPaaDagen_Data(i)= TidspunktPaaDagen(4);
                     else if hour(x(i))>=17 && hour(x(i))<23
                             d=1; 
-                            category_interval_data(i)= category_inteval(5);
+                            TidspunktPaaDagen_Data(i)= TidspunktPaaDagen(5);
                         else if hour(x(i))==23 || hour(x(i))<5
                                 d=1; 
-                                category_interval_data(i)= category_inteval(6);
+                                TidspunktPaaDagen_Data(i)= TidspunktPaaDagen(6);
                             end
                         end
                     end
@@ -116,38 +117,45 @@ if strcmp(periode, 'Dag')==1
         end
     end
     d=1; 
-    tab_new_all = timetable(x',Dag',category_interval_data');
+    %Dette indsættes i en ny timetable
+    ttMedTidspunkt = timetable(x',Dag',TidspunktPaaDagen_Data');
     
-    d=1;    
+    d=1;  
+    
+    %Beregner summen af alle medarbejder indenfor hvert interval.
+    %Var2 er tidspunkt, hvor Va1 angiver antal medarbejdere. 
     CntSum = 1;
     CntData=1; 
-    for category=1:length(category_inteval)
+    for tidspunkt=1:length(TidspunktPaaDagen)
         data =[];
-        for i = 1:size(tab_new_all)
-            if tab_new_all.Var2(i)==category_inteval(category)
-                data(CntData) = double(tab_new_all.Var1(i));
+        for i = 1:size(ttMedTidspunkt)
+            if ttMedTidspunkt.Var2(i)==TidspunktPaaDagen(tidspunkt)
+                data(CntData) = double(ttMedTidspunkt.Var1(i));
                 CntData=CntData+1; 
                 d=1; 
             end
             d=1; 
         end
         d=1;
-            sumData(CntSum) = sum(data);
-            CntSum = CntSum +1; 
+        %Beregner summen af data indenfor et bestemt tidspunkt
+        sumData(CntSum) = sum(data);
+        CntSum = CntSum +1; 
     end
-    d=1; 
-    A=find(tab_new_all.Var1~=0)
-    d=1;
-    
-    Row = 1; 
-
-        for i=1:length(A)
-            Data(Row) = tab_new_all.Var2(A(i));
-            Row = Row+1; 
-        end
+%     d=1;
+%     A=find(ttMedTidspunkt.Var1~=0)
+%     d=1;
+%     
+%     Row = 1; 
+% 
+%         for i=1:length(A)
+%             Data(Row) = ttMedTidspunkt.Var2(A(i));
+%             Row = Row+1; 
+%         end
 d=1; 
     axes(axesTeknologi)
-    x = reordercats(category_inteval,{'Morgen', 'Formiddag', 'Middag', 'Eftermiddag', 'Aften', 'Nat'});
+    %x-aksen vil sortere det i kategorisk rækkefølge, derfor anvendes
+    %reordercats, som indsætter det i den originale rækkefølge. 
+    x = reordercats(TidspunktPaaDagen,{'Morgen', 'Formiddag', 'Middag', 'Eftermiddag', 'Aften', 'Nat'});
     d=1; 
     bar(x, sumData);
     set(handles.txtAntalGangeTeknologioverblik,'String',Antal);
