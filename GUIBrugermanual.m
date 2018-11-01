@@ -56,7 +56,12 @@ function GUIBrugermanual_OpeningFcn(hObject, eventdata, handles, varargin)
 handles.output = hObject;
 handles.Velfaerdsteknologi = varargin{1}; %henter handles fra GUIValgafteknologi
 guidata(hObject, handles);
-handles = Brugermanual(handles); 
+handles = Brugermanual(handles);
+
+AarhusKommuneLogo = imread('AarhusKommuneLogo.jpg');
+axes(handles.axAarhusLogo);
+imshow(AarhusKommuneLogo);
+
 % Update handles structure
 guidata(hObject, handles);
 

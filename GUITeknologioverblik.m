@@ -22,7 +22,7 @@ function varargout = GUITeknologioverblik(varargin)
 
 % Edit the above text to modify the response to help GUITeknologioverblik
 
-% Last Modified by GUIDE v2.5 22-Oct-2018 09:11:19
+% Last Modified by GUIDE v2.5 01-Nov-2018 09:19:57
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -56,7 +56,8 @@ function GUITeknologioverblik_OpeningFcn(hObject, eventdata, handles, varargin)
 handles.output = hObject;
 if ~isfield(handles, 'Velfaerdsteknologi')
     handles.Velfaerdsteknologi = varargin{1}; %henter handles fra GUIValgafteknologi
-end 
+end
+
 if isfield(handles.Velfaerdsteknologi, 'Carendo')
    set(handles.txtValgtteknologiOverblik, 'String', 'Carendo');
 end
@@ -64,14 +65,17 @@ if isfield(handles.Velfaerdsteknologi, 'Luna')
     set(handles.txtValgtteknologiOverblik, 'String', 'Luna loftlift');
 end
 
+AarhusKommuneLogo = imread('AarhusKommuneLogo.jpg');
+axes(handles.axAarhusLogo);
+imshow(AarhusKommuneLogo);
+
 % Update handles structure
 guidata(hObject, handles);
 %handles = SortereTid(handles);
 teknologi = fieldnames(handles.Velfaerdsteknologi);
-d=1; 
 teknologi = string(teknologi);
 
-set(handles.txtValgtteknologiOverblik,'String',teknologi); 
+%set(handles.txtValgtteknologiOverblik,'String',teknologi); 
 set(handles.txtAntalGangeTeknologioverblik,'String',num2str(handles.Velfaerdsteknologi.(teknologi)(1).Medarbejdere))
 handles = SortereTid(handles, 'Medarbejdere',handles.axesMedarbejdereTeknologiOverblik);
 handles = SortereTid(handles, 'Varighed',handles.axesVarighedTeknologiOverblik);
@@ -97,13 +101,13 @@ set(gcf, 'Units', 'normal', 'Position', [0 0 1 1])
 %set(gcf, 'Toolbar', 'none', 'Menu', 'none');
 
 
-% --- Executes on button press in btnTilbage.
-function btnTilbage_Callback(hObject, eventdata, handles)
-% hObject    handle to btnTilbage (see GCBO)
+% --- Executes on button press in btnTilbageTeknologiOverblik.
+function btnTilbageTeknologiOverblik_Callback(hObject, eventdata, handles)
+% hObject    handle to btnTilbageTeknologiOverblik (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-GUIValgafteknologi;
 close(GUITeknologioverblik);
+GUIValgafteknologi;
 
 
 % --- Executes on button press in btnListoversensorerTeknologioverblik.
@@ -111,8 +115,6 @@ function btnListoversensorerTeknologioverblik_Callback(hObject, eventdata, handl
 % hObject    handle to btnListoversensorerTeknologioverblik (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-
-
 datatogo = handles.Velfaerdsteknologi;
 GUISensorliste(datatogo);
 
@@ -172,3 +174,11 @@ function rbAarTeknologioverblik_Callback(hObject, eventdata, handles)
 % handles    structure with handles and user data (see GUIDATA)
 
 % Hint: get(hObject,'Value') returns toggle state of rbAarTeknologioverblik
+
+
+% --- If Enable == 'on', executes on mouse press in 5 pixel border.
+% --- Otherwise, executes on mouse press in 5 pixel border or over text3.
+function text3_ButtonDownFcn(hObject, eventdata, handles)
+% hObject    handle to text3 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
