@@ -131,6 +131,8 @@ function btnYderligeredataTeknologioverblik_Callback(hObject, eventdata, handles
 % hObject    handle to btnYderligeredataTeknologioverblik (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
+datatogo = handles.Velfaerdsteknologi;
+GUIYderligereData(datatogo);
 
 
 % --- Executes on button press in btnBrugermanualTeknologioverblik.
@@ -146,7 +148,11 @@ function btnSammenlignmedandreplejecentreTeknologioverblik_Callback(hObject, eve
 % hObject    handle to btnSammenlignmedandreplejecentreTeknologioverblik (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-
+%handles = SortereTid(handles);
+teknologi = fieldnames(handles.Velfaerdsteknologi);
+datatogo= string(teknologi);
+%datatogo = handles.Velfaerdsteknologi;
+GUISammenlignMedPlejecentre(datatogo);
 
 % --- Executes on button press in btnVaelgDatoTeknologioverblik.
 function btnVaelgDatoTeknologioverblik_Callback(hObject, eventdata, handles)
@@ -162,7 +168,7 @@ waitfor(handles.stDatoTeknologiOverblik,'String');
 % handles = SortereTid(handles, 'Varighed',handles.axesVarighedTeknologiOverblik);
 teknologi = fieldnames(handles.Velfaerdsteknologi);
 teknologi = string(teknologi);
-
+d=1;
 D = [handles.Velfaerdsteknologi.(teknologi).Varighedforarbejdsgang];
 %Idet at det er en tid så skal det skrives ud i typen duration med
 %følgende format. 

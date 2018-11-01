@@ -28,7 +28,7 @@ end
 % If row start and end points are not specified, define defaults
 if nargin <= 3
     startRow = 2;
-    endRow = 14;
+    endRow = 15;
 end
 
 %% Import the data, extracting spreadsheet dates in Excel serial date format

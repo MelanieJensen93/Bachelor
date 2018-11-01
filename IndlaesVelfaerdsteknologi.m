@@ -1,9 +1,15 @@
-function handles = IndlaesVelfaerdsteknologi(handles)
+function handles = IndlaesVelfaerdsteknologi(handles,fil)
 %HENTDATAFRASENSORDATAFIL Summary of this function goes here
 %   Detailed explanation goes here
 
 %SensorDataFil = importfile('SensorDataFil.xlsx','Ark1');
-SensorDataFil = IndlaesFil('SensorDataFil.xlsx','Ark1');
+if nargin ==1
+    SensorDataFil = IndlaesFil('SensorDataFil.xlsx','Ark1');
+end
+
+if nargin ==2
+    SensorDataFil = IndlaesFil('Plejecentre.xlsx','Ark1');
+end
 d=1; 
 
 handles.Velfaerdsteknologi.Carendo = VelfaerdsteknologiIndeling(SensorDataFil,"Carendo");

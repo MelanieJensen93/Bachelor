@@ -21,6 +21,11 @@ switch Vindue
         stringDato = get(handles.stDatoSensorOverblik,'String');
         d=1;
         txtAntal = handles.txtAntalGangeSensoroverblik;
+    case 'Plejecentre'
+        periode = get(get(handles.btngroupRedigergrafPlejecentre,'SelectedObject'),'String');
+        stringDato = get(handles.stDatoPlejecentre,'String');
+        % Den valgte dato
+        txtAntal = handles.txtAntalGangePlejecentreoverblik;
 end
 % Hvis dato ikke valgt, vælges seneste dato 
 if isempty(stringDato)
