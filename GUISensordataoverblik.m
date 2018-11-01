@@ -73,6 +73,7 @@ if isfield(handles.Velfaerdsteknologi, 'CarendoSensor')
     set(handles.txtValgtteknologiSensorOverblik, 'String', sensor);
 end
 
+handles = SortereTid(handles,[handles.Velfaerdsteknologi.(teknologi).(sensor).Tidspunkt],[handles.Velfaerdsteknologi.(teknologi).(sensor).Medarbejdere],handles.axesMedarbejderSensorDataVindue);
 %close(GUITilfoejBemaerkning);
 
 guidata(hObject, handles);

@@ -77,8 +77,14 @@ teknologi = string(teknologi);
 
 %set(handles.txtValgtteknologiOverblik,'String',teknologi); 
 set(handles.txtAntalGangeTeknologioverblik,'String',num2str(handles.Velfaerdsteknologi.(teknologi)(1).Medarbejdere))
-handles = SortereTid(handles, 'Medarbejdere',handles.axesMedarbejdereTeknologiOverblik);
-handles = SortereTid(handles, 'Varighed',handles.axesVarighedTeknologiOverblik);
+d=1;
+D = [handles.Velfaerdsteknologi.(teknologi).Varighedforarbejdsgang];
+%Idet at det er en tid så skal det skrives ud i typen duration med
+%følgende format. 
+infmt = 'mm:ss';
+D = duration(D,'InputFormat',infmt); 
+handles = SortereTid(handles,[handles.Velfaerdsteknologi.(teknologi).Tidspunkt],[handles.Velfaerdsteknologi.(teknologi).Medarbejdere],handles.axesMedarbejdereTeknologiOverblik);
+handles = SortereTid(handles,[handles.Velfaerdsteknologi.(teknologi).Tidspunkt],D,handles.axesVarighedTeknologiOverblik);
 
 
 
@@ -152,8 +158,19 @@ uicalendar('Weekend',[1 0 0 0 0 0 1], ...
 'DestinationUI', handles.stDatoTeknologiOverblik);
 
 waitfor(handles.stDatoTeknologiOverblik,'String');
-handles = SortereTid(handles, 'Medarbejdere',handles.axesMedarbejdereTeknologiOverblik);
-handles = SortereTid(handles, 'Varighed',handles.axesVarighedTeknologiOverblik);
+% handles = SortereTid(handles, 'Medarbejdere',handles.axesMedarbejdereTeknologiOverblik);
+% handles = SortereTid(handles, 'Varighed',handles.axesVarighedTeknologiOverblik);
+teknologi = fieldnames(handles.Velfaerdsteknologi);
+teknologi = string(teknologi);
+
+D = [handles.Velfaerdsteknologi.(teknologi).Varighedforarbejdsgang];
+%Idet at det er en tid så skal det skrives ud i typen duration med
+%følgende format. 
+infmt = 'mm:ss';
+D = duration(D,'InputFormat',infmt); 
+
+handles = SortereTid(handles,[handles.Velfaerdsteknologi.(teknologi).Tidspunkt],[handles.Velfaerdsteknologi.(teknologi).Medarbejdere],handles.axesMedarbejdereTeknologiOverblik);
+handles = SortereTid(handles,[handles.Velfaerdsteknologi.(teknologi).Tidspunkt],D,handles.axesVarighedTeknologiOverblik);
 
 
 
@@ -163,8 +180,18 @@ function btngroupRedigerGrafTeknologioverblik_SelectionChangedFcn(hObject, event
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 %handles = SortereTid(handles, 'Medarbejdere',handles.axesMedarbejdereTeknologiOverblik);
-handles = SortereTid(handles, 'Medarbejdere',handles.axesMedarbejdereTeknologiOverblik);
-handles = SortereTid(handles, 'Varighed',handles.axesVarighedTeknologiOverblik);
+% handles = SortereTid(handles, 'Medarbejdere',handles.axesMedarbejdereTeknologiOverblik);
+% handles = SortereTid(handles, 'Varighed',handles.axesVarighedTeknologiOverblik);
+teknologi = fieldnames(handles.Velfaerdsteknologi);
+teknologi = string(teknologi);
+D = [handles.Velfaerdsteknologi.(teknologi).Varighedforarbejdsgang];
+%Idet at det er en tid så skal det skrives ud i typen duration med
+%følgende format. 
+infmt = 'mm:ss';
+D = duration(D,'InputFormat',infmt); 
+handles = SortereTid(handles,[handles.Velfaerdsteknologi.(teknologi).Tidspunkt],[handles.Velfaerdsteknologi.(teknologi).Medarbejdere],handles.axesMedarbejdereTeknologiOverblik);
+handles = SortereTid(handles,[handles.Velfaerdsteknologi.(teknologi).Tidspunkt],D,handles.axesVarighedTeknologiOverblik);
+
 
 
 % --- Executes on button press in rbAarTeknologioverblik.

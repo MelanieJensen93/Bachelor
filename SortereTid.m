@@ -1,9 +1,10 @@
-function handles = SortereTid(handles, data, axesTeknologi)
-
+function handles = SortereTid(handles,xData, yData, axesTeknologi)
+d=1; 
 % Finder den teknologi der er trykket på
-teknologi = fieldnames(handles.Velfaerdsteknologi);
-teknologi = string(teknologi);
+% teknologi = fieldnames(handles.Velfaerdsteknologi);
+% teknologi = string(teknologi);
 enTime = hours(1);
+d=1; 
 
 % Den valgte periode
 periode = get(get(handles.btngroupRedigerGrafTeknologioverblik,'SelectedObject'),'String');
@@ -13,31 +14,34 @@ stringDato = get(handles.stDatoTeknologiOverblik,'String');
 
 % Hvis dato ikke valgt, vælges seneste dato 
 if isempty(stringDato)
-    stringDato = handles.Velfaerdsteknologi.(teknologi)(1).Tidspunkt;
+    %stringDato = handles.Velfaerdsteknologi.(teknologi)(1).Tidspunkt;
+    stringDato = xData(1);
 end
-
+d=1; 
 %Konvertere dato til en datetime 
 slutDato = datetime(stringDato,'InputFormat','dd-MM-yyyy');
 
 %Henter tiderne og udskriver i nedenstående format
-times = [handles.Velfaerdsteknologi.(teknologi).Tidspunkt]';
+%times = [handles.Tidspunkt]';
+times = xData';
+d=1;
 %times.Format = 'dd-MM-yyyy HH:mm:ss';
  
 % Data hentes alt efter den data der skal vises. 
-switch data 
-    case 'Medarbejdere'
-        D= [handles.Velfaerdsteknologi.(teknologi).Medarbejdere]';
-        d=1;
-    case 'Varighed'
-        D = [handles.Velfaerdsteknologi.(teknologi).Varighedforarbejdsgang]';
-        %Idet at det er en tid så skal det skrives ud i typen duration med
-        %følgende format. 
-        infmt = 'mm:ss';
-        D = duration(D,'InputFormat',infmt); 
-end
+% switch data 
+%     case 'Medarbejdere'
+%         D= [handles.Velfaerdsteknologi.(teknologi).Medarbejdere]';
+%         d=1;
+%     case 'Varighed'
+%         D = [handles.Velfaerdsteknologi.(teknologi).Varighedforarbejdsgang]';
+%         %Idet at det er en tid så skal det skrives ud i typen duration med
+%         %følgende format. 
+%         infmt = 'mm:ss';
+%         D = duration(D,'InputFormat',infmt); 
+% end
 
 %Opretter en timetable, som knytter data til tiderne. 
-tt = timetable(times,D,'VariableNames',{'Data'});
+tt = timetable(times,yData','VariableNames',{'Data'});
 
 %Hvis den valgte periode er dag skal der ske følgende
 if strcmp(periode, 'Dag')==1
@@ -63,7 +67,6 @@ if strcmp(periode, 'Dag')==1
     
     % Finder hvilke timer af x-aksen der er data for 
     matchDay = ismember(x,tt.times);
-    
     
     Dag = zeros(1,length(x));
     %Hvis der er data skal data ligges ind i et array eller skal det være lig med 0.  
