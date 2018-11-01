@@ -12,8 +12,29 @@ if isfield(handles.Velfaerdsteknologi, 'ValgtTidspunktPaaDato')
           Sensornavn = string(Sensor(i));
           for ii = 1:length(handles.Velfaerdsteknologi.(teknologi).(Sensornavn))
             if ValgtTidspunkt == ii
-                udskrift = string(handles.Velfaerdsteknologi.(teknologi).(Sensornavn)(ii).Tidspunkt);
-                udskrift = sprintf("%s %s %s", teknologi, Sensornavn, udskrift);
+                  tidspunkt = handles.Velfaerdsteknologi.(teknologi).(Sensornavn)(ii).Tidspunkt;
+                 % Præallokere et categorical array med tidspunkterpådagen
+                  TidspunktPaaDagen = (categorical({'Morgen', 'Formiddag', 'Middag', 'Eftermiddag', 'Aften', 'Nat'}))';
+                %Tiden bliver placeret indenfor de bestemte intervaller. 
+                    if hour(tidspunkt)>=5 && hour(tidspunkt)< 9
+                        TidspunktPaaDagen_Data=TidspunktPaaDagen(1);
+                    elseif hour(tidspunkt)>=9 && hour(tidspunkt)<11
+                            TidspunktPaaDagen_Data= TidspunktPaaDagen(2);
+                    elseif hour(tidspunkt)>=11 && hour(tidspunkt)<14
+                            TidspunktPaaDagen_Data= TidspunktPaaDagen(3);
+                    elseif hour(tidspunkt)>=14 && hour(tidspunkt)<17
+                            TidspunktPaaDagen_Data= TidspunktPaaDagen(4);
+                    elseif hour(tidspunkt)>=17 && hour(tidspunkt)<23 
+                            TidspunktPaaDagen_Data= TidspunktPaaDagen(5);
+                    else 
+                            TidspunktPaaDagen_Data= TidspunktPaaDagen(6);
+                    end
+                
+                tidspunktKunDato = handles.Velfaerdsteknologi.(teknologi).(Sensornavn)(ii).Tidspunkt;
+                tidspunktKunDato.Format = 'dd-MMM-yyyy';
+                tidspunktKunDato = string(tidspunktKunDato);
+                %udskrift = string(handles.Velfaerdsteknologi.(teknologi).(Sensornavn)(ii).Tidspunkt);
+                udskrift = sprintf("%s %s %s", Sensornavn, tidspunktKunDato, TidspunktPaaDagen_Data);
                 set(handles.txtValgtTidspunkt, 'String', udskrift);
             end
           end

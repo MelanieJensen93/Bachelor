@@ -58,7 +58,6 @@ handles.output = hObject;
 % Update handles structure
 guidata(hObject, handles);
 
-%set(handles.axAarhusLogo, 'Layer', 'top');
 AarhusKommuneLogo = imread('AarhusKommuneLogo.jpg');
 axes(handles.axAarhusLogo);
 imshow(AarhusKommuneLogo);
