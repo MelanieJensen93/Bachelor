@@ -56,11 +56,12 @@ function GUITilfoejBemaerkning_OpeningFcn(hObject, eventdata, handles, varargin)
 handles.output = hObject;
 
 handles.Velfaerdsteknologi = varargin{1}; %henter handles fra GUIBemaerkning
+
+AarhusKommuneLogo = imread('AarhusKommuneLogo.jpg');
+axes(handles.axAarhusLogo);
+imshow(AarhusKommuneLogo);
+
 if isfield(handles.Velfaerdsteknologi, 'ValgtTidspunktPaaDato')
-    %datatogo = handles.Velfaerdsteknologi; 
-    %tekst = string(handles.Velfaerdsteknologi.ValgtTidspunktPaaDato);
-    %ValgtTidspunkt = handles.Velfaerdsteknologi.ValgtTidspunktPaaDato; 
-    %set(handles.txtValgtteknologiSensorliste, 'String', tekst);
     ValgtafTidspunkt(handles);
 end
 

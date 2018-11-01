@@ -23,7 +23,6 @@ if isfield(handles.Velfaerdsteknologi,teknologi)
                 % Præallokere et categorical array med tidspunkterpådagen
                   TidspunktPaaDagen = (categorical({'Morgen', 'Formiddag', 'Middag', 'Eftermiddag', 'Aften', 'Nat'}))';
                 %Tiden bliver placeret indenfor de bestemte intervaller. 
-                %for i = 1: length(tidspunkt)
                     if hour(tidspunkt)>=5 && hour(tidspunkt)< 9
                         TidspunktPaaDagen_Data=TidspunktPaaDagen(1);
                     elseif hour(tidspunkt)>=9 && hour(tidspunkt)<11
@@ -41,7 +40,7 @@ if isfield(handles.Velfaerdsteknologi,teknologi)
                 tidspunktKunDato = handles.Velfaerdsteknologi.(teknologi).(Sensornavn)(ii).Tidspunkt;
                 tidspunktKunDato.Format = 'dd-MMM-yyyy';
                 tidspunktKunDato = string(tidspunktKunDato);
-                udskrift= sprintf("%s %s %s %s", teknologi, Sensornavn, tidspunktKunDato, TidspunktPaaDagen_Data);
+                udskrift= sprintf(" %s %s %s", Sensornavn, tidspunktKunDato, TidspunktPaaDagen_Data);
                 str_part = udskrift; 
                 old_str = get(listboxDataforvalgtdato,'String'); 
                 new_str=strvcat(char(old_str),char(str_part));
