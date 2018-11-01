@@ -22,7 +22,7 @@ function varargout = GUISensordataoverblik(varargin)
 
 % Edit the above text to modify the response to help GUISensordataoverblik
 
-% Last Modified by GUIDE v2.5 12-Oct-2018 12:49:04
+% Last Modified by GUIDE v2.5 01-Nov-2018 13:16:22
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -70,10 +70,18 @@ end
 if isfield(handles.Velfaerdsteknologi, 'CarendoSensor')
     f = fieldnames(handles.Velfaerdsteknologi.CarendoSensor);
     sensor = f(ValgtSensor);
+    d=1;
     set(handles.txtValgtteknologiSensorOverblik, 'String', sensor);
+    Varighed = [handles.Velfaerdsteknologi.CarendoSensor.(string(sensor)).Varighedforarbejdsgang];
+    %Idet at det er en tid så skal det skrives ud i typen duration med
+    %følgende format. 
+    infmt = 'mm:ss';
+    Varighed = duration(Varighed,'InputFormat',infmt); 
+    handles = SortereTid(handles,[handles.Velfaerdsteknologi.CarendoSensor.(string(sensor)).Tidspunkt],[handles.Velfaerdsteknologi.CarendoSensor.(string(sensor)).Medarbejdere],handles.axesMedarbejderSensorDataVindue,'Sensor');
+    handles = SortereTid(handles,[handles.Velfaerdsteknologi.CarendoSensor.(string(sensor)).Tidspunkt],Varighed,handles.axesVarighedSensorDataVindue,'Sensor');
 end
 
-handles = SortereTid(handles,[handles.Velfaerdsteknologi.(teknologi).(sensor).Tidspunkt],[handles.Velfaerdsteknologi.(teknologi).(sensor).Medarbejdere],handles.axesMedarbejderSensorDataVindue);
+
 %close(GUITilfoejBemaerkning);
 
 guidata(hObject, handles);
@@ -147,3 +155,57 @@ function btnVaelgDatoSensorDataOverblik_Callback(hObject, eventdata, handles)
 % hObject    handle to btnVaelgDatoSensorDataOverblik (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
+
+uicalendar('Weekend',[1 0 0 0 0 0 1], ...  
+'SelectionType', 1, ...  
+'DestinationUI', handles.stDatoSensorOverblik);
+
+waitfor(handles.stDatoSensorOverblik,'String');
+teknologi = fieldnames(handles.Velfaerdsteknologi(1));
+teknologi = string(teknologi(1));
+d=1;
+sensorer=fieldnames(handles.Velfaerdsteknologi.(teknologi));
+sensor = string(sensorer(handles.Velfaerdsteknologi.BrugerValgtSensor));
+Varighed = [handles.Velfaerdsteknologi.(teknologi).(sensor).Varighedforarbejdsgang];
+%Idet at det er en tid så skal det skrives ud i typen duration med
+%følgende format. 
+infmt = 'mm:ss';
+Varighed = duration(Varighed,'InputFormat',infmt); 
+handles = SortereTid(handles,[handles.Velfaerdsteknologi.(teknologi).(sensor).Tidspunkt],[handles.Velfaerdsteknologi.(teknologi).(sensor).Medarbejdere],handles.axesMedarbejderSensorDataVindue,'Sensor');
+handles = SortereTid(handles,[handles.Velfaerdsteknologi.(teknologi).(sensor).Tidspunkt],Varighed,handles.axesVarighedSensorDataVindue,'Sensor');
+
+
+
+% --- Executes on button press in etDatoSensor.
+function etDatoSensor_Callback(hObject, eventdata, handles)
+% hObject    handle to etDatoSensor (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hint: get(hObject,'Value') returns toggle state of etDatoSensor
+
+
+% --- Executes during object creation, after setting all properties.
+function etDatoSensor_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to etDatoSensor (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+
+% --- Executes when selected object is changed in btngroupRedigerGrafSensoroverblik.
+function btngroupRedigerGrafSensoroverblik_SelectionChangedFcn(hObject, eventdata, handles)
+% hObject    handle to the selected object in btngroupRedigerGrafSensoroverblik 
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+teknologi = fieldnames(handles.Velfaerdsteknologi(1));
+teknologi = string(teknologi(1));
+d=1;
+sensorer=fieldnames(handles.Velfaerdsteknologi.(teknologi));
+sensor = string(sensorer(handles.Velfaerdsteknologi.BrugerValgtSensor));
+Varighed = [handles.Velfaerdsteknologi.(teknologi).(sensor).Varighedforarbejdsgang];
+%Idet at det er en tid så skal det skrives ud i typen duration med
+%følgende format. 
+infmt = 'mm:ss';
+Varighed = duration(Varighed,'InputFormat',infmt); 
+handles = SortereTid(handles,[handles.Velfaerdsteknologi.(teknologi).(sensor).Tidspunkt],[handles.Velfaerdsteknologi.(teknologi).(sensor).Medarbejdere],handles.axesMedarbejderSensorDataVindue,'Sensor');
+handles = SortereTid(handles,[handles.Velfaerdsteknologi.(teknologi).(sensor).Tidspunkt],Varighed,handles.axesVarighedSensorDataVindue,'Sensor');

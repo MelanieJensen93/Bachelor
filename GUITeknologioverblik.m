@@ -83,8 +83,8 @@ D = [handles.Velfaerdsteknologi.(teknologi).Varighedforarbejdsgang];
 %følgende format. 
 infmt = 'mm:ss';
 D = duration(D,'InputFormat',infmt); 
-handles = SortereTid(handles,[handles.Velfaerdsteknologi.(teknologi).Tidspunkt],[handles.Velfaerdsteknologi.(teknologi).Medarbejdere],handles.axesMedarbejdereTeknologiOverblik);
-handles = SortereTid(handles,[handles.Velfaerdsteknologi.(teknologi).Tidspunkt],D,handles.axesVarighedTeknologiOverblik);
+handles = SortereTid(handles,[handles.Velfaerdsteknologi.(teknologi).Tidspunkt],[handles.Velfaerdsteknologi.(teknologi).Medarbejdere],handles.axesMedarbejdereTeknologiOverblik,'Teknologi');
+handles = SortereTid(handles,[handles.Velfaerdsteknologi.(teknologi).Tidspunkt],D,handles.axesVarighedTeknologiOverblik,'Teknologi');
 
 
 
@@ -169,8 +169,8 @@ D = [handles.Velfaerdsteknologi.(teknologi).Varighedforarbejdsgang];
 infmt = 'mm:ss';
 D = duration(D,'InputFormat',infmt); 
 
-handles = SortereTid(handles,[handles.Velfaerdsteknologi.(teknologi).Tidspunkt],[handles.Velfaerdsteknologi.(teknologi).Medarbejdere],handles.axesMedarbejdereTeknologiOverblik);
-handles = SortereTid(handles,[handles.Velfaerdsteknologi.(teknologi).Tidspunkt],D,handles.axesVarighedTeknologiOverblik);
+handles = SortereTid(handles,[handles.Velfaerdsteknologi.(teknologi).Tidspunkt],[handles.Velfaerdsteknologi.(teknologi).Medarbejdere],handles.axesMedarbejdereTeknologiOverblik,'Teknologi');
+handles = SortereTid(handles,[handles.Velfaerdsteknologi.(teknologi).Tidspunkt],D,handles.axesVarighedTeknologiOverblik,'Teknologi');
 
 
 
@@ -189,8 +189,8 @@ D = [handles.Velfaerdsteknologi.(teknologi).Varighedforarbejdsgang];
 %følgende format. 
 infmt = 'mm:ss';
 D = duration(D,'InputFormat',infmt); 
-handles = SortereTid(handles,[handles.Velfaerdsteknologi.(teknologi).Tidspunkt],[handles.Velfaerdsteknologi.(teknologi).Medarbejdere],handles.axesMedarbejdereTeknologiOverblik);
-handles = SortereTid(handles,[handles.Velfaerdsteknologi.(teknologi).Tidspunkt],D,handles.axesVarighedTeknologiOverblik);
+handles = SortereTid(handles,[handles.Velfaerdsteknologi.(teknologi).Tidspunkt],[handles.Velfaerdsteknologi.(teknologi).Medarbejdere],handles.axesMedarbejdereTeknologiOverblik,'Teknologi');
+handles = SortereTid(handles,[handles.Velfaerdsteknologi.(teknologi).Tidspunkt],D,handles.axesVarighedTeknologiOverblik,'Teknologi');
 
 
 
