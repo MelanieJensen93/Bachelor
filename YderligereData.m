@@ -15,6 +15,8 @@ for i = 1:length(handles.Velfaerdsteknologi.(teknologi))
         handles.Almindelig(CntRowAlmindelig) = handles.Velfaerdsteknologi.(teknologi)(i);
         CntRowAlmindelig = CntRowAlmindelig +1; 
     end
+    
+    
 end
 
 d=1;

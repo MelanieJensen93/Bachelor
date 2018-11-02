@@ -77,7 +77,6 @@ teknologi = string(teknologi);
 
 %set(handles.txtValgtteknologiOverblik,'String',teknologi); 
 set(handles.txtAntalGangeTeknologioverblik,'String',num2str(handles.Velfaerdsteknologi.(teknologi)(1).Medarbejdere))
-d=1;
 D = [handles.Velfaerdsteknologi.(teknologi).Varighedforarbejdsgang];
 %Idet at det er en tid så skal det skrives ud i typen duration med
 %følgende format. 

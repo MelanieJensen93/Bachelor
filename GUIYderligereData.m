@@ -22,7 +22,7 @@ function varargout = GUIYderligereData(varargin)
 
 % Edit the above text to modify the response to help GUIYderligereData
 
-% Last Modified by GUIDE v2.5 01-Nov-2018 21:29:27
+% Last Modified by GUIDE v2.5 02-Nov-2018 08:56:02
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -58,6 +58,22 @@ handles.Velfaerdsteknologi = varargin{1}; %henter handles fra GUIValgafteknologi
 % Update handles structure
 guidata(hObject, handles);
 handles = YderligereData(handles);
+guidata(hObject,handles);
+d=1;
+teknologi = fieldnames(handles.Velfaerdsteknologi);
+handles.teknologi = string(teknologi);
+d=1;
+    if strcmp(handles.teknologi,'Carendo')==1
+       set(handles.txtLunaMedCarendoYderligere, 'Visible', 'off');
+    end
+    if strcmp(teknologi,'Luna')==1
+        set(handles.txtVariabel, 'String', 'Anvendelse af Luna med Carendo'); 
+        set(handles.txtStringKomfort, 'Visible', 'off');
+        set(handles.txtStringHaeveSaenke, 'Visible', 'off');
+        set(handles.txtOmsorgsfunktionYderligere, 'Visible', 'off');
+        set(handles.txtKomfortfunktionYderligere, 'Visible', 'off');
+        set(handles.txtHaeveSaenkefunktionYderligere, 'Visible', 'off');
+    end
 
 % UIWAIT makes GUIYderligereData wait for user response (see UIRESUME)
 % uiwait(handles.figure1);
@@ -79,3 +95,44 @@ function btnVaelgDatoYderligereData_Callback(hObject, eventdata, handles)
 % hObject    handle to btnVaelgDatoYderligereData (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
+% handles    structure with handles and user data (see GUIDATA)
+uicalendar('Weekend',[1 0 0 0 0 0 1], ...  
+'SelectionType', 1, ...  
+'DestinationUI', handles.stDatoYderligere);
+
+waitfor(handles.stDatoYderligere,'String');
+d=1;
+teknologi = fieldnames(handles.Velfaerdsteknologi);
+teknologi = string(teknologi);
+VarighedSuperbruger = [handles.SuperBruger.Varighedforarbejdsgang];
+VarighedAlmindelig = [handles.Almindelig.Varighedforarbejdsgang];
+DirekteTid = [handles.Velfaerdsteknologi.(teknologi).Tidmedborger];
+%Idet at det er en tid så skal det skrives ud i typen duration med
+%følgende format. 
+infmt = 'mm:ss';
+VarighedSuperbruger = duration(VarighedSuperbruger,'InputFormat',infmt); 
+VarighedAlmindelig = duration(VarighedAlmindelig,'InputFormat',infmt);
+DirekteTid = duration(DirekteTid,'InputFormat',infmt);
+
+handles = SortereTid(handles,[handles.SuperBruger.Tidspunkt],VarighedSuperbruger,handles.axSuperBrugerYderligereData,'Yderligere');
+handles = SortereTid(handles,[handles.Almindelig.Tidspunkt],VarighedAlmindelig,handles.axAlmindeligYderligereData,'Yderligere');
+handles = SortereTid(handles,[handles.Velfaerdsteknologi.(teknologi).Tidspunkt],DirekteTid,handles.axDirekteTidYderligereData,'Yderligere');
+
+% --- Executes when selected object is changed in btngroupRedigergrafYderligere.
+function btngroupRedigergrafYderligere_SelectionChangedFcn(hObject, eventdata, handles)
+% hObject    handle to the selected object in btngroupRedigergrafYderligere 
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+teknologi = fieldnames(handles.Velfaerdsteknologi);
+teknologi = string(teknologi);
+VarighedSuperbruger = [handles.SuperBruger.Varighedforarbejdsgang];
+VarighedAlmindelig = [handles.Almindelig.Varighedforarbejdsgang];
+DirekteTid = [handles.Velfaerdsteknologi.(teknologi).Tidmedborger];
+%Idet at det er en tid så skal det skrives ud i typen duration med
+%følgende format. 
+infmt = 'mm:ss';
+VarighedSuperbruger = duration(VarighedSuperbruger,'InputFormat',infmt); 
+VarighedAlmindelig = duration(VarighedAlmindelig,'InputFormat',infmt); 
+handles = SortereTid(handles,[handles.SuperBruger.Tidspunkt],VarighedSuperbruger,handles.axSuperBrugerYderligereData,'Yderligere');
+handles = SortereTid(handles,[handles.Almindelig.Tidspunkt],VarighedAlmindelig,handles.axAlmindeligYderligereData,'Yderligere');
+handles = SortereTid(handles,[handles.Velfaerdsteknologi.(teknologi).Tidspunkt],DirekteTid,handles.axDirekteTidYderligereData,'Yderligere');
