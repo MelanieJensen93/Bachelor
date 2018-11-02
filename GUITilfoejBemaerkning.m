@@ -62,6 +62,7 @@ axes(handles.axAarhusLogo);
 imshow(AarhusKommuneLogo);
 
 if isfield(handles.Velfaerdsteknologi, 'ValgtTidspunktPaaDato')
+    %datatogo = handles.Velfaerdsteknologi;
     ValgtafTidspunkt(handles);
 end
 

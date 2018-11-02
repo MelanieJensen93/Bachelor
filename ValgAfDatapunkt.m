@@ -2,9 +2,9 @@ function handles = ValgAfDatapunkt(handles,datatogo, ValgtDato, ValgtDatoDatetim
 %UNTITLED Summary of this function goes here
 %   Detailed explanation goes here
 d=1; 
-ValgtDato = get(handles.etDatoTilfoejBemaerkning, 'String');
-ValgtDatoDatetime = datetime(ValgtDato, 'InputFormat', 'dd-MM-yyyy');
-
+%ValgtDato = get(handles.etDatoTilfoejBemaerkning, 'String');
+%ValgtDatoDatetime = datetime(ValgtDato, 'InputFormat', 'dd-MM-yyyy');
+handles.Velfaerdsteknologi.ValgtDatoDatetime = ValgtDatoDatetime;
 %Vi skal bruge navnet på den valgte teknologi og det står i række 1
 teknologi = fieldnames(handles.Velfaerdsteknologi(1));
 teknologi = string(teknologi(1));
@@ -20,6 +20,7 @@ if isfield(handles.Velfaerdsteknologi,teknologi)
             tidspunkt.Format = 'dd-MMM-yyyy'; 
             strTidspunkt = string(tidspunkt);
             if strTidspunkt == ValgtDatoDatetime
+                 
                 % Præallokere et categorical array med tidspunkterpådagen
                   TidspunktPaaDagen = (categorical({'Morgen', 'Formiddag', 'Middag', 'Eftermiddag', 'Aften', 'Nat'}))';
                 %Tiden bliver placeret indenfor de bestemte intervaller. 

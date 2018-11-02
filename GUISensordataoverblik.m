@@ -82,8 +82,6 @@ else
     end
     guidata(hObject, handles);
 
-end
-
 %OpdaterListboxmedBemaerkning(handles);
 % idx=1;
 % a= sprintf("%s %s %s"+handles.TB.B(idx).bemaerkning,handles.TB.B(idx).dato, handles.TB.B(idx).tidspunkt);
@@ -94,7 +92,8 @@ end
 % set(handles.lbBemaerkning, 'Value', idx+1);
 
 
-
+% Update handles structure
+guidata(hObject, handles);
 
 
 % UIWAIT makes GUISensordataoverblik wait for user response (see UIRESUME)
@@ -206,21 +205,3 @@ infmt = 'mm:ss';
 Varighed = duration(Varighed,'InputFormat',infmt); 
 handles = SortereTid(handles,[handles.Velfaerdsteknologi.(teknologi).(sensor).Tidspunkt],[handles.Velfaerdsteknologi.(teknologi).(sensor).Medarbejdere],handles.axesMedarbejderSensorDataVindue,'Sensor');
 handles = SortereTid(handles,[handles.Velfaerdsteknologi.(teknologi).(sensor).Tidspunkt],Varighed,handles.axesVarighedSensorDataVindue,'Sensor');
-
-
-% --- Executes on button press in btnTilbageSensorDataoverblik.
-function btnTilbageSensorDataoverblik_Callback(hObject, eventdata, handles)
-% hObject    handle to btnTilbageSensorDataoverblik (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
-GUISensordataoverblik_OpeningFcn(hObject, eventdata, handles, 'exit');
-
-
-% --- Executes when user attempts to close GUISensorDataOverbliksVindue.
-function GUISensorDataOverbliksVindue_CloseRequestFcn(hObject, eventdata, handles)
-% hObject    handle to GUISensorDataOverbliksVindue (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
-
-% Hint: delete(hObject) closes the figure
-delete(hObject);
