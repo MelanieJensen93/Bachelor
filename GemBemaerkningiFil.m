@@ -24,16 +24,22 @@ if isfield(handles.Velfaerdsteknologi,'ValgtTidspunktPaaDato')
                   if Antalfravalgtdato == Valuefromlistbox
                     % A står for Append, og stemmer fra linket her
                     % https://se.mathworks.com/help/symbolic/mupad_ref/fopen.html
-                    bemaerkningsFil = fopen('bemarkningsFil.txt', 'A');
-                    for iii = 1:length(handles.Velfaerdsteknologi.(teknologi).(Sensornavn)(ii).TilfoejBemaerkning)  
+%                     bemaerkningsFil = fopen('bemarkningsFil.txt', 'A');
+                     for iii = 1:length(handles.Velfaerdsteknologi.(teknologi).(Sensornavn)(ii).TilfoejBemaerkning)  
+% 
+%                         fprintf(bemaerkningsFil, '%s %s %s %s\n',...
+%                             handles.Velfaerdsteknologi.(teknologi).(Sensornavn)(ii).TilfoejBemaerkning(iii).Bemaerkning().tidspunkt,...
+%                             handles.Velfaerdsteknologi.(teknologi).(Sensornavn)(ii).TilfoejBemaerkning(iii).Bemaerkning().bemaerkning,...
+%                             teknologi, handles.Velfaerdsteknologi.(teknologi).(Sensornavn)(ii).Tidspunkt);
+%                     end
+% 
+%                     fclose(bemaerkningsFil);
+                        dlmwrite('bemarkningsFil.csv',handles.Velfaerdsteknologi.(teknologi).(Sensornavn)(ii).TilfoejBemaerkning(iii).Bemaerkning().tidspunkt,...
+                             handles.Velfaerdsteknologi.(teknologi).(Sensornavn)(ii).TilfoejBemaerkning(iii).Bemaerkning().bemaerkning,...
+                             teknologi, handles.Velfaerdsteknologi.(teknologi).(Sensornavn)(ii).Tidspunkt, 'D')
+                         d=1;
+                     end
 
-                        fprintf(bemaerkningsFil, '%s %s %s %s\n',...
-                            handles.Velfaerdsteknologi.(teknologi).(Sensornavn)(ii).TilfoejBemaerkning(iii).Bemaerkning().tidspunkt,...
-                            handles.Velfaerdsteknologi.(teknologi).(Sensornavn)(ii).TilfoejBemaerkning(iii).Bemaerkning().bemaerkning,...
-                            teknologi, handles.Velfaerdsteknologi.(teknologi).(Sensornavn)(ii).Tidspunkt);
-                    end
-
-                    fclose(bemaerkningsFil);
                   end
             end
           end

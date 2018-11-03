@@ -28,7 +28,7 @@ if isfield(handles.Velfaerdsteknologi,'ValgtTidspunktPaaDato')
 %                       format = '%s %s %s %s\n';
 %                       datafraBemaerkningsfil = textscan(bemaerkningsFil, 'string');
 %                       fclose(bemaerkningsFil);
-                        bF = importdata('bemarkningsFil.txt');
+                        %bF = importdata('bemarkningsFil.txt');
                         
                       
                       tidspunkt = handles.Velfaerdsteknologi.(teknologi).(Sensornavn)(ii).Tidspunkt;
