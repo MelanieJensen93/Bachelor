@@ -64,7 +64,8 @@ else
         f = fieldnames(handles.Velfaerdsteknologi.LunaSensor);
         sensor = f(ValgtSensor);
         set(handles.txtValgtteknologiSensorOverblik, 'String', sensor);
-        %OpdaterListboxmedBemaerkning(handles);
+        OpdaterListboxmedBemaerkning(handles);
+        guidata(hObject, handles);
     end 
 
     if isfield(handles.Velfaerdsteknologi, 'CarendoSensor')

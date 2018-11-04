@@ -54,22 +54,25 @@ function GUISensorliste_OpeningFcn(hObject, eventdata, handles, varargin)
 
 % Choose default command line output for GUISensorliste
 handles.output = hObject;
-handles.Velfaerdsteknologi = varargin{1};
-guidata(hObject, handles);
+if ~isempty(varargin) && ischar(varargin{1}) && strcmp(varargin{1},'exit')
+    close;
+else
+    handles.Velfaerdsteknologi = varargin{1};
+    guidata(hObject, handles);
 
-handles = SensorInddeling(handles);
+    handles = SensorInddeling(handles);
 
-if isfield(handles.Velfaerdsteknologi, 'CarendoSensor')
-   set(handles.txtValgtteknologiSensorliste, 'String', 'Carendo');
+    if isfield(handles.Velfaerdsteknologi, 'CarendoSensor')
+       set(handles.txtValgtteknologiSensorliste, 'String', 'Carendo');
+    end
+    if isfield(handles.Velfaerdsteknologi, 'LunaSensor')
+        set(handles.txtValgtteknologiSensorliste, 'String', 'Luna loftlift');
+    end
+
+
+    % Update handles structure
+    guidata(hObject, handles);
 end
-if isfield(handles.Velfaerdsteknologi, 'LunaSensor')
-    set(handles.txtValgtteknologiSensorliste, 'String', 'Luna loftlift');
-end
-
-
-% Update handles structure
-guidata(hObject, handles);
-
 % UIWAIT makes GUISensorliste wait for user response (see UIRESUME)
 % uiwait(handles.figure1);
 
@@ -90,7 +93,9 @@ function btnTilbageSensorliste_Callback(hObject, eventdata, handles)
 % hObject    handle to btnTilbageSensorliste (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-
+GUISensorliste_OpeningFcn(hObject, eventdata, handles, 'exit');
+%datatogo = handles.Velfaerdsteknologi;
+%GUITeknologioverblik(datatogo);
 
 
 % --- Executes on selection change in lbSensorliste.

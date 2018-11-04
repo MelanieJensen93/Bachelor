@@ -1,4 +1,4 @@
-function [handles,datatogo] = Bemaerkning(handles, datatogo)
+function [handles,datatogo,svar] = Bemaerkning(handles, datatogo)
 
 %GUITilfoejBemaerkning(datatogo)
 %Henter alle filnavne i handles.Velfaerdsteknologi, første kolonne
@@ -38,7 +38,7 @@ if isfield(handles.Velfaerdsteknologi,'ValgtTidspunktPaaDato')
                         %handles.Velfaerdsteknologi.(teknologi).(Sensornavn)(1).TilfoejBemaerkning.Bemaerkning(idx).tidspunkt = get(get(handles.bgTidspunktTilfoejBemaerkning,'SelectedObject'),'String');
                         handles.Velfaerdsteknologi.(teknologi).(Sensornavn)(ii).TilfoejBemaerkning.Bemaerkning(idx).bemaerkning = get(get(handles.bgBemaerkningTilfoejBemaerkning,'SelectedObject'),'String');
                     else
-                        idx = length(handles.Velfaerdsteknologi.(teknologi)(ii).(Sensornavn).TilfoejBemaerkning.Bemaerkning);
+                        idx = length(handles.Velfaerdsteknologi.(teknologi).(Sensornavn)(ii).TilfoejBemaerkning.Bemaerkning);
                         handles.Velfaerdsteknologi.(teknologi).(Sensornavn)(ii).TilfoejBemaerkning.Bemaerkning(idx+1).dato = get(handles.etDatoTilfoejBemaerkning,'String');
                         %handles.Velfaerdsteknologi.(teknologi).(Sensornavn).TilfoejBemaerkning.Bemaerkning(idx+1).tidspunkt = get(get(handles.bgTidspunktTilfoejBemaerkning,'SelectedObject'),'String');
                         handles.Velfaerdsteknologi.(teknologi).(Sensornavn)(ii).TilfoejBemaerkning.Bemaerkning(idx+1).bemaerkning = get(get(handles.bgBemaerkningTilfoejBemaerkning,'SelectedObject'),'String');
@@ -57,10 +57,10 @@ else
     msgbox('Vælg venligst en dato.');
 end
 
-%Henter kommentar fra andet feltet
-if strcmp(getfield(handles.Velfaerdsteknologi.(teknologi).(Sensornavn)(ii).TilfoejBemaerkning.Bemaerkning(idx),'bemaerkning'),'Andet') == 1
-    handles.Velfaerdsteknologi.(teknologi).(Sensornavn)(ii).TilfoejBemaerkning(idx).Bemaerkning.bemaerkning =  get(handles.etAndetTilfoejBemaerkning,'String');
-end
+% %Henter kommentar fra andet feltet
+% if strcmp(getfield(handles.Velfaerdsteknologi.(teknologi).(Sensornavn)(ii).TilfoejBemaerkning.Bemaerkning(idx),'bemaerkning'),'Andet') == 1
+%     handles.Velfaerdsteknologi.(teknologi).(Sensornavn)(ii).TilfoejBemaerkning(idx).Bemaerkning.bemaerkning =  get(handles.etAndetTilfoejBemaerkning,'String');
+% end
 
 if ~isfield(handles.Velfaerdsteknologi.(teknologi).(Sensornavn),'TilfoejBemaerkning')
     if ~isfield(handles.Velfaerdsteknologi.(teknologi).(Sensornavn)(ii).TilfoejBemaerkning,'Bemaerkning')
@@ -86,10 +86,12 @@ if isfield(handles.Velfaerdsteknologi.(teknologi).(Sensornavn)(ii).TilfoejBemaer
         case 'Gem'
             disp([svar ' gemt'])
             GemBemaerkningiFil(handles);
+            %handles.Velfaerdsteknologi.SvarGemt = 'Gemt'; 
             datatogo = handles.Velfaerdsteknologi;
-            GUISensordataoverblik(datatogo);
+            %GUITilfoejBemaerkning_OpeningFcn(hObject, eventdata, handles, 'exit');
+            %GUISensordataoverblik(datatogo);
             %close(GUITilfoejBemaerkning);
-            d=1;
+            GUITilfoejBemaerkning(datatogo);
         case 'Annuller'
             disp([svar ' annulleret'])
              
