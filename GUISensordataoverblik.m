@@ -65,7 +65,7 @@ else
         f = fieldnames(handles.Velfaerdsteknologi.LunaSensor);
         sensor = f(ValgtSensor);
         set(handles.txtValgtteknologiSensorOverblik, 'String', sensor);
-        %OpdaterListboxmedBemaerkning(handles);
+        OpdaterListboxmedBemaerkning(handles);
         Varighed = [handles.Velfaerdsteknologi.LunaSensor.(string(sensor)).Varighedforarbejdsgang];
         %Idet at det er en tid så skal det skrives ud i typen duration med
         %følgende format. 
