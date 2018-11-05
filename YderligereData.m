@@ -14,10 +14,7 @@ for i = 1:length(handles.Velfaerdsteknologi.(teknologi))
     if handles.Velfaerdsteknologi.(teknologi)(i).Almindeligtpersonale ==1
         handles.Almindelig(CntRowAlmindelig) = handles.Velfaerdsteknologi.(teknologi)(i);
         CntRowAlmindelig = CntRowAlmindelig +1; 
-    end
-    
-    
+    end 
 end
-
 d=1;
 end

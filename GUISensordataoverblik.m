@@ -61,9 +61,18 @@ else
     handles.Velfaerdsteknologi = varargin{1};
     ValgtSensor = handles.Velfaerdsteknologi.BrugerValgtSensor;
     if isfield(handles.Velfaerdsteknologi, 'LunaSensor')
+        handles.field = 'LunaSensor'; 
         f = fieldnames(handles.Velfaerdsteknologi.LunaSensor);
         sensor = f(ValgtSensor);
         set(handles.txtValgtteknologiSensorOverblik, 'String', sensor);
+        OpdaterListboxmedBemaerkning(handles);
+        Varighed = [handles.Velfaerdsteknologi.LunaSensor.(string(sensor)).Varighedforarbejdsgang];
+        %Idet at det er en tid så skal det skrives ud i typen duration med
+        %følgende format. 
+        infmt = 'mm:ss';
+        Varighed = duration(Varighed,'InputFormat',infmt); 
+        VisData(handles,[handles.Velfaerdsteknologi.LunaSensor.(string(sensor)).Tidspunkt],[handles.Velfaerdsteknologi.LunaSensor.(string(sensor)).Medarbejdere],handles.axesMedarbejderSensorDataVindue,'Sensor');
+        VisData(handles,[handles.Velfaerdsteknologi.LunaSensor.(string(sensor)).Tidspunkt],Varighed,handles.axesVarighedSensorDataVindue,'Sensor');
         
         set(handles.lbBemaerkning, 'Value',[]);
         drawnow;
@@ -74,20 +83,33 @@ else
 
     if isfield(handles.Velfaerdsteknologi, 'CarendoSensor')
         f = fieldnames(handles.Velfaerdsteknologi.CarendoSensor);
+        handles.field = 'CarendoSensor'; 
         sensor = f(ValgtSensor);
-        d=1;
         set(handles.txtValgtteknologiSensorOverblik, 'String', sensor);
         Varighed = [handles.Velfaerdsteknologi.CarendoSensor.(string(sensor)).Varighedforarbejdsgang];
         %Idet at det er en tid så skal det skrives ud i typen duration med
         %følgende format. 
         infmt = 'mm:ss';
         Varighed = duration(Varighed,'InputFormat',infmt); 
-        handles = SortereTid(handles,[handles.Velfaerdsteknologi.CarendoSensor.(string(sensor)).Tidspunkt],[handles.Velfaerdsteknologi.CarendoSensor.(string(sensor)).Medarbejdere],handles.axesMedarbejderSensorDataVindue,'Sensor');
-        handles = SortereTid(handles,[handles.Velfaerdsteknologi.CarendoSensor.(string(sensor)).Tidspunkt],Varighed,handles.axesVarighedSensorDataVindue,'Sensor');
-    end
+        VisData(handles,[handles.Velfaerdsteknologi.CarendoSensor.(string(sensor)).Tidspunkt],[handles.Velfaerdsteknologi.CarendoSensor.(string(sensor)).Medarbejdere],handles.axesMedarbejderSensorDataVindue,'Sensor');
+        VisData(handles,[handles.Velfaerdsteknologi.CarendoSensor.(string(sensor)).Tidspunkt],Varighed,handles.axesVarighedSensorDataVindue,'Sensor');
+        
+   end
     guidata(hObject, handles);
 end
-    
+
+%OpdaterListboxmedBemaerkning(handles);
+% idx=1;
+% a= sprintf("%s %s %s"+handles.TB.B(idx).bemaerkning,handles.TB.B(idx).dato, handles.TB.B(idx).tidspunkt);
+% str_part = a; 
+% old_str = get(handles.lbBemaerkning,'String'); 
+% new_str=strvcat(char(old_str),char(str_part));
+% set(handles.lbBemaerkning,'String',new_str);
+% set(handles.lbBemaerkning, 'Value', idx+1);
+
+
+
+
 
 % UIWAIT makes GUISensordataoverblik wait for user response (see UIRESUME)
 % uiwait(handles.GUISensorDataOverbliksVindue);
@@ -150,8 +172,8 @@ uicalendar('Weekend',[1 0 0 0 0 0 1], ...
 'DestinationUI', handles.stDatoSensorOverblik);
 
 waitfor(handles.stDatoSensorOverblik,'String');
-teknologi = fieldnames(handles.Velfaerdsteknologi(1));
-teknologi = string(teknologi(1));
+teknologi = handles.field; 
+%teknologi = string(teknologi(1));
 d=1;
 sensorer=fieldnames(handles.Velfaerdsteknologi.(teknologi));
 sensor = string(sensorer(handles.Velfaerdsteknologi.BrugerValgtSensor));
@@ -160,8 +182,8 @@ Varighed = [handles.Velfaerdsteknologi.(teknologi).(sensor).Varighedforarbejdsga
 %følgende format. 
 infmt = 'mm:ss';
 Varighed = duration(Varighed,'InputFormat',infmt); 
-handles = SortereTid(handles,[handles.Velfaerdsteknologi.(teknologi).(sensor).Tidspunkt],[handles.Velfaerdsteknologi.(teknologi).(sensor).Medarbejdere],handles.axesMedarbejderSensorDataVindue,'Sensor');
-handles = SortereTid(handles,[handles.Velfaerdsteknologi.(teknologi).(sensor).Tidspunkt],Varighed,handles.axesVarighedSensorDataVindue,'Sensor');
+VisData(handles,[handles.Velfaerdsteknologi.(teknologi).(sensor).Tidspunkt],[handles.Velfaerdsteknologi.(teknologi).(sensor).Medarbejdere],handles.axesMedarbejderSensorDataVindue,'Sensor');
+VisData(handles,[handles.Velfaerdsteknologi.(teknologi).(sensor).Tidspunkt],Varighed,handles.axesVarighedSensorDataVindue,'Sensor');
 
 
 
@@ -186,9 +208,8 @@ function btngroupRedigerGrafSensoroverblik_SelectionChangedFcn(hObject, eventdat
 % hObject    handle to the selected object in btngroupRedigerGrafSensoroverblik 
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-teknologi = fieldnames(handles.Velfaerdsteknologi(1));
-teknologi = string(teknologi(1));
-d=1;
+teknologi = handles.field; 
+%teknologi = string(teknologi(1));
 sensorer=fieldnames(handles.Velfaerdsteknologi.(teknologi));
 sensor = string(sensorer(handles.Velfaerdsteknologi.BrugerValgtSensor));
 Varighed = [handles.Velfaerdsteknologi.(teknologi).(sensor).Varighedforarbejdsgang];
@@ -196,8 +217,8 @@ Varighed = [handles.Velfaerdsteknologi.(teknologi).(sensor).Varighedforarbejdsga
 %følgende format. 
 infmt = 'mm:ss';
 Varighed = duration(Varighed,'InputFormat',infmt); 
-handles = SortereTid(handles,[handles.Velfaerdsteknologi.(teknologi).(sensor).Tidspunkt],[handles.Velfaerdsteknologi.(teknologi).(sensor).Medarbejdere],handles.axesMedarbejderSensorDataVindue,'Sensor');
-handles = SortereTid(handles,[handles.Velfaerdsteknologi.(teknologi).(sensor).Tidspunkt],Varighed,handles.axesVarighedSensorDataVindue,'Sensor');
+VisData(handles,[handles.Velfaerdsteknologi.(teknologi).(sensor).Tidspunkt],[handles.Velfaerdsteknologi.(teknologi).(sensor).Medarbejdere],handles.axesMedarbejderSensorDataVindue,'Sensor');
+VisData(handles,[handles.Velfaerdsteknologi.(teknologi).(sensor).Tidspunkt],Varighed,handles.axesVarighedSensorDataVindue,'Sensor');
 
 % --- Executes on button press in btnTilbageSensorDataoverblik.
 function btnTilbageSensorDataoverblik_Callback(hObject, eventdata, handles)
