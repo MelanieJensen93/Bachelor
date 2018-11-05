@@ -61,10 +61,11 @@ else
     handles.Velfaerdsteknologi = varargin{1};
     ValgtSensor = handles.Velfaerdsteknologi.BrugerValgtSensor;
     if isfield(handles.Velfaerdsteknologi, 'LunaSensor')
+        handles.field = 'LunaSensor'; 
         f = fieldnames(handles.Velfaerdsteknologi.LunaSensor);
         sensor = f(ValgtSensor);
         set(handles.txtValgtteknologiSensorOverblik, 'String', sensor);
-        OpdaterListboxmedBemaerkning(handles);
+        %OpdaterListboxmedBemaerkning(handles);
         Varighed = [handles.Velfaerdsteknologi.LunaSensor.(string(sensor)).Varighedforarbejdsgang];
         %Idet at det er en tid så skal det skrives ud i typen duration med
         %følgende format. 
@@ -77,8 +78,8 @@ else
 
     if isfield(handles.Velfaerdsteknologi, 'CarendoSensor')
         f = fieldnames(handles.Velfaerdsteknologi.CarendoSensor);
+        handles.field = 'CarendoSensor'; 
         sensor = f(ValgtSensor);
-        d=1;
         set(handles.txtValgtteknologiSensorOverblik, 'String', sensor);
         Varighed = [handles.Velfaerdsteknologi.CarendoSensor.(string(sensor)).Varighedforarbejdsgang];
         %Idet at det er en tid så skal det skrives ud i typen duration med
@@ -166,8 +167,8 @@ uicalendar('Weekend',[1 0 0 0 0 0 1], ...
 'DestinationUI', handles.stDatoSensorOverblik);
 
 waitfor(handles.stDatoSensorOverblik,'String');
-teknologi = fieldnames(handles.Velfaerdsteknologi(1));
-teknologi = string(teknologi(1));
+teknologi = handles.field; 
+%teknologi = string(teknologi(1));
 d=1;
 sensorer=fieldnames(handles.Velfaerdsteknologi.(teknologi));
 sensor = string(sensorer(handles.Velfaerdsteknologi.BrugerValgtSensor));
@@ -202,8 +203,8 @@ function btngroupRedigerGrafSensoroverblik_SelectionChangedFcn(hObject, eventdat
 % hObject    handle to the selected object in btngroupRedigerGrafSensoroverblik 
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-teknologi = fieldnames(handles.Velfaerdsteknologi(1));
-teknologi = string(teknologi(1));
+teknologi = handles.field; 
+%teknologi = string(teknologi(1));
 sensorer=fieldnames(handles.Velfaerdsteknologi.(teknologi));
 sensor = string(sensorer(handles.Velfaerdsteknologi.BrugerValgtSensor));
 Varighed = [handles.Velfaerdsteknologi.(teknologi).(sensor).Varighedforarbejdsgang];

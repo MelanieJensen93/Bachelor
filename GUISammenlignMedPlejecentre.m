@@ -71,8 +71,8 @@ D = [handles.Velfaerdsteknologi.(teknologi).Varighedforarbejdsgang];
 infmt = 'mm:ss';
 D = duration(D,'InputFormat',infmt); 
 
-handles = SortereTid(handles,[handles.Velfaerdsteknologi.(teknologi).Tidspunkt],[handles.Velfaerdsteknologi.(teknologi).Medarbejdere],handles.axMedarbejderePlejecentre,'Plejecentre');
-handles = SortereTid(handles,[handles.Velfaerdsteknologi.(teknologi).Tidspunkt],D,handles.axVarighedPlejecentre,'Plejecentre');
+VisData(handles,[handles.Velfaerdsteknologi.(teknologi).Tidspunkt],[handles.Velfaerdsteknologi.(teknologi).Medarbejdere],handles.axMedarbejderePlejecentre,'Plejecentre');
+VisData(handles,[handles.Velfaerdsteknologi.(teknologi).Tidspunkt],D,handles.axVarighedPlejecentre,'Plejecentre');
 
  
 
@@ -110,8 +110,8 @@ D = [handles.Velfaerdsteknologi.(teknologi).Varighedforarbejdsgang];
 infmt = 'mm:ss';
 D = duration(D,'InputFormat',infmt); 
 
-handles = SortereTid(handles,[handles.Velfaerdsteknologi.(teknologi).Tidspunkt],[handles.Velfaerdsteknologi.(teknologi).Medarbejdere],handles.axMedarbejderePlejecentre,'Plejecentre');
-handles = SortereTid(handles,[handles.Velfaerdsteknologi.(teknologi).Tidspunkt],D,handles.axVarighedPlejecentre,'Plejecentre');
+VisData(handles,[handles.Velfaerdsteknologi.(teknologi).Tidspunkt],[handles.Velfaerdsteknologi.(teknologi).Medarbejdere],handles.axMedarbejderePlejecentre,'Plejecentre');
+VisData(handles,[handles.Velfaerdsteknologi.(teknologi).Tidspunkt],D,handles.axVarighedPlejecentre,'Plejecentre');
 
 
 % --- Executes when selected object is changed in btngroupRedigergrafPlejecentre.
@@ -127,5 +127,5 @@ D = [handles.Velfaerdsteknologi.(teknologi).Varighedforarbejdsgang];
 infmt = 'mm:ss';
 D = duration(D,'InputFormat',infmt); 
 
-handles = SortereTid(handles,[handles.Velfaerdsteknologi.(teknologi).Tidspunkt],[handles.Velfaerdsteknologi.(teknologi).Medarbejdere],handles.axMedarbejderePlejecentre,'Plejecentre');
-handles = SortereTid(handles,[handles.Velfaerdsteknologi.(teknologi).Tidspunkt],D,handles.axVarighedPlejecentre,'Plejecentre');
+VisData(handles,[handles.Velfaerdsteknologi.(teknologi).Tidspunkt],[handles.Velfaerdsteknologi.(teknologi).Medarbejdere],handles.axMedarbejderePlejecentre,'Plejecentre');
+VisData(handles,[handles.Velfaerdsteknologi.(teknologi).Tidspunkt],D,handles.axVarighedPlejecentre,'Plejecentre');
