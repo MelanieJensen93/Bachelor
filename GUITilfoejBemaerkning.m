@@ -244,12 +244,10 @@ function btnTilfoejBemaerkningTilfoejBemaerkning_Callback(hObject, eventdata, ha
 %datatogo = handles.Velfaerdsteknologi;
 Bemaerkning(handles);
 guidata(hObject, handles);
-%if isfield(handles.Velfaerdsteknologi, 'SvarGemt')
-    GUITilfoejBemaerkning_OpeningFcn(hObject, eventdata, handles, 'exit');
-    datatogo = handles.Velfaerdsteknologi;
-    GUISensordataoverblik(datatogo);
-%end
 
+GUITilfoejBemaerkning_OpeningFcn(hObject, eventdata, handles, 'exit');
+datatogo = handles.Velfaerdsteknologi;
+GUISensordataoverblik(datatogo);
 
 %OpdaterListboxmedBemaerkning(handles);
 

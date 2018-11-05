@@ -23,23 +23,17 @@ if isfield(handles.Velfaerdsteknologi,'ValgtTidspunktPaaDato')
               tidspunkt = string(tidspunkt);
             if handles.Velfaerdsteknologi.ValgtTidspunkt == tidspunkt 
                   Antalfravalgtdato = Antalfravalgtdato+1;
-                  if Antalfravalgtdato == Valuefromlistbox
-%                       bemaerkningsFil = fopen('bemarkningsFil.txt', 'r');
-%                       format = '%s %s %s %s\n';
-%                       datafraBemaerkningsfil = textscan(bemaerkningsFil, 'string');
-%                       fclose(bemaerkningsFil);
-                        %bF = importdata('bemarkningsFil.txt');
-                        
+                  if Antalfravalgtdato == Valuefromlistbox                        
                       
                       tidspunkt = handles.Velfaerdsteknologi.(teknologi).(Sensornavn)(ii).Tidspunkt;
-                    if ~isfield(handles.Velfaerdsteknologi.(teknologi).(Sensornavn),'TilfoejBemaerkning')
+                    if ~isfield(handles.Velfaerdsteknologi.(teknologi).(Sensornavn),'TilfoejBemaerkning') || isempty(handles.Velfaerdsteknologi.(teknologi).(Sensornavn)(ii).TilfoejBemaerkning)
                         idx=1; 
                         handles.Velfaerdsteknologi.(teknologi).(Sensornavn)(ii).TilfoejBemaerkning.Bemaerkning(idx).tidspunkt= get(handles.txtValgtTidspunkt,'String');
                         %handles.Velfaerdsteknologi.(teknologi).(Sensornavn)(1).TilfoejBemaerkning.Bemaerkning(idx).tidspunkt = get(get(handles.bgTidspunktTilfoejBemaerkning,'SelectedObject'),'String');
                         handles.Velfaerdsteknologi.(teknologi).(Sensornavn)(ii).TilfoejBemaerkning.Bemaerkning(idx).bemaerkning = get(get(handles.bgBemaerkningTilfoejBemaerkning,'SelectedObject'),'String');
                     else
                         idx = length(handles.Velfaerdsteknologi.(teknologi).(Sensornavn)(ii).TilfoejBemaerkning.Bemaerkning);
-                        handles.Velfaerdsteknologi.(teknologi).(Sensornavn)(ii).TilfoejBemaerkning.Bemaerkning(idx+1).dato = get(handles.etDatoTilfoejBemaerkning,'String');
+                        handles.Velfaerdsteknologi.(teknologi).(Sensornavn)(ii).TilfoejBemaerkning.Bemaerkning(idx+1).tidspunkt = get(handles.etDatoTilfoejBemaerkning,'String');
                         %handles.Velfaerdsteknologi.(teknologi).(Sensornavn).TilfoejBemaerkning.Bemaerkning(idx+1).tidspunkt = get(get(handles.bgTidspunktTilfoejBemaerkning,'SelectedObject'),'String');
                         handles.Velfaerdsteknologi.(teknologi).(Sensornavn)(ii).TilfoejBemaerkning.Bemaerkning(idx+1).bemaerkning = get(get(handles.bgBemaerkningTilfoejBemaerkning,'SelectedObject'),'String');
                         idx = idx+1;
@@ -57,10 +51,12 @@ else
     msgbox('Vælg venligst en dato.');
 end
 
-% %Henter kommentar fra andet feltet
-% if strcmp(getfield(handles.Velfaerdsteknologi.(teknologi).(Sensornavn)(ii).TilfoejBemaerkning.Bemaerkning(idx),'bemaerkning'),'Andet') == 1
-%     handles.Velfaerdsteknologi.(teknologi).(Sensornavn)(ii).TilfoejBemaerkning(idx).Bemaerkning.bemaerkning =  get(handles.etAndetTilfoejBemaerkning,'String');
-% end
+%Henter kommentar fra andet feltet
+if strcmp(getfield(handles.Velfaerdsteknologi.(teknologi).(Sensornavn)(ii).TilfoejBemaerkning.Bemaerkning(idx),'bemaerkning'),'Andet') == 1
+    AndetBemaerkning = get(handles.etAndetTilfoejBemaerkning,'String');
+    AndetBemaerkning = "Andet: " + AndetBemaerkning;
+    handles.Velfaerdsteknologi.(teknologi).(Sensornavn)(ii).TilfoejBemaerkning.Bemaerkning(idx).bemaerkning =  AndetBemaerkning;
+end
 
 if ~isfield(handles.Velfaerdsteknologi.(teknologi).(Sensornavn),'TilfoejBemaerkning')
     if ~isfield(handles.Velfaerdsteknologi.(teknologi).(Sensornavn)(ii).TilfoejBemaerkning,'Bemaerkning')
