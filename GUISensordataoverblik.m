@@ -213,3 +213,18 @@ infmt = 'mm:ss';
 Varighed = duration(Varighed,'InputFormat',infmt); 
 VisData(handles,[handles.Velfaerdsteknologi.(teknologi).(sensor).Tidspunkt],[handles.Velfaerdsteknologi.(teknologi).(sensor).Medarbejdere],handles.axesMedarbejderSensorDataVindue,'Sensor');
 VisData(handles,[handles.Velfaerdsteknologi.(teknologi).(sensor).Tidspunkt],Varighed,handles.axesVarighedSensorDataVindue,'Sensor');
+
+% --- Executes on button press in btnTilbageSensorDataoverblik.
+function btnTilbageSensorDataoverblik_Callback(hObject, eventdata, handles)
+% hObject    handle to btnTilbageSensorDataoverblik (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+GUISensordataoverblik_OpeningFcn(hObject, eventdata, handles, 'exit');
+ % --- Executes when user attempts to close GUISensorDataOverbliksVindue.
+ 
+function GUISensorDataOverbliksVindue_CloseRequestFcn(hObject, eventdata, handles)
+% hObject    handle to GUISensorDataOverbliksVindue (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+ % Hint: delete(hObject) closes the figure
+delete(hObject);

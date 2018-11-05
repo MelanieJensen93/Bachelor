@@ -54,21 +54,25 @@ function GUITilfoejBemaerkning_OpeningFcn(hObject, eventdata, handles, varargin)
 
 % Choose default command line output for GUITilfoejBemaerkning
 handles.output = hObject;
+if ~isempty(varargin) && ischar(varargin{1}) && strcmp(varargin{1},'exit')
+    close;
+else
+    handles.Velfaerdsteknologi = varargin{1}; %henter handles fra GUIBemaerkning
 
-handles.Velfaerdsteknologi = varargin{1}; %henter handles fra GUIBemaerkning
+    AarhusKommuneLogo = imread('AarhusKommuneLogo.jpg');
+    axes(handles.axAarhusLogo);
+    imshow(AarhusKommuneLogo);
 
-AarhusKommuneLogo = imread('AarhusKommuneLogo.jpg');
-axes(handles.axAarhusLogo);
-imshow(AarhusKommuneLogo);
-
-if isfield(handles.Velfaerdsteknologi, 'ValgtTidspunktPaaDato')
-    %datatogo = handles.Velfaerdsteknologi;
-    ValgtafTidspunkt(handles);
+    if isfield(handles.Velfaerdsteknologi, 'ValgtTidspunktPaaDato')
+        %datatogo = handles.Velfaerdsteknologi;
+        ValgtafTidspunkt(handles);
+    end
+    % Update handles structure
+    guidata(hObject, handles);
 end
 
 
-% Update handles structure
-guidata(hObject, handles);
+
 
 % UIWAIT makes GUITilfoejBemaerkning wait for user response (see UIRESUME)
 % uiwait(handles.GUITilfoejBemaerkning);
@@ -240,7 +244,11 @@ function btnTilfoejBemaerkningTilfoejBemaerkning_Callback(hObject, eventdata, ha
 %datatogo = handles.Velfaerdsteknologi;
 Bemaerkning(handles);
 guidata(hObject, handles);
-
+%if isfield(handles.Velfaerdsteknologi, 'SvarGemt')
+    GUITilfoejBemaerkning_OpeningFcn(hObject, eventdata, handles, 'exit');
+    datatogo = handles.Velfaerdsteknologi;
+    GUISensordataoverblik(datatogo);
+%end
 
 
 %OpdaterListboxmedBemaerkning(handles);

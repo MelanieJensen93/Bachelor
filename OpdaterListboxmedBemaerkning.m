@@ -16,6 +16,13 @@ idx=1;
 %       Sensornavn = string(Sensor(ii));
 %       if isfield(handles.Velfaerdsteknologi.LunaSensor.(Sensornavn), 'TilfoejBemaerkning')
 %       
+%set(handles.lbBemaerkning, 'Value',[]);
+
+gemtDataBemaerkningsfil = load(fullfile('C:\Users\Bruger\Documents\Sundhedsteknologi\7. Semester\Bachelor\MatLab',...
+    'BemaerkningsFil.mat'));
+
+handles.Velfaerdsteknologi = gemtDataBemaerkningsfil.Velfaerdsteknologi;
+
 teknologi = fieldnames(handles.Velfaerdsteknologi(1));
 teknologi = string(teknologi(1));
 
@@ -38,25 +45,29 @@ if isfield(handles.Velfaerdsteknologi, 'ValgtTidspunktPaaDato')
                   Antalfravalgtdato = Antalfravalgtdato+1;
                   if Antalfravalgtdato == Valuefromlistbox
                       tidspunkt = handles.Velfaerdsteknologi.(teknologi).(Sensornavn)(ii).Tidspunkt;
-                     % Præallokere et categorical array med tidspunkterpådagen
-%                       TidspunktPaaDagen = (categorical({'Morgen', 'Formiddag', 'Middag', 'Eftermiddag', 'Aften', 'Nat'}))';
-%                     %Tiden bliver placeret indenfor de bestemte intervaller. 
-%                         if hour(tidspunkt)>=5 && hour(tidspunkt)< 9
-%                             TidspunktPaaDagen_Data=TidspunktPaaDagen(1);
-%                         elseif hour(tidspunkt)>=9 && hour(tidspunkt)<11
-%                                 TidspunktPaaDagen_Data= TidspunktPaaDagen(2);
-%                         elseif hour(tidspunkt)>=11 && hour(tidspunkt)<14
-%                                 TidspunktPaaDagen_Data= TidspunktPaaDagen(3);
-%                         elseif hour(tidspunkt)>=14 && hour(tidspunkt)<17
-%                                 TidspunktPaaDagen_Data= TidspunktPaaDagen(4);
-%                         elseif hour(tidspunkt)>=17 && hour(tidspunkt)<23 
-%                                 TidspunktPaaDagen_Data= TidspunktPaaDagen(5);
-%                         else 
-%                                 TidspunktPaaDagen_Data= TidspunktPaaDagen(6);
-%                         end
-
-                        udskrift= sprintf("%s %s", handles.Velfaerdsteknologi.(teknologi).(Sensornavn)(ii).TilfoejBemaerkning.Bemaerkning(idx).bemaerkning,...
-                        handles.Velfaerdsteknologi.(teknologi).(Sensornavn)(ii).TilfoejBemaerkning.Bemaerkning(idx).tidspunkt);
+                     %Præallokere et categorical array med tidspunkterpådagen
+                      TidspunktPaaDagen = (categorical({'Morgen', 'Formiddag', 'Middag', 'Eftermiddag', 'Aften', 'Nat'}))';
+                    %Tiden bliver placeret indenfor de bestemte intervaller. 
+                        if hour(tidspunkt)>=5 && hour(tidspunkt)< 9
+                            TidspunktPaaDagen_Data=TidspunktPaaDagen(1);
+                        elseif hour(tidspunkt)>=9 && hour(tidspunkt)<11
+                                TidspunktPaaDagen_Data= TidspunktPaaDagen(2);
+                        elseif hour(tidspunkt)>=11 && hour(tidspunkt)<14
+                                TidspunktPaaDagen_Data= TidspunktPaaDagen(3);
+                        elseif hour(tidspunkt)>=14 && hour(tidspunkt)<17
+                                TidspunktPaaDagen_Data= TidspunktPaaDagen(4);
+                        elseif hour(tidspunkt)>=17 && hour(tidspunkt)<23 
+                                TidspunktPaaDagen_Data= TidspunktPaaDagen(5);
+                        else 
+                                TidspunktPaaDagen_Data= TidspunktPaaDagen(6);
+                        end
+                        
+                        
+                        tidspunktKunDato = handles.Velfaerdsteknologi.(teknologi).(Sensornavn)(ii).Tidspunkt;
+                        tidspunktKunDato.Format = 'dd-MMM-yyyy';
+                        tidspunktKunDato = string(tidspunktKunDato);
+                        udskrift= sprintf("%s %s %s %s", Sensornavn, tidspunktKunDato, TidspunktPaaDagen_Data, ...
+                            handles.Velfaerdsteknologi.(teknologi).(Sensornavn)(ii).TilfoejBemaerkning.Bemaerkning(idx).bemaerkning);
                         str_part = udskrift; 
                         old_str = get(handles.lbBemaerkning,'String'); 
                         new_str=strvcat(char(old_str),char(str_part));

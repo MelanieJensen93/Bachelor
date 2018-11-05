@@ -1,6 +1,14 @@
 function handles = GemBemaerkningiFil(handles,inputArg2)
 %UNTITLED Summary of this function goes here
 %   Detailed explanation goes here
+% teknologi = fieldnames(handles.Velfaerdsteknologi(1));
+% teknologi = string(teknologi(1));
+% 
+% FilNavn = fullfile('C:\Users\Bruger\Documents\Sundhedsteknologi\7. Semester\Bachelor\MatLab',...
+%     'BemaerkningsFil.mat')
+% save(FilNavn, '-struct', 'handles', 'Velfaerdsteknologi')
+
+
 teknologi = fieldnames(handles.Velfaerdsteknologi(1));
 teknologi = string(teknologi(1));
 
@@ -24,16 +32,28 @@ if isfield(handles.Velfaerdsteknologi,'ValgtTidspunktPaaDato')
                   if Antalfravalgtdato == Valuefromlistbox
                     % A står for Append, og stemmer fra linket her
                     % https://se.mathworks.com/help/symbolic/mupad_ref/fopen.html
-                    bemaerkningsFil = fopen('bemarkningsFil.txt', 'A');
-                    for iii = 1:length(handles.Velfaerdsteknologi.(teknologi).(Sensornavn)(ii).TilfoejBemaerkning)  
+%                     bemaerkningsFil = fopen('bemarkningsFil.txt', 'A');
+                     for iii = 1:length(handles.Velfaerdsteknologi.(teknologi).(Sensornavn)(ii).TilfoejBemaerkning)  
+% 
+%                         udskriftTilBemaerkningsfil = fprintf('%s %s %s %s\n',...
+%                             handles.Velfaerdsteknologi.(teknologi).(Sensornavn)(ii).TilfoejBemaerkning(iii).Bemaerkning().tidspunkt,...
+%                             handles.Velfaerdsteknologi.(teknologi).(Sensornavn)(ii).TilfoejBemaerkning(iii).Bemaerkning().bemaerkning,...
+%                             teknologi, handles.Velfaerdsteknologi.(teknologi).(Sensornavn)(ii).Tidspunkt);
+%                     end
+% 
+%                     fclose(bemaerkningsFil);
+%                         dlmwrite('bemarkningsFil.csv',string(handles.Velfaerdsteknologi.(teknologi).(Sensornavn)(ii).TilfoejBemaerkning(iii).Bemaerkning().tidspunkt),...
+%                              string(handles.Velfaerdsteknologi.(teknologi).(Sensornavn)(ii).TilfoejBemaerkning(iii).Bemaerkning().bemaerkning),...
+%                              string(teknologi, handles.Velfaerdsteknologi.(teknologi).(Sensornavn)(ii).Tidspunkt), 'D')
+%                          d=1;
+                        csvwrite('bemarkningsFil.csv',handles.Velfaerdsteknologi.(teknologi).(Sensornavn)(ii).TilfoejBemaerkning(iii).Bemaerkning().tidspunkt,...
+                              handles.Velfaerdsteknologi.(teknologi).(Sensornavn)(ii).TilfoejBemaerkning(iii).Bemaerkning).bemaerkning,...
+                              teknologi, handles.Velfaerdsteknologi.(teknologi).(Sensornavn)(ii).Tidspunkt);
 
-                        fprintf(bemaerkningsFil, '%s %s %s %s\n',...
-                            handles.Velfaerdsteknologi.(teknologi).(Sensornavn)(ii).TilfoejBemaerkning(iii).Bemaerkning().tidspunkt,...
-                            handles.Velfaerdsteknologi.(teknologi).(Sensornavn)(ii).TilfoejBemaerkning(iii).Bemaerkning().bemaerkning,...
-                            teknologi, handles.Velfaerdsteknologi.(teknologi).(Sensornavn)(ii).Tidspunkt);
-                    end
 
-                    fclose(bemaerkningsFil);
+                     end
+                     %dlmwrite('bemarkningsFil.csv', udskriftTilBemaerkningsfil, 'D');
+                        d=1;
                   end
             end
           end

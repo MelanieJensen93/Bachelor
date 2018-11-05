@@ -55,10 +55,15 @@ function GUIDatafravalgtdato_OpeningFcn(hObject, eventdata, handles, varargin)
 % Choose default command line output for GUIDatafravalgtdato
 handles.output = hObject;
 
-handles.Velfaerdsteknologi = varargin{1};
+if ~isempty(varargin) && ischar(varargin{1}) && strcmp(varargin{1},'exit')
+    close;
+else
+    handles.Velfaerdsteknologi = varargin{1};
+    guidata(hObject, handles);
+end
 
 % Update handles structure
-guidata(hObject, handles);
+%guidata(hObject, handles);
 
 % UIWAIT makes GUIDatafravalgtdato wait for user response (see UIRESUME)
 % uiwait(handles.figure1);
@@ -87,8 +92,10 @@ function lbDataforvalgtdag_Callback(hObject, eventdata, handles)
 handles.Velfaerdsteknologi.ValgtTidspunktPaaDato = get(hObject, 'value');
 datatogo = handles.Velfaerdsteknologi;
 guidata(hObject, handles);
-GUITilfoejBemaerkning(datatogo);
+% GUITilfoejBemaerkning(datatogo)
 %close(GUIDatafravalgtdato);
+GUIDatafravalgtdato_OpeningFcn(hObject, eventdata, handles, 'exit');
+GUITilfoejBemaerkning(datatogo)
 
 % --- Executes during object creation, after setting all properties.
 function lbDataforvalgtdag_CreateFcn(hObject, eventdata, handles)
