@@ -1,4 +1,4 @@
-function handles = VisData(handles, xData)
+function VisData(handles, xData, yData, axesTeknologi,Vindue)
     teknologi = fieldnames(handles.Velfaerdsteknologi);
     teknologi = string(teknologi);
     times = xData';
@@ -15,7 +15,6 @@ function handles = VisData(handles, xData)
 
             % Den valgte dato
             stringDato = get(handles.stDatoSensorOverblik,'String');
-            d=1;
             txtAntal = handles.txtAntalGangeSensoroverblik;
         case 'Plejecentre'
             periode = get(get(handles.btngroupRedigergrafPlejecentre,'SelectedObject'),'String');
@@ -27,7 +26,6 @@ function handles = VisData(handles, xData)
             stringDato = get(handles.stDatoYderligere,'String');
             tider = [handles.Velfaerdsteknologi.(teknologi).Tidspunkt];
             if strcmp(teknologi,'Carendo')==1
-    %             set(handles.txtLunaMedCarendoYderligere, 'Visible', 'off');
                 Omsorgsfunktion = [handles.Velfaerdsteknologi.(teknologi).Omsorgsfunktion];
                 Komfortfunktion = [handles.Velfaerdsteknologi.(teknologi).Komfortfunktion];
                 Haevesaenkefunktion = [handles.Velfaerdsteknologi.(teknologi).Haevesaenkefunktion];
@@ -38,7 +36,7 @@ function handles = VisData(handles, xData)
                 ttYderligere = timetable(tider',LunaMedCarendo');
             end 
     end
-    
+    d=1;
 % Hvis dato ikke valgt, vælges seneste dato 
 if isempty(stringDato)
     %stringDato = handles.Velfaerdsteknologi.(teknologi)(1).Tidspunkt;
@@ -52,18 +50,20 @@ slutDato = datetime(stringDato,'InputFormat','dd-MM-yyyy');
 tt = timetable(times,yData','VariableNames',{'Data'});
 
 if strcmp(periode, 'Dag')==1
-    handles = DagInddeling(startDato,tt);
+    [sumAnvendelse,Begraensning] = DagInddeling(slutDato,stringDato,tt,axesTeknologi);
 end
 
 if strcmp(periode, 'Dag')==0
     switch periode 
+        case 'Uge' 
+            [xData, match, tt, sumAnvendelse, Begraensning] = UgeInddeling(slutDato,tt);
         case 'Måned'
-            [xData, match, tt, sumAnvendelse] = AarInddeling(slutDato,tt);
+            [xData, match, tt, sumAnvendelse, Begraensning ] = MaanedInddeling(slutDato,tt);
         case 'År'
-            [xData, match, tt, sumAnvendelse] = AarInddeling(slutDato,tt);
+            [xData, match, tt, sumAnvendelse, Begraensning] = AarInddeling(slutDato,tt);
             
     end
-    
+
     CntRow = 1; 
     ii=1; 
     for i=1:length(match)
@@ -79,12 +79,16 @@ if strcmp(periode, 'Dag')==0
         end
         CntRow=CntRow +1; 
     end
-    
+
     axes(axesTeknologi)
     bar(xData,Data);  
-    datetick('x','mmm-yy','keeplimits')  
-    
+    %datetick('x','mmm-yy','keeplimits')  
+end
     if strcmp(Vindue,'Yderligere')==0
        set(txtAntal,'String',sumAnvendelse);
+    end
+    
+    if strcmp(Vindue,'Yderligere')==1
+        YderligereDataFunktioner(handles,ttYderligere,teknologi, Begraensning);
     end
 end

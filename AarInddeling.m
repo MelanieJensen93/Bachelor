@@ -1,4 +1,4 @@
-function [xData, match, tt, sumAnvendelse] = AarInddeling(slutDato,tt)
+function [xData, match, tt, sumAnvendelse,Begraensning] = AarInddeling(slutDato,tt)
         startDato = datetime(slutDato.Year-1,slutDato.Month+1,slutDato.Day);
         slutDato = datetime(slutDato.Year,slutDato.Month,slutDato.Day+1);
         Begraensning = timerange (startDato,slutDato);    

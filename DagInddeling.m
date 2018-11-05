@@ -1,4 +1,4 @@
-function handles = DagInddeling(slutDato,tt)
+function [sumAnvendelse,Begraensning] = DagInddeling(slutDato,stringDato, tt,axesTeknologi)
     slutTidspunkt = datetime([datestr(stringDato,'dd-mm-yyyy') ' 05:00:00']);
     % startDato findes vha. slutDato og trækker en dag fra. 
     startDato = datetime(slutDato.Year,slutDato.Month,slutDato.Day+1);
@@ -15,6 +15,7 @@ function handles = DagInddeling(slutDato,tt)
     tt = rmmissing(tt);
     
     % Definere x-aksen
+    enTime = hours(1);
     x = slutTidspunkt: enTime:startTidspunkt;
     
     % Finder hvilke timer af x-aksen der er data for 

@@ -170,32 +170,39 @@ if strcmp(periode, 'Dag')==0
             sumAnvendelse = length(tt.times);
             x=startDato:day(1):slutDato;
             tt = retime(tt,'daily',@mean);
+            tt = rmmissing(tt);
             CntRowMedarbejdere = 1; 
-            match =(times>=startDato & times<slutDato);
+            %match =(times>=startDato & times<slutDato);
             d=1;  
             ii = 1; 
             tt = retime(tt,'daily',@mean);
-%             for i = 1:length(match)
-%                 d=1; 
-%                 if match(i)==1
-%                     DataUge(CntRowMedarbejdere) = tt.Data(ii);
-%                     ii=ii+1;
-%                     d=1; 
-%                 else 
-%                     DataUge(CntRowMedarbejdere)=0; 
-%                     d=1; 
-%                 end
-%                  CntRowMedarbejdere = 1+CntRowMedarbejdere;
-%             end
-            tt = rmmissing(tt);
+            match = ismember(x,tt.times);
+            for i = 1:length(match)
+                d=1; 
+                if match(i)==1
+                    if isduration(tt.Data(ii))==1 
+                        
+                        DataUge(CntRowMedarbejdere) = minutes(tt.Data(ii));
+                    else 
+                        DataUge(CntRowMedarbejdere) = tt.Data(ii);
+                    end
+                    ii=ii+1;
+                else 
+                    DataUge(CntRowMedarbejdere)=0; 
+                    d=1; 
+                end
+                 CntRowMedarbejdere = 1+CntRowMedarbejdere;
+            end
+            
             axes(axesTeknologi)
-            bar(tt.times,tt.Data)
+            bar(x,DataUge)
             
         case 'Måned'
             startDato = datetime(slutDato.Year,slutDato.Month-1,slutDato.Day);
             slutDato = datetime(slutDato.Year,slutDato.Month,slutDato.Day+1);
             Begraensning = timerange ( startDato,slutDato);
             tt = tt(Begraensning,:);
+            
 %             [C,~,ic]=unique(day(tt.times));
 %             a_accounts = accumarray(ic,1);
 %             value = [C,a_accounts];
@@ -238,6 +245,7 @@ if strcmp(periode, 'Dag')==0
             sumAnvendelse = length(tt.times);
            
             tt = retime(tt,'monthly',@mean);
+            d=1;
             count =  [(month(slutDato))+1:12, 1:(month(slutDato))]; 
             matchYear = ismember(count,month(tt.times));
             CntRow=1; 
@@ -256,6 +264,7 @@ if strcmp(periode, 'Dag')==0
                 end
                 CntRow=CntRow +1; 
             end
+            d=1;
 %             if month(tt.times(1))==1
 %                 sorteret=matchYear;
 %             else
@@ -265,7 +274,7 @@ if strcmp(periode, 'Dag')==0
             xData = linspace(startDato,slutDato,12);
             axes(axesTeknologi)
             bar(xData,DataAar);  
-            datetick('x','mmm-yy','keeplimits')           
+            datetick('x','mmm','keeplimits')           
     end 
     
     if strcmp(Vindue,'Yderligere')==0

@@ -59,10 +59,10 @@ handles.Velfaerdsteknologi = varargin{1}; %henter handles fra GUIValgafteknologi
 guidata(hObject, handles);
 handles = YderligereData(handles);
 guidata(hObject,handles);
-d=1;
+
 teknologi = fieldnames(handles.Velfaerdsteknologi);
 handles.teknologi = string(teknologi);
-d=1;
+
     if strcmp(handles.teknologi,'Carendo')==1
        set(handles.txtLunaMedCarendoYderligere, 'Visible', 'off');
     end
@@ -74,6 +74,20 @@ d=1;
         set(handles.txtKomfortfunktionYderligere, 'Visible', 'off');
         set(handles.txtHaeveSaenkefunktionYderligere, 'Visible', 'off');
     end
+    
+    VarighedSuperbruger = [handles.SuperBruger.Varighedforarbejdsgang];
+VarighedAlmindelig = [handles.Almindelig.Varighedforarbejdsgang];
+DirekteTid = [handles.Velfaerdsteknologi.(handles.teknologi).Tidmedborger];
+%Idet at det er en tid så skal det skrives ud i typen duration med
+%følgende format. 
+infmt = 'mm:ss';
+VarighedSuperbruger = duration(VarighedSuperbruger,'InputFormat',infmt); 
+VarighedAlmindelig = duration(VarighedAlmindelig,'InputFormat',infmt);
+DirekteTid = duration(DirekteTid,'InputFormat',infmt);
+
+VisData(handles,[handles.SuperBruger.Tidspunkt],VarighedSuperbruger,handles.axSuperBrugerYderligereData,'Yderligere');
+VisData(handles,[handles.Almindelig.Tidspunkt],VarighedAlmindelig,handles.axAlmindeligYderligereData,'Yderligere');
+VisData(handles,[handles.Velfaerdsteknologi.(handles.teknologi).Tidspunkt],DirekteTid,handles.axDirekteTidYderligereData,'Yderligere');
 
 % UIWAIT makes GUIYderligereData wait for user response (see UIRESUME)
 % uiwait(handles.figure1);
@@ -101,7 +115,6 @@ uicalendar('Weekend',[1 0 0 0 0 0 1], ...
 'DestinationUI', handles.stDatoYderligere);
 
 waitfor(handles.stDatoYderligere,'String');
-d=1;
 teknologi = fieldnames(handles.Velfaerdsteknologi);
 teknologi = string(teknologi);
 VarighedSuperbruger = [handles.SuperBruger.Varighedforarbejdsgang];
@@ -114,9 +127,9 @@ VarighedSuperbruger = duration(VarighedSuperbruger,'InputFormat',infmt);
 VarighedAlmindelig = duration(VarighedAlmindelig,'InputFormat',infmt);
 DirekteTid = duration(DirekteTid,'InputFormat',infmt);
 
-handles = SortereTid(handles,[handles.SuperBruger.Tidspunkt],VarighedSuperbruger,handles.axSuperBrugerYderligereData,'Yderligere');
-handles = SortereTid(handles,[handles.Almindelig.Tidspunkt],VarighedAlmindelig,handles.axAlmindeligYderligereData,'Yderligere');
-handles = SortereTid(handles,[handles.Velfaerdsteknologi.(teknologi).Tidspunkt],DirekteTid,handles.axDirekteTidYderligereData,'Yderligere');
+VisData(handles,[handles.SuperBruger.Tidspunkt],VarighedSuperbruger,handles.axSuperBrugerYderligereData,'Yderligere');
+VisData(handles,[handles.Almindelig.Tidspunkt],VarighedAlmindelig,handles.axAlmindeligYderligereData,'Yderligere');
+VisData(handles,[handles.Velfaerdsteknologi.(teknologi).Tidspunkt],DirekteTid,handles.axDirekteTidYderligereData,'Yderligere');
 
 % --- Executes when selected object is changed in btngroupRedigergrafYderligere.
 function btngroupRedigergrafYderligere_SelectionChangedFcn(hObject, eventdata, handles)
@@ -133,6 +146,7 @@ DirekteTid = [handles.Velfaerdsteknologi.(teknologi).Tidmedborger];
 infmt = 'mm:ss';
 VarighedSuperbruger = duration(VarighedSuperbruger,'InputFormat',infmt); 
 VarighedAlmindelig = duration(VarighedAlmindelig,'InputFormat',infmt); 
-handles = SortereTid(handles,[handles.SuperBruger.Tidspunkt],VarighedSuperbruger,handles.axSuperBrugerYderligereData,'Yderligere');
-handles = SortereTid(handles,[handles.Almindelig.Tidspunkt],VarighedAlmindelig,handles.axAlmindeligYderligereData,'Yderligere');
-handles = SortereTid(handles,[handles.Velfaerdsteknologi.(teknologi).Tidspunkt],DirekteTid,handles.axDirekteTidYderligereData,'Yderligere');
+DirekteTid = duration(DirekteTid,'InputFormat',infmt); 
+VisData(handles,[handles.SuperBruger.Tidspunkt],VarighedSuperbruger,handles.axSuperBrugerYderligereData,'Yderligere');
+VisData(handles,[handles.Almindelig.Tidspunkt],VarighedAlmindelig,handles.axAlmindeligYderligereData,'Yderligere');
+VisData(handles,[handles.Velfaerdsteknologi.(teknologi).Tidspunkt],DirekteTid,handles.axDirekteTidYderligereData,'Yderligere');
