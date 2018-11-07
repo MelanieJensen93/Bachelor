@@ -60,12 +60,19 @@ if ~isempty(varargin) && ischar(varargin{1}) && strcmp(varargin{1},'exit')
 else
     handles.Velfaerdsteknologi = varargin{1};
     ValgtSensor = handles.Velfaerdsteknologi.BrugerValgtSensor;
+    
+    %set(handles.lbBemaerkning, 'Value',[]);
+    %drawnow;
+        
+    handles=OpdaterListboxmedBemaerkning(handles);
+    guidata(hObject, handles);
+    
     if isfield(handles.Velfaerdsteknologi, 'LunaSensor')
         handles.field = 'LunaSensor'; 
         f = fieldnames(handles.Velfaerdsteknologi.LunaSensor);
         sensor = f(ValgtSensor);
         set(handles.txtValgtteknologiSensorOverblik, 'String', sensor);
-        OpdaterListboxmedBemaerkning(handles);
+        
         Varighed = [handles.Velfaerdsteknologi.LunaSensor.(string(sensor)).Varighedforarbejdsgang];
         %Idet at det er en tid så skal det skrives ud i typen duration med
         %følgende format. 
@@ -74,11 +81,7 @@ else
         VisData(handles,[handles.Velfaerdsteknologi.LunaSensor.(string(sensor)).Tidspunkt],[handles.Velfaerdsteknologi.LunaSensor.(string(sensor)).Medarbejdere],handles.axesMedarbejderSensorDataVindue,'Sensor');
         VisData(handles,[handles.Velfaerdsteknologi.LunaSensor.(string(sensor)).Tidspunkt],Varighed,handles.axesVarighedSensorDataVindue,'Sensor');
         
-        set(handles.lbBemaerkning, 'Value',[]);
-        drawnow;
         
-        handles=OpdaterListboxmedBemaerkning(handles);
-        guidata(hObject, handles);
     end 
 
     if isfield(handles.Velfaerdsteknologi, 'CarendoSensor')
