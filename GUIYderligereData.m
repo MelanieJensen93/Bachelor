@@ -74,8 +74,9 @@ handles.teknologi = string(teknologi);
         set(handles.txtKomfortfunktionYderligere, 'Visible', 'off');
         set(handles.txtHaeveSaenkefunktionYderligere, 'Visible', 'off');
     end
-    
-    VarighedSuperbruger = [handles.SuperBruger.Varighedforarbejdsgang];
+handles.Velfaerdsteknologi.Yderligere.Dato = handles.Velfaerdsteknologi.(handles.teknologi)(1).Tidspunkt;
+guidata(hObject,handles);
+VarighedSuperbruger = [handles.SuperBruger.Varighedforarbejdsgang];
 VarighedAlmindelig = [handles.Almindelig.Varighedforarbejdsgang];
 DirekteTid = [handles.Velfaerdsteknologi.(handles.teknologi).Tidmedborger];
 %Idet at det er en tid så skal det skrives ud i typen duration med
@@ -116,7 +117,7 @@ uicalendar('Weekend',[1 0 0 0 0 0 1], ...
 
 waitfor(handles.stDatoYderligere,'String');
 teknologi = fieldnames(handles.Velfaerdsteknologi);
-teknologi = string(teknologi);
+teknologi = string(teknologi(1));
 VarighedSuperbruger = [handles.SuperBruger.Varighedforarbejdsgang];
 VarighedAlmindelig = [handles.Almindelig.Varighedforarbejdsgang];
 DirekteTid = [handles.Velfaerdsteknologi.(teknologi).Tidmedborger];
@@ -137,7 +138,7 @@ function btngroupRedigergrafYderligere_SelectionChangedFcn(hObject, eventdata, h
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 teknologi = fieldnames(handles.Velfaerdsteknologi);
-teknologi = string(teknologi);
+teknologi = string(teknologi(1));
 VarighedSuperbruger = [handles.SuperBruger.Varighedforarbejdsgang];
 VarighedAlmindelig = [handles.Almindelig.Varighedforarbejdsgang];
 DirekteTid = [handles.Velfaerdsteknologi.(teknologi).Tidmedborger];

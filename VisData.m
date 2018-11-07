@@ -1,6 +1,6 @@
 function VisData(handles, xData, yData, axesTeknologi,Vindue)
     teknologi = fieldnames(handles.Velfaerdsteknologi);
-    teknologi = string(teknologi);
+    teknologi = string(teknologi(1));
     times = xData';
     
     switch Vindue
@@ -40,7 +40,11 @@ function VisData(handles, xData, yData, axesTeknologi,Vindue)
 % Hvis dato ikke valgt, vælges seneste dato 
 if isempty(stringDato)
     %stringDato = handles.Velfaerdsteknologi.(teknologi)(1).Tidspunkt;
-    stringDato = xData(1);
+    if strcmp(Vindue,'Yderligere')==1
+        stringDato = handles.Velfaerdsteknologi.Yderligere.Dato;
+    else 
+        stringDato = xData(1);
+    end
 end
 
 %Konvertere dato til en datetime 

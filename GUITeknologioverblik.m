@@ -85,6 +85,9 @@ infmt = 'mm:ss';
 D = duration(D,'InputFormat',infmt); 
 VisData(handles,[handles.Velfaerdsteknologi.(teknologi).Tidspunkt],[handles.Velfaerdsteknologi.(teknologi).Medarbejdere],handles.axesMedarbejdereTeknologiOverblik,'Teknologi');
 VisData(handles,[handles.Velfaerdsteknologi.(teknologi).Tidspunkt],D,handles.axesVarighedTeknologiOverblik,'Teknologi');
+axes(handles.axesMedarbejdereTeknologiOverblik)
+xlabel('Periode')
+ylabel('Antal medarbejdere')
 
 
 
@@ -164,6 +167,7 @@ uicalendar('Weekend',[1 0 0 0 0 0 1], ...
 'DestinationUI', handles.stDatoTeknologiOverblik);
 
 waitfor(handles.stDatoTeknologiOverblik,'String');
+d=1; 
 % handles = SortereTid(handles, 'Medarbejdere',handles.axesMedarbejdereTeknologiOverblik);
 % handles = SortereTid(handles, 'Varighed',handles.axesVarighedTeknologiOverblik);
 teknologi = fieldnames(handles.Velfaerdsteknologi);
@@ -177,6 +181,11 @@ D = duration(D,'InputFormat',infmt);
 
 VisData(handles,[handles.Velfaerdsteknologi.(teknologi).Tidspunkt],[handles.Velfaerdsteknologi.(teknologi).Medarbejdere],handles.axesMedarbejdereTeknologiOverblik,'Teknologi');
 VisData(handles,[handles.Velfaerdsteknologi.(teknologi).Tidspunkt],D,handles.axesVarighedTeknologiOverblik,'Teknologi');
+
+axes(handles.axesMedarbejdereTeknologiOverblik)
+xlabel('Periode')
+ylabel('Antal medarbejdere')
+
 
 
 
@@ -197,6 +206,9 @@ infmt = 'mm:ss';
 D = duration(D,'InputFormat',infmt); 
 VisData(handles,[handles.Velfaerdsteknologi.(teknologi).Tidspunkt],[handles.Velfaerdsteknologi.(teknologi).Medarbejdere],handles.axesMedarbejdereTeknologiOverblik,'Teknologi');
 VisData(handles,[handles.Velfaerdsteknologi.(teknologi).Tidspunkt],D,handles.axesVarighedTeknologiOverblik,'Teknologi');
+axes(handles.axesMedarbejdereTeknologiOverblik)
+xlabel('Periode')
+ylabel('Antal medarbejdere')
 
 
 

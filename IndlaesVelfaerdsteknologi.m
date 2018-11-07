@@ -10,7 +10,6 @@ end
 if nargin ==2
     SensorDataFil = IndlaesFil('Plejecentre.xlsx','Ark1');
 end
-d=1; 
 
 handles.Velfaerdsteknologi.Carendo = VelfaerdsteknologiIndeling(SensorDataFil,"Carendo");
 handles.Velfaerdsteknologi.Luna = VelfaerdsteknologiIndeling(SensorDataFil,"Luna");
