@@ -17,7 +17,7 @@ idx=1;
 %       if isfield(handles.Velfaerdsteknologi.LunaSensor.(Sensornavn), 'TilfoejBemaerkning')
 %
 
-waitfor(set(handles.lbBemaerkning, 'Value',[]));
+%waitfor(set(handles.lbBemaerkning, 'Value',[]));
 %drawnow;
 
 %clear handles.lbBemaerkning
@@ -26,6 +26,24 @@ gemtDataBemaerkningsfil = load(fullfile('C:\Users\Bruger\Documents\Sundhedstekno
     'BemaerkningsFil.mat'));
 
 handles.Velfaerdsteknologi = gemtDataBemaerkningsfil.Velfaerdsteknologi;
+
+% teknologi = fieldnames(handles.Velfaerdsteknologi(1));
+% teknologi = string(teknologi(1));
+% 
+% for i = 1:length(fieldnames(handles.Velfaerdsteknologi.(teknologi)))
+%     if Sensornr == i 
+%            Sensor = fieldnames(handles.Velfaerdsteknologi.(teknologi));
+%            Sensornavn = string(Sensor(i));
+%     end
+% end
+% 
+% stringDato = get(handles.stDatoSensorOverblik, 'String');
+% if isempty(stringDato)
+%     stringDato = handles.Velfaerdsteknologi.(teknologi).(Sensornavn)(1);
+% end
+% 
+% slutDato = datatime(stringDato, 'InputFormat', 'dd-MM-yyyy');
+
 
 teknologi = fieldnames(handles.Velfaerdsteknologi(1));
 teknologi = string(teknologi(1));
