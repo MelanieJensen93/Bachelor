@@ -9,6 +9,5 @@ function [xData, match, tt, sumAnvendelse,Begraensning] = AarInddeling(slutDato,
         count =  [(month(slutDato))+1:12, 1:(month(slutDato))]; 
         match = ismember(count,month(tt.times)); 
         
-        xData = linspace(startDato,slutDato,12);
-        
+        xData = linspace(startDato,slutDato,12);     
 end

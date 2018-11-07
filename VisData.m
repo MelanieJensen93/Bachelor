@@ -60,8 +60,7 @@ if strcmp(periode, 'Dag')==0
         case 'Måned'
             [xData, match, tt, sumAnvendelse, Begraensning ] = MaanedInddeling(slutDato,tt);
         case 'År'
-            [xData, match, tt, sumAnvendelse, Begraensning] = AarInddeling(slutDato,tt);
-            
+            [xData, match, tt, sumAnvendelse, Begraensning] = AarInddeling(slutDato,tt);    
     end
 
     CntRow = 1; 
@@ -79,7 +78,7 @@ if strcmp(periode, 'Dag')==0
         end
         CntRow=CntRow +1; 
     end
-
+  
     axes(axesTeknologi)
     bar(xData,Data);  
     %datetick('x','mmm-yy','keeplimits')  
