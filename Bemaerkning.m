@@ -38,6 +38,37 @@ if isfield(handles.Velfaerdsteknologi,'ValgtTidspunktPaaDato')
                         handles.Velfaerdsteknologi.(teknologi).(Sensornavn)(ii).TilfoejBemaerkning.Bemaerkning(idx+1).bemaerkning = get(get(handles.bgBemaerkningTilfoejBemaerkning,'SelectedObject'),'String');
                         idx = idx+1;
                     end
+                    
+                    %Henter kommentar fra andet feltet
+                    if strcmp(getfield(handles.Velfaerdsteknologi.(teknologi).(Sensornavn)(ii).TilfoejBemaerkning.Bemaerkning(idx),'bemaerkning'),'Andet') == 1
+                        AndetBemaerkning = get(handles.etAndetTilfoejBemaerkning,'String');
+                        AndetBemaerkning = "Andet: " + AndetBemaerkning;
+                        handles.Velfaerdsteknologi.(teknologi).(Sensornavn)(ii).TilfoejBemaerkning.Bemaerkning(idx).bemaerkning =  AndetBemaerkning;
+                    end
+                    
+                    if isfield(handles.Velfaerdsteknologi.(teknologi).(Sensornavn)(ii).TilfoejBemaerkning,'Bemaerkning')
+                        % Stammer fra : https://se.mathworks.com/help/matlab/ref/questdlg.html
+                        spoergsmaal=sprintf('Ønsker du at tilføje bemærkningen: %s %s ?',...
+                            handles.Velfaerdsteknologi.(teknologi).(Sensornavn)(ii).TilfoejBemaerkning.Bemaerkning(idx).bemaerkning,...
+                            handles.Velfaerdsteknologi.(teknologi).(Sensornavn)(ii).TilfoejBemaerkning.Bemaerkning(idx).tidspunkt);
+                        svar=questdlg(spoergsmaal,'Tilføj bemærkning',...
+                            'Gem', 'Annuller', 'Gem'); %den sidste gem er default værdien
+                        switch svar
+                            case 'Gem'
+                                disp([svar ' gemt'])
+                                GemBemaerkningiFil(handles);
+                                %handles.Velfaerdsteknologi.SvarGemt = 'Gemt'; 
+                                datatogo = handles.Velfaerdsteknologi;
+                                %GUITilfoejBemaerkning_OpeningFcn(hObject, eventdata, handles, 'exit');
+                                %GUISensordataoverblik(datatogo);
+                                %close(GUITilfoejBemaerkning);
+                                GUITilfoejBemaerkning(datatogo);
+                                break
+                            case 'Annuller'
+                                disp([svar ' annulleret'])
+
+                        end 
+                    end
                   end
             end
           end
@@ -51,12 +82,7 @@ else
     msgbox('Vælg venligst en dato.');
 end
 
-%Henter kommentar fra andet feltet
-if strcmp(getfield(handles.Velfaerdsteknologi.(teknologi).(Sensornavn)(ii).TilfoejBemaerkning.Bemaerkning(idx),'bemaerkning'),'Andet') == 1
-    AndetBemaerkning = get(handles.etAndetTilfoejBemaerkning,'String');
-    AndetBemaerkning = "Andet: " + AndetBemaerkning;
-    handles.Velfaerdsteknologi.(teknologi).(Sensornavn)(ii).TilfoejBemaerkning.Bemaerkning(idx).bemaerkning =  AndetBemaerkning;
-end
+
 
 if ~isfield(handles.Velfaerdsteknologi.(teknologi).(Sensornavn),'TilfoejBemaerkning')
     if ~isfield(handles.Velfaerdsteknologi.(teknologi).(Sensornavn)(ii).TilfoejBemaerkning,'Bemaerkning')
@@ -71,27 +97,27 @@ end
 %     return;
 % end
 
-if isfield(handles.Velfaerdsteknologi.(teknologi).(Sensornavn)(ii).TilfoejBemaerkning,'Bemaerkning')
-    % Stammer fra : https://se.mathworks.com/help/matlab/ref/questdlg.html
-    spoergsmaal=sprintf('Ønsker du at tilføje bemærkningen: %s %s ?',...
-        handles.Velfaerdsteknologi.(teknologi).(Sensornavn)(ii).TilfoejBemaerkning.Bemaerkning(idx).bemaerkning,...
-        handles.Velfaerdsteknologi.(teknologi).(Sensornavn)(ii).TilfoejBemaerkning.Bemaerkning(idx).tidspunkt);
-    svar=questdlg(spoergsmaal,'Tilføj bemærkning',...
-        'Gem', 'Annuller', 'Gem'); %den sidste gem er default værdien
-    switch svar
-        case 'Gem'
-            disp([svar ' gemt'])
-            GemBemaerkningiFil(handles);
-            %handles.Velfaerdsteknologi.SvarGemt = 'Gemt'; 
-            datatogo = handles.Velfaerdsteknologi;
-            %GUITilfoejBemaerkning_OpeningFcn(hObject, eventdata, handles, 'exit');
-            %GUISensordataoverblik(datatogo);
-            %close(GUITilfoejBemaerkning);
-            GUITilfoejBemaerkning(datatogo);
-        case 'Annuller'
-            disp([svar ' annulleret'])
-             
-    end 
+% if isfield(handles.Velfaerdsteknologi.(teknologi).(Sensornavn)(ii).TilfoejBemaerkning,'Bemaerkning')
+%     % Stammer fra : https://se.mathworks.com/help/matlab/ref/questdlg.html
+%     spoergsmaal=sprintf('Ønsker du at tilføje bemærkningen: %s %s ?',...
+%         handles.Velfaerdsteknologi.(teknologi).(Sensornavn)(ii).TilfoejBemaerkning.Bemaerkning(idx).bemaerkning,...
+%         handles.Velfaerdsteknologi.(teknologi).(Sensornavn)(ii).TilfoejBemaerkning.Bemaerkning(idx).tidspunkt);
+%     svar=questdlg(spoergsmaal,'Tilføj bemærkning',...
+%         'Gem', 'Annuller', 'Gem'); %den sidste gem er default værdien
+%     switch svar
+%         case 'Gem'
+%             disp([svar ' gemt'])
+%             GemBemaerkningiFil(handles);
+%             %handles.Velfaerdsteknologi.SvarGemt = 'Gemt'; 
+%             datatogo = handles.Velfaerdsteknologi;
+%             %GUITilfoejBemaerkning_OpeningFcn(hObject, eventdata, handles, 'exit');
+%             %GUISensordataoverblik(datatogo);
+%             %close(GUITilfoejBemaerkning);
+%             GUITilfoejBemaerkning(datatogo);
+%         case 'Annuller'
+%             disp([svar ' annulleret'])
+%              
+%     end 
 end
 
 %OpdaterListboxmedBemaerkning(handles);
