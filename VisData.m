@@ -1,6 +1,6 @@
 function VisData(handles, xData, yData, axesTeknologi,Vindue)
     teknologi = fieldnames(handles.Velfaerdsteknologi);
-    teknologi = string(teknologi);
+    teknologi = string(teknologi(1));
     times = xData';
     
     switch Vindue
@@ -40,7 +40,11 @@ function VisData(handles, xData, yData, axesTeknologi,Vindue)
 % Hvis dato ikke valgt, vælges seneste dato 
 if isempty(stringDato)
     %stringDato = handles.Velfaerdsteknologi.(teknologi)(1).Tidspunkt;
-    stringDato = xData(1);
+    if strcmp(Vindue,'Yderligere')==1
+        stringDato = handles.Velfaerdsteknologi.Yderligere.Dato;
+    else 
+        stringDato = xData(1);
+    end
 end
 
 %Konvertere dato til en datetime 
@@ -60,8 +64,7 @@ if strcmp(periode, 'Dag')==0
         case 'Måned'
             [xData, match, tt, sumAnvendelse, Begraensning ] = MaanedInddeling(slutDato,tt);
         case 'År'
-            [xData, match, tt, sumAnvendelse, Begraensning] = AarInddeling(slutDato,tt);
-            
+            [xData, match, tt, sumAnvendelse, Begraensning] = AarInddeling(slutDato,tt);    
     end
 
     CntRow = 1; 
@@ -79,7 +82,7 @@ if strcmp(periode, 'Dag')==0
         end
         CntRow=CntRow +1; 
     end
-
+  
     axes(axesTeknologi)
     bar(xData,Data);  
     %datetick('x','mmm-yy','keeplimits')  
