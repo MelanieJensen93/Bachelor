@@ -74,6 +74,12 @@ D = duration(D,'InputFormat',infmt);
 VisData(handles,[handles.Velfaerdsteknologi.(teknologi).Tidspunkt],[handles.Velfaerdsteknologi.(teknologi).Medarbejdere],handles.axMedarbejderePlejecentre,'Plejecentre');
 VisData(handles,[handles.Velfaerdsteknologi.(teknologi).Tidspunkt],D,handles.axVarighedPlejecentre,'Plejecentre');
 
+axes(handles.axMedarbejderePlejecentre)
+xlabel('Periode')
+ylabel('Antal medarbejdere')
+axes(handles.axVarighedPlejecentre)
+xlabel('Periode')
+ylabel('Varighed i minutter')
  
 
 % UIWAIT makes GUISammenlignMedPlejecentre wait for user response (see UIRESUME)
@@ -113,6 +119,12 @@ D = duration(D,'InputFormat',infmt);
 VisData(handles,[handles.Velfaerdsteknologi.(teknologi).Tidspunkt],[handles.Velfaerdsteknologi.(teknologi).Medarbejdere],handles.axMedarbejderePlejecentre,'Plejecentre');
 VisData(handles,[handles.Velfaerdsteknologi.(teknologi).Tidspunkt],D,handles.axVarighedPlejecentre,'Plejecentre');
 
+axes(handles.axMedarbejderePlejecentre)
+xlabel('Periode')
+ylabel('Antal medarbejdere')
+axes(handles.axVarighedPlejecentre)
+xlabel('Periode')
+ylabel('Varighed i minutter')
 
 % --- Executes when selected object is changed in btngroupRedigergrafPlejecentre.
 function btngroupRedigergrafPlejecentre_SelectionChangedFcn(hObject, eventdata, handles)
@@ -129,3 +141,10 @@ D = duration(D,'InputFormat',infmt);
 
 VisData(handles,[handles.Velfaerdsteknologi.(teknologi).Tidspunkt],[handles.Velfaerdsteknologi.(teknologi).Medarbejdere],handles.axMedarbejderePlejecentre,'Plejecentre');
 VisData(handles,[handles.Velfaerdsteknologi.(teknologi).Tidspunkt],D,handles.axVarighedPlejecentre,'Plejecentre');
+
+axes(handles.axMedarbejderePlejecentre)
+xlabel('Periode')
+ylabel('Antal medarbejdere')
+axes(handles.axVarighedPlejecentre)
+xlabel('Periode')
+ylabel('Varighed i minutter')

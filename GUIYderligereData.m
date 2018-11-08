@@ -90,6 +90,13 @@ VisData(handles,[handles.SuperBruger.Tidspunkt],VarighedSuperbruger,handles.axSu
 VisData(handles,[handles.Almindelig.Tidspunkt],VarighedAlmindelig,handles.axAlmindeligYderligereData,'Yderligere');
 VisData(handles,[handles.Velfaerdsteknologi.(handles.teknologi).Tidspunkt],DirekteTid,handles.axDirekteTidYderligereData,'Yderligere');
 
+axes(handles.axSuperBrugerYderligereData)
+xlabel('Periode')
+ylabel('Antal medarbejdere')
+axes(handles.axAlmindeligYderligereData)
+xlabel('Periode')
+ylabel('Varighed i minutter')
+
 % UIWAIT makes GUIYderligereData wait for user response (see UIRESUME)
 % uiwait(handles.figure1);
 
@@ -132,6 +139,13 @@ VisData(handles,[handles.SuperBruger.Tidspunkt],VarighedSuperbruger,handles.axSu
 VisData(handles,[handles.Almindelig.Tidspunkt],VarighedAlmindelig,handles.axAlmindeligYderligereData,'Yderligere');
 VisData(handles,[handles.Velfaerdsteknologi.(teknologi).Tidspunkt],DirekteTid,handles.axDirekteTidYderligereData,'Yderligere');
 
+axes(handles.axSuperBrugerYderligereData)
+xlabel('Periode')
+ylabel('Antal medarbejdere')
+axes(handles.axAlmindeligYderligereData)
+xlabel('Periode')
+ylabel('Varighed i minutter')
+
 % --- Executes when selected object is changed in btngroupRedigergrafYderligere.
 function btngroupRedigergrafYderligere_SelectionChangedFcn(hObject, eventdata, handles)
 % hObject    handle to the selected object in btngroupRedigergrafYderligere 
@@ -151,3 +165,10 @@ DirekteTid = duration(DirekteTid,'InputFormat',infmt);
 VisData(handles,[handles.SuperBruger.Tidspunkt],VarighedSuperbruger,handles.axSuperBrugerYderligereData,'Yderligere');
 VisData(handles,[handles.Almindelig.Tidspunkt],VarighedAlmindelig,handles.axAlmindeligYderligereData,'Yderligere');
 VisData(handles,[handles.Velfaerdsteknologi.(teknologi).Tidspunkt],DirekteTid,handles.axDirekteTidYderligereData,'Yderligere');
+
+axes(handles.axSuperBrugerYderligereData)
+xlabel('Periode')
+ylabel('Antal medarbejdere')
+axes(handles.axAlmindeligYderligereData)
+xlabel('Periode')
+ylabel('Varighed i minutter')
