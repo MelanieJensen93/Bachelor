@@ -1,4 +1,4 @@
-function [sumAnvendelse,Begraensning] = DagInddeling(slutDato,stringDato, tt,axesTeknologi)
+function [sumAnvendelse,Begraensning,x] = DagInddeling(slutDato,stringDato, tt,axesTeknologi)
     slutTidspunkt = datetime([datestr(stringDato,'dd-mm-yyyy') ' 05:00:00']);
     % startDato findes vha. slutDato og trækker en dag fra. 
     startDato = datetime(slutDato.Year,slutDato.Month,slutDato.Day+1);
