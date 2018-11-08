@@ -64,10 +64,20 @@ else
 
     if isfield(handles.Velfaerdsteknologi, 'CarendoSensor')
        set(handles.txtValgtteknologiSensorliste, 'String', 'Carendo');
+       CarendoBilledeMedSensor = imread('CarendoMedSensor.png');
+       axes(handles.axTeknologiMedSensorSensorliste);
+       imshow(CarendoBilledeMedSensor);
     end
     if isfield(handles.Velfaerdsteknologi, 'LunaSensor')
         set(handles.txtValgtteknologiSensorliste, 'String', 'Luna loftlift');
+        LunaBilledeMedSensor = imread('LunaMedSensor.png');
+        axes(handles.axTeknologiMedSensorSensorliste);
+        imshow(LunaBilledeMedSensor);
     end
+    
+    AarhusKommuneLogo = imread('AarhusKommuneLogo.jpg');
+    axes(handles.axAarhusLogo);
+    imshow(AarhusKommuneLogo);
 
 
     % Update handles structure

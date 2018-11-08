@@ -67,6 +67,22 @@ else
         %datatogo = handles.Velfaerdsteknologi;
         ValgtafTidspunkt(handles);
     end
+    ValgtSensor = handles.Velfaerdsteknologi.BrugerValgtSensor;
+    if isfield(handles.Velfaerdsteknologi, 'LunaSensor')
+        Sensornavn = fieldnames(handles.Velfaerdsteknologi.LunaSensor);
+        sensor = Sensornavn(ValgtSensor);
+        udskrift = sprintf('Luna %s', string(sensor));
+        set(handles.txtValgtTeknologiTilfoejbemaerkning, 'String', udskrift);
+    end
+    
+    if isfield(handles.Velfaerdsteknologi, 'CarendoSensor')
+        Sensornavn = fieldnames(handles.Velfaerdsteknologi.CarendoSensor);
+        handles.field = 'CarendoSensor'; 
+        sensor = Sensornavn(ValgtSensor);
+        udskrift = sprintf('Carendo %s', string(sensor));
+        set(handles.txtValgtTeknologiTilfoejbemaerkning, 'String', udskrift);
+    end
+    
     % Update handles structure
     guidata(hObject, handles);
 end

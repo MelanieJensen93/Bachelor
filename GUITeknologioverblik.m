@@ -58,13 +58,6 @@ if ~isfield(handles, 'Velfaerdsteknologi')
     handles.Velfaerdsteknologi = varargin{1}; %henter handles fra GUIValgafteknologi
 end
 
-if isfield(handles.Velfaerdsteknologi, 'Carendo')
-   set(handles.txtValgtteknologiOverblik, 'String', 'Carendo');
-end
-if isfield(handles.Velfaerdsteknologi, 'Luna')
-    set(handles.txtValgtteknologiOverblik, 'String', 'Luna loftlift');
-end
-
 AarhusKommuneLogo = imread('AarhusKommuneLogo.jpg');
 axes(handles.axAarhusLogo);
 imshow(AarhusKommuneLogo);
@@ -74,8 +67,7 @@ guidata(hObject, handles);
 %handles = SortereTid(handles);
 teknologi = fieldnames(handles.Velfaerdsteknologi);
 teknologi = string(teknologi);
-
-%set(handles.txtValgtteknologiOverblik,'String',teknologi); 
+set(handles.txtValgtteknologiOverblik,'String',teknologi); 
 set(handles.txtAntalGangeTeknologioverblik,'String',num2str(handles.Velfaerdsteknologi.(teknologi)(1).Medarbejdere))
 D = [handles.Velfaerdsteknologi.(teknologi).Varighedforarbejdsgang];
 %Idet at det er en tid så skal det skrives ud i typen duration med
@@ -87,10 +79,6 @@ VisData(handles,[handles.Velfaerdsteknologi.(teknologi).Tidspunkt],D,handles.axe
 axes(handles.axesMedarbejdereTeknologiOverblik)
 xlabel('Periode')
 ylabel('Antal medarbejdere')
-
-
-
-
 % UIWAIT makes GUITeknologioverblik wait for user response (see UIRESUME)
 % uiwait(handles.figure1);
 
@@ -123,6 +111,7 @@ function btnListoversensorerTeknologioverblik_Callback(hObject, eventdata, handl
 % hObject    handle to btnListoversensorerTeknologioverblik (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
+close(GUITeknologioverblik);
 datatogo = handles.Velfaerdsteknologi;
 GUISensorliste(datatogo);
 
@@ -133,6 +122,7 @@ function btnYderligeredataTeknologioverblik_Callback(hObject, eventdata, handles
 % hObject    handle to btnYderligeredataTeknologioverblik (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
+close(GUITeknologioverblik);
 datatogo = handles.Velfaerdsteknologi;
 GUIYderligereData(datatogo);
 
@@ -142,6 +132,7 @@ function btnBrugermanualTeknologioverblik_Callback(hObject, eventdata, handles)
 % hObject    handle to btnBrugermanualTeknologioverblik (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
+%close(GUITeknologioverblik);
 datatogo = handles.Velfaerdsteknologi;
 GUIBrugermanual(datatogo);
 
@@ -150,10 +141,9 @@ function btnSammenlignmedandreplejecentreTeknologioverblik_Callback(hObject, eve
 % hObject    handle to btnSammenlignmedandreplejecentreTeknologioverblik (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-%handles = SortereTid(handles);
+close(GUITeknologioverblik);
 teknologi = fieldnames(handles.Velfaerdsteknologi);
 datatogo= string(teknologi);
-%datatogo = handles.Velfaerdsteknologi;
 GUISammenlignMedPlejecentre(datatogo);
 
 % --- Executes on button press in btnVaelgDatoTeknologioverblik.

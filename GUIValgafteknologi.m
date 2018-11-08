@@ -72,15 +72,6 @@ imshow(LunaBillede);
 
 handles = IndlaesVelfaerdsteknologi(handles);
 guidata(hObject,handles);
- 
-
-%handles = Brugermanual(handles); 
-% Update handles structure
-%guidata(hObject, handles);
-
-
-
-
 
 % UIWAIT makes GUIValgafteknologi wait for user response (see UIRESUME)
 % uiwait(handles.GUIValgAfTeknologi);
@@ -115,9 +106,7 @@ if isfield(handles.Velfaerdsteknologi ,'Luna')
     datatogo = handles.Velfaerdsteknologi;
     guidata(hObject, handles);
     close(GUIValgafteknologi);
-    GUITeknologioverblik(datatogo);
-    
-    
+    GUITeknologioverblik(datatogo);    
 else
     msgbox('Data for den valgte velfærdsteknologi eksisterer ikke');
 
@@ -136,16 +125,13 @@ if isfield(handles.Velfaerdsteknologi ,'Luna')
     handles.Velfaerdsteknologi=rmfield(handles.Velfaerdsteknologi,'Luna');
 end
 
-
 if isfield(handles.Velfaerdsteknologi ,'Carendo')
     datatogo = handles.Velfaerdsteknologi;
     guidata(hObject, handles);
     close(GUIValgafteknologi);
     GUITeknologioverblik(datatogo);
-    
 else
     msgbox('Data for den valgte velfærdsteknologi eksisterer ikke');
 end
-%close(GUIValgafteknologi);
 
 
