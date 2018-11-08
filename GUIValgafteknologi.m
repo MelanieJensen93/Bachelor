@@ -78,10 +78,6 @@ guidata(hObject,handles);
 % Update handles structure
 %guidata(hObject, handles);
 
-
-
-
-
 % UIWAIT makes GUIValgafteknologi wait for user response (see UIRESUME)
 % uiwait(handles.GUIValgAfTeknologi);
 

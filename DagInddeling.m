@@ -65,25 +65,30 @@ function [sumAnvendelse,Begraensning] = DagInddeling(slutDato,stringDato, tt,axe
 
     %Beregner summen af alle medarbejder indenfor hvert interval.
     %Var2 er tidspunkt, hvor Va1 angiver antal medarbejdere. 
-    sumData = zeros(1, 6);
+    meanData = zeros(1, 6);
     CntSum = 1;
     CntData=1; 
     for tidspunkt=1:length(TidspunktPaaDagen)
-        data =[];
+        data=[];
         for i = 1:size(ttMedTidspunkt)
             if ttMedTidspunkt.Var2(i)==TidspunktPaaDagen(tidspunkt)
                 data(CntData) = double(ttMedTidspunkt.Var1(i));
                 CntData=CntData+1; 
-            end
-        end 
-        %Beregner summen af data indenfor et bestemt tidspunkt
-        sumData(CntSum) = sum(data);
-        CntSum = CntSum +1; 
-    end
+            end 
+        end
+        
+        if ~all(data == 0)
+            index = find(data~=0);
+            data = data(index);
+        end      
+        meanData(CntSum) = mean(data);
+        CntSum = CntSum +1;       
+    end  
+    
     axes(axesTeknologi)
     %x-aksen vil sortere det i kategorisk rækkefølge, derfor anvendes
     %reordercats, som indsætter det i den originale rækkefølge. 
     x = reordercats(TidspunktPaaDagen,{'Morgen', 'Formiddag', 'Middag', 'Eftermiddag', 'Aften', 'Nat'});
-    bar(x, sumData);
+    bar(x, meanData);
 
 end
