@@ -74,11 +74,10 @@ else
         VisData(handles,[handles.Velfaerdsteknologi.LunaSensor.(string(sensor)).Tidspunkt],[handles.Velfaerdsteknologi.LunaSensor.(string(sensor)).Medarbejdere],handles.axesMedarbejderSensorDataVindue,'Sensor');
         VisData(handles,[handles.Velfaerdsteknologi.LunaSensor.(string(sensor)).Tidspunkt],Varighed,handles.axesVarighedSensorDataVindue,'Sensor');
         
-        set(handles.lbBemaerkning, 'Value',[]);
-        drawnow;
+        %set(handles.lbBemaerkning, 'Value',[]);
+        %drawnow;
         
-        %handles=OpdaterListboxmedBemaerkning(handles);
-        guidata(hObject, handles);
+        
     end 
 
     if isfield(handles.Velfaerdsteknologi, 'CarendoSensor')
@@ -94,7 +93,8 @@ else
         VisData(handles,[handles.Velfaerdsteknologi.CarendoSensor.(string(sensor)).Tidspunkt],[handles.Velfaerdsteknologi.CarendoSensor.(string(sensor)).Medarbejdere],handles.axesMedarbejderSensorDataVindue,'Sensor');
         VisData(handles,[handles.Velfaerdsteknologi.CarendoSensor.(string(sensor)).Tidspunkt],Varighed,handles.axesVarighedSensorDataVindue,'Sensor');
         
-   end
+    end
+   handles=OpdaterListboxmedBemaerkning(handles);
     guidata(hObject, handles);
 end
 

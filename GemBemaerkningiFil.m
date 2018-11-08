@@ -14,6 +14,8 @@ teknologi = fieldnames(handles.Velfaerdsteknologi(1));
 teknologi = string(teknologi(1));
 
 Antalfravalgtdato = 0;
+DatafraBemaerkningsFil = readtable('BemaerkningsFil.xlsx');
+handles.Velfaerdsteknologi.BemaerkningsFilLaengde = height(DatafraBemaerkningsFil);
 
 if isfield(handles.Velfaerdsteknologi,'ValgtTidspunktPaaDato')
     Sensornr = getfield(handles.Velfaerdsteknologi, 'BrugerValgtSensor');
@@ -31,12 +33,9 @@ if isfield(handles.Velfaerdsteknologi,'ValgtTidspunktPaaDato')
             if handles.Velfaerdsteknologi.ValgtTidspunkt == tidspunkt 
                   Antalfravalgtdato = Antalfravalgtdato+1;
                   if Antalfravalgtdato == Valuefromlistbox
-                    % A står for Append, og stemmer fra linket her
-                    % https://se.mathworks.com/help/symbolic/mupad_ref/fopen.html
-%                     bemaerkningsFil = fopen('bemarkningsFil.txt', 'A');
                      for iii = 1:length(handles.Velfaerdsteknologi.(teknologi).(Sensornavn)(ii).TilfoejBemaerkning) 
                          T = table(teknologi, Sensornavn,handles.Velfaerdsteknologi.(teknologi).(Sensornavn)(ii).Tidspunkt ,...
-                             handles.Velfaerdsteknologi.(teknologi).(Sensornavn)(ii).TilfoejBemaerkning(iii).Bemaerkning().bemaerkning)
+                             handles.Velfaerdsteknologi.(teknologi).(Sensornavn)(ii).TilfoejBemaerkning(iii).Bemaerkning().bemaerkning);
                          laengdeafBemaerkningsfil = handles.Velfaerdsteknologi.BemaerkningsFilLaengde+2;
                          udskrift = sprintf('A%1.f:D%1.f', laengdeafBemaerkningsfil, laengdeafBemaerkningsfil);
                         writetable(T, 'BemaerkningsFil.xlsx', 'Sheet', 1,'Range', udskrift, 'WriteVariableNames', false);
