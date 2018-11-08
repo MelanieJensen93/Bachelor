@@ -57,7 +57,6 @@ handles.output = hObject;
 if ~isfield(handles, 'Velfaerdsteknologi')
     handles.Velfaerdsteknologi = varargin{1}; %henter handles fra GUIValgafteknologi
 end
-d=1;
 
 if isfield(handles.Velfaerdsteknologi, 'Carendo')
    set(handles.txtValgtteknologiOverblik, 'String', 'Carendo');
@@ -167,12 +166,12 @@ uicalendar('Weekend',[1 0 0 0 0 0 1], ...
 'DestinationUI', handles.stDatoTeknologiOverblik);
 
 waitfor(handles.stDatoTeknologiOverblik,'String');
-d=1; 
+ 
 % handles = SortereTid(handles, 'Medarbejdere',handles.axesMedarbejdereTeknologiOverblik);
 % handles = SortereTid(handles, 'Varighed',handles.axesVarighedTeknologiOverblik);
 teknologi = fieldnames(handles.Velfaerdsteknologi);
 teknologi = string(teknologi);
-d=1;
+
 D = [handles.Velfaerdsteknologi.(teknologi).Varighedforarbejdsgang];
 %Idet at det er en tid så skal det skrives ud i typen duration med
 %følgende format. 
