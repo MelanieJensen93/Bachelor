@@ -22,7 +22,7 @@ function varargout = GUISensordataoverblik(varargin)
 
 % Edit the above text to modify the response to help GUISensordataoverblik
 
-% Last Modified by GUIDE v2.5 02-Nov-2018 13:38:50
+% Last Modified by GUIDE v2.5 08-Nov-2018 11:08:47
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -62,10 +62,11 @@ else
     ValgtSensor = handles.Velfaerdsteknologi.BrugerValgtSensor;
     if isfield(handles.Velfaerdsteknologi, 'LunaSensor')
         handles.field = 'LunaSensor'; 
-        f = fieldnames(handles.Velfaerdsteknologi.LunaSensor);
-        sensor = f(ValgtSensor);
-        set(handles.txtValgtteknologiSensorOverblik, 'String', sensor);
-        %OpdaterListboxmedBemaerkning(handles);
+        Sensornavn = fieldnames(handles.Velfaerdsteknologi.LunaSensor);
+        sensor = Sensornavn(ValgtSensor);
+        udskrift = sprintf('Luna %s', string(sensor));
+        set(handles.txtValgtteknologiSensorOverblik, 'String', udskrift);
+        
         Varighed = [handles.Velfaerdsteknologi.LunaSensor.(string(sensor)).Varighedforarbejdsgang];
         %Idet at det er en tid så skal det skrives ud i typen duration med
         %følgende format. 
@@ -81,10 +82,11 @@ else
     end 
 
     if isfield(handles.Velfaerdsteknologi, 'CarendoSensor')
-        f = fieldnames(handles.Velfaerdsteknologi.CarendoSensor);
+        Sensornavn = fieldnames(handles.Velfaerdsteknologi.CarendoSensor);
         handles.field = 'CarendoSensor'; 
-        sensor = f(ValgtSensor);
-        set(handles.txtValgtteknologiSensorOverblik, 'String', sensor);
+        sensor = Sensornavn(ValgtSensor);
+        udskrift = sprintf('Carendo %s', string(sensor));
+        set(handles.txtValgtteknologiSensorOverblik, 'String', udskrift);
         Varighed = [handles.Velfaerdsteknologi.CarendoSensor.(string(sensor)).Varighedforarbejdsgang];
         %Idet at det er en tid så skal det skrives ud i typen duration med
         %følgende format. 
@@ -94,6 +96,12 @@ else
         handles = VisData(handles,[handles.Velfaerdsteknologi.CarendoSensor.(string(sensor)).Tidspunkt],Varighed,handles.axesVarighedSensorDataVindue,'Sensor');
         
     end
+    
+    AarhusKommuneLogo = imread('AarhusKommuneLogo.jpg');
+    axes(handles.axAarhusLogo);
+    imshow(AarhusKommuneLogo);
+   
+    
    handles=OpdaterListboxmedBemaerkning(handles);
     guidata(hObject, handles);
 end

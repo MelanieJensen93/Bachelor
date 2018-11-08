@@ -8,7 +8,6 @@ function handles = OpdaterListboxmedBemaerkning(handles, datatogo)
 % handles.Velfaerdsteknologi = gemtDataBemaerkningsfil.Velfaerdsteknologi;
 
 handles.lbBemaerkning.String = [];
-%set(handles.lbBemaerkning, 'Value',[]);
 drawnow;       
 
 DatafraBemaerkningsFil = readtable('BemaerkningsFil.xlsx');
@@ -46,7 +45,7 @@ if isfield(handles.Velfaerdsteknologi, 'BrugerValgtSensor')
                                 
                                  if isfield(handles.Velfaerdsteknologi.(teknologi).(Sensornavn)(ii), 'TilfoejBemaerkning')
                                     %handles.lbBemaerkning.String = []; 
-                                    %for iiii = 1:length(handles.Velfaerdsteknologi.(teknologi).(Sensornavn)(ii).TilfoejBemaerkning.Bemaerkning)
+                                    for iiii = 1:length(handles.Velfaerdsteknologi.(teknologi).(Sensornavn)(ii).TilfoejBemaerkning.Bemaerkning)
                                     %handles.Velfaerdsteknologi.(teknologi).(Sensornavn)(ii).TilfoejBemaerkning.Bemaerkning(idx)
                                      %Præallokere et categorical array med tidspunkterpådagen
                                       TidspunktPaaDagen = (categorical({'Morgen', 'Formiddag', 'Middag', 'Eftermiddag', 'Aften', 'Nat'}))';
@@ -65,7 +64,7 @@ if isfield(handles.Velfaerdsteknologi, 'BrugerValgtSensor')
                                                 TidspunktPaaDagen_Data= TidspunktPaaDagen(6);
                                         end
                                                                              
-                                    %end
+                                    end
                                     
                                     tidspunktKunDato = handles.Velfaerdsteknologi.(teknologi).(Sensornavn)(ii).Tidspunkt;
                                         tidspunktKunDato.Format = 'dd-MMM-yyyy';
@@ -76,7 +75,7 @@ if isfield(handles.Velfaerdsteknologi, 'BrugerValgtSensor')
                                         old_str = get(handles.lbBemaerkning,'String'); 
                                         new_str=strvcat(char(old_str),char(str_part));
                                         set(handles.lbBemaerkning,'String',new_str);
-                                        set(handles.lbBemaerkning, 'Value', iii); 
+                                        %set(handles.lbBemaerkning, 'Value', iii); 
                                  end
                             end
                         end

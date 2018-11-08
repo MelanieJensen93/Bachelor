@@ -38,27 +38,8 @@ if isfield(handles.Velfaerdsteknologi,'ValgtTidspunktPaaDato')
                              handles.Velfaerdsteknologi.(teknologi).(Sensornavn)(ii).TilfoejBemaerkning(iii).Bemaerkning().bemaerkning);
                          laengdeafBemaerkningsfil = handles.Velfaerdsteknologi.BemaerkningsFilLaengde+2;
                          udskrift = sprintf('A%1.f:D%1.f', laengdeafBemaerkningsfil, laengdeafBemaerkningsfil);
-                        writetable(T, 'BemaerkningsFil.xlsx', 'Sheet', 1,'Range', udskrift, 'WriteVariableNames', false);
-% 
-%                         udskriftTilBemaerkningsfil = fprintf('%s %s %s %s\n',...
-%                             handles.Velfaerdsteknologi.(teknologi).(Sensornavn)(ii).TilfoejBemaerkning(iii).Bemaerkning().tidspunkt,...
-%                             handles.Velfaerdsteknologi.(teknologi).(Sensornavn)(ii).TilfoejBemaerkning(iii).Bemaerkning().bemaerkning,...
-%                             teknologi, handles.Velfaerdsteknologi.(teknologi).(Sensornavn)(ii).Tidspunkt);
-%                     end
-% 
-%                     fclose(bemaerkningsFil);
-%                         dlmwrite('bemarkningsFil.csv',string(handles.Velfaerdsteknologi.(teknologi).(Sensornavn)(ii).TilfoejBemaerkning(iii).Bemaerkning().tidspunkt),...
-%                              string(handles.Velfaerdsteknologi.(teknologi).(Sensornavn)(ii).TilfoejBemaerkning(iii).Bemaerkning().bemaerkning),...
-%                              string(teknologi, handles.Velfaerdsteknologi.(teknologi).(Sensornavn)(ii).Tidspunkt), 'D')
-%                          d=1;
-%                         csvwrite('bemarkningsFil.csv', handles.Velfaerdsteknologi.(teknologi).(Sensornavn)(ii).TilfoejBemaerkning(iii).Bemaerkning().tidspunkt,...
-%                               handles.Velfaerdsteknologi.(teknologi).(Sensornavn)(ii).TilfoejBemaerkning(iii).Bemaerkning).bemaerkning,...
-%                               teknologi, handles.Velfaerdsteknologi.(teknologi).(Sensornavn)(ii).Tidspunkt);
-
-
+                        writetable(T, 'BemaerkningsFil.xlsx', 'Sheet', 1,'Range', udskrift, 'WriteVariableNames', false);            
                      end
-                     %dlmwrite('bemarkningsFil.csv', udskriftTilBemaerkningsfil, 'D');
-                        d=1;
                   end
             end
           end

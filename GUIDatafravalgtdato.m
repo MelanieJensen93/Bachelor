@@ -59,6 +59,27 @@ if ~isempty(varargin) && ischar(varargin{1}) && strcmp(varargin{1},'exit')
     close;
 else
     handles.Velfaerdsteknologi = varargin{1};
+    
+    ValgtSensor = handles.Velfaerdsteknologi.BrugerValgtSensor;
+    if isfield(handles.Velfaerdsteknologi, 'LunaSensor')
+        Sensornavn = fieldnames(handles.Velfaerdsteknologi.LunaSensor);
+        sensor = Sensornavn(ValgtSensor);
+        udskrift = sprintf('Luna %s', string(sensor));
+        set(handles.txtValgtTeknologiDatafravalgtdato, 'String', udskrift);
+    end
+    
+    if isfield(handles.Velfaerdsteknologi, 'CarendoSensor')
+        Sensornavn = fieldnames(handles.Velfaerdsteknologi.CarendoSensor);
+        handles.field = 'CarendoSensor'; 
+        sensor = Sensornavn(ValgtSensor);
+        udskrift = sprintf('Carendo %s', string(sensor));
+        set(handles.txtValgtTeknologiDatafravalgtdato, 'String', udskrift);
+    end
+    
+    AarhusKommuneLogo = imread('AarhusKommuneLogo.jpg');
+    axes(handles.axAarhusLogo);
+    imshow(AarhusKommuneLogo);
+    
     guidata(hObject, handles);
 end
 
