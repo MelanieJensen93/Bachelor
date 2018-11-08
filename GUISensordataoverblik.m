@@ -71,8 +71,8 @@ else
         %følgende format. 
         infmt = 'mm:ss';
         Varighed = duration(Varighed,'InputFormat',infmt); 
-        VisData(handles,[handles.Velfaerdsteknologi.LunaSensor.(string(sensor)).Tidspunkt],[handles.Velfaerdsteknologi.LunaSensor.(string(sensor)).Medarbejdere],handles.axesMedarbejderSensorDataVindue,'Sensor');
-        VisData(handles,[handles.Velfaerdsteknologi.LunaSensor.(string(sensor)).Tidspunkt],Varighed,handles.axesVarighedSensorDataVindue,'Sensor');
+        handles = VisData(handles,[handles.Velfaerdsteknologi.LunaSensor.(string(sensor)).Tidspunkt],[handles.Velfaerdsteknologi.LunaSensor.(string(sensor)).Medarbejdere],handles.axesMedarbejderSensorDataVindue,'Sensor');
+        handles = VisData(handles,[handles.Velfaerdsteknologi.LunaSensor.(string(sensor)).Tidspunkt],Varighed,handles.axesVarighedSensorDataVindue,'Sensor');
         
         %set(handles.lbBemaerkning, 'Value',[]);
         %drawnow;
@@ -90,8 +90,8 @@ else
         %følgende format. 
         infmt = 'mm:ss';
         Varighed = duration(Varighed,'InputFormat',infmt); 
-        VisData(handles,[handles.Velfaerdsteknologi.CarendoSensor.(string(sensor)).Tidspunkt],[handles.Velfaerdsteknologi.CarendoSensor.(string(sensor)).Medarbejdere],handles.axesMedarbejderSensorDataVindue,'Sensor');
-        VisData(handles,[handles.Velfaerdsteknologi.CarendoSensor.(string(sensor)).Tidspunkt],Varighed,handles.axesVarighedSensorDataVindue,'Sensor');
+        handles = VisData(handles,[handles.Velfaerdsteknologi.CarendoSensor.(string(sensor)).Tidspunkt],[handles.Velfaerdsteknologi.CarendoSensor.(string(sensor)).Medarbejdere],handles.axesMedarbejderSensorDataVindue,'Sensor');
+        handles = VisData(handles,[handles.Velfaerdsteknologi.CarendoSensor.(string(sensor)).Tidspunkt],Varighed,handles.axesVarighedSensorDataVindue,'Sensor');
         
     end
    handles=OpdaterListboxmedBemaerkning(handles);

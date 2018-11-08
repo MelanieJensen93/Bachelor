@@ -1,4 +1,4 @@
-function VisData(handles, xData, yData, axesTeknologi,Vindue)
+function handles = VisData(handles, xData, yData, axesTeknologi,Vindue)
     teknologi = fieldnames(handles.Velfaerdsteknologi);
     teknologi = string(teknologi(1));
     times = xData';
@@ -36,7 +36,6 @@ function VisData(handles, xData, yData, axesTeknologi,Vindue)
                 ttYderligere = timetable(tider',LunaMedCarendo');
             end 
     end
-    d=1;
 % Hvis dato ikke valgt, vælges seneste dato 
 if isempty(stringDato)
     %stringDato = handles.Velfaerdsteknologi.(teknologi)(1).Tidspunkt;
@@ -66,7 +65,7 @@ if strcmp(periode, 'Dag')==0
         case 'År'
             [xData, match, tt, sumAnvendelse, Begraensning] = AarInddeling(slutDato,tt);    
     end
-
+    handles.Velfaerdsteknologi.VisData.TidsBegraensning= xData; 
     CntRow = 1; 
     ii=1; 
     for i=1:length(match)
