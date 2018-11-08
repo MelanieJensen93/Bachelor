@@ -18,9 +18,9 @@ teknologi = fieldnames(handles.Velfaerdsteknologi(1));
 teknologi = string(teknologi(1));
 
 if isfield(handles.Velfaerdsteknologi, 'BrugerValgtSensor')
-    Sensornr = getfield(handles.Velfaerdsteknologi, 'BrugerValgtSensor');
+    Sensornrfralistbox = getfield(handles.Velfaerdsteknologi, 'BrugerValgtSensor');
      for i = 1:length(fieldnames(handles.Velfaerdsteknologi.(teknologi)))
-            if Sensornr == i 
+            if Sensornrfralistbox == i 
               Sensor = fieldnames(handles.Velfaerdsteknologi.(teknologi));
               Sensornavn = string(Sensor(i));
               for ii = 1:length(handles.Velfaerdsteknologi.(teknologi).(Sensornavn))
@@ -46,7 +46,8 @@ if isfield(handles.Velfaerdsteknologi, 'BrugerValgtSensor')
                                 
                                  if isfield(handles.Velfaerdsteknologi.(teknologi).(Sensornavn)(ii), 'TilfoejBemaerkning')
                                     %handles.lbBemaerkning.String = []; 
-                                    for iiii = 1:length(handles.Velfaerdsteknologi.(teknologi).(Sensornavn)(ii).TilfoejBemaerkning.Bemaerkning)
+                                    %for iiii = 1:length(handles.Velfaerdsteknologi.(teknologi).(Sensornavn)(ii).TilfoejBemaerkning.Bemaerkning)
+                                    %handles.Velfaerdsteknologi.(teknologi).(Sensornavn)(ii).TilfoejBemaerkning.Bemaerkning(idx)
                                      %Præallokere et categorical array med tidspunkterpådagen
                                       TidspunktPaaDagen = (categorical({'Morgen', 'Formiddag', 'Middag', 'Eftermiddag', 'Aften', 'Nat'}))';
                                       %Tiden bliver placeret indenfor de bestemte intervaller. 
@@ -63,17 +64,19 @@ if isfield(handles.Velfaerdsteknologi, 'BrugerValgtSensor')
                                         else 
                                                 TidspunktPaaDagen_Data= TidspunktPaaDagen(6);
                                         end
-                                        tidspunktKunDato = handles.Velfaerdsteknologi.(teknologi).(Sensornavn)(ii).Tidspunkt;
+                                                                             
+                                    %end
+                                    
+                                    tidspunktKunDato = handles.Velfaerdsteknologi.(teknologi).(Sensornavn)(ii).Tidspunkt;
                                         tidspunktKunDato.Format = 'dd-MMM-yyyy';
                                         tidspunktKunDato = string(tidspunktKunDato);
                                         udskrift= sprintf("%s %s %s %s", Sensornavn, tidspunktKunDato, TidspunktPaaDagen_Data, ...
-                                            string(handles.Velfaerdsteknologi.(teknologi).(Sensornavn)(ii).TilfoejBemaerkning.Bemaerkning(iiii).bemaerkning));
+                                            string(handles.Velfaerdsteknologi.(teknologi).(Sensornavn)(ii).TilfoejBemaerkning.Bemaerkning(idx).bemaerkning));
                                         str_part = udskrift; 
                                         old_str = get(handles.lbBemaerkning,'String'); 
                                         new_str=strvcat(char(old_str),char(str_part));
                                         set(handles.lbBemaerkning,'String',new_str);
-                                        set(handles.lbBemaerkning, 'Value', iii);                                      
-                                    end
+                                        set(handles.lbBemaerkning, 'Value', iii); 
                                  end
                             end
                         end
