@@ -112,11 +112,8 @@ if isfield(handles.Velfaerdsteknologi ,'Luna')
     guidata(hObject, handles);
     close(GUIValgafteknologi);
     GUITeknologioverblik(datatogo);
-    
-    
 else
     msgbox('Data for den valgte velfærdsteknologi eksisterer ikke');
-
 end
 
 
@@ -138,7 +135,6 @@ if isfield(handles.Velfaerdsteknologi ,'Carendo')
     guidata(hObject, handles);
     close(GUIValgafteknologi);
     GUITeknologioverblik(datatogo);
-    
 else
     msgbox('Data for den valgte velfærdsteknologi eksisterer ikke');
 end
