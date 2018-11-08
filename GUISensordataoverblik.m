@@ -92,7 +92,7 @@ else
         %følgende format. 
         infmt = 'mm:ss';
         Varighed = duration(Varighed,'InputFormat',infmt); 
-        handles = VisData(handles,[handles.Velfaerdsteknologi.CarendoSensor.(string(sensor)).Tidspunkt],[handles.Velfaerdsteknologi.CarendoSensor.(string(sensor)).Medarbejdere],handles.axesMedarbejderSensorDataVindue,'Sensor');
+        handles  = VisData(handles,[handles.Velfaerdsteknologi.CarendoSensor.(string(sensor)).Tidspunkt],[handles.Velfaerdsteknologi.CarendoSensor.(string(sensor)).Medarbejdere],handles.axesMedarbejderSensorDataVindue,'Sensor');
         handles = VisData(handles,[handles.Velfaerdsteknologi.CarendoSensor.(string(sensor)).Tidspunkt],Varighed,handles.axesVarighedSensorDataVindue,'Sensor');
         
     end
@@ -104,6 +104,7 @@ else
     
    handles=OpdaterListboxmedBemaerkning(handles);
     guidata(hObject, handles);
+    
 end
 
 %OpdaterListboxmedBemaerkning(handles);
@@ -225,9 +226,10 @@ Varighed = [handles.Velfaerdsteknologi.(teknologi).(sensor).Varighedforarbejdsga
 %følgende format. 
 infmt = 'mm:ss';
 Varighed = duration(Varighed,'InputFormat',infmt); 
-VisData(handles,[handles.Velfaerdsteknologi.(teknologi).(sensor).Tidspunkt],[handles.Velfaerdsteknologi.(teknologi).(sensor).Medarbejdere],handles.axesMedarbejderSensorDataVindue,'Sensor');
-VisData(handles,[handles.Velfaerdsteknologi.(teknologi).(sensor).Tidspunkt],Varighed,handles.axesVarighedSensorDataVindue,'Sensor');
-
+handles = VisData(handles,[handles.Velfaerdsteknologi.(teknologi).(sensor).Tidspunkt],[handles.Velfaerdsteknologi.(teknologi).(sensor).Medarbejdere],handles.axesMedarbejderSensorDataVindue,'Sensor');
+handles = VisData(handles,[handles.Velfaerdsteknologi.(teknologi).(sensor).Tidspunkt],Varighed,handles.axesVarighedSensorDataVindue,'Sensor');
+guidata(hObject,handles);
+handles=OpdaterListboxmedBemaerkning(handles);
 % --- Executes on button press in btnTilbageSensorDataoverblik.
 function btnTilbageSensorDataoverblik_Callback(hObject, eventdata, handles)
 % hObject    handle to btnTilbageSensorDataoverblik (see GCBO)

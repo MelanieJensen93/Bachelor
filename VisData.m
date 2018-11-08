@@ -12,7 +12,6 @@ function handles = VisData(handles, xData, yData, axesTeknologi,Vindue)
             txtAntal = handles.txtAntalGangeTeknologioverblik;
         case 'Sensor'
             periode = get(get(handles.btngroupRedigerGrafSensoroverblik,'SelectedObject'),'String');
-
             % Den valgte dato
             stringDato = get(handles.stDatoSensorOverblik,'String');
             txtAntal = handles.txtAntalGangeSensoroverblik;
@@ -53,7 +52,7 @@ slutDato = datetime(stringDato,'InputFormat','dd-MM-yyyy');
 tt = timetable(times,yData','VariableNames',{'Data'});
 
 if strcmp(periode, 'Dag')==1
-    [sumAnvendelse,Begraensning] = DagInddeling(slutDato,stringDato,tt,axesTeknologi);
+    [sumAnvendelse,Begraensning,xData] = DagInddeling(slutDato,stringDato,tt,axesTeknologi);
 end
 
 if strcmp(periode, 'Dag')==0
@@ -66,6 +65,7 @@ if strcmp(periode, 'Dag')==0
             [xData, match, tt, sumAnvendelse, Begraensning] = AarInddeling(slutDato,tt);    
     end
     handles.Velfaerdsteknologi.VisData.TidsBegraensning= xData; 
+    
     CntRow = 1; 
     ii=1; 
     for i=1:length(match)
