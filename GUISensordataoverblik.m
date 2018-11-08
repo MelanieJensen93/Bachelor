@@ -75,8 +75,12 @@ else
         handles = VisData(handles,[handles.Velfaerdsteknologi.LunaSensor.(string(sensor)).Tidspunkt],[handles.Velfaerdsteknologi.LunaSensor.(string(sensor)).Medarbejdere],handles.axesMedarbejderSensorDataVindue,'Sensor');
         handles = VisData(handles,[handles.Velfaerdsteknologi.LunaSensor.(string(sensor)).Tidspunkt],Varighed,handles.axesVarighedSensorDataVindue,'Sensor');
         
-        %set(handles.lbBemaerkning, 'Value',[]);
-        %drawnow;
+        axes(handles.axesMedarbejderSensorDataVindue)
+        xlabel('Periode')
+        ylabel('Antal medarbejdere')
+        axes(handles.axesVarighedSensorDataVindue)
+        xlabel('Periode')
+        ylabel('Varighed i minutter')
         
         
     end 
@@ -95,6 +99,12 @@ else
         handles = VisData(handles,[handles.Velfaerdsteknologi.CarendoSensor.(string(sensor)).Tidspunkt],[handles.Velfaerdsteknologi.CarendoSensor.(string(sensor)).Medarbejdere],handles.axesMedarbejderSensorDataVindue,'Sensor');
         handles = VisData(handles,[handles.Velfaerdsteknologi.CarendoSensor.(string(sensor)).Tidspunkt],Varighed,handles.axesVarighedSensorDataVindue,'Sensor');
         
+        axes(handles.axesMedarbejderSensorDataVindue)
+        xlabel('Periode')
+        ylabel('Antal medarbejdere')
+        axes(handles.axesVarighedSensorDataVindue)
+        xlabel('Periode')
+        ylabel('Varighed i minutter')
     end
     
     AarhusKommuneLogo = imread('AarhusKommuneLogo.jpg');
@@ -103,21 +113,9 @@ else
    
     
    handles=OpdaterListboxmedBemaerkning(handles);
-    guidata(hObject, handles);
+   guidata(hObject, handles);
+    
 end
-
-%OpdaterListboxmedBemaerkning(handles);
-% idx=1;
-% a= sprintf("%s %s %s"+handles.TB.B(idx).bemaerkning,handles.TB.B(idx).dato, handles.TB.B(idx).tidspunkt);
-% str_part = a; 
-% old_str = get(handles.lbBemaerkning,'String'); 
-% new_str=strvcat(char(old_str),char(str_part));
-% set(handles.lbBemaerkning,'String',new_str);
-% set(handles.lbBemaerkning, 'Value', idx+1);
-
-
-
-
 
 % UIWAIT makes GUISensordataoverblik wait for user response (see UIRESUME)
 % uiwait(handles.GUISensorDataOverbliksVindue);
@@ -142,8 +140,6 @@ function btnTilojbemaerkningSensordatavindue_Callback(hObject, eventdata, handle
 
 datatogo = handles.Velfaerdsteknologi;
 GUITilfoejBemaerkning(datatogo);
-%Bemaerkning(datatogo);
-
 
 
 % --- Executes on selection change in lbBemaerkning.
@@ -193,7 +189,12 @@ Varighed = duration(Varighed,'InputFormat',infmt);
 VisData(handles,[handles.Velfaerdsteknologi.(teknologi).(sensor).Tidspunkt],[handles.Velfaerdsteknologi.(teknologi).(sensor).Medarbejdere],handles.axesMedarbejderSensorDataVindue,'Sensor');
 VisData(handles,[handles.Velfaerdsteknologi.(teknologi).(sensor).Tidspunkt],Varighed,handles.axesVarighedSensorDataVindue,'Sensor');
 
-
+axes(handles.axesMedarbejderSensorDataVindue)
+xlabel('Periode')
+ylabel('Antal medarbejdere')
+axes(handles.axesVarighedSensorDataVindue)
+xlabel('Periode')
+ylabel('Varighed i minutter')
 
 % --- Executes on button press in etDatoSensor.
 function etDatoSensor_Callback(hObject, eventdata, handles)
@@ -228,6 +229,13 @@ Varighed = duration(Varighed,'InputFormat',infmt);
 VisData(handles,[handles.Velfaerdsteknologi.(teknologi).(sensor).Tidspunkt],[handles.Velfaerdsteknologi.(teknologi).(sensor).Medarbejdere],handles.axesMedarbejderSensorDataVindue,'Sensor');
 VisData(handles,[handles.Velfaerdsteknologi.(teknologi).(sensor).Tidspunkt],Varighed,handles.axesVarighedSensorDataVindue,'Sensor');
 
+axes(handles.axesMedarbejderSensorDataVindue)
+xlabel('Periode')
+ylabel('Antal medarbejdere')
+axes(handles.axesVarighedSensorDataVindue)
+xlabel('Periode')
+ylabel('Varighed i minutter')
+        
 % --- Executes on button press in btnTilbageSensorDataoverblik.
 function btnTilbageSensorDataoverblik_Callback(hObject, eventdata, handles)
 % hObject    handle to btnTilbageSensorDataoverblik (see GCBO)

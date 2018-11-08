@@ -76,9 +76,13 @@ infmt = 'mm:ss';
 D = duration(D,'InputFormat',infmt); 
 VisData(handles,[handles.Velfaerdsteknologi.(teknologi).Tidspunkt],[handles.Velfaerdsteknologi.(teknologi).Medarbejdere],handles.axesMedarbejdereTeknologiOverblik,'Teknologi');
 VisData(handles,[handles.Velfaerdsteknologi.(teknologi).Tidspunkt],D,handles.axesVarighedTeknologiOverblik,'Teknologi');
+
 axes(handles.axesMedarbejdereTeknologiOverblik)
 xlabel('Periode')
 ylabel('Antal medarbejdere')
+axes(handles.axesVarighedTeknologiOverblik)
+xlabel('Periode')
+ylabel('Varighed i minutter')
 % UIWAIT makes GUITeknologioverblik wait for user response (see UIRESUME)
 % uiwait(handles.figure1);
 
@@ -174,6 +178,9 @@ VisData(handles,[handles.Velfaerdsteknologi.(teknologi).Tidspunkt],D,handles.axe
 axes(handles.axesMedarbejdereTeknologiOverblik)
 xlabel('Periode')
 ylabel('Antal medarbejdere')
+axes(handles.axesVarighedTeknologiOverblik)
+xlabel('Periode')
+ylabel('Varighed i minutter')
 
 
 
@@ -198,6 +205,9 @@ VisData(handles,[handles.Velfaerdsteknologi.(teknologi).Tidspunkt],D,handles.axe
 axes(handles.axesMedarbejdereTeknologiOverblik)
 xlabel('Periode')
 ylabel('Antal medarbejdere')
+axes(handles.axesVarighedTeknologiOverblik)
+xlabel('Periode')
+ylabel('Varighed i minutter')
 
 
 
