@@ -44,9 +44,7 @@ if isfield(handles.Velfaerdsteknologi, 'BrugerValgtSensor')
                                 end
                                 
                                  if isfield(handles.Velfaerdsteknologi.(teknologi).(Sensornavn)(ii), 'TilfoejBemaerkning')
-                                    %handles.lbBemaerkning.String = []; 
                                     for iiii = 1:length(handles.Velfaerdsteknologi.(teknologi).(Sensornavn)(ii).TilfoejBemaerkning.Bemaerkning)
-                                    %handles.Velfaerdsteknologi.(teknologi).(Sensornavn)(ii).TilfoejBemaerkning.Bemaerkning(idx)
                                      %Præallokere et categorical array med tidspunkterpådagen
                                       TidspunktPaaDagen = (categorical({'Morgen', 'Formiddag', 'Middag', 'Eftermiddag', 'Aften', 'Nat'}))';
                                       %Tiden bliver placeret indenfor de bestemte intervaller. 
@@ -66,6 +64,8 @@ if isfield(handles.Velfaerdsteknologi, 'BrugerValgtSensor')
                                                                              
                                     end
                                     
+                               
+ 
                                     tidspunktKunDato = handles.Velfaerdsteknologi.(teknologi).(Sensornavn)(ii).Tidspunkt;
                                         tidspunktKunDato.Format = 'dd-MMM-yyyy';
                                         tidspunktKunDato = string(tidspunktKunDato);
