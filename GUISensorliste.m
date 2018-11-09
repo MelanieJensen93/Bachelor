@@ -54,6 +54,7 @@ function GUISensorliste_OpeningFcn(hObject, eventdata, handles, varargin)
 
 % Choose default command line output for GUISensorliste
 handles.output = hObject;
+
 if ~isempty(varargin) && ischar(varargin{1}) && strcmp(varargin{1},'exit')
     close;
 else
