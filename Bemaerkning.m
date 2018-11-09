@@ -77,7 +77,7 @@ if isfield(handles.Velfaerdsteknologi,'ValgtTidspunktPaaDato')
 
     
 else
-    msgbox('Vælg venligst en dato.');
+    uiwait(msgbox('Vælg venligst en dato', 'Error', 'error', 'modal'));
 end
 
 

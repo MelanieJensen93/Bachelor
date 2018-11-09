@@ -105,9 +105,10 @@ function btnTilbageSensorliste_Callback(hObject, eventdata, handles)
 % hObject    handle to btnTilbageSensorliste (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
+
 GUISensorliste_OpeningFcn(hObject, eventdata, handles, 'exit');
-%datatogo = handles.Velfaerdsteknologi;
-%GUITeknologioverblik(datatogo);
+datatogo = handles.Velfaerdsteknologi;
+GUITeknologioverblik(datatogo);
 
 
 % --- Executes on selection change in lbSensorliste.
@@ -121,6 +122,7 @@ function lbSensorliste_Callback(hObject, eventdata, handles)
 handles.Velfaerdsteknologi.BrugerValgtSensor = get(hObject, 'Value');
 datatogo = handles.Velfaerdsteknologi;
 guidata(hObject, handles);
+GUISensorliste_OpeningFcn(hObject, eventdata, handles, 'exit');
 GUISensordataoverblik(datatogo);
 
 % --- Executes during object creation, after setting all properties.

@@ -64,7 +64,7 @@ else
         handles.field = 'LunaSensor'; 
         Sensornavn = fieldnames(handles.Velfaerdsteknologi.LunaSensor);
         sensor = Sensornavn(ValgtSensor);
-        udskrift = sprintf('Luna %s', string(sensor));
+        udskrift = sprintf('Luna loftlift %s', string(sensor));
         set(handles.txtValgtteknologiSensorOverblik, 'String', udskrift);
         
         Varighed = [handles.Velfaerdsteknologi.LunaSensor.(string(sensor)).Varighedforarbejdsgang];
@@ -236,6 +236,8 @@ function btnTilbageSensorDataoverblik_Callback(hObject, eventdata, handles)
 % handles    structure with handles and user data (see GUIDATA)
 GUISensordataoverblik_OpeningFcn(hObject, eventdata, handles, 'exit');
  % --- Executes when user attempts to close GUISensorDataOverbliksVindue.
+ GUISensorliste(handles); 
+ 
  
 function GUISensorDataOverbliksVindue_CloseRequestFcn(hObject, eventdata, handles)
 % hObject    handle to GUISensorDataOverbliksVindue (see GCBO)

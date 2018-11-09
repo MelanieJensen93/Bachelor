@@ -71,7 +71,7 @@ else
     if isfield(handles.Velfaerdsteknologi, 'LunaSensor')
         Sensornavn = fieldnames(handles.Velfaerdsteknologi.LunaSensor);
         sensor = Sensornavn(ValgtSensor);
-        udskrift = sprintf('Luna %s', string(sensor));
+        udskrift = sprintf('Luna loftlift %s', string(sensor));
         set(handles.txtValgtTeknologiTilfoejbemaerkning, 'String', udskrift);
     end
     

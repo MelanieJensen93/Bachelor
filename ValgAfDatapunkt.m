@@ -1,7 +1,7 @@
 function handles = ValgAfDatapunkt(handles,datatogo, ValgtDato, ValgtDatoDatetime)
 %UNTITLED Summary of this function goes here
 %   Detailed explanation goes here
-d=1; 
+
 %ValgtDato = get(handles.etDatoTilfoejBemaerkning, 'String');
 %ValgtDatoDatetime = datetime(ValgtDato, 'InputFormat', 'dd-MM-yyyy');
 handles.Velfaerdsteknologi.ValgtDatoDatetime = ValgtDatoDatetime;
@@ -46,7 +46,9 @@ if isfield(handles.Velfaerdsteknologi,teknologi)
                 old_str = get(listboxDataforvalgtdato,'String'); 
                 new_str=strvcat(char(old_str),char(str_part));
                 set(listboxDataforvalgtdato,'String',new_str);
-                
+            else
+                uiwait(msgbox('Der er ikke data for den valgte dato, vælg venligst ny dato', 'Error', 'error', 'modal'));
+               
             end 
             
         end
