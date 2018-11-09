@@ -22,7 +22,7 @@ function varargout = GUISammenlignMedPlejecentre(varargin)
 
 % Edit the above text to modify the response to help GUISammenlignMedPlejecentre
 
-% Last Modified by GUIDE v2.5 01-Nov-2018 20:54:34
+% Last Modified by GUIDE v2.5 09-Nov-2018 16:01:26
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -55,8 +55,12 @@ function GUISammenlignMedPlejecentre_OpeningFcn(hObject, eventdata, handles, var
 % Choose default command line output for GUISammenlignMedPlejecentre
 handles.output = hObject;
 
+AarhusKommuneLogo = imread('AarhusKommuneLogo.jpg');
+axes(handles.axAarhusLogo);
+imshow(AarhusKommuneLogo);
+
 handles.teknologi = varargin{1};
-guidata(hObject, handles);
+%guidata(hObject, handles);
 % Update handles structure
 guidata(hObject, handles);
 
@@ -92,9 +96,8 @@ function varargout = GUISammenlignMedPlejecentre_OutputFcn(hObject, eventdata, h
 
 % Get default command line output from handles structure
 varargout{1} = handles.output;
-
-set(gcf, 'units','normalized','outerposition',[0 0 1 1]);
-set(gcf, 'Toolbar', 'none', 'Menu', 'none');
+set(gcf, 'Position', get(0,'Screensize'));
+set(gcf, 'units', 'normalized', 'outerposition', [0 0 1 1])
 
 
 % --- Executes on button press in btnVaelgDatoPlejecentre.
@@ -142,3 +145,10 @@ axes(handles.axMedarbejderePlejecentre)
 ylabel('Antal medarbejdere')
 axes(handles.axVarighedPlejecentre)
 ylabel('Varighed i minutter')
+
+
+% --- Executes on button press in btnTilbageSammenlignmedandreplejecentre.
+function btnTilbageSammenlignmedandreplejecentre_Callback(hObject, eventdata, handles)
+% hObject    handle to btnTilbageSammenlignmedandreplejecentre (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
