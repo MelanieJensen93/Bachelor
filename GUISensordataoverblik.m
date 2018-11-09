@@ -237,7 +237,8 @@ function btnTilbageSensorDataoverblik_Callback(hObject, eventdata, handles)
 % handles    structure with handles and user data (see GUIDATA)
 GUISensordataoverblik_OpeningFcn(hObject, eventdata, handles, 'exit');
  % --- Executes when user attempts to close GUISensorDataOverbliksVindue.
- GUISensorliste(handles); 
+GUISensorliste(handles); 
+ %GUISensorliste(handles); 
  
  
 function GUISensorDataOverbliksVindue_CloseRequestFcn(hObject, eventdata, handles)
