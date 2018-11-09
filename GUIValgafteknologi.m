@@ -58,7 +58,7 @@ handles.output = hObject;
 % Update handles structure
 guidata(hObject, handles);
 
-wb = waitbar(0, 'Indlæser velfærdsteknologier','windowstyle', 'modal');
+%wb = waitbar(0, 'Indlæser velfærdsteknologier','windowstyle', 'modal');
 
 %Mus bliver til ur
 %set(handles.figure1,'Pointer','watch');
@@ -75,25 +75,25 @@ imshow(CarendoBillede);
 LunaBillede = imread('Lunaloftlift.jpg');
 axes(handles.axLunaValgafteknologi)
 imshow(LunaBillede);
-
-if isvalid(wb)
-    waitbar(1/3, wb);
-end
+% 
+% if isvalid(wb)
+%     waitbar(1/3, wb);
+% end
 
 handles = IndlaesVelfaerdsteknologi(handles);
-
-if isvalid(wb)
-    waitbar(2/3, wb);
-end
+% 
+% if isvalid(wb)
+%     waitbar(2/3, wb);
+% end
 
 guidata(hObject,handles);
 
-if isvalid(wb)
-    waitbar(3/3, wb);
-    close(wb);
+% if isvalid(wb)
+%     waitbar(3/3, wb);
+%     close(wb);
 %Mus tilbage til pil 
 set(gcf,'Pointer','arrow');
-end
+%end
 
 
 %handles = Brugermanual(handles); 

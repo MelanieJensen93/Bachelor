@@ -22,7 +22,7 @@ function varargout = GUIYderligereData(varargin)
 
 % Edit the above text to modify the response to help GUIYderligereData
 
-% Last Modified by GUIDE v2.5 02-Nov-2018 08:56:02
+% Last Modified by GUIDE v2.5 09-Nov-2018 16:35:31
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -54,49 +54,59 @@ function GUIYderligereData_OpeningFcn(hObject, eventdata, handles, varargin)
 
 % Choose default command line output for GUIYderligereData
 handles.output = hObject;
-handles.Velfaerdsteknologi = varargin{1}; %henter handles fra GUIValgafteknologi
-% Update handles structure
-guidata(hObject, handles);
-handles = YderligereData(handles);
-guidata(hObject,handles);
 
-teknologi = fieldnames(handles.Velfaerdsteknologi);
-handles.teknologi = string(teknologi);
+if ~isempty(varargin) && ischar(varargin{1}) && strcmp(varargin{1},'exit')
+    close;
+else
+    handles.Velfaerdsteknologi = varargin{1}; %henter handles fra GUIValgafteknologi
+    handles = YderligereData(handles);
+    guidata(hObject,handles);
+    
+    AarhusKommuneLogo = imread('AarhusKommuneLogo.jpg');
+    axes(handles.axAarhusLogo);
+    imshow(AarhusKommuneLogo);
 
-    if strcmp(handles.teknologi,'Carendo')==1
-       set(handles.txtLunaMedCarendoYderligere, 'Visible', 'off');
-    end
-    if strcmp(teknologi,'Luna')==1
-        set(handles.txtVariabel, 'String', 'Anvendelse af Luna med Carendo'); 
-        set(handles.txtStringKomfort, 'Visible', 'off');
-        set(handles.txtStringHaeveSaenke, 'Visible', 'off');
-        set(handles.txtOmsorgsfunktionYderligere, 'Visible', 'off');
-        set(handles.txtKomfortfunktionYderligere, 'Visible', 'off');
-        set(handles.txtHaeveSaenkefunktionYderligere, 'Visible', 'off');
-    end
-handles.Velfaerdsteknologi.Yderligere.Dato = handles.Velfaerdsteknologi.(handles.teknologi)(1).Tidspunkt;
-guidata(hObject,handles);
-VarighedSuperbruger = [handles.SuperBruger.Varighedforarbejdsgang];
-VarighedAlmindelig = [handles.Almindelig.Varighedforarbejdsgang];
-DirekteTid = [handles.Velfaerdsteknologi.(handles.teknologi).Tidmedborger];
-%Idet at det er en tid så skal det skrives ud i typen duration med
-%følgende format. 
-infmt = 'mm:ss';
-VarighedSuperbruger = duration(VarighedSuperbruger,'InputFormat',infmt); 
-VarighedAlmindelig = duration(VarighedAlmindelig,'InputFormat',infmt);
-DirekteTid = duration(DirekteTid,'InputFormat',infmt);
+    teknologi = fieldnames(handles.Velfaerdsteknologi);
+    handles.teknologi = string(teknologi);
 
-VisData(handles,[handles.SuperBruger.Tidspunkt],VarighedSuperbruger,handles.axSuperBrugerYderligereData,'Yderligere');
-VisData(handles,[handles.Almindelig.Tidspunkt],VarighedAlmindelig,handles.axAlmindeligYderligereData,'Yderligere');
-VisData(handles,[handles.Velfaerdsteknologi.(handles.teknologi).Tidspunkt],DirekteTid,handles.axDirekteTidYderligereData,'Yderligere');
+        if strcmp(handles.teknologi,'Carendo')==1
+           set(handles.txtLunaMedCarendoYderligere, 'Visible', 'off');
+        end
+        if strcmp(teknologi,'Luna')==1
+            set(handles.txtVariabel, 'String', 'Anvendelse af Luna med Carendo'); 
+            set(handles.txtStringKomfort, 'Visible', 'off');
+            set(handles.txtStringHaeveSaenke, 'Visible', 'off');
+            set(handles.txtOmsorgsfunktionYderligere, 'Visible', 'off');
+            set(handles.txtKomfortfunktionYderligere, 'Visible', 'off');
+            set(handles.txtHaeveSaenkefunktionYderligere, 'Visible', 'off');
+        end
+    
+    handles.Velfaerdsteknologi.Yderligere.Dato = handles.Velfaerdsteknologi.(handles.teknologi)(1).Tidspunkt;
+    guidata(hObject,handles);
+    VarighedSuperbruger = [handles.SuperBruger.Varighedforarbejdsgang];
+    VarighedAlmindelig = [handles.Almindelig.Varighedforarbejdsgang];
+    DirekteTid = [handles.Velfaerdsteknologi.(handles.teknologi).Tidmedborger];
+    %Idet at det er en tid så skal det skrives ud i typen duration med
+    %følgende format. 
+    infmt = 'mm:ss';
+    VarighedSuperbruger = duration(VarighedSuperbruger,'InputFormat',infmt); 
+    VarighedAlmindelig = duration(VarighedAlmindelig,'InputFormat',infmt);
+    DirekteTid = duration(DirekteTid,'InputFormat',infmt);
 
-axes(handles.axSuperBrugerYderligereData)
-ylabel('Varighed i minutter')
-axes(handles.axAlmindeligYderligereData)
-ylabel('Varighed i minutter')
-axes(handles.axDirekteTidYderligereData)
-ylabel('Varighed i minutter')
+    VisData(handles,[handles.SuperBruger.Tidspunkt],VarighedSuperbruger,handles.axSuperBrugerYderligereData,'Yderligere');
+    VisData(handles,[handles.Almindelig.Tidspunkt],VarighedAlmindelig,handles.axAlmindeligYderligereData,'Yderligere');
+    VisData(handles,[handles.Velfaerdsteknologi.(handles.teknologi).Tidspunkt],DirekteTid,handles.axDirekteTidYderligereData,'Yderligere');
 
+    axes(handles.axSuperBrugerYderligereData)
+    ylabel('Varighed i minutter')
+    axes(handles.axAlmindeligYderligereData)
+    ylabel('Varighed i minutter')
+    axes(handles.axDirekteTidYderligereData)
+    ylabel('Varighed i minutter')
+    
+    % Update handles structure
+    guidata(hObject, handles);
+end
 % UIWAIT makes GUIYderligereData wait for user response (see UIRESUME)
 % uiwait(handles.figure1);
 
@@ -110,9 +120,9 @@ function varargout = GUIYderligereData_OutputFcn(hObject, eventdata, handles)
 
 % Get default command line output from handles structure
 varargout{1} = handles.output;
-
+set(gcf, 'Position', get(0,'Screensize'));
 set(gcf, 'units','normalized','outerposition',[0 0 1 1]);
-set(gcf, 'Toolbar', 'none', 'Menu', 'none');
+
 
 % --- Executes on button press in btnVaelgDatoYderligereData.
 function btnVaelgDatoYderligereData_Callback(hObject, eventdata, handles)
@@ -174,3 +184,12 @@ axes(handles.axAlmindeligYderligereData)
 ylabel('Varighed i minutter')
 axes(handles.axDirekteTidYderligereData)
 ylabel('Varighed i minutter')
+
+
+% --- Executes on button press in bntTilbageYderligerData.
+function bntTilbageYderligerData_Callback(hObject, eventdata, handles)
+% hObject    handle to bntTilbageYderligerData (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+GUIYderligereData_OpeningFcn(hObject, eventdata, handles, 'exit')
+GUITeknologioverblik(handles); 
