@@ -89,8 +89,6 @@ end
 % UIWAIT makes GUITilfoejBemaerkning wait for user response (see UIRESUME)
 % uiwait(handles.GUITilfoejBemaerkning);
 
-
-
 % --- Outputs from this function are returned to the command line.
 function varargout = GUITilfoejBemaerkning_OutputFcn(hObject, eventdata, handles) 
 % varargout  cell array for returning output args (see VARARGOUT);
@@ -120,8 +118,6 @@ ValgtDatoDatetime = datetime(ValgtDato, 'InputFormat', 'dd-MM-yyyy');
 datatogo = handles.Velfaerdsteknologi;
 ValgAfDatapunkt(handles,datatogo, ValgtDato, ValgtDatoDatetime);
 
-
-
 % --- Executes on button press in rbMiddagTilfoejBemaerkning.
 function rbMiddagTilfoejBemaerkning_Callback(hObject, eventdata, handles)
 % hObject    handle to rbMiddagTilfoejBemaerkning (see GCBO)
@@ -129,8 +125,6 @@ function rbMiddagTilfoejBemaerkning_Callback(hObject, eventdata, handles)
 % handles    structure with handles and user data (see GUIDATA)
 
 % Hint: get(hObject,'Value') returns toggle state of rbMiddagTilfoejBemaerkning
-
-
 
 % --- Executes on button press in rbNatTilfoejBemaerkning.
 function rbNatTilfoejBemaerkning_Callback(hObject, eventdata, handles)
@@ -140,18 +134,12 @@ function rbNatTilfoejBemaerkning_Callback(hObject, eventdata, handles)
 
 % Hint: get(hObject,'Value') returns toggle state of rbNatTilfoejBemaerkning
 
-
-
-
-
 function etDatoTilfoejBemaerkning_Callback(hObject, eventdata, handles)
 % hObject    handle to etDatoTilfoejBemaerkning (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-
 % Hints: get(hObject,'String') returns contents of etDatoTilfoejBemaerkning as text
 %        str2double(get(hObject,'String')) returns contents of etDatoTilfoejBemaerkning as a double
-
 
 % --- Executes during object creation, after setting all properties.
 function etDatoTilfoejBemaerkning_CreateFcn(hObject, eventdata, handles)
@@ -165,11 +153,6 @@ if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgr
     set(hObject,'BackgroundColor','white');
 end
 
-
-
-
-
-
 % --- Executes on button press in rbMorgenTilfoejBemearkning.
 function rbMorgenTilfoejBemearkning_Callback(hObject, eventdata, handles)
 % hObject    handle to rbMorgenTilfoejBemearkning (see GCBO)
@@ -177,7 +160,6 @@ function rbMorgenTilfoejBemearkning_Callback(hObject, eventdata, handles)
 % handles    structure with handles and user data (see GUIDATA)
 
 % Hint: get(hObject,'Value') returns toggle state of rbMorgenTilfoejBemearkning
-
 
 % --- Executes on button press in rbEftermiddagTilfoejBemaerkning.
 function rbEftermiddagTilfoejBemaerkning_Callback(hObject, eventdata, handles)
@@ -187,7 +169,6 @@ function rbEftermiddagTilfoejBemaerkning_Callback(hObject, eventdata, handles)
 
 % Hint: get(hObject,'Value') returns toggle state of rbEftermiddagTilfoejBemaerkning
 
-
 % --- Executes on button press in rbFormiddagTilfoejBemaerkning.
 function rbFormiddagTilfoejBemaerkning_Callback(hObject, eventdata, handles)
 % hObject    handle to rbFormiddagTilfoejBemaerkning (see GCBO)
@@ -195,7 +176,6 @@ function rbFormiddagTilfoejBemaerkning_Callback(hObject, eventdata, handles)
 % handles    structure with handles and user data (see GUIDATA)
 
 % Hint: get(hObject,'Value') returns toggle state of rbFormiddagTilfoejBemaerkning
-
 
 % --- Executes on button press in rbAftenTilfoejBemaerkning.
 function rbAftenTilfoejBemaerkning_Callback(hObject, eventdata, handles)
@@ -205,15 +185,12 @@ function rbAftenTilfoejBemaerkning_Callback(hObject, eventdata, handles)
 
 % Hint: get(hObject,'Value') returns toggle state of rbAftenTilfoejBemaerkning
 
-
 % --- Executes when selected object is changed in bgTidspunktTilfoejBemaerkning.
 function bgTidspunktTilfoejBemaerkning_SelectionChangedFcn(hObject, eventdata, handles)
 % hObject    handle to the selected object in bgTidspunktTilfoejBemaerkning 
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-%handles.TB(1).tidspunkt = get(get(handles.bgTidspunktTilfoejBemaerkning,'SelectedObject'),'String');
-
-
+%handles.TB(1).tidspunkt = get(get(handles.bgTidspunktTilfoejBemaerkning,'SelectedObject'),'String')
 
 % --- Executes when selected object is changed in bgBemaerkningTilfoejBemaerkning.
 function bgBemaerkningTilfoejBemaerkning_SelectionChangedFcn(hObject, eventdata, handles)
@@ -253,15 +230,23 @@ function btnTilfoejBemaerkningTilfoejBemaerkning_Callback(hObject, eventdata, ha
 % hObject    handle to btnTilfoejBemaerkningTilfoejBemaerkning (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-%datatogo = handles.Velfaerdsteknologi;
-Bemaerkning(handles);
-guidata(hObject, handles);
 
-GUITilfoejBemaerkning_OpeningFcn(hObject, eventdata, handles, 'exit');
-datatogo = handles.Velfaerdsteknologi;
-GUISensordataoverblik(datatogo);
+rbEkstraPersonaleTilstede = get(handles.rbEkstraPersonaleTilstedeTilfoejBemaerkning, 'Value');
+rbBorgerKraeverToPersonaler = get(handles.rbBorgerKraeverToPersonalerTilfoejBemaerkning, 'Value');
+etAndetTilfoejBemaerkning = get(handles.etAndetTilfoejBemaerkning, 'string');
 
-%OpdaterListboxmedBemaerkning(handles);
+if rbBorgerKraeverToPersonaler==1 || rbEkstraPersonaleTilstede==1 || ~isempty(etAndetTilfoejBemaerkning)==1
+    Bemaerkning(handles);
+    guidata(hObject, handles);
+
+    GUITilfoejBemaerkning_OpeningFcn(hObject, eventdata, handles, 'exit');
+    datatogo = handles.Velfaerdsteknologi;
+    GUISensordataoverblik(datatogo);
+else
+    uiwait(msgbox('Vælg venligst hvilken bemærkning du ønsker at tilføje. Hvis du ønsker at tilføje en bemærkning til feltet "Andet" skal du skrive hvad andet dækker over i feltet til højre.', 'Error', 'error', 'modal'));
+end
+
+
 
 
 

@@ -158,9 +158,6 @@ uicalendar('Weekend',[1 0 0 0 0 0 1], ...
 'DestinationUI', handles.stDatoTeknologiOverblik);
 
 waitfor(handles.stDatoTeknologiOverblik,'String');
- 
-% handles = SortereTid(handles, 'Medarbejdere',handles.axesMedarbejdereTeknologiOverblik);
-% handles = SortereTid(handles, 'Varighed',handles.axesVarighedTeknologiOverblik);
 teknologi = fieldnames(handles.Velfaerdsteknologi);
 teknologi = string(teknologi);
 
@@ -174,10 +171,8 @@ VisData(handles,[handles.Velfaerdsteknologi.(teknologi).Tidspunkt],[handles.Velf
 VisData(handles,[handles.Velfaerdsteknologi.(teknologi).Tidspunkt],D,handles.axesVarighedTeknologiOverblik,'Teknologi');
 
 axes(handles.axesMedarbejdereTeknologiOverblik)
-xlabel('Periode')
 ylabel('Antal medarbejdere')
 axes(handles.axesVarighedTeknologiOverblik)
-xlabel('Periode')
 ylabel('Varighed i minutter')
 
 
@@ -188,9 +183,7 @@ function btngroupRedigerGrafTeknologioverblik_SelectionChangedFcn(hObject, event
 % hObject    handle to the selected object in btngroupRedigerGrafTeknologioverblik 
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-%handles = SortereTid(handles, 'Medarbejdere',handles.axesMedarbejdereTeknologiOverblik);
-% handles = SortereTid(handles, 'Medarbejdere',handles.axesMedarbejdereTeknologiOverblik);
-% handles = SortereTid(handles, 'Varighed',handles.axesVarighedTeknologiOverblik);
+
 teknologi = fieldnames(handles.Velfaerdsteknologi);
 teknologi = string(teknologi);
 D = [handles.Velfaerdsteknologi.(teknologi).Varighedforarbejdsgang];
@@ -201,10 +194,8 @@ D = duration(D,'InputFormat',infmt);
 VisData(handles,[handles.Velfaerdsteknologi.(teknologi).Tidspunkt],[handles.Velfaerdsteknologi.(teknologi).Medarbejdere],handles.axesMedarbejdereTeknologiOverblik,'Teknologi');
 VisData(handles,[handles.Velfaerdsteknologi.(teknologi).Tidspunkt],D,handles.axesVarighedTeknologiOverblik,'Teknologi');
 axes(handles.axesMedarbejdereTeknologiOverblik)
-xlabel('Periode')
 ylabel('Antal medarbejdere')
 axes(handles.axesVarighedTeknologiOverblik)
-xlabel('Periode')
 ylabel('Varighed i minutter')
 
 

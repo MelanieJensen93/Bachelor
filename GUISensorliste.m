@@ -108,8 +108,8 @@ function btnTilbageSensorliste_Callback(hObject, eventdata, handles)
 % handles    structure with handles and user data (see GUIDATA)
 
 GUISensorliste_OpeningFcn(hObject, eventdata, handles, 'exit');
-datatogo = handles.Velfaerdsteknologi;
-GUITeknologioverblik(datatogo);
+%datatogo = handles.Velfaerdsteknologi;
+GUITeknologioverblik;
 
 
 % --- Executes on selection change in lbSensorliste.

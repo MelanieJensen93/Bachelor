@@ -9,6 +9,8 @@ handles.Velfaerdsteknologi.ValgtDatoDatetime = ValgtDatoDatetime;
 teknologi = fieldnames(handles.Velfaerdsteknologi(1));
 teknologi = string(teknologi(1));
 
+erdenkommetindiif = 0;
+
 if isfield(handles.Velfaerdsteknologi,teknologi)
     Sensornr = getfield(handles.Velfaerdsteknologi, 'BrugerValgtSensor');
     for i = 1:length(fieldnames(handles.Velfaerdsteknologi.(teknologi)))
@@ -46,13 +48,20 @@ if isfield(handles.Velfaerdsteknologi,teknologi)
                 old_str = get(listboxDataforvalgtdato,'String'); 
                 new_str=strvcat(char(old_str),char(str_part));
                 set(listboxDataforvalgtdato,'String',new_str);
-            else
-                uiwait(msgbox('Der er ikke data for den valgte dato, vælg venligst ny dato', 'Error', 'error', 'modal'));
+            
+                erdenkommetindiif = erdenkommetindiif+1;
+                
                
             end 
             
+            
+            
         end
         end
+    end
+    
+    if erdenkommetindiif == 0
+        uiwait(msgbox('Der er ikke data for den valgte dato, vælg venligst ny dato', 'Error', 'error', 'modal'));
     end
 end
 

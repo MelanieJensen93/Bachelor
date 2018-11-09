@@ -12,11 +12,7 @@ if isfield(handles.Velfaerdsteknologi,teknologi)
    for ii = 1:max(uniqvalue)
         for CntRow = 1:length(handles.Velfaerdsteknologi.(teknologi))
        
-           id = ['Sensor' num2str(ii)];
-           
-           %idx=1;
-           %udskrift = sprintf("Sensor nr. %s", id);
-            
+           id = ['Sensor' num2str(ii)];            
            
            if  handles.Velfaerdsteknologi.(teknologi)(CntRow).ID == ii           
 
