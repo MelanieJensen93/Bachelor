@@ -54,7 +54,7 @@ tt = timetable(times,yData','VariableNames',{'Data'});
 
 if strcmp(periode, 'Dag')==1
     [sumAnvendelse,Begraensning,xData] = DagInddeling(slutDato,stringDato,tt,axesTeknologi);
-    handles.Velfaerdsteknologi.VisData.TidsBegraensning = slutDato; 
+    handles.Velfaerdsteknologi.VisData.TidsBegraensning = stringDato; 
 end
 
 if strcmp(periode, 'Dag')==0
