@@ -41,7 +41,8 @@ if isempty(stringDato)
     if strcmp(Vindue,'Yderligere')==1
         stringDato = handles.Velfaerdsteknologi.Yderligere.Dato;
     else 
-        stringDato = xData(1);
+        %stringDato = xData(1);
+        stringDato = datetime(datestr(xData(1),'dd-mm-yyyy'));
     end
 end
 
@@ -53,6 +54,7 @@ tt = timetable(times,yData','VariableNames',{'Data'});
 
 if strcmp(periode, 'Dag')==1
     [sumAnvendelse,Begraensning,xData] = DagInddeling(slutDato,stringDato,tt,axesTeknologi);
+    handles.Velfaerdsteknologi.VisData.TidsBegraensning = slutDato; 
 end
 
 if strcmp(periode, 'Dag')==0
