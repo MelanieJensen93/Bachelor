@@ -63,6 +63,7 @@ if isfield(handles.Velfaerdsteknologi, 'BrugerValgtSensor')
                                                 TidspunktPaaDagen_Data= TidspunktPaaDagen(6);
                                         end
                                         
+                                        
                                         tidspunktPeriode = handles.Velfaerdsteknologi.VisData.TidsBegraensning;
                                         handles.Velfaerdsteknologi.(teknologi).(Sensornavn)(ii).tidspunktPeriode = []; 
                                         for iiiii = 1:length(tidspunktPeriode)
