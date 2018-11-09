@@ -91,10 +91,10 @@ VisData(handles,[handles.Almindelig.Tidspunkt],VarighedAlmindelig,handles.axAlmi
 VisData(handles,[handles.Velfaerdsteknologi.(handles.teknologi).Tidspunkt],DirekteTid,handles.axDirekteTidYderligereData,'Yderligere');
 
 axes(handles.axSuperBrugerYderligereData)
-xlabel('Periode')
-ylabel('Antal medarbejdere')
+ylabel('Varighed i minutter')
 axes(handles.axAlmindeligYderligereData)
-xlabel('Periode')
+ylabel('Varighed i minutter')
+axes(handles.axDirekteTidYderligereData)
 ylabel('Varighed i minutter')
 
 % UIWAIT makes GUIYderligereData wait for user response (see UIRESUME)
@@ -111,6 +111,8 @@ function varargout = GUIYderligereData_OutputFcn(hObject, eventdata, handles)
 % Get default command line output from handles structure
 varargout{1} = handles.output;
 
+set(gcf, 'units','normalized','outerposition',[0 0 1 1]);
+set(gcf, 'Toolbar', 'none', 'Menu', 'none');
 
 % --- Executes on button press in btnVaelgDatoYderligereData.
 function btnVaelgDatoYderligereData_Callback(hObject, eventdata, handles)
@@ -140,10 +142,10 @@ VisData(handles,[handles.Almindelig.Tidspunkt],VarighedAlmindelig,handles.axAlmi
 VisData(handles,[handles.Velfaerdsteknologi.(teknologi).Tidspunkt],DirekteTid,handles.axDirekteTidYderligereData,'Yderligere');
 
 axes(handles.axSuperBrugerYderligereData)
-xlabel('Periode')
-ylabel('Antal medarbejdere')
+ylabel('Varighed i minutter')
 axes(handles.axAlmindeligYderligereData)
-xlabel('Periode')
+ylabel('Varighed i minutter')
+axes(handles.axDirekteTidYderligereData)
 ylabel('Varighed i minutter')
 
 % --- Executes when selected object is changed in btngroupRedigergrafYderligere.
@@ -167,8 +169,8 @@ VisData(handles,[handles.Almindelig.Tidspunkt],VarighedAlmindelig,handles.axAlmi
 VisData(handles,[handles.Velfaerdsteknologi.(teknologi).Tidspunkt],DirekteTid,handles.axDirekteTidYderligereData,'Yderligere');
 
 axes(handles.axSuperBrugerYderligereData)
-xlabel('Periode')
-ylabel('Antal medarbejdere')
+ylabel('Varighed i minutter')
 axes(handles.axAlmindeligYderligereData)
-xlabel('Periode')
+ylabel('Varighed i minutter')
+axes(handles.axDirekteTidYderligereData)
 ylabel('Varighed i minutter')

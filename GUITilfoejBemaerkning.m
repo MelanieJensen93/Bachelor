@@ -57,16 +57,16 @@ handles.output = hObject;
 if ~isempty(varargin) && ischar(varargin{1}) && strcmp(varargin{1},'exit')
     close;
 else
-    handles.Velfaerdsteknologi = varargin{1}; %henter handles fra GUIBemaerkning
+    handles.Velfaerdsteknologi = varargin{1}; 
 
     AarhusKommuneLogo = imread('AarhusKommuneLogo.jpg');
     axes(handles.axAarhusLogo);
     imshow(AarhusKommuneLogo);
 
     if isfield(handles.Velfaerdsteknologi, 'ValgtTidspunktPaaDato')
-        %datatogo = handles.Velfaerdsteknologi;
         ValgtafTidspunkt(handles);
     end
+    
     ValgtSensor = handles.Velfaerdsteknologi.BrugerValgtSensor;
     if isfield(handles.Velfaerdsteknologi, 'LunaSensor')
         Sensornavn = fieldnames(handles.Velfaerdsteknologi.LunaSensor);
@@ -86,10 +86,6 @@ else
     % Update handles structure
     guidata(hObject, handles);
 end
-
-
-
-
 % UIWAIT makes GUITilfoejBemaerkning wait for user response (see UIRESUME)
 % uiwait(handles.GUITilfoejBemaerkning);
 

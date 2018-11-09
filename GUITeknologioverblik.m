@@ -64,7 +64,7 @@ imshow(AarhusKommuneLogo);
 
 % Update handles structure
 guidata(hObject, handles);
-%handles = SortereTid(handles);
+
 teknologi = fieldnames(handles.Velfaerdsteknologi);
 teknologi = string(teknologi);
 set(handles.txtValgtteknologiOverblik,'String',teknologi); 
@@ -78,10 +78,8 @@ VisData(handles,[handles.Velfaerdsteknologi.(teknologi).Tidspunkt],[handles.Velf
 VisData(handles,[handles.Velfaerdsteknologi.(teknologi).Tidspunkt],D,handles.axesVarighedTeknologiOverblik,'Teknologi');
 
 axes(handles.axesMedarbejdereTeknologiOverblik)
-xlabel('Periode')
 ylabel('Antal medarbejdere')
 axes(handles.axesVarighedTeknologiOverblik)
-xlabel('Periode')
 ylabel('Varighed i minutter')
 % UIWAIT makes GUITeknologioverblik wait for user response (see UIRESUME)
 % uiwait(handles.figure1);

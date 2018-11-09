@@ -64,7 +64,6 @@ handles = IndlaesVelfaerdsteknologi(handles, 'Plejecentre');
 guidata(hObject,handles);
 
 teknologi = handles.teknologi;
-d=1;
 D = [handles.Velfaerdsteknologi.(teknologi).Varighedforarbejdsgang];
 %Idet at det er en tid så skal det skrives ud i typen duration med
 %følgende format. 
@@ -75,10 +74,8 @@ VisData(handles,[handles.Velfaerdsteknologi.(teknologi).Tidspunkt],[handles.Velf
 VisData(handles,[handles.Velfaerdsteknologi.(teknologi).Tidspunkt],D,handles.axVarighedPlejecentre,'Plejecentre');
 
 axes(handles.axMedarbejderePlejecentre)
-xlabel('Periode')
 ylabel('Antal medarbejdere')
 axes(handles.axVarighedPlejecentre)
-xlabel('Periode')
 ylabel('Varighed i minutter')
  
 
@@ -96,6 +93,9 @@ function varargout = GUISammenlignMedPlejecentre_OutputFcn(hObject, eventdata, h
 % Get default command line output from handles structure
 varargout{1} = handles.output;
 
+set(gcf, 'units','normalized','outerposition',[0 0 1 1]);
+set(gcf, 'Toolbar', 'none', 'Menu', 'none');
+
 
 % --- Executes on button press in btnVaelgDatoPlejecentre.
 function btnVaelgDatoPlejecentre_Callback(hObject, eventdata, handles)
@@ -109,7 +109,6 @@ uicalendar('Weekend',[1 0 0 0 0 0 1], ...
 waitfor(handles.stDatoPlejecentre,'String');
 
 teknologi = handles.teknologi;
-d=1;
 D = [handles.Velfaerdsteknologi.(teknologi).Varighedforarbejdsgang];
 %Idet at det er en tid så skal det skrives ud i typen duration med
 %følgende format. 
@@ -120,10 +119,8 @@ VisData(handles,[handles.Velfaerdsteknologi.(teknologi).Tidspunkt],[handles.Velf
 VisData(handles,[handles.Velfaerdsteknologi.(teknologi).Tidspunkt],D,handles.axVarighedPlejecentre,'Plejecentre');
 
 axes(handles.axMedarbejderePlejecentre)
-xlabel('Periode')
 ylabel('Antal medarbejdere')
 axes(handles.axVarighedPlejecentre)
-xlabel('Periode')
 ylabel('Varighed i minutter')
 
 % --- Executes when selected object is changed in btngroupRedigergrafPlejecentre.
@@ -132,7 +129,6 @@ function btngroupRedigergrafPlejecentre_SelectionChangedFcn(hObject, eventdata, 
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 teknologi = handles.teknologi;
-d=1;
 D = [handles.Velfaerdsteknologi.(teknologi).Varighedforarbejdsgang];
 %Idet at det er en tid så skal det skrives ud i typen duration med
 %følgende format. 
@@ -143,8 +139,6 @@ VisData(handles,[handles.Velfaerdsteknologi.(teknologi).Tidspunkt],[handles.Velf
 VisData(handles,[handles.Velfaerdsteknologi.(teknologi).Tidspunkt],D,handles.axVarighedPlejecentre,'Plejecentre');
 
 axes(handles.axMedarbejderePlejecentre)
-xlabel('Periode')
 ylabel('Antal medarbejdere')
 axes(handles.axVarighedPlejecentre)
-xlabel('Periode')
 ylabel('Varighed i minutter')
