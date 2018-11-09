@@ -1,4 +1,4 @@
-function [xData, match, tt, sumAnvendelse,Begraensning] = UgeInddeling(slutDato,tt)
+function [xData, match, tt, sumAnvendelse,Begraensning,startDato] = UgeInddeling(slutDato,tt)
     startDato = datetime(slutDato.Year,slutDato.Month,slutDato.Day-7);
     slutDato = datetime(slutDato.Year,slutDato.Month,slutDato.Day);
     Begraensning = timerange (startDato,slutDato+1);

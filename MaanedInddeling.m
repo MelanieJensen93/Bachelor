@@ -1,4 +1,4 @@
-function [xData, match, tt, sumAnvendelse,Begraensning] = MaanedInddeling(slutDato,tt)
+function [xData, match, tt, sumAnvendelse,Begraensning, startDato] = MaanedInddeling(slutDato,tt)
     startDato = datetime(slutDato.Year,slutDato.Month-1,slutDato.Day);
     slutDato = datetime(slutDato.Year,slutDato.Month,slutDato.Day);
     Begraensning = timerange ( startDato,slutDato+1);

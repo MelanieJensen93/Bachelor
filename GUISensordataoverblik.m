@@ -184,7 +184,8 @@ infmt = 'mm:ss';
 Varighed = duration(Varighed,'InputFormat',infmt); 
 VisData(handles,[handles.Velfaerdsteknologi.(teknologi).(sensor).Tidspunkt],[handles.Velfaerdsteknologi.(teknologi).(sensor).Medarbejdere],handles.axesMedarbejderSensorDataVindue,'Sensor');
 VisData(handles,[handles.Velfaerdsteknologi.(teknologi).(sensor).Tidspunkt],Varighed,handles.axesVarighedSensorDataVindue,'Sensor');
-
+guidata(hObject,handles);
+handles=OpdaterListboxmedBemaerkning(handles);
 axes(handles.axesMedarbejderSensorDataVindue)
 ylabel('Antal medarbejdere')
 axes(handles.axesVarighedSensorDataVindue)

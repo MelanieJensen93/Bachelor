@@ -53,21 +53,23 @@ slutDato = datetime(stringDato,'InputFormat','dd-MM-yyyy');
 tt = timetable(times,yData','VariableNames',{'Data'});
 
 if strcmp(periode, 'Dag')==1
-    [sumAnvendelse,Begraensning,xData] = DagInddeling(slutDato,stringDato,tt,axesTeknologi);
-    handles.Velfaerdsteknologi.VisData.TidsBegraensning = stringDato; 
+    [sumAnvendelse,Begraensning,slutDato] = DagInddeling(slutDato,stringDato,tt,axesTeknologi);
+    %handles.Velfaerdsteknologi.VisData.TidsBegraensning = stringDato; 
+    startDato = stringDato; 
 end
 
 if strcmp(periode, 'Dag')==0
     switch periode 
         case 'Uge' 
-            [xData, match, tt, sumAnvendelse, Begraensning] = UgeInddeling(slutDato,tt);
+            [xData, match, tt, sumAnvendelse, Begraensning, startDato] = UgeInddeling(slutDato,tt);
         case 'Måned'
-            [xData, match, tt, sumAnvendelse, Begraensning ] = MaanedInddeling(slutDato,tt);
+            [xData, match, tt, sumAnvendelse, Begraensning, startDato ] = MaanedInddeling(slutDato,tt);
         case 'År'
-            [xData, match, tt, sumAnvendelse, Begraensning] = AarInddeling(slutDato,tt);    
+            [xData, match, tt, sumAnvendelse, Begraensning, startDato] = AarInddeling(slutDato,tt);    
     end
-    handles.Velfaerdsteknologi.VisData.TidsBegraensning= xData; 
-    
+    %handles.Velfaerdsteknologi.VisData.TidsBegraensning= xData; 
+    handles.Velfaerdsteknologi.VisData.startDato = startDato; 
+    handles.Velfaerdsteknologi.VisData.slutDato = stringDato; 
     CntRow = 1; 
     ii=1; 
     for i=1:length(match)

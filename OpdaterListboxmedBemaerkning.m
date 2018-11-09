@@ -42,7 +42,7 @@ if isfield(handles.Velfaerdsteknologi, 'BrugerValgtSensor')
                                         handles.Velfaerdsteknologi.(teknologi).(Sensornavn)(ii).TilfoejBemaerkning.Bemaerkning(idx).bemaerkning = DatafraBemaerkningsFil.Bemaerkning(iii);
                                         
                                 end
-                                
+                                 [handles.Velfaerdsteknologi.(teknologi).(Sensornavn)(ii).tidspunktPeriode] = [];
                                  if isfield(handles.Velfaerdsteknologi.(teknologi).(Sensornavn)(ii), 'TilfoejBemaerkning')
                                     for iiii = 1:length(handles.Velfaerdsteknologi.(teknologi).(Sensornavn)(ii).TilfoejBemaerkning.Bemaerkning)
                                         
@@ -63,23 +63,44 @@ if isfield(handles.Velfaerdsteknologi, 'BrugerValgtSensor')
                                                 TidspunktPaaDagen_Data= TidspunktPaaDagen(6);
                                         end
                                         
+                                        startDato = handles.Velfaerdsteknologi.VisData.startDato; 
+                                        slutDato = handles.Velfaerdsteknologi.VisData.slutDato;
                                         
-                                        tidspunktPeriode = handles.Velfaerdsteknologi.VisData.TidsBegraensning;
-                                        handles.Velfaerdsteknologi.(teknologi).(Sensornavn)(ii).tidspunktPeriode = []; 
-                                        for iiiii = 1:length(tidspunktPeriode)
-                                            tidspunktBemaerkning = handles.Velfaerdsteknologi.(teknologi).(Sensornavn)(ii).TilfoejBemaerkning.Bemaerkning(iiii).tidspunkt;
-                                            tidspunktBemaerkning.Format = 'dd-MMM-yyyy';
-                                            formatTidspunktBemaerkning = string(tidspunktBemaerkning);
-                                            formatTidspunktPeriode = string(tidspunktPeriode(iiiii));
-                                            if formatTidspunktBemaerkning == formatTidspunktPeriode
+                                        if ischar(slutDato)==1
+                                            slutDato = datetime(slutDato);
+                                        end
+                                        slutDato = slutDato + '23:59:59';
+                                        %tidspunktPeriode = handles.Velfaerdsteknologi.VisData.TidsBegraensning;
+                                        %handles.Velfaerdsteknologi.(teknologi).(Sensornavn)(ii).tidspunktPeriode = []; 
+                                        %for iiiii = 1:length(tidspunktPeriode)
+                                         tidspunktBemaerkning = handles.Velfaerdsteknologi.(teknologi).(Sensornavn)(ii).TilfoejBemaerkning.Bemaerkning(iiii).tidspunkt;
+                                         
+                                         periode = get(get(handles.btngroupRedigerGrafSensoroverblik,'SelectedObject'),'String');
+                                         if strcmp(periode,'Dag')==1
+                                             tidspunktBemaerkning.Format = 'dd-MMM-yyyy';
+                                             tidspunktBemaerkning = string(tidspunktBemaerkning);
+                                             slutDato.Format = 'dd-MMM-yyyy';
+                                             slutDato = string(slutDato);
+                                             if tidspunktBemaerkning == slutDato
+                                                 handles.Velfaerdsteknologi.(teknologi).(Sensornavn)(ii).tidspunktPeriode = 1; 
+                                             end 
+                                         else 
+                                            if tidspunktBemaerkning >= startDato && tidspunktBemaerkning <slutDato
                                                 handles.Velfaerdsteknologi.(teknologi).(Sensornavn)(ii).tidspunktPeriode = 1; 
-                             
                                             end
+                                         end 
+%                                                 = 'dd-MMM-yyyy';
+%                                             formatTidspunktBemaerkning = string(tidspunktBemaerkning);
+%                                             formatTidspunktPeriode = string(tidspunktPeriode(iiiii));
+%                                             if formatTidspunktBemaerkning == formatTidspunktPeriode
+%                                                 handles.Velfaerdsteknologi.(teknologi).(Sensornavn)(ii).tidspunktPeriode = 1; 
+%                              
+%                                             end
                                         end
                                                                              
                                     end
                                     
-                               
+                                
                                     if handles.Velfaerdsteknologi.(teknologi).(Sensornavn)(ii).tidspunktPeriode ==1 
                                         tidspunktKunDato = handles.Velfaerdsteknologi.(teknologi).(Sensornavn)(ii).Tidspunkt;
                                         tidspunktKunDato.Format = 'dd-MMM-yyyy';
