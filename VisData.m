@@ -97,4 +97,5 @@ end
     if strcmp(Vindue,'Yderligere')==1
         YderligereDataFunktioner(handles,ttYderligere,teknologi, Begraensning);
     end
+   
 end

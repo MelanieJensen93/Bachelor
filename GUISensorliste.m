@@ -58,23 +58,31 @@ handles.output = hObject;
 if ~isempty(varargin) && ischar(varargin{1}) && strcmp(varargin{1},'exit')
     close;
 else
-    handles.Velfaerdsteknologi = varargin{1};
-    guidata(hObject, handles);
+    if ~isfield(varargin{1,1}, 'TilbageKnap')
+        
+        handles.Velfaerdsteknologi = varargin{1};
+        guidata(hObject, handles);
 
-    handles = SensorInddeling(handles);
-
-    if isfield(handles.Velfaerdsteknologi, 'CarendoSensor')
-       set(handles.txtValgtteknologiSensorliste, 'String', 'Carendo');
-       CarendoBilledeMedSensor = imread('CarendoMedSensor.png');
-       axes(handles.axTeknologiMedSensorSensorliste);
-       imshow(CarendoBilledeMedSensor);
+        handles = SensorInddeling(handles);
+    else 
+        handles.Velfaerdsteknologi = varargin{1,1}.Velfaerdsteknologi;
+        guidata(hObject, handles);
+        OpdaterListboxSensorOverblik(handles);
+        guidata(hObject, handles);
     end
-    if isfield(handles.Velfaerdsteknologi, 'LunaSensor')
-        set(handles.txtValgtteknologiSensorliste, 'String', 'Luna loftlift');
-        LunaBilledeMedSensor = imread('LunaMedSensor.png');
-        axes(handles.axTeknologiMedSensorSensorliste);
-        imshow(LunaBilledeMedSensor);
-    end
+    
+        if isfield(handles.Velfaerdsteknologi, 'CarendoSensor')
+           set(handles.txtValgtteknologiSensorliste, 'String', 'Carendo');
+           CarendoBilledeMedSensor = imread('CarendoMedSensor.png');
+           axes(handles.axTeknologiMedSensorSensorliste);
+           imshow(CarendoBilledeMedSensor);
+        end
+        if isfield(handles.Velfaerdsteknologi, 'LunaSensor')
+            set(handles.txtValgtteknologiSensorliste, 'String', 'Luna loftlift');
+            LunaBilledeMedSensor = imread('LunaMedSensor.png');
+            axes(handles.axTeknologiMedSensorSensorliste);
+            imshow(LunaBilledeMedSensor);
+        end
     
     AarhusKommuneLogo = imread('AarhusKommuneLogo.jpg');
     axes(handles.axAarhusLogo);

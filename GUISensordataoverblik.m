@@ -182,8 +182,8 @@ Varighed = [handles.Velfaerdsteknologi.(teknologi).(sensor).Varighedforarbejdsga
 %følgende format. 
 infmt = 'mm:ss';
 Varighed = duration(Varighed,'InputFormat',infmt); 
-VisData(handles,[handles.Velfaerdsteknologi.(teknologi).(sensor).Tidspunkt],[handles.Velfaerdsteknologi.(teknologi).(sensor).Medarbejdere],handles.axesMedarbejderSensorDataVindue,'Sensor');
-VisData(handles,[handles.Velfaerdsteknologi.(teknologi).(sensor).Tidspunkt],Varighed,handles.axesVarighedSensorDataVindue,'Sensor');
+handles = VisData(handles,[handles.Velfaerdsteknologi.(teknologi).(sensor).Tidspunkt],[handles.Velfaerdsteknologi.(teknologi).(sensor).Medarbejdere],handles.axesMedarbejderSensorDataVindue,'Sensor');
+handles = VisData(handles,[handles.Velfaerdsteknologi.(teknologi).(sensor).Tidspunkt],Varighed,handles.axesVarighedSensorDataVindue,'Sensor');
 guidata(hObject,handles);
 handles=OpdaterListboxmedBemaerkning(handles);
 axes(handles.axesMedarbejderSensorDataVindue)
@@ -224,7 +224,6 @@ handles = VisData(handles,[handles.Velfaerdsteknologi.(teknologi).(sensor).Tidsp
 handles = VisData(handles,[handles.Velfaerdsteknologi.(teknologi).(sensor).Tidspunkt],Varighed,handles.axesVarighedSensorDataVindue,'Sensor');
 guidata(hObject,handles);
 handles=OpdaterListboxmedBemaerkning(handles);
-
 axes(handles.axesMedarbejderSensorDataVindue)
 ylabel('Antal medarbejdere')
 axes(handles.axesVarighedSensorDataVindue)
@@ -237,6 +236,7 @@ function btnTilbageSensorDataoverblik_Callback(hObject, eventdata, handles)
 % handles    structure with handles and user data (see GUIDATA)
 GUISensordataoverblik_OpeningFcn(hObject, eventdata, handles, 'exit');
  % --- Executes when user attempts to close GUISensorDataOverbliksVindue.
+handles.TilbageKnap = 'SensorDataoverblik'; 
 GUISensorliste(handles); 
  %GUISensorliste(handles); 
  

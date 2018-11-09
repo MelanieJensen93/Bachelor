@@ -89,6 +89,7 @@ if isfield(handles.Velfaerdsteknologi, 'BrugerValgtSensor')
                                                 handles.Velfaerdsteknologi.(teknologi).(Sensornavn)(ii).tidspunktPeriode = 1; 
                                             end
                                          end 
+                                         
 %                                                 = 'dd-MMM-yyyy';
 %                                             formatTidspunktBemaerkning = string(tidspunktBemaerkning);
 %                                             formatTidspunktPeriode = string(tidspunktPeriode(iiiii));

@@ -32,12 +32,7 @@ if isfield(handles.Velfaerdsteknologi,teknologi)
                handles.Velfaerdsteknologi.(teknologisensor).(id)(CntRowSensor).Superbruger = handles.Velfaerdsteknologi.(teknologi)(CntRow).Superbruger;
                handles.Velfaerdsteknologi.(teknologisensor).(id)(CntRowSensor).Almindeligtpersonale = handles.Velfaerdsteknologi.(teknologi)(CntRow).Almindeligtpersonale;
                handles.Velfaerdsteknologi.(teknologisensor).(id)(CntRowSensor).Afloeser = handles.Velfaerdsteknologi.(teknologi)(CntRow).Afloeser;
-               
-               
-               
-
-              
-               
+        
                CntRowSensor = CntRowSensor +1; 
            end
             
