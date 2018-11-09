@@ -76,10 +76,8 @@ else
         handles = VisData(handles,[handles.Velfaerdsteknologi.LunaSensor.(string(sensor)).Tidspunkt],Varighed,handles.axesVarighedSensorDataVindue,'Sensor');
         
         axes(handles.axesMedarbejderSensorDataVindue)
-        xlabel('Periode')
         ylabel('Antal medarbejdere')
         axes(handles.axesVarighedSensorDataVindue)
-        xlabel('Periode')
         ylabel('Varighed i minutter')
         
         
@@ -100,10 +98,8 @@ else
         handles = VisData(handles,[handles.Velfaerdsteknologi.CarendoSensor.(string(sensor)).Tidspunkt],Varighed,handles.axesVarighedSensorDataVindue,'Sensor');
         
         axes(handles.axesMedarbejderSensorDataVindue)
-        xlabel('Periode')
         ylabel('Antal medarbejdere')
         axes(handles.axesVarighedSensorDataVindue)
-        xlabel('Periode')
         ylabel('Varighed i minutter')
     end
     
@@ -131,6 +127,8 @@ function varargout = GUISensordataoverblik_OutputFcn(hObject, eventdata, handles
 % Get default command line output from handles structure
 varargout{1} = handles.output;
 
+set(gcf, 'units','normalized','outerposition',[0 0 1 1]);
+set(gcf, 'Toolbar', 'none', 'Menu', 'none');
 
 % --- Executes on button press in btnTilojbemaerkningSensordatavindue.
 function btnTilojbemaerkningSensordatavindue_Callback(hObject, eventdata, handles)
@@ -177,8 +175,6 @@ uicalendar('Weekend',[1 0 0 0 0 0 1], ...
 
 waitfor(handles.stDatoSensorOverblik,'String');
 teknologi = handles.field; 
-%teknologi = string(teknologi(1));
-d=1;
 sensorer=fieldnames(handles.Velfaerdsteknologi.(teknologi));
 sensor = string(sensorer(handles.Velfaerdsteknologi.BrugerValgtSensor));
 Varighed = [handles.Velfaerdsteknologi.(teknologi).(sensor).Varighedforarbejdsgang];
@@ -190,10 +186,8 @@ VisData(handles,[handles.Velfaerdsteknologi.(teknologi).(sensor).Tidspunkt],[han
 VisData(handles,[handles.Velfaerdsteknologi.(teknologi).(sensor).Tidspunkt],Varighed,handles.axesVarighedSensorDataVindue,'Sensor');
 
 axes(handles.axesMedarbejderSensorDataVindue)
-xlabel('Periode')
 ylabel('Antal medarbejdere')
 axes(handles.axesVarighedSensorDataVindue)
-xlabel('Periode')
 ylabel('Varighed i minutter')
 
 % --- Executes on button press in etDatoSensor.
@@ -218,7 +212,6 @@ function btngroupRedigerGrafSensoroverblik_SelectionChangedFcn(hObject, eventdat
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 teknologi = handles.field; 
-%teknologi = string(teknologi(1));
 sensorer=fieldnames(handles.Velfaerdsteknologi.(teknologi));
 sensor = string(sensorer(handles.Velfaerdsteknologi.BrugerValgtSensor));
 Varighed = [handles.Velfaerdsteknologi.(teknologi).(sensor).Varighedforarbejdsgang];
@@ -230,6 +223,12 @@ handles = VisData(handles,[handles.Velfaerdsteknologi.(teknologi).(sensor).Tidsp
 handles = VisData(handles,[handles.Velfaerdsteknologi.(teknologi).(sensor).Tidspunkt],Varighed,handles.axesVarighedSensorDataVindue,'Sensor');
 guidata(hObject,handles);
 handles=OpdaterListboxmedBemaerkning(handles);
+
+axes(handles.axesMedarbejderSensorDataVindue)
+ylabel('Antal medarbejdere')
+axes(handles.axesVarighedSensorDataVindue)
+ylabel('Varighed i minutter')
+
 % --- Executes on button press in btnTilbageSensorDataoverblik.
 function btnTilbageSensorDataoverblik_Callback(hObject, eventdata, handles)
 % hObject    handle to btnTilbageSensorDataoverblik (see GCBO)
