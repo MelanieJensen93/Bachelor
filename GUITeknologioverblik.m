@@ -67,7 +67,12 @@ guidata(hObject, handles);
 
 teknologi = fieldnames(handles.Velfaerdsteknologi);
 teknologi = string(teknologi);
-set(handles.txtValgtteknologiOverblik,'String',teknologi); 
+if teknologi == "Luna"
+    set(handles.txtValgtteknologiOverblik,'String', 'Luna loftlift'); 
+else
+    set(handles.txtValgtteknologiOverblik,'String',teknologi); 
+end
+
 set(handles.txtAntalGangeTeknologioverblik,'String',num2str(handles.Velfaerdsteknologi.(teknologi)(1).Medarbejdere))
 D = [handles.Velfaerdsteknologi.(teknologi).Varighedforarbejdsgang];
 %Idet at det er en tid så skal det skrives ud i typen duration med

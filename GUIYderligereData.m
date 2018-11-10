@@ -71,6 +71,7 @@ else
 
         if strcmp(handles.teknologi,'Carendo')==1
            set(handles.txtLunaMedCarendoYderligere, 'Visible', 'off');
+           set(handles.txtValgtTeknologiYderligereData, 'String', 'Carendo');
         end
         if strcmp(teknologi,'Luna')==1
             set(handles.txtVariabel, 'String', 'Anvendelse af Luna med Carendo'); 
@@ -79,6 +80,7 @@ else
             set(handles.txtOmsorgsfunktionYderligere, 'Visible', 'off');
             set(handles.txtKomfortfunktionYderligere, 'Visible', 'off');
             set(handles.txtHaeveSaenkefunktionYderligere, 'Visible', 'off');
+            set(handles.txtValgtTeknologiYderligereData, 'String', 'Luna loftlift');
         end
     
     handles.Velfaerdsteknologi.Yderligere.Dato = handles.Velfaerdsteknologi.(handles.teknologi)(1).Tidspunkt;

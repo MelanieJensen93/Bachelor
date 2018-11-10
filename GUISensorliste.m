@@ -105,9 +105,9 @@ function varargout = GUISensorliste_OutputFcn(hObject, eventdata, handles)
 
 % Get default command line output from handles structure
 varargout{1} = handles.output;
-
+set(gcf, 'Position', get(0,'Screensize'));
 set(gcf, 'units','normalized','outerposition',[0 0 1 1]);
-set(gcf, 'Toolbar', 'none', 'Menu', 'none');
+
 
 % --- Executes on button press in btnTilbageSensorliste.
 function btnTilbageSensorliste_Callback(hObject, eventdata, handles)
