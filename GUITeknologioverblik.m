@@ -90,10 +90,12 @@ set(handles.stDatoTeknologiOverblik, 'String', stringDato)
 
 axes(handles.axesMedarbejdereTeknologiOverblik)
 ylabel('Antal medarbejdere')
+title('Gennemsnittet af antal medarbejdere ved en arbejdsgang')
 axes(handles.axesVarighedTeknologiOverblik)
 ylabel('Varighed i minutter')
-
+title('Gennemsnittet af hvor lang tid en arbejdsgang tager')
 set(gcf,'Pointer','arrow');
+end
 % UIWAIT makes GUITeknologioverblik wait for user response (see UIRESUME)
 % uiwait(handles.figure1);
 
@@ -189,4 +191,4 @@ VisData(handles,[handles.Velfaerdsteknologi.(teknologi).Tidspunkt],D,handles.axe
     axes(handles.axesVarighedTeknologiOverblik)
     ylabel('Varighed i minutter')
     title('Gennemsnittet af hvor lang tid en arbejdsgang tager')
-end
+

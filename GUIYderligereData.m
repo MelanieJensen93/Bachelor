@@ -105,10 +105,13 @@ else
     
     axes(handles.axSuperBrugerYderligereData)
     ylabel('Varighed i minutter')
+    title('Gennemsnitlig varighed af arbejdsgang for superbruger ')
     axes(handles.axAlmindeligYderligereData)
     ylabel('Varighed i minutter')
+    title('Gennemsnitlig varighed af arbejdsgang for almindeligt personale')
     axes(handles.axDirekteTidYderligereData)
     ylabel('Varighed i minutter')
+    title('Gennemsnitlig direkte tid med borger')
     
     % Update handles structure
     guidata(hObject, handles);

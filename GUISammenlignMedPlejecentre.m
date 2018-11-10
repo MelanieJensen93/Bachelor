@@ -89,6 +89,7 @@ else
     %axMedarbejdere(2).YColor = [0.69, 0, 0.21];
     axes(handles.axMedarbejderePlejecentre)
     ylabel('Antal medarbejdere')
+    title('Gennemsnittet af antal medarbejdere ved en arbejdsgang')
 
     VisData(handles,[handles.Velfaerdsteknologi.(teknologi).Tidspunkt],VarighedPlejecenter,handles.axVarighedPlejecentre,'Plejecentre');
     hold on 
@@ -96,6 +97,7 @@ else
     hold off 
     axes(handles.axVarighedPlejecentre)
     ylabel('Varighed i minutter')
+    title('Gennemsnittet af hvor lang tid en arbejdsgang tager')
 end
 % UIWAIT makes GUISammenlignMedPlejecentre wait for user response (see UIRESUME)
 % uiwait(handles.figure1);
@@ -143,6 +145,7 @@ hold off
 %axMedarbejdere(2).YColor = [0.69, 0, 0.21];
 axes(handles.axMedarbejderePlejecentre)
 ylabel('Antal medarbejdere')
+title('Gennemsnittet af antal medarbejdere ved en arbejdsgang')
 
 VisData(handles,[handles.Velfaerdsteknologi.(teknologi).Tidspunkt],VarighedPlejecenter,handles.axVarighedPlejecentre,'Plejecentre');
 hold on 
@@ -150,6 +153,7 @@ VisData(handles,[handles.TeknologiOverblik.(teknologi).Tidspunkt],VarighedTeknol
 hold off 
 axes(handles.axVarighedPlejecentre)
 ylabel('Varighed i minutter')
+title('Gennemsnittet af hvor lang tid en arbejdsgang tager')
 
 
 % --- Executes when selected object is changed in btngroupRedigergrafPlejecentre.
@@ -174,6 +178,7 @@ hold off
 %axMedarbejdere(2).YColor = [0.69, 0, 0.21];
 axes(handles.axMedarbejderePlejecentre)
 ylabel('Antal medarbejdere')
+title('Gennemsnittet af antal medarbejdere ved en arbejdsgang')
 
 
 
@@ -183,7 +188,7 @@ VisData(handles,[handles.TeknologiOverblik.(teknologi).Tidspunkt],VarighedTeknol
 hold off 
 axes(handles.axVarighedPlejecentre)
 ylabel('Varighed i minutter')
-
+title('Gennemsnittet af hvor lang tid en arbejdsgang tager')
 
 % --- Executes on button press in btnTilbageSammenlignmedandreplejecentre.
 function btnTilbageSammenlignmedandreplejecentre_Callback(hObject, eventdata, handles)
