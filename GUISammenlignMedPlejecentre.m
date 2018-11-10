@@ -119,17 +119,23 @@ D = [handles.Velfaerdsteknologi.(teknologi).Varighedforarbejdsgang];
 infmt = 'mm:ss';
 D = duration(D,'InputFormat',infmt); 
 
-VisData(handles,[handles.TeknologiOverblik.(teknologi).Tidspunkt],[handles.Velfaerdsteknologi.(teknologi).Medarbejdere],handles.axMedarbejderePlejecentre,'Plejecentre');
+axMedarbejdere = handles.axMedarbejderePlejecentre;
+VisData(handles,[handles.Velfaerdsteknologi.(teknologi).Tidspunkt],[handles.Velfaerdsteknologi.(teknologi).Medarbejdere],axMedarbejdere,'Plejecentre');
 hold on 
-VisData(handles,[handles.TeknologiOverblik.(teknologi).Tidspunkt],[handles.TeknologiOverblik.(teknologi).Medarbejdere],handles.axMedarbejderePlejecentre,'Plejecentre');
-
-VisData(handles,[handles.TeknologiOverblik.(teknologi).Tidspunkt],D,handles.axVarighedPlejecentre,'Plejecentre');
-
-
+VisData(handles,[handles.TeknologiOverblik.(teknologi).Tidspunkt],[handles.TeknologiOverblik.(teknologi).Medarbejdere],axMedarbejdere,'Plejecentre');
+hold off 
+%axMedarbejdere(1).YColor = [177, 125, 1];
+%axMedarbejdere(2).YColor = [177, 1, 53];
 axes(handles.axMedarbejderePlejecentre)
 ylabel('Antal medarbejdere')
+
+VisData(handles,[handles.Velfaerdsteknologi.(teknologi).Tidspunkt],D,handles.axVarighedPlejecentre,'Plejecentre');
+hold on 
+VisData(handles,[handles.TeknologiOverblik.(teknologi).Tidspunkt],D,handles.axVarighedPlejecentre,'Plejecentre');
+hold off 
 axes(handles.axVarighedPlejecentre)
 ylabel('Varighed i minutter')
+
 
 % --- Executes when selected object is changed in btngroupRedigergrafPlejecentre.
 function btngroupRedigergrafPlejecentre_SelectionChangedFcn(hObject, eventdata, handles)
