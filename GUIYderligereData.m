@@ -58,6 +58,7 @@ handles.output = hObject;
 if ~isempty(varargin) && ischar(varargin{1}) && strcmp(varargin{1},'exit')
     close;
 else
+    set(gcf,'Pointer','watch');
     handles.Velfaerdsteknologi = varargin{1}; %henter handles fra GUIValgafteknologi
     handles = YderligereData(handles);
     guidata(hObject,handles);
@@ -95,10 +96,13 @@ else
     VarighedAlmindelig = duration(VarighedAlmindelig,'InputFormat',infmt);
     DirekteTid = duration(DirekteTid,'InputFormat',infmt);
 
-    VisData(handles,[handles.SuperBruger.Tidspunkt],VarighedSuperbruger,handles.axSuperBrugerYderligereData,'Yderligere');
+    [~, stringDato] = VisData(handles,[handles.SuperBruger.Tidspunkt],VarighedSuperbruger,handles.axSuperBrugerYderligereData,'Yderligere');
     VisData(handles,[handles.Almindelig.Tidspunkt],VarighedAlmindelig,handles.axAlmindeligYderligereData,'Yderligere');
     VisData(handles,[handles.Velfaerdsteknologi.(handles.teknologi).Tidspunkt],DirekteTid,handles.axDirekteTidYderligereData,'Yderligere');
-
+    stringDato.Format = 'dd-MMM-yyyy';
+    stringDato = string(stringDato);
+    set(handles.stDatoYderligere, 'String', stringDato)
+    
     axes(handles.axSuperBrugerYderligereData)
     ylabel('Varighed i minutter')
     axes(handles.axAlmindeligYderligereData)
@@ -108,6 +112,7 @@ else
     
     % Update handles structure
     guidata(hObject, handles);
+    set(gcf,'Pointer','arrow');
 end
 % UIWAIT makes GUIYderligereData wait for user response (see UIRESUME)
 % uiwait(handles.figure1);

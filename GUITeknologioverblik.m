@@ -22,7 +22,7 @@ function varargout = GUITeknologioverblik(varargin)
 
 % Edit the above text to modify the response to help GUITeknologioverblik
 
-% Last Modified by GUIDE v2.5 01-Nov-2018 09:19:57
+% Last Modified by GUIDE v2.5 10-Nov-2018 14:29:41
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -76,22 +76,24 @@ else
         set(handles.txtValgtteknologiOverblik,'String',teknologi); 
     end
 
-    set(handles.txtAntalGangeTeknologioverblik,'String',num2str(handles.Velfaerdsteknologi.(teknologi)(1).Medarbejdere))
-    D = [handles.Velfaerdsteknologi.(teknologi).Varighedforarbejdsgang];
-    %Idet at det er en tid så skal det skrives ud i typen duration med
-    %følgende format. 
-    infmt = 'mm:ss';
-    D = duration(D,'InputFormat',infmt); 
-    VisData(handles,[handles.Velfaerdsteknologi.(teknologi).Tidspunkt],[handles.Velfaerdsteknologi.(teknologi).Medarbejdere],handles.axesMedarbejdereTeknologiOverblik,'Teknologi');
-    VisData(handles,[handles.Velfaerdsteknologi.(teknologi).Tidspunkt],D,handles.axesVarighedTeknologiOverblik,'Teknologi');
+set(handles.txtAntalGangeTeknologioverblik,'String',num2str(handles.Velfaerdsteknologi.(teknologi)(1).Medarbejdere))
+D = [handles.Velfaerdsteknologi.(teknologi).Varighedforarbejdsgang];
+%Idet at det er en tid så skal det skrives ud i typen duration med
+%følgende format. 
+infmt = 'mm:ss';
+D = duration(D,'InputFormat',infmt); 
+VisData(handles,[handles.Velfaerdsteknologi.(teknologi).Tidspunkt],[handles.Velfaerdsteknologi.(teknologi).Medarbejdere],handles.axesMedarbejdereTeknologiOverblik,'Teknologi');
+[~,stringDato] = VisData(handles,[handles.Velfaerdsteknologi.(teknologi).Tidspunkt],D,handles.axesVarighedTeknologiOverblik,'Teknologi');
 
-    axes(handles.axesMedarbejdereTeknologiOverblik)
-    ylabel('Antal medarbejdere')
-    title('Gennemsnittet af antal medarbejdere ved en arbejdsgang')
-    axes(handles.axesVarighedTeknologiOverblik)
-    ylabel('Varighed i minutter')
-    title('Gennemsnittet af hvor lang tid en arbejdsgang tager')
-end
+stringDato = string(stringDato);
+set(handles.stDatoTeknologiOverblik, 'String', stringDato)
+
+axes(handles.axesMedarbejdereTeknologiOverblik)
+ylabel('Antal medarbejdere')
+axes(handles.axesVarighedTeknologiOverblik)
+ylabel('Varighed i minutter')
+
+set(gcf,'Pointer','arrow');
 % UIWAIT makes GUITeknologioverblik wait for user response (see UIRESUME)
 % uiwait(handles.figure1);
 
@@ -181,54 +183,10 @@ D = duration(D,'InputFormat',infmt);
 VisData(handles,[handles.Velfaerdsteknologi.(teknologi).Tidspunkt],[handles.Velfaerdsteknologi.(teknologi).Medarbejdere],handles.axesMedarbejdereTeknologiOverblik,'Teknologi');
 VisData(handles,[handles.Velfaerdsteknologi.(teknologi).Tidspunkt],D,handles.axesVarighedTeknologiOverblik,'Teknologi');
 
-axes(handles.axesMedarbejdereTeknologiOverblik)
-ylabel('Antal medarbejdere')
-title('Gennemsnittet af antal medarbejdere ved en arbejdsgang')
-axes(handles.axesVarighedTeknologiOverblik)
-ylabel('Varighed i minutter')
-title('Gennemsnittet af hvor lang tid en arbejdsgang tager')
-
-
-
-
-
-% --- Executes when selected object is changed in btngroupRedigerGrafTeknologioverblik.
-function btngroupRedigerGrafTeknologioverblik_SelectionChangedFcn(hObject, eventdata, handles)
-% hObject    handle to the selected object in btngroupRedigerGrafTeknologioverblik 
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
-
-teknologi = fieldnames(handles.Velfaerdsteknologi);
-teknologi = string(teknologi);
-D = [handles.Velfaerdsteknologi.(teknologi).Varighedforarbejdsgang];
-%Idet at det er en tid så skal det skrives ud i typen duration med
-%følgende format. 
-infmt = 'mm:ss';
-D = duration(D,'InputFormat',infmt); 
-VisData(handles,[handles.Velfaerdsteknologi.(teknologi).Tidspunkt],[handles.Velfaerdsteknologi.(teknologi).Medarbejdere],handles.axesMedarbejdereTeknologiOverblik,'Teknologi');
-VisData(handles,[handles.Velfaerdsteknologi.(teknologi).Tidspunkt],D,handles.axesVarighedTeknologiOverblik,'Teknologi');
-axes(handles.axesMedarbejdereTeknologiOverblik)
-ylabel('Antal medarbejdere')
-title('Gennemsnittet af antal medarbejdere ved en arbejdsgang')
-axes(handles.axesVarighedTeknologiOverblik)
-ylabel('Varighed i minutter')
-title('Gennemsnittet af hvor lang tid en arbejdsgang tager')
-
-
-
-
-% --- Executes on button press in rbAarTeknologioverblik.
-function rbAarTeknologioverblik_Callback(hObject, eventdata, handles)
-% hObject    handle to rbAarTeknologioverblik (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
-
-% Hint: get(hObject,'Value') returns toggle state of rbAarTeknologioverblik
-
-
-% --- If Enable == 'on', executes on mouse press in 5 pixel border.
-% --- Otherwise, executes on mouse press in 5 pixel border or over text3.
-function text3_ButtonDownFcn(hObject, eventdata, handles)
-% hObject    handle to text3 (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
+    axes(handles.axesMedarbejdereTeknologiOverblik)
+    ylabel('Antal medarbejdere')
+    title('Gennemsnittet af antal medarbejdere ved en arbejdsgang')
+    axes(handles.axesVarighedTeknologiOverblik)
+    ylabel('Varighed i minutter')
+    title('Gennemsnittet af hvor lang tid en arbejdsgang tager')
+end

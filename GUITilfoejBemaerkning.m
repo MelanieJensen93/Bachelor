@@ -57,6 +57,7 @@ handles.output = hObject;
 if ~isempty(varargin) && ischar(varargin{1}) && strcmp(varargin{1},'exit')
     close;
 else
+    set(gcf,'Pointer','watch');
     handles.Velfaerdsteknologi = varargin{1}; 
 
     AarhusKommuneLogo = imread('AarhusKommuneLogo.jpg');
@@ -85,6 +86,7 @@ else
     
     % Update handles structure
     guidata(hObject, handles);
+    set(gcf,'Pointer','arrow');
 end
 % UIWAIT makes GUITilfoejBemaerkning wait for user response (see UIRESUME)
 % uiwait(handles.GUITilfoejBemaerkning);
@@ -119,15 +121,16 @@ datatogo = handles.Velfaerdsteknologi;
 ValgAfDatapunkt(handles,datatogo, ValgtDato, ValgtDatoDatetime);
 
 % --- Executes on button press in rbMiddagTilfoejBemaerkning.
-function rbMiddagTilfoejBemaerkning_Callback(hObject, eventdata, handles)
+%function rbMiddagTilfoejBemaerkning_Callback(hObject, eventdata, handles)
 % hObject    handle to rbMiddagTilfoejBemaerkning (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
 % Hint: get(hObject,'Value') returns toggle state of rbMiddagTilfoejBemaerkning
 
+
 % --- Executes on button press in rbNatTilfoejBemaerkning.
-function rbNatTilfoejBemaerkning_Callback(hObject, eventdata, handles)
+%function rbNatTilfoejBemaerkning_Callback(hObject, eventdata, handles)
 % hObject    handle to rbNatTilfoejBemaerkning (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
@@ -154,7 +157,7 @@ if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgr
 end
 
 % --- Executes on button press in rbMorgenTilfoejBemearkning.
-function rbMorgenTilfoejBemearkning_Callback(hObject, eventdata, handles)
+%function rbMorgenTilfoejBemearkning_Callback(hObject, eventdata, handles)
 % hObject    handle to rbMorgenTilfoejBemearkning (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
@@ -162,7 +165,7 @@ function rbMorgenTilfoejBemearkning_Callback(hObject, eventdata, handles)
 % Hint: get(hObject,'Value') returns toggle state of rbMorgenTilfoejBemearkning
 
 % --- Executes on button press in rbEftermiddagTilfoejBemaerkning.
-function rbEftermiddagTilfoejBemaerkning_Callback(hObject, eventdata, handles)
+%function rbEftermiddagTilfoejBemaerkning_Callback(hObject, eventdata, handles)
 % hObject    handle to rbEftermiddagTilfoejBemaerkning (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
@@ -170,7 +173,7 @@ function rbEftermiddagTilfoejBemaerkning_Callback(hObject, eventdata, handles)
 % Hint: get(hObject,'Value') returns toggle state of rbEftermiddagTilfoejBemaerkning
 
 % --- Executes on button press in rbFormiddagTilfoejBemaerkning.
-function rbFormiddagTilfoejBemaerkning_Callback(hObject, eventdata, handles)
+%function rbFormiddagTilfoejBemaerkning_Callback(hObject, eventdata, handles)
 % hObject    handle to rbFormiddagTilfoejBemaerkning (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
@@ -178,7 +181,7 @@ function rbFormiddagTilfoejBemaerkning_Callback(hObject, eventdata, handles)
 % Hint: get(hObject,'Value') returns toggle state of rbFormiddagTilfoejBemaerkning
 
 % --- Executes on button press in rbAftenTilfoejBemaerkning.
-function rbAftenTilfoejBemaerkning_Callback(hObject, eventdata, handles)
+%function rbAftenTilfoejBemaerkning_Callback(hObject, eventdata, handles)
 % hObject    handle to rbAftenTilfoejBemaerkning (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
@@ -204,27 +207,30 @@ function rbBorgerKraeverToPersonalerTilfoejBemaerkning_Callback(hObject, eventda
 % hObject    handle to rbBorgerKraeverToPersonalerTilfoejBemaerkning (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-
 % Hint: get(hObject,'Value') returns toggle state of rbBorgerKraeverToPersonalerTilfoejBemaerkning
-
+set(handles.rbBorgerKraeverToPersonalerTilfoejBemaerkning, 'ForegroundColor', [0.69 0.49 0])
+set(handles.rbEkstraPersonaleTilstedeTilfoejBemaerkning, 'ForegroundColor', [0 0.55 0.69])
+set(handles.rbAndetTilfoejBemaerkning, 'ForegroundColor', [0 0.55 0.69])
 
 % --- Executes on button press in rbEkstraPersonaleTilstedeTilfoejBemaerkning.
 function rbEkstraPersonaleTilstedeTilfoejBemaerkning_Callback(hObject, eventdata, handles)
 % hObject    handle to rbEkstraPersonaleTilstedeTilfoejBemaerkning (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-
 % Hint: get(hObject,'Value') returns toggle state of rbEkstraPersonaleTilstedeTilfoejBemaerkning
-
+set(handles.rbBorgerKraeverToPersonalerTilfoejBemaerkning, 'ForegroundColor', [0 0.55 0.69])
+set(handles.rbEkstraPersonaleTilstedeTilfoejBemaerkning, 'ForegroundColor', [0.69 0.49 0])
+set(handles.rbAndetTilfoejBemaerkning, 'ForegroundColor', [0 0.55 0.69])
 
 % --- Executes on button press in rbAndetTilfoejBemaerkning.
 function rbAndetTilfoejBemaerkning_Callback(hObject, eventdata, handles)
 % hObject    handle to rbAndetTilfoejBemaerkning (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-
 % Hint: get(hObject,'Value') returns toggle state of rbAndetTilfoejBemaerkning
-
+set(handles.rbBorgerKraeverToPersonalerTilfoejBemaerkning, 'ForegroundColor', [0 0.55 0.69])
+set(handles.rbEkstraPersonaleTilstedeTilfoejBemaerkning, 'ForegroundColor', [0 0.55 0.69])
+set(handles.rbAndetTilfoejBemaerkning, 'ForegroundColor', [0.69 0.49 0])
 % --- Executes on button press in btnTilfoejBemaerkningTilfoejBemaerkning.
 function btnTilfoejBemaerkningTilfoejBemaerkning_Callback(hObject, eventdata, handles)
 % hObject    handle to btnTilfoejBemaerkningTilfoejBemaerkning (see GCBO)

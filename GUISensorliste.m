@@ -58,6 +58,7 @@ handles.output = hObject;
 if ~isempty(varargin) && ischar(varargin{1}) && strcmp(varargin{1},'exit')
     close;
 else
+    set(gcf,'Pointer','watch');
     if ~isfield(varargin{1,1}, 'TilbageKnap')
         
         handles.Velfaerdsteknologi = varargin{1};
@@ -91,6 +92,7 @@ else
 
     % Update handles structure
     guidata(hObject, handles);
+    set(gcf,'Pointer','arrow');
 end
 % UIWAIT makes GUISensorliste wait for user response (see UIRESUME)
 % uiwait(handles.figure1);
