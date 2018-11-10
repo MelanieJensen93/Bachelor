@@ -69,16 +69,27 @@ handles = IndlaesVelfaerdsteknologi(handles, 'Plejecentre');
 guidata(hObject,handles);
 
 teknologi = string(handles.teknologi);
-D = [handles.Velfaerdsteknologi.(teknologi).Varighedforarbejdsgang];
+VarighedPlejecenter = [handles.Velfaerdsteknologi.(teknologi).Varighedforarbejdsgang];
+VarighedTeknologi = [handles.TeknologiOverblik.(teknologi).Varighedforarbejdsgang];
 %Idet at det er en tid så skal det skrives ud i typen duration med
 %følgende format. 
 infmt = 'mm:ss';
-D = duration(D,'InputFormat',infmt); 
-VisData(handles,[handles.Velfaerdsteknologi.(teknologi).Tidspunkt],[handles.Velfaerdsteknologi.(teknologi).Medarbejdere],handles.axMedarbejderePlejecentre,'Plejecentre');
-VisData(handles,[handles.Velfaerdsteknologi.(teknologi).Tidspunkt],D,handles.axVarighedPlejecentre,'Plejecentre');
-
+VarighedPlejecenter = duration(VarighedPlejecenter,'InputFormat',infmt); 
+VarighedTeknologi = duration(VarighedTeknologi,'InputFormat',infmt); 
+axMedarbejdere = handles.axMedarbejderePlejecentre;
+VisData(handles,[handles.Velfaerdsteknologi.(teknologi).Tidspunkt],[handles.Velfaerdsteknologi.(teknologi).Medarbejdere],axMedarbejdere,'Plejecentre');
+hold on 
+VisData(handles,[handles.TeknologiOverblik.(teknologi).Tidspunkt],[handles.TeknologiOverblik.(teknologi).Medarbejdere],axMedarbejdere,'Plejecentre');
+hold off 
+%axMedarbejdere(1).YColor = [0.69, 0.49, 0];
+%axMedarbejdere(2).YColor = [0.69, 0, 0.21];
 axes(handles.axMedarbejderePlejecentre)
 ylabel('Antal medarbejdere')
+
+VisData(handles,[handles.Velfaerdsteknologi.(teknologi).Tidspunkt],VarighedPlejecenter,handles.axVarighedPlejecentre,'Plejecentre');
+hold on 
+VisData(handles,[handles.TeknologiOverblik.(teknologi).Tidspunkt],VarighedTeknologi,handles.axVarighedPlejecentre,'Plejecentre');
+hold off 
 axes(handles.axVarighedPlejecentre)
 ylabel('Varighed i minutter')
 % UIWAIT makes GUISammenlignMedPlejecentre wait for user response (see UIRESUME)
@@ -110,25 +121,27 @@ uicalendar('Weekend',[1 0 0 0 0 0 1], ...
 waitfor(handles.stDatoPlejecentre,'String');
 
 teknologi = string(handles.teknologi);
-D = [handles.Velfaerdsteknologi.(teknologi).Varighedforarbejdsgang];
+VarighedPlejecenter = [handles.Velfaerdsteknologi.(teknologi).Varighedforarbejdsgang];
+VarighedTeknologi = [handles.TeknologiOverblik.(teknologi).Varighedforarbejdsgang];
 %Idet at det er en tid så skal det skrives ud i typen duration med
 %følgende format. 
 infmt = 'mm:ss';
-D = duration(D,'InputFormat',infmt); 
+VarighedPlejecenter = duration(VarighedPlejecenter,'InputFormat',infmt); 
+VarighedTeknologi = duration(VarighedTeknologi,'InputFormat',infmt);
 
 axMedarbejdere = handles.axMedarbejderePlejecentre;
 VisData(handles,[handles.Velfaerdsteknologi.(teknologi).Tidspunkt],[handles.Velfaerdsteknologi.(teknologi).Medarbejdere],axMedarbejdere,'Plejecentre');
 hold on 
 VisData(handles,[handles.TeknologiOverblik.(teknologi).Tidspunkt],[handles.TeknologiOverblik.(teknologi).Medarbejdere],axMedarbejdere,'Plejecentre');
 hold off 
-%axMedarbejdere(1).YColor = [177, 125, 1];
-%axMedarbejdere(2).YColor = [177, 1, 53];
+%axMedarbejdere(1).YColor = [0.69, 0.49, 0];
+%axMedarbejdere(2).YColor = [0.69, 0, 0.21];
 axes(handles.axMedarbejderePlejecentre)
 ylabel('Antal medarbejdere')
 
-VisData(handles,[handles.Velfaerdsteknologi.(teknologi).Tidspunkt],D,handles.axVarighedPlejecentre,'Plejecentre');
+VisData(handles,[handles.Velfaerdsteknologi.(teknologi).Tidspunkt],VarighedPlejecenter,handles.axVarighedPlejecentre,'Plejecentre');
 hold on 
-VisData(handles,[handles.TeknologiOverblik.(teknologi).Tidspunkt],D,handles.axVarighedPlejecentre,'Plejecentre');
+VisData(handles,[handles.TeknologiOverblik.(teknologi).Tidspunkt],VarighedTeknologi,handles.axVarighedPlejecentre,'Plejecentre');
 hold off 
 axes(handles.axVarighedPlejecentre)
 ylabel('Varighed i minutter')
@@ -140,16 +153,29 @@ function btngroupRedigergrafPlejecentre_SelectionChangedFcn(hObject, eventdata, 
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 teknologi = string(handles.teknologi);
-D = [handles.Velfaerdsteknologi.(teknologi).Varighedforarbejdsgang];
+VarighedPlejecenter = [handles.Velfaerdsteknologi.(teknologi).Varighedforarbejdsgang];
+VarighedTeknologi = [handles.TeknologiOverblik.(teknologi).Varighedforarbejdsgang];
 %Idet at det er en tid så skal det skrives ud i typen duration med
 %følgende format. 
 infmt = 'mm:ss';
-D = duration(D,'InputFormat',infmt); 
-VisData(handles,[handles.Velfaerdsteknologi.(teknologi).Tidspunkt],[handles.Velfaerdsteknologi.(teknologi).Medarbejdere],handles.axMedarbejderePlejecentre,'Plejecentre');
-VisData(handles,[handles.Velfaerdsteknologi.(teknologi).Tidspunkt],D,handles.axVarighedPlejecentre,'Plejecentre');
-
+VarighedPlejecenter = duration(VarighedPlejecenter,'InputFormat',infmt); 
+VarighedTeknologi = duration(VarighedTeknologi,'InputFormat',infmt);
+axMedarbejdere = handles.axMedarbejderePlejecentre;
+VisData(handles,[handles.Velfaerdsteknologi.(teknologi).Tidspunkt],[handles.Velfaerdsteknologi.(teknologi).Medarbejdere],axMedarbejdere,'Plejecentre');
+hold on 
+VisData(handles,[handles.TeknologiOverblik.(teknologi).Tidspunkt],[handles.TeknologiOverblik.(teknologi).Medarbejdere],axMedarbejdere,'Plejecentre');
+hold off 
+%axMedarbejdere(1).YColor = [0.69, 0.49, 0];
+%axMedarbejdere(2).YColor = [0.69, 0, 0.21];
 axes(handles.axMedarbejderePlejecentre)
 ylabel('Antal medarbejdere')
+
+
+
+VisData(handles,[handles.Velfaerdsteknologi.(teknologi).Tidspunkt],VarighedPlejecenter,handles.axVarighedPlejecentre,'Plejecentre');
+hold on 
+VisData(handles,[handles.TeknologiOverblik.(teknologi).Tidspunkt],VarighedTeknologi,handles.axVarighedPlejecentre,'Plejecentre');
+hold off 
 axes(handles.axVarighedPlejecentre)
 ylabel('Varighed i minutter')
 
