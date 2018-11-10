@@ -49,7 +49,7 @@ if isfield(handles.Velfaerdsteknologi,teknologi)
        old_str = get(handles.lbSensorliste,'String'); 
        new_str=strvcat(char(old_str),char(str_part));
        set(handles.lbSensorliste,'String',new_str);
-       set(handles.lbSensorliste, 'Value', idx+1);
+       
    end        
        
 end

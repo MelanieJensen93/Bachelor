@@ -22,7 +22,7 @@ function varargout = GUISammenlignMedPlejecentre(varargin)
 
 % Edit the above text to modify the response to help GUISammenlignMedPlejecentre
 
-% Last Modified by GUIDE v2.5 09-Nov-2018 16:01:26
+% Last Modified by GUIDE v2.5 10-Nov-2018 10:25:16
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -73,7 +73,6 @@ D = [handles.Velfaerdsteknologi.(teknologi).Varighedforarbejdsgang];
 %følgende format. 
 infmt = 'mm:ss';
 D = duration(D,'InputFormat',infmt); 
-
 VisData(handles,[handles.Velfaerdsteknologi.(teknologi).Tidspunkt],[handles.Velfaerdsteknologi.(teknologi).Medarbejdere],handles.axMedarbejderePlejecentre,'Plejecentre');
 VisData(handles,[handles.Velfaerdsteknologi.(teknologi).Tidspunkt],D,handles.axVarighedPlejecentre,'Plejecentre');
 
@@ -81,8 +80,6 @@ axes(handles.axMedarbejderePlejecentre)
 ylabel('Antal medarbejdere')
 axes(handles.axVarighedPlejecentre)
 ylabel('Varighed i minutter')
- 
-
 % UIWAIT makes GUISammenlignMedPlejecentre wait for user response (see UIRESUME)
 % uiwait(handles.figure1);
 
@@ -137,7 +134,6 @@ D = [handles.Velfaerdsteknologi.(teknologi).Varighedforarbejdsgang];
 %følgende format. 
 infmt = 'mm:ss';
 D = duration(D,'InputFormat',infmt); 
-
 VisData(handles,[handles.Velfaerdsteknologi.(teknologi).Tidspunkt],[handles.Velfaerdsteknologi.(teknologi).Medarbejdere],handles.axMedarbejderePlejecentre,'Plejecentre');
 VisData(handles,[handles.Velfaerdsteknologi.(teknologi).Tidspunkt],D,handles.axVarighedPlejecentre,'Plejecentre');
 
@@ -150,5 +146,12 @@ ylabel('Varighed i minutter')
 % --- Executes on button press in btnTilbageSammenlignmedandreplejecentre.
 function btnTilbageSammenlignmedandreplejecentre_Callback(hObject, eventdata, handles)
 % hObject    handle to btnTilbageSammenlignmedandreplejecentre (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+
+% --- Executes when btngroupRedigergrafPlejecentre is resized.
+function btngroupRedigergrafPlejecentre_SizeChangedFcn(hObject, eventdata, handles)
+% hObject    handle to btngroupRedigergrafPlejecentre (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
