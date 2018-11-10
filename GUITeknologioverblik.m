@@ -54,38 +54,44 @@ function GUITeknologioverblik_OpeningFcn(hObject, eventdata, handles, varargin)
 
 % Choose default command line output for GUITeknologioverblik
 handles.output = hObject;
-if ~isfield(handles, 'Velfaerdsteknologi')
-    handles.Velfaerdsteknologi = varargin{1}; %henter handles fra GUIValgafteknologi
-end
-
-AarhusKommuneLogo = imread('AarhusKommuneLogo.jpg');
-axes(handles.axAarhusLogo);
-imshow(AarhusKommuneLogo);
-
-% Update handles structure
-guidata(hObject, handles);
-
-teknologi = fieldnames(handles.Velfaerdsteknologi);
-teknologi = string(teknologi);
-if teknologi == "Luna"
-    set(handles.txtValgtteknologiOverblik,'String', 'Luna loftlift'); 
+if ~isempty(varargin) && ischar(varargin{1}) && strcmp(varargin{1},'exit')
+    close;
 else
-    set(handles.txtValgtteknologiOverblik,'String',teknologi); 
+    if ~isfield(handles, 'Velfaerdsteknologi')
+        handles.Velfaerdsteknologi = varargin{1}; %henter handles fra GUIValgafteknologi
+    end
+
+    AarhusKommuneLogo = imread('AarhusKommuneLogo.jpg');
+    axes(handles.axAarhusLogo);
+    imshow(AarhusKommuneLogo);
+
+    % Update handles structure
+    guidata(hObject, handles);
+
+    teknologi = fieldnames(handles.Velfaerdsteknologi);
+    teknologi = string(teknologi);
+    if teknologi == "Luna"
+        set(handles.txtValgtteknologiOverblik,'String', 'Luna loftlift'); 
+    else
+        set(handles.txtValgtteknologiOverblik,'String',teknologi); 
+    end
+
+    set(handles.txtAntalGangeTeknologioverblik,'String',num2str(handles.Velfaerdsteknologi.(teknologi)(1).Medarbejdere))
+    D = [handles.Velfaerdsteknologi.(teknologi).Varighedforarbejdsgang];
+    %Idet at det er en tid så skal det skrives ud i typen duration med
+    %følgende format. 
+    infmt = 'mm:ss';
+    D = duration(D,'InputFormat',infmt); 
+    VisData(handles,[handles.Velfaerdsteknologi.(teknologi).Tidspunkt],[handles.Velfaerdsteknologi.(teknologi).Medarbejdere],handles.axesMedarbejdereTeknologiOverblik,'Teknologi');
+    VisData(handles,[handles.Velfaerdsteknologi.(teknologi).Tidspunkt],D,handles.axesVarighedTeknologiOverblik,'Teknologi');
+
+    axes(handles.axesMedarbejdereTeknologiOverblik)
+    ylabel('Antal medarbejdere')
+    title('Gennemsnittet af antal medarbejdere ved en arbejdsgang')
+    axes(handles.axesVarighedTeknologiOverblik)
+    ylabel('Varighed i minutter')
+    title('Gennemsnittet af hvor lang tid en arbejdsgang tager')
 end
-
-set(handles.txtAntalGangeTeknologioverblik,'String',num2str(handles.Velfaerdsteknologi.(teknologi)(1).Medarbejdere))
-D = [handles.Velfaerdsteknologi.(teknologi).Varighedforarbejdsgang];
-%Idet at det er en tid så skal det skrives ud i typen duration med
-%følgende format. 
-infmt = 'mm:ss';
-D = duration(D,'InputFormat',infmt); 
-VisData(handles,[handles.Velfaerdsteknologi.(teknologi).Tidspunkt],[handles.Velfaerdsteknologi.(teknologi).Medarbejdere],handles.axesMedarbejdereTeknologiOverblik,'Teknologi');
-VisData(handles,[handles.Velfaerdsteknologi.(teknologi).Tidspunkt],D,handles.axesVarighedTeknologiOverblik,'Teknologi');
-
-axes(handles.axesMedarbejdereTeknologiOverblik)
-ylabel('Antal medarbejdere')
-axes(handles.axesVarighedTeknologiOverblik)
-ylabel('Varighed i minutter')
 % UIWAIT makes GUITeknologioverblik wait for user response (see UIRESUME)
 % uiwait(handles.figure1);
 
@@ -177,8 +183,11 @@ VisData(handles,[handles.Velfaerdsteknologi.(teknologi).Tidspunkt],D,handles.axe
 
 axes(handles.axesMedarbejdereTeknologiOverblik)
 ylabel('Antal medarbejdere')
+title('Gennemsnittet af antal medarbejdere ved en arbejdsgang')
 axes(handles.axesVarighedTeknologiOverblik)
 ylabel('Varighed i minutter')
+title('Gennemsnittet af hvor lang tid en arbejdsgang tager')
+
 
 
 
@@ -200,8 +209,11 @@ VisData(handles,[handles.Velfaerdsteknologi.(teknologi).Tidspunkt],[handles.Velf
 VisData(handles,[handles.Velfaerdsteknologi.(teknologi).Tidspunkt],D,handles.axesVarighedTeknologiOverblik,'Teknologi');
 axes(handles.axesMedarbejdereTeknologiOverblik)
 ylabel('Antal medarbejdere')
+title('Gennemsnittet af antal medarbejdere ved en arbejdsgang')
 axes(handles.axesVarighedTeknologiOverblik)
 ylabel('Varighed i minutter')
+title('Gennemsnittet af hvor lang tid en arbejdsgang tager')
+
 
 
 

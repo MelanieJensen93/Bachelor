@@ -194,4 +194,7 @@ function bntTilbageYderligerData_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 GUIYderligereData_OpeningFcn(hObject, eventdata, handles, 'exit')
-GUITeknologioverblik(handles); 
+handles.Velfaerdsteknologi.Yderligere = []; 
+handles.Velfaerdsteknologi=rmfield(handles.Velfaerdsteknologi,'Yderligere');
+datatogo = handles.Velfaerdsteknologi;
+GUITeknologioverblik(datatogo); 
