@@ -59,7 +59,8 @@ AarhusKommuneLogo = imread('AarhusKommuneLogo.jpg');
 axes(handles.axAarhusLogo);
 imshow(AarhusKommuneLogo);
 
-handles.teknologi = varargin{1};
+handles.TeknologiOverblik = varargin{1};
+handles.teknologi = fieldnames(handles.TeknologiOverblik);
 %guidata(hObject, handles);
 % Update handles structure
 guidata(hObject, handles);
@@ -67,7 +68,7 @@ guidata(hObject, handles);
 handles = IndlaesVelfaerdsteknologi(handles, 'Plejecentre');
 guidata(hObject,handles);
 
-teknologi = handles.teknologi;
+teknologi = string(handles.teknologi);
 D = [handles.Velfaerdsteknologi.(teknologi).Varighedforarbejdsgang];
 %Idet at det er en tid så skal det skrives ud i typen duration med
 %følgende format. 
@@ -111,15 +112,19 @@ uicalendar('Weekend',[1 0 0 0 0 0 1], ...
 
 waitfor(handles.stDatoPlejecentre,'String');
 
-teknologi = handles.teknologi;
+teknologi = string(handles.teknologi);
 D = [handles.Velfaerdsteknologi.(teknologi).Varighedforarbejdsgang];
 %Idet at det er en tid så skal det skrives ud i typen duration med
 %følgende format. 
 infmt = 'mm:ss';
 D = duration(D,'InputFormat',infmt); 
 
-VisData(handles,[handles.Velfaerdsteknologi.(teknologi).Tidspunkt],[handles.Velfaerdsteknologi.(teknologi).Medarbejdere],handles.axMedarbejderePlejecentre,'Plejecentre');
-VisData(handles,[handles.Velfaerdsteknologi.(teknologi).Tidspunkt],D,handles.axVarighedPlejecentre,'Plejecentre');
+VisData(handles,[handles.TeknologiOverblik.(teknologi).Tidspunkt],[handles.Velfaerdsteknologi.(teknologi).Medarbejdere],handles.axMedarbejderePlejecentre,'Plejecentre');
+hold on 
+VisData(handles,[handles.TeknologiOverblik.(teknologi).Tidspunkt],[handles.TeknologiOverblik.(teknologi).Medarbejdere],handles.axMedarbejderePlejecentre,'Plejecentre');
+
+VisData(handles,[handles.TeknologiOverblik.(teknologi).Tidspunkt],D,handles.axVarighedPlejecentre,'Plejecentre');
+
 
 axes(handles.axMedarbejderePlejecentre)
 ylabel('Antal medarbejdere')
@@ -131,7 +136,7 @@ function btngroupRedigergrafPlejecentre_SelectionChangedFcn(hObject, eventdata, 
 % hObject    handle to the selected object in btngroupRedigergrafPlejecentre 
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-teknologi = handles.teknologi;
+teknologi = string(handles.teknologi);
 D = [handles.Velfaerdsteknologi.(teknologi).Varighedforarbejdsgang];
 %Idet at det er en tid så skal det skrives ud i typen duration med
 %følgende format. 

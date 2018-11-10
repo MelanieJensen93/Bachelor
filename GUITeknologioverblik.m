@@ -144,8 +144,8 @@ function btnSammenlignmedandreplejecentreTeknologioverblik_Callback(hObject, eve
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 close(GUITeknologioverblik);
-teknologi = fieldnames(handles.Velfaerdsteknologi);
-datatogo= string(teknologi);
+%teknologi = fieldnames(handles.Velfaerdsteknologi);
+datatogo= handles.Velfaerdsteknologi;
 GUISammenlignMedPlejecentre(datatogo);
 
 % --- Executes on button press in btnVaelgDatoTeknologioverblik.
