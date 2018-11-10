@@ -1,4 +1,4 @@
-function handles = OpdaterListboxmedBemaerkning(handles, datatogo)
+function handles = OpdaterListboxmedBemaerkning(handles, startDato, slutDato)
 %OPDATERLISTBOXMEDBEMAERKNING Summary of this function goes here
 %   Detailed explanation goes here
 
@@ -6,7 +6,12 @@ function handles = OpdaterListboxmedBemaerkning(handles, datatogo)
 %     'BemaerkningsFil.mat'));
 % 
 % handles.Velfaerdsteknologi = gemtDataBemaerkningsfil.Velfaerdsteknologi;
-
+if ischar(slutDato)==1
+    slutDato = datetime(slutDato);
+end
+slutDato = slutDato + '23:59:59';
+slutDato.Format = 'dd-MMM-yyyy';
+slutDato = string(slutDato);
 handles.lbBemaerkning.String = [];
 drawnow;       
 
@@ -22,15 +27,12 @@ if isfield(handles.Velfaerdsteknologi, 'BrugerValgtSensor')
             if Sensornrfralistbox == i 
               Sensor = fieldnames(handles.Velfaerdsteknologi.(teknologi));
               Sensornavn = string(Sensor(i));
-              for ii = 1:length(handles.Velfaerdsteknologi.(teknologi).(Sensornavn))
-                  
-                  tidspunkt = handles.Velfaerdsteknologi.(teknologi).(Sensornavn)(ii).Tidspunkt;
-                  
+              for ii = 1:length(handles.Velfaerdsteknologi.(teknologi).(Sensornavn))                  
+                  tidspunkt = handles.Velfaerdsteknologi.(teknologi).(Sensornavn)(ii).Tidspunkt;                  
                   for iii = 1:height(DatafraBemaerkningsFil)
                     if teknologi == DatafraBemaerkningsFil.Teknologi(iii)
                         if Sensornavn == DatafraBemaerkningsFil.Sensornavn(iii)
                             if tidspunkt == DatafraBemaerkningsFil.DatoOgTidspunkt(iii)
-
                                 if ~isfield(handles.Velfaerdsteknologi.(teknologi).(Sensornavn),'TilfoejBemaerkning') || isempty(handles.Velfaerdsteknologi.(teknologi).(Sensornavn)(ii).TilfoejBemaerkning)
                                         idx=1; 
                                         handles.Velfaerdsteknologi.(teknologi).(Sensornavn)(ii).TilfoejBemaerkning.Bemaerkning(idx).tidspunkt= DatafraBemaerkningsFil.DatoOgTidspunkt(iii);
@@ -63,13 +65,10 @@ if isfield(handles.Velfaerdsteknologi, 'BrugerValgtSensor')
                                                 TidspunktPaaDagen_Data= TidspunktPaaDagen(6);
                                         end
                                         
-                                        startDato = handles.Velfaerdsteknologi.VisData.startDato; 
-                                        slutDato = handles.Velfaerdsteknologi.VisData.slutDato;
+                                        %startDato = handles.Velfaerdsteknologi.VisData.startDato; 
+                                        %slutDato = handles.Velfaerdsteknologi.VisData.slutDato;
                                         
-                                        if ischar(slutDato)==1
-                                            slutDato = datetime(slutDato);
-                                        end
-                                        slutDato = slutDato + '23:59:59';
+                                        
                                         %tidspunktPeriode = handles.Velfaerdsteknologi.VisData.TidsBegraensning;
                                         %handles.Velfaerdsteknologi.(teknologi).(Sensornavn)(ii).tidspunktPeriode = []; 
                                         %for iiiii = 1:length(tidspunktPeriode)
@@ -79,8 +78,8 @@ if isfield(handles.Velfaerdsteknologi, 'BrugerValgtSensor')
                                          if strcmp(periode,'Dag')==1
                                              tidspunktBemaerkning.Format = 'dd-MMM-yyyy';
                                              tidspunktBemaerkning = string(tidspunktBemaerkning);
-                                             slutDato.Format = 'dd-MMM-yyyy';
-                                             slutDato = string(slutDato);
+%                                              slutDato.Format = 'dd-MMM-yyyy';
+%                                              slutDato = string(slutDato);
                                              if tidspunktBemaerkning == slutDato
                                                  handles.Velfaerdsteknologi.(teknologi).(Sensornavn)(ii).tidspunktPeriode = 1; 
                                              end 
@@ -120,7 +119,7 @@ if isfield(handles.Velfaerdsteknologi, 'BrugerValgtSensor')
                             end
                         end
                     end
-                  end
+              end
               end
             end
      end

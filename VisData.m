@@ -1,4 +1,4 @@
-function handles = VisData(handles, xData, yData, axesTeknologi,Vindue)
+function [startDato, stringDato] = VisData(handles, xData, yData, axesTeknologi,Vindue)
     teknologi = fieldnames(handles.Velfaerdsteknologi);
     teknologi = string(teknologi(1));
     times = xData';
@@ -68,8 +68,11 @@ if strcmp(periode, 'Dag')==0
             [xData, match, tt, sumAnvendelse, Begraensning, startDato] = AarInddeling(slutDato,tt);    
     end
     %handles.Velfaerdsteknologi.VisData.TidsBegraensning= xData; 
-    handles.Velfaerdsteknologi.VisData.startDato = startDato; 
-    handles.Velfaerdsteknologi.VisData.slutDato = stringDato; 
+    
+%     if isfield(handles.Velfaerdsteknologi, 'VisData')
+%         delete(datestr(handles.Velfaerdsteknologi.VisData.slutDato));
+%         delete(datestr(handles.Velfaerdsteknologi.VisData.startDato));
+%     end
     CntRow = 1; 
     ii=1; 
     for i=1:length(match)
@@ -87,7 +90,15 @@ if strcmp(periode, 'Dag')==0
     end
   
     axes(axesTeknologi)
-    bar(xData,Data);  
+    if strcmp(Vindue,'Plejecentre')==0
+       bar(xData,Data);  
+    end
+    
+    if strcmp(Vindue,'Plejecentre')==1
+        plot(xData,Data,'-o','LineWidth',2);
+        
+    end 
+    
     %datetick('x','mmm-yy','keeplimits')  
 end
     if strcmp(Vindue,'Yderligere')==0
@@ -97,5 +108,5 @@ end
     if strcmp(Vindue,'Yderligere')==1
         YderligereDataFunktioner(handles,ttYderligere,teknologi, Begraensning);
     end
-   
+
 end

@@ -72,8 +72,8 @@ else
         %følgende format. 
         infmt = 'mm:ss';
         Varighed = duration(Varighed,'InputFormat',infmt); 
-        handles = VisData(handles,[handles.Velfaerdsteknologi.LunaSensor.(string(sensor)).Tidspunkt],[handles.Velfaerdsteknologi.LunaSensor.(string(sensor)).Medarbejdere],handles.axesMedarbejderSensorDataVindue,'Sensor');
-        handles = VisData(handles,[handles.Velfaerdsteknologi.LunaSensor.(string(sensor)).Tidspunkt],Varighed,handles.axesVarighedSensorDataVindue,'Sensor');
+        [startDato,slutDato] =  VisData(handles,[handles.Velfaerdsteknologi.LunaSensor.(string(sensor)).Tidspunkt],[handles.Velfaerdsteknologi.LunaSensor.(string(sensor)).Medarbejdere],handles.axesMedarbejderSensorDataVindue,'Sensor');
+        [~,~] =  VisData(handles,[handles.Velfaerdsteknologi.LunaSensor.(string(sensor)).Tidspunkt],Varighed,handles.axesVarighedSensorDataVindue,'Sensor');
         
         axes(handles.axesMedarbejderSensorDataVindue)
         ylabel('Antal medarbejdere')
@@ -94,8 +94,8 @@ else
         %følgende format. 
         infmt = 'mm:ss';
         Varighed = duration(Varighed,'InputFormat',infmt); 
-        handles  = VisData(handles,[handles.Velfaerdsteknologi.CarendoSensor.(string(sensor)).Tidspunkt],[handles.Velfaerdsteknologi.CarendoSensor.(string(sensor)).Medarbejdere],handles.axesMedarbejderSensorDataVindue,'Sensor');
-        handles = VisData(handles,[handles.Velfaerdsteknologi.CarendoSensor.(string(sensor)).Tidspunkt],Varighed,handles.axesVarighedSensorDataVindue,'Sensor');
+        [startDato,slutDato] =  VisData(handles,[handles.Velfaerdsteknologi.CarendoSensor.(string(sensor)).Tidspunkt],[handles.Velfaerdsteknologi.CarendoSensor.(string(sensor)).Medarbejdere],handles.axesMedarbejderSensorDataVindue,'Sensor');
+        [~,~] =  VisData(handles,[handles.Velfaerdsteknologi.CarendoSensor.(string(sensor)).Tidspunkt],Varighed,handles.axesVarighedSensorDataVindue,'Sensor');
         
         axes(handles.axesMedarbejderSensorDataVindue)
         ylabel('Antal medarbejdere')
@@ -108,7 +108,7 @@ else
     imshow(AarhusKommuneLogo);
    
     
-   handles=OpdaterListboxmedBemaerkning(handles);
+   handles=OpdaterListboxmedBemaerkning(handles, startDato, slutDato);
     guidata(hObject, handles);
     
 end
@@ -182,10 +182,10 @@ Varighed = [handles.Velfaerdsteknologi.(teknologi).(sensor).Varighedforarbejdsga
 %følgende format. 
 infmt = 'mm:ss';
 Varighed = duration(Varighed,'InputFormat',infmt); 
-handles = VisData(handles,[handles.Velfaerdsteknologi.(teknologi).(sensor).Tidspunkt],[handles.Velfaerdsteknologi.(teknologi).(sensor).Medarbejdere],handles.axesMedarbejderSensorDataVindue,'Sensor');
-handles = VisData(handles,[handles.Velfaerdsteknologi.(teknologi).(sensor).Tidspunkt],Varighed,handles.axesVarighedSensorDataVindue,'Sensor');
+[startDato, slutDato] = VisData(handles,[handles.Velfaerdsteknologi.(teknologi).(sensor).Tidspunkt],[handles.Velfaerdsteknologi.(teknologi).(sensor).Medarbejdere],handles.axesMedarbejderSensorDataVindue,'Sensor');
+[~, ~] = VisData(handles,[handles.Velfaerdsteknologi.(teknologi).(sensor).Tidspunkt],Varighed,handles.axesVarighedSensorDataVindue,'Sensor');
 guidata(hObject,handles);
-handles=OpdaterListboxmedBemaerkning(handles);
+handles=OpdaterListboxmedBemaerkning(handles, startDato, slutDato);
 axes(handles.axesMedarbejderSensorDataVindue)
 ylabel('Antal medarbejdere')
 axes(handles.axesVarighedSensorDataVindue)
@@ -220,10 +220,10 @@ Varighed = [handles.Velfaerdsteknologi.(teknologi).(sensor).Varighedforarbejdsga
 %følgende format. 
 infmt = 'mm:ss';
 Varighed = duration(Varighed,'InputFormat',infmt); 
-handles = VisData(handles,[handles.Velfaerdsteknologi.(teknologi).(sensor).Tidspunkt],[handles.Velfaerdsteknologi.(teknologi).(sensor).Medarbejdere],handles.axesMedarbejderSensorDataVindue,'Sensor');
-handles = VisData(handles,[handles.Velfaerdsteknologi.(teknologi).(sensor).Tidspunkt],Varighed,handles.axesVarighedSensorDataVindue,'Sensor');
+[startDato, slutDato]= VisData(handles,[handles.Velfaerdsteknologi.(teknologi).(sensor).Tidspunkt],[handles.Velfaerdsteknologi.(teknologi).(sensor).Medarbejdere],handles.axesMedarbejderSensorDataVindue,'Sensor');
+[~,~]=VisData(handles,[handles.Velfaerdsteknologi.(teknologi).(sensor).Tidspunkt],Varighed,handles.axesVarighedSensorDataVindue,'Sensor');
 guidata(hObject,handles);
-handles=OpdaterListboxmedBemaerkning(handles);
+handles=OpdaterListboxmedBemaerkning(handles,startDato, slutDato);
 axes(handles.axesMedarbejderSensorDataVindue)
 ylabel('Antal medarbejdere')
 axes(handles.axesVarighedSensorDataVindue)
