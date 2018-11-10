@@ -66,6 +66,7 @@ if isempty(stringDato)
     else 
         %stringDato = xData(1);
         stringDato = datetime(datestr(xData(1),'dd-mm-yyyy'));
+        
     end
 end
 
