@@ -58,6 +58,7 @@ handles.output = hObject;
 if ~isempty(varargin) && ischar(varargin{1}) && strcmp(varargin{1},'exit')
     close;
 else
+    set(gcf,'Pointer','watch');
     handles.Velfaerdsteknologi = varargin{1};
     ValgtSensor = handles.Velfaerdsteknologi.BrugerValgtSensor;
     if isfield(handles.Velfaerdsteknologi, 'LunaSensor')
@@ -73,7 +74,10 @@ else
         infmt = 'mm:ss';
         Varighed = duration(Varighed,'InputFormat',infmt); 
         [startDato,slutDato] =  VisData(handles,[handles.Velfaerdsteknologi.LunaSensor.(string(sensor)).Tidspunkt],[handles.Velfaerdsteknologi.LunaSensor.(string(sensor)).Medarbejdere],handles.axesMedarbejderSensorDataVindue,'Sensor');
-        [~,~] =  VisData(handles,[handles.Velfaerdsteknologi.LunaSensor.(string(sensor)).Tidspunkt],Varighed,handles.axesVarighedSensorDataVindue,'Sensor');
+        [~,stringDato] =  VisData(handles,[handles.Velfaerdsteknologi.LunaSensor.(string(sensor)).Tidspunkt],Varighed,handles.axesVarighedSensorDataVindue,'Sensor');
+        
+        stringDato = string(stringDato);
+        set(handles.stDatoSensorOverblik, 'String', stringDato)
         
         axes(handles.axesMedarbejderSensorDataVindue)
         ylabel('Antal medarbejdere')
@@ -95,7 +99,10 @@ else
         infmt = 'mm:ss';
         Varighed = duration(Varighed,'InputFormat',infmt); 
         [startDato,slutDato] =  VisData(handles,[handles.Velfaerdsteknologi.CarendoSensor.(string(sensor)).Tidspunkt],[handles.Velfaerdsteknologi.CarendoSensor.(string(sensor)).Medarbejdere],handles.axesMedarbejderSensorDataVindue,'Sensor');
-        [~,~] =  VisData(handles,[handles.Velfaerdsteknologi.CarendoSensor.(string(sensor)).Tidspunkt],Varighed,handles.axesVarighedSensorDataVindue,'Sensor');
+        [~,stringDato] =  VisData(handles,[handles.Velfaerdsteknologi.CarendoSensor.(string(sensor)).Tidspunkt],Varighed,handles.axesVarighedSensorDataVindue,'Sensor');
+        
+        stringDato = string(stringDato);
+        set(handles.stDatoSensorOverblik, 'String', stringDato)
         
         axes(handles.axesMedarbejderSensorDataVindue)
         ylabel('Antal medarbejdere')
@@ -109,8 +116,8 @@ else
    
     
    handles=OpdaterListboxmedBemaerkning(handles, startDato, slutDato);
-    guidata(hObject, handles);
-    
+   guidata(hObject, handles);
+   set(gcf,'Pointer','arrow');
 end
 
 % UIWAIT makes GUISensordataoverblik wait for user response (see UIRESUME)

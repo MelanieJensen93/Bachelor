@@ -22,7 +22,7 @@ function varargout = GUITeknologioverblik(varargin)
 
 % Edit the above text to modify the response to help GUITeknologioverblik
 
-% Last Modified by GUIDE v2.5 01-Nov-2018 09:19:57
+% Last Modified by GUIDE v2.5 10-Nov-2018 14:29:41
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -57,7 +57,7 @@ handles.output = hObject;
 if ~isfield(handles, 'Velfaerdsteknologi')
     handles.Velfaerdsteknologi = varargin{1}; %henter handles fra GUIValgafteknologi
 end
-
+set(gcf,'Pointer','watch');
 AarhusKommuneLogo = imread('AarhusKommuneLogo.jpg');
 axes(handles.axAarhusLogo);
 imshow(AarhusKommuneLogo);
@@ -80,12 +80,17 @@ D = [handles.Velfaerdsteknologi.(teknologi).Varighedforarbejdsgang];
 infmt = 'mm:ss';
 D = duration(D,'InputFormat',infmt); 
 VisData(handles,[handles.Velfaerdsteknologi.(teknologi).Tidspunkt],[handles.Velfaerdsteknologi.(teknologi).Medarbejdere],handles.axesMedarbejdereTeknologiOverblik,'Teknologi');
-VisData(handles,[handles.Velfaerdsteknologi.(teknologi).Tidspunkt],D,handles.axesVarighedTeknologiOverblik,'Teknologi');
+[~,stringDato] = VisData(handles,[handles.Velfaerdsteknologi.(teknologi).Tidspunkt],D,handles.axesVarighedTeknologiOverblik,'Teknologi');
+
+stringDato = string(stringDato);
+set(handles.stDatoTeknologiOverblik, 'String', stringDato)
 
 axes(handles.axesMedarbejdereTeknologiOverblik)
 ylabel('Antal medarbejdere')
 axes(handles.axesVarighedTeknologiOverblik)
 ylabel('Varighed i minutter')
+
+set(gcf,'Pointer','arrow');
 % UIWAIT makes GUITeknologioverblik wait for user response (see UIRESUME)
 % uiwait(handles.figure1);
 
@@ -205,13 +210,13 @@ ylabel('Varighed i minutter')
 
 
 
-% --- Executes on button press in rbAarTeknologioverblik.
-function rbAarTeknologioverblik_Callback(hObject, eventdata, handles)
-% hObject    handle to rbAarTeknologioverblik (see GCBO)
+% --- Executes on button press in rbAar.
+function rbAar_Callback(hObject, eventdata, handles)
+% hObject    handle to rbAar (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
-% Hint: get(hObject,'Value') returns toggle state of rbAarTeknologioverblik
+% Hint: get(hObject,'Value') returns toggle state of rbAar
 
 
 % --- If Enable == 'on', executes on mouse press in 5 pixel border.

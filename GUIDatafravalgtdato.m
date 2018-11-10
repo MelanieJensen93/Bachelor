@@ -58,6 +58,7 @@ handles.output = hObject;
 if ~isempty(varargin) && ischar(varargin{1}) && strcmp(varargin{1},'exit')
     close;
 else
+    set(gcf,'Pointer','watch');
     handles.Velfaerdsteknologi = varargin{1};
     
     ValgtSensor = handles.Velfaerdsteknologi.BrugerValgtSensor;
@@ -81,6 +82,7 @@ else
     imshow(AarhusKommuneLogo);
     
     guidata(hObject, handles);
+    set(gcf,'Pointer','arrow');
 end
 
 % Update handles structure

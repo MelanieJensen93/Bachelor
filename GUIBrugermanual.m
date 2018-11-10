@@ -54,7 +54,7 @@ function GUIBrugermanual_OpeningFcn(hObject, eventdata, handles, varargin)
 
 % Choose default command line output for GUIBrugermanual
 handles.output = hObject;
-
+set(gcf,'Pointer','watch');
 handles.Velfaerdsteknologi = varargin{1}; %henter handles fra GUIValgafteknologi
 guidata(hObject, handles);
 handles = Brugermanual(handles);
@@ -65,6 +65,7 @@ imshow(AarhusKommuneLogo);
 
 % Update handles structure
 guidata(hObject, handles);
+set(gcf,'Pointer','arrow');
      
 % UIWAIT makes GUIBrugermanual wait for user response (see UIRESUME)
 % uiwait(handles.BrugermanualVindue);

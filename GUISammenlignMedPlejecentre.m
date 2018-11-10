@@ -54,7 +54,7 @@ function GUISammenlignMedPlejecentre_OpeningFcn(hObject, eventdata, handles, var
 
 % Choose default command line output for GUISammenlignMedPlejecentre
 handles.output = hObject;
-
+set(gcf,'Pointer','watch');
 AarhusKommuneLogo = imread('AarhusKommuneLogo.jpg');
 axes(handles.axAarhusLogo);
 imshow(AarhusKommuneLogo);
@@ -74,13 +74,18 @@ D = [handles.Velfaerdsteknologi.(teknologi).Varighedforarbejdsgang];
 %følgende format. 
 infmt = 'mm:ss';
 D = duration(D,'InputFormat',infmt); 
-VisData(handles,[handles.Velfaerdsteknologi.(teknologi).Tidspunkt],[handles.Velfaerdsteknologi.(teknologi).Medarbejdere],handles.axMedarbejderePlejecentre,'Plejecentre');
+[~, stringDato] = VisData(handles,[handles.Velfaerdsteknologi.(teknologi).Tidspunkt],[handles.Velfaerdsteknologi.(teknologi).Medarbejdere],handles.axMedarbejderePlejecentre,'Plejecentre');
 VisData(handles,[handles.Velfaerdsteknologi.(teknologi).Tidspunkt],D,handles.axVarighedPlejecentre,'Plejecentre');
+
+stringDato = string(stringDato)
+set(handles.stDatoPlejecentre, 'String', stringDato);
 
 axes(handles.axMedarbejderePlejecentre)
 ylabel('Antal medarbejdere')
 axes(handles.axVarighedPlejecentre)
 ylabel('Varighed i minutter')
+
+set(gcf,'Pointer','arrow');
 % UIWAIT makes GUISammenlignMedPlejecentre wait for user response (see UIRESUME)
 % uiwait(handles.figure1);
 

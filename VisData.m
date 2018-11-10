@@ -35,6 +35,29 @@ function [startDato, stringDato] = VisData(handles, xData, yData, axesTeknologi,
                 ttYderligere = timetable(tider',LunaMedCarendo');
             end 
     end
+    
+    switch periode
+        case 'Dag'
+            set(handles.rbDag, 'ForegroundColor', [0.69 0.49 0])
+            set(handles.rbUge, 'ForegroundColor', [0 0.55 0.69])
+            set(handles.rbMaaned, 'ForegroundColor', [0 0.55 0.69])
+            set(handles.rbAar, 'ForegroundColor', [0 0.55 0.69])
+        case 'Uge'
+            set(handles.rbUge, 'ForegroundColor', [0.69 0.40 0])
+            set(handles.rbDag, 'ForegroundColor', [0 0.55 0.69])
+            set(handles.rbMaaned, 'ForegroundColor', [0 0.55 0.69])
+            set(handles.rbAar, 'ForegroundColor', [0 0.55 0.69])
+        case 'Måned'
+            set(handles.rbMaaned, 'ForegroundColor', [0.69 0.40 0])
+            set(handles.rbUge, 'ForegroundColor', [0 0.55 0.69])
+            set(handles.rbAar, 'ForegroundColor', [0 0.55 0.69])
+            set(handles.rbDag, 'ForegroundColor', [0 0.55 0.69])
+        case 'År'
+            set(handles.rbAar, 'ForegroundColor', [0.69 0.40 0])
+            set(handles.rbUge, 'ForegroundColor', [0 0.55 0.69])
+            set(handles.rbMaaned, 'ForegroundColor', [0 0.55 0.69])
+            set(handles.rbDag, 'ForegroundColor', [0 0.55 0.69])
+    end
 % Hvis dato ikke valgt, vælges seneste dato 
 if isempty(stringDato)
     %stringDato = handles.Velfaerdsteknologi.(teknologi)(1).Tidspunkt;
