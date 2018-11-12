@@ -105,13 +105,13 @@ else
     
     axes(handles.axSuperBrugerYderligereData)
     ylabel('Varighed i minutter')
-    title('Gennemsnitlig varighed af arbejdsgang for superbruger ')
+    title('Gennemsnitlig tid af arbejdsgang for superbruger ')
     axes(handles.axAlmindeligYderligereData)
     ylabel('Varighed i minutter')
-    title('Gennemsnitlig varighed af arbejdsgang for almindeligt personale')
+    title('Gennemsnitlig tid af arbejdsgang for alment personale')
     axes(handles.axDirekteTidYderligereData)
     ylabel('Varighed i minutter')
-    title('Gennemsnitlig direkte tid med borger')
+    title('Gennemsnitlig tid med borger')
     
     % Update handles structure
     guidata(hObject, handles);
@@ -163,10 +163,13 @@ VisData(handles,[handles.Velfaerdsteknologi.(teknologi).Tidspunkt],DirekteTid,ha
 
 axes(handles.axSuperBrugerYderligereData)
 ylabel('Varighed i minutter')
+title('Gennemsnitlig tid af arbejdsgang for superbruger ')
 axes(handles.axAlmindeligYderligereData)
 ylabel('Varighed i minutter')
+title('Gennemsnitlig tid af arbejdsgang for almindeligt personale')
 axes(handles.axDirekteTidYderligereData)
 ylabel('Varighed i minutter')
+title('Gennemsnitlig tid med borger')
 
 % --- Executes when selected object is changed in btngroupRedigergrafYderligere.
 function btngroupRedigergrafYderligere_SelectionChangedFcn(hObject, eventdata, handles)
@@ -190,10 +193,13 @@ VisData(handles,[handles.Velfaerdsteknologi.(teknologi).Tidspunkt],DirekteTid,ha
 
 axes(handles.axSuperBrugerYderligereData)
 ylabel('Varighed i minutter')
+title('Gennemsnitlig tid af arbejdsgang for superbruger ')
 axes(handles.axAlmindeligYderligereData)
 ylabel('Varighed i minutter')
+title('Gennemsnitlig tid af arbejdsgang for almindeligt personale')
 axes(handles.axDirekteTidYderligereData)
 ylabel('Varighed i minutter')
+title('Gennemsnitlig tid med borger')
 
 
 % --- Executes on button press in bntTilbageYderligerData.

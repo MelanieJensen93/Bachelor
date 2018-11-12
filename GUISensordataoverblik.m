@@ -120,7 +120,8 @@ else
     imshow(AarhusKommuneLogo);
    
     
-   handles=OpdaterListboxmedBemaerkning(handles, startDato, slutDato);
+   %handles=OpdaterListboxmedBemaerkning(handles, startDato, slutDato);
+   OpdaterBemaerkningSensorOverblik(handles,startDato,slutDato)
    guidata(hObject, handles);
    set(gcf,'Pointer','arrow');
 end
@@ -197,7 +198,8 @@ Varighed = duration(Varighed,'InputFormat',infmt);
 [startDato, slutDato] = VisData(handles,[handles.Velfaerdsteknologi.(teknologi).(sensor).Tidspunkt],[handles.Velfaerdsteknologi.(teknologi).(sensor).Medarbejdere],handles.axesMedarbejderSensorDataVindue,'Sensor');
 [~, ~] = VisData(handles,[handles.Velfaerdsteknologi.(teknologi).(sensor).Tidspunkt],Varighed,handles.axesVarighedSensorDataVindue,'Sensor');
 guidata(hObject,handles);
-handles=OpdaterListboxmedBemaerkning(handles, startDato, slutDato);
+%handles=OpdaterListboxmedBemaerkning(handles, startDato, slutDato);
+OpdaterBemaerkningSensorOverblik(handles, startDato, slutDato)
 axes(handles.axesMedarbejderSensorDataVindue)
 ylabel('Antal medarbejdere')
 title('Gennemsnittet af antal medarbejdere ved en arbejdsgang')
@@ -237,7 +239,8 @@ Varighed = duration(Varighed,'InputFormat',infmt);
 [startDato, slutDato]= VisData(handles,[handles.Velfaerdsteknologi.(teknologi).(sensor).Tidspunkt],[handles.Velfaerdsteknologi.(teknologi).(sensor).Medarbejdere],handles.axesMedarbejderSensorDataVindue,'Sensor');
 [~,~]=VisData(handles,[handles.Velfaerdsteknologi.(teknologi).(sensor).Tidspunkt],Varighed,handles.axesVarighedSensorDataVindue,'Sensor');
 guidata(hObject,handles);
-handles=OpdaterListboxmedBemaerkning(handles,startDato, slutDato);
+%handles=OpdaterListboxmedBemaerkning(handles,startDato, slutDato);
+OpdaterBemaerkningSensorOverblik(handles,startDato,slutDato)
 axes(handles.axesMedarbejderSensorDataVindue)
 title('Gennemsnittet af antal medarbejdere ved en arbejdsgang')
 ylabel('Antal medarbejdere')

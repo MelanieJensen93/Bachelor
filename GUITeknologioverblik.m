@@ -95,6 +95,7 @@ axes(handles.axesVarighedTeknologiOverblik)
 ylabel('Varighed i minutter')
 title('Gennemsnittet af hvor lang tid en arbejdsgang tager')
 set(gcf,'Pointer','arrow');
+
 end
 % UIWAIT makes GUITeknologioverblik wait for user response (see UIRESUME)
 % uiwait(handles.figure1);
@@ -109,9 +110,9 @@ function varargout = GUITeknologioverblik_OutputFcn(hObject, eventdata, handles)
 
 % Get default command line output from handles structure
 varargout{1} = handles.output;
-set(gcf, 'Position', get(0,'Screensize'));
+%set(gcf, 'Position', get(0,'Screensize'));
 set(gcf, 'Units', 'normal', 'Position', [0 0 1 1])
-%set(gcf, 'Toolbar', 'none', 'Menu', 'none');
+set(gcf, 'Toolbar', 'none', 'Menu', 'none');
 
 
 % --- Executes on button press in btnTilbageTeknologiOverblik.

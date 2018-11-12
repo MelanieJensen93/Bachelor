@@ -53,6 +53,7 @@ function GUIValgafteknologi_OpeningFcn(hObject, eventdata, handles, varargin)
 % varargin   command line arguments to GUIValgafteknologi (see VARARGIN)
 
 % Choose default command line output for GUIValgafteknologi
+set(gcf, 'Position', get(0,'Screensize'));
 handles.output = hObject;
 
 % Update handles structure
@@ -78,6 +79,7 @@ guidata(hObject,handles);
 
 %Mus tilbage til pil 
 set(gcf,'Pointer','arrow');
+%set(gcf, 'Position', get(0,'Screensize'));
 % UIWAIT makes GUIValgafteknologi wait for user response (see UIRESUME)
 % uiwait(handles.GUIValgAfTeknologi);
 
@@ -91,8 +93,8 @@ function varargout = GUIValgafteknologi_OutputFcn(hObject, eventdata, handles)
 
 % Get default command line output from handles structure
 varargout{1} = handles.output;
-set(gcf, 'Position', get(0,'Screensize'));
-set(gcf, 'units','normalized','outerposition',[0 0 1 1]);
+%set(gcf, 'Position', get(0,'Screensize'));
+%set(gcf, 'units','normalized','outerposition',[0 0 1 1]);
 
 
 % --- Executes on button press in btnLunaValgafteknologi.
