@@ -54,24 +54,27 @@ function GUITeknologioverblik_OpeningFcn(hObject, eventdata, handles, varargin)
 
 % Choose default command line output for GUITeknologioverblik
 handles.output = hObject;
-if ~isfield(handles, 'Velfaerdsteknologi')
-    handles.Velfaerdsteknologi = varargin{1}; %henter handles fra GUIValgafteknologi
-end
-set(gcf,'Pointer','watch');
-AarhusKommuneLogo = imread('AarhusKommuneLogo.jpg');
-axes(handles.axAarhusLogo);
-imshow(AarhusKommuneLogo);
-
-% Update handles structure
-guidata(hObject, handles);
-
-teknologi = fieldnames(handles.Velfaerdsteknologi);
-teknologi = string(teknologi);
-if teknologi == "Luna"
-    set(handles.txtValgtteknologiOverblik,'String', 'Luna loftlift'); 
+if ~isempty(varargin) && ischar(varargin{1}) && strcmp(varargin{1},'exit')
+    close;
 else
-    set(handles.txtValgtteknologiOverblik,'String',teknologi); 
-end
+    if ~isfield(handles, 'Velfaerdsteknologi')
+        handles.Velfaerdsteknologi = varargin{1}; %henter handles fra GUIValgafteknologi
+    end
+
+    AarhusKommuneLogo = imread('AarhusKommuneLogo.jpg');
+    axes(handles.axAarhusLogo);
+    imshow(AarhusKommuneLogo);
+
+    % Update handles structure
+    guidata(hObject, handles);
+
+    teknologi = fieldnames(handles.Velfaerdsteknologi);
+    teknologi = string(teknologi);
+    if teknologi == "Luna"
+        set(handles.txtValgtteknologiOverblik,'String', 'Luna loftlift'); 
+    else
+        set(handles.txtValgtteknologiOverblik,'String',teknologi); 
+    end
 
 set(handles.txtAntalGangeTeknologioverblik,'String',num2str(handles.Velfaerdsteknologi.(teknologi)(1).Medarbejdere))
 D = [handles.Velfaerdsteknologi.(teknologi).Varighedforarbejdsgang];
@@ -87,10 +90,12 @@ set(handles.stDatoTeknologiOverblik, 'String', stringDato)
 
 axes(handles.axesMedarbejdereTeknologiOverblik)
 ylabel('Antal medarbejdere')
+title('Gennemsnittet af antal medarbejdere ved en arbejdsgang')
 axes(handles.axesVarighedTeknologiOverblik)
 ylabel('Varighed i minutter')
-
+title('Gennemsnittet af hvor lang tid en arbejdsgang tager')
 set(gcf,'Pointer','arrow');
+end
 % UIWAIT makes GUITeknologioverblik wait for user response (see UIRESUME)
 % uiwait(handles.figure1);
 
@@ -180,10 +185,12 @@ D = duration(D,'InputFormat',infmt);
 VisData(handles,[handles.Velfaerdsteknologi.(teknologi).Tidspunkt],[handles.Velfaerdsteknologi.(teknologi).Medarbejdere],handles.axesMedarbejdereTeknologiOverblik,'Teknologi');
 VisData(handles,[handles.Velfaerdsteknologi.(teknologi).Tidspunkt],D,handles.axesVarighedTeknologiOverblik,'Teknologi');
 
-axes(handles.axesMedarbejdereTeknologiOverblik)
-ylabel('Antal medarbejdere')
-axes(handles.axesVarighedTeknologiOverblik)
-ylabel('Varighed i minutter')
+    axes(handles.axesMedarbejdereTeknologiOverblik)
+    ylabel('Antal medarbejdere')
+    title('Gennemsnittet af antal medarbejdere ved en arbejdsgang')
+    axes(handles.axesVarighedTeknologiOverblik)
+    ylabel('Varighed i minutter')
+    title('Gennemsnittet af hvor lang tid en arbejdsgang tager')
 
 
 
@@ -218,9 +225,3 @@ function rbAar_Callback(hObject, eventdata, handles)
 % Hint: get(hObject,'Value') returns toggle state of rbAar
 
 
-% --- If Enable == 'on', executes on mouse press in 5 pixel border.
-% --- Otherwise, executes on mouse press in 5 pixel border or over text3.
-function text3_ButtonDownFcn(hObject, eventdata, handles)
-% hObject    handle to text3 (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)

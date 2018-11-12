@@ -81,8 +81,10 @@ else
         
         axes(handles.axesMedarbejderSensorDataVindue)
         ylabel('Antal medarbejdere')
+        title('Gennemsnittet af antal medarbejdere ved en arbejdsgang')
         axes(handles.axesVarighedSensorDataVindue)
         ylabel('Varighed i minutter')
+        title('Gennemsnittet af hvor lang tid en arbejdsgang tager')
         
         
     end 
@@ -98,6 +100,7 @@ else
         %følgende format. 
         infmt = 'mm:ss';
         Varighed = duration(Varighed,'InputFormat',infmt); 
+        
         [startDato,slutDato] =  VisData(handles,[handles.Velfaerdsteknologi.CarendoSensor.(string(sensor)).Tidspunkt],[handles.Velfaerdsteknologi.CarendoSensor.(string(sensor)).Medarbejdere],handles.axesMedarbejderSensorDataVindue,'Sensor');
         [~,stringDato] =  VisData(handles,[handles.Velfaerdsteknologi.CarendoSensor.(string(sensor)).Tidspunkt],Varighed,handles.axesVarighedSensorDataVindue,'Sensor');
         
@@ -106,8 +109,10 @@ else
         
         axes(handles.axesMedarbejderSensorDataVindue)
         ylabel('Antal medarbejdere')
+        title('Gennemsnittet af antal medarbejdere ved en arbejdsgang')
         axes(handles.axesVarighedSensorDataVindue)
         ylabel('Varighed i minutter')
+        title('Gennemsnittet af hvor lang tid en arbejdsgang tager')
     end
     
     AarhusKommuneLogo = imread('AarhusKommuneLogo.jpg');
@@ -195,8 +200,10 @@ guidata(hObject,handles);
 handles=OpdaterListboxmedBemaerkning(handles, startDato, slutDato);
 axes(handles.axesMedarbejderSensorDataVindue)
 ylabel('Antal medarbejdere')
+title('Gennemsnittet af antal medarbejdere ved en arbejdsgang')
 axes(handles.axesVarighedSensorDataVindue)
 ylabel('Varighed i minutter')
+title('Gennemsnittet af hvor lang tid en arbejdsgang tager')
 
 % --- Executes on button press in etDatoSensor.
 function etDatoSensor_Callback(hObject, eventdata, handles)
@@ -232,9 +239,11 @@ Varighed = duration(Varighed,'InputFormat',infmt);
 guidata(hObject,handles);
 handles=OpdaterListboxmedBemaerkning(handles,startDato, slutDato);
 axes(handles.axesMedarbejderSensorDataVindue)
+title('Gennemsnittet af antal medarbejdere ved en arbejdsgang')
 ylabel('Antal medarbejdere')
 axes(handles.axesVarighedSensorDataVindue)
 ylabel('Varighed i minutter')
+title('Gennemsnittet af hvor lang tid en arbejdsgang tager')
 
 % --- Executes on button press in btnTilbageSensorDataoverblik.
 function btnTilbageSensorDataoverblik_Callback(hObject, eventdata, handles)

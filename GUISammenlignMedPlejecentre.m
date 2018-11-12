@@ -54,46 +54,51 @@ function GUISammenlignMedPlejecentre_OpeningFcn(hObject, eventdata, handles, var
 
 % Choose default command line output for GUISammenlignMedPlejecentre
 handles.output = hObject;
-set(gcf,'Pointer','watch');
-AarhusKommuneLogo = imread('AarhusKommuneLogo.jpg');
-axes(handles.axAarhusLogo);
-imshow(AarhusKommuneLogo);
+if ~isempty(varargin) && ischar(varargin{1}) && strcmp(varargin{1},'exit')
+    close;
+else
+    AarhusKommuneLogo = imread('AarhusKommuneLogo.jpg');
+    axes(handles.axAarhusLogo);
+    imshow(AarhusKommuneLogo);
 
-handles.TeknologiOverblik = varargin{1};
-handles.teknologi = fieldnames(handles.TeknologiOverblik);
-%guidata(hObject, handles);
-% Update handles structure
-guidata(hObject, handles);
+    handles.TeknologiOverblik = varargin{1};
+    handles.teknologi = fieldnames(handles.TeknologiOverblik);
+    %guidata(hObject, handles);
+    set(handles.txtValgtTeknologiSammenlignmedandreplejecentre, 'String',handles.teknologi)
+    % Update handles structure
+    
+    guidata(hObject, handles);
 
-handles = IndlaesVelfaerdsteknologi(handles, 'Plejecentre');
-guidata(hObject,handles);
+    handles = IndlaesVelfaerdsteknologi(handles, 'Plejecentre');
+    guidata(hObject,handles);
 
-teknologi = string(handles.teknologi);
-VarighedPlejecenter = [handles.Velfaerdsteknologi.(teknologi).Varighedforarbejdsgang];
-VarighedTeknologi = [handles.TeknologiOverblik.(teknologi).Varighedforarbejdsgang];
-%Idet at det er en tid så skal det skrives ud i typen duration med
-%følgende format. 
-infmt = 'mm:ss';
-VarighedPlejecenter = duration(VarighedPlejecenter,'InputFormat',infmt); 
-VarighedTeknologi = duration(VarighedTeknologi,'InputFormat',infmt); 
-axMedarbejdere = handles.axMedarbejderePlejecentre;
-VisData(handles,[handles.Velfaerdsteknologi.(teknologi).Tidspunkt],[handles.Velfaerdsteknologi.(teknologi).Medarbejdere],axMedarbejdere,'Plejecentre');
-hold on 
-VisData(handles,[handles.TeknologiOverblik.(teknologi).Tidspunkt],[handles.TeknologiOverblik.(teknologi).Medarbejdere],axMedarbejdere,'Plejecentre');
-hold off 
-%axMedarbejdere(1).YColor = [0.69, 0.49, 0];
-%axMedarbejdere(2).YColor = [0.69, 0, 0.21];
-axes(handles.axMedarbejderePlejecentre)
-ylabel('Antal medarbejdere')
+    teknologi = string(handles.teknologi);
+    VarighedPlejecenter = [handles.Velfaerdsteknologi.(teknologi).Varighedforarbejdsgang];
+    VarighedTeknologi = [handles.TeknologiOverblik.(teknologi).Varighedforarbejdsgang];
+    %Idet at det er en tid så skal det skrives ud i typen duration med
+    %følgende format. 
+    infmt = 'mm:ss';
+    VarighedPlejecenter = duration(VarighedPlejecenter,'InputFormat',infmt); 
+    VarighedTeknologi = duration(VarighedTeknologi,'InputFormat',infmt); 
+    axMedarbejdere = handles.axMedarbejderePlejecentre;
+    VisData(handles,[handles.Velfaerdsteknologi.(teknologi).Tidspunkt],[handles.Velfaerdsteknologi.(teknologi).Medarbejdere],axMedarbejdere,'Plejecentre');
+    hold on 
+    VisData(handles,[handles.TeknologiOverblik.(teknologi).Tidspunkt],[handles.TeknologiOverblik.(teknologi).Medarbejdere],axMedarbejdere,'Plejecentre');
+    hold off 
+    %axMedarbejdere(1).YColor = [0.69, 0.49, 0];
+    %axMedarbejdere(2).YColor = [0.69, 0, 0.21];
+    axes(handles.axMedarbejderePlejecentre)
+    ylabel('Antal medarbejdere')
+    title('Gennemsnittet af antal medarbejdere ved en arbejdsgang')
 
-VisData(handles,[handles.Velfaerdsteknologi.(teknologi).Tidspunkt],VarighedPlejecenter,handles.axVarighedPlejecentre,'Plejecentre');
-hold on 
-VisData(handles,[handles.TeknologiOverblik.(teknologi).Tidspunkt],VarighedTeknologi,handles.axVarighedPlejecentre,'Plejecentre');
-hold off 
-axes(handles.axVarighedPlejecentre)
-ylabel('Varighed i minutter')
-
-set(gcf,'Pointer','arrow');
+    VisData(handles,[handles.Velfaerdsteknologi.(teknologi).Tidspunkt],VarighedPlejecenter,handles.axVarighedPlejecentre,'Plejecentre');
+    hold on 
+    VisData(handles,[handles.TeknologiOverblik.(teknologi).Tidspunkt],VarighedTeknologi,handles.axVarighedPlejecentre,'Plejecentre');
+    hold off 
+    axes(handles.axVarighedPlejecentre)
+    ylabel('Varighed i minutter')
+    title('Gennemsnittet af hvor lang tid en arbejdsgang tager')
+end
 % UIWAIT makes GUISammenlignMedPlejecentre wait for user response (see UIRESUME)
 % uiwait(handles.figure1);
 
@@ -140,6 +145,7 @@ hold off
 %axMedarbejdere(2).YColor = [0.69, 0, 0.21];
 axes(handles.axMedarbejderePlejecentre)
 ylabel('Antal medarbejdere')
+title('Gennemsnittet af antal medarbejdere ved en arbejdsgang')
 
 VisData(handles,[handles.Velfaerdsteknologi.(teknologi).Tidspunkt],VarighedPlejecenter,handles.axVarighedPlejecentre,'Plejecentre');
 hold on 
@@ -147,6 +153,7 @@ VisData(handles,[handles.TeknologiOverblik.(teknologi).Tidspunkt],VarighedTeknol
 hold off 
 axes(handles.axVarighedPlejecentre)
 ylabel('Varighed i minutter')
+title('Gennemsnittet af hvor lang tid en arbejdsgang tager')
 
 
 % --- Executes when selected object is changed in btngroupRedigergrafPlejecentre.
@@ -171,6 +178,7 @@ hold off
 %axMedarbejdere(2).YColor = [0.69, 0, 0.21];
 axes(handles.axMedarbejderePlejecentre)
 ylabel('Antal medarbejdere')
+title('Gennemsnittet af antal medarbejdere ved en arbejdsgang')
 
 
 
@@ -180,14 +188,17 @@ VisData(handles,[handles.TeknologiOverblik.(teknologi).Tidspunkt],VarighedTeknol
 hold off 
 axes(handles.axVarighedPlejecentre)
 ylabel('Varighed i minutter')
-
+title('Gennemsnittet af hvor lang tid en arbejdsgang tager')
 
 % --- Executes on button press in btnTilbageSammenlignmedandreplejecentre.
 function btnTilbageSammenlignmedandreplejecentre_Callback(hObject, eventdata, handles)
 % hObject    handle to btnTilbageSammenlignmedandreplejecentre (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-
+GUISammenlignMedPlejecentre_OpeningFcn(hObject, eventdata, handles, 'exit');
+ % --- Executes when user attempts to close GUISensorDataOverbliksVindue.
+handles.TilbageKnap = 'Plejecentre'; 
+GUITeknologioverblik(handles.TeknologiOverblik); 
 
 % --- Executes when btngroupRedigergrafPlejecentre is resized.
 function btngroupRedigergrafPlejecentre_SizeChangedFcn(hObject, eventdata, handles)

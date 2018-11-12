@@ -105,10 +105,13 @@ else
     
     axes(handles.axSuperBrugerYderligereData)
     ylabel('Varighed i minutter')
+    title('Gennemsnitlig varighed af arbejdsgang for superbruger ')
     axes(handles.axAlmindeligYderligereData)
     ylabel('Varighed i minutter')
+    title('Gennemsnitlig varighed af arbejdsgang for almindeligt personale')
     axes(handles.axDirekteTidYderligereData)
     ylabel('Varighed i minutter')
+    title('Gennemsnitlig direkte tid med borger')
     
     % Update handles structure
     guidata(hObject, handles);
@@ -199,4 +202,7 @@ function bntTilbageYderligerData_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 GUIYderligereData_OpeningFcn(hObject, eventdata, handles, 'exit')
-GUITeknologioverblik(handles); 
+handles.Velfaerdsteknologi.Yderligere = []; 
+handles.Velfaerdsteknologi=rmfield(handles.Velfaerdsteknologi,'Yderligere');
+datatogo = handles.Velfaerdsteknologi;
+GUITeknologioverblik(datatogo); 
