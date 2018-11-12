@@ -22,7 +22,7 @@ function varargout = GUITeknologioverblik(varargin)
 
 % Edit the above text to modify the response to help GUITeknologioverblik
 
-% Last Modified by GUIDE v2.5 10-Nov-2018 14:29:41
+% Last Modified by GUIDE v2.5 12-Nov-2018 15:07:26
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -54,6 +54,7 @@ function GUITeknologioverblik_OpeningFcn(hObject, eventdata, handles, varargin)
 
 % Choose default command line output for GUITeknologioverblik
 handles.output = hObject;
+set(gcf, 'WindowState', 'fullscreen');
 if ~isempty(varargin) && ischar(varargin{1}) && strcmp(varargin{1},'exit')
     close;
 else
@@ -111,7 +112,8 @@ function varargout = GUITeknologioverblik_OutputFcn(hObject, eventdata, handles)
 % Get default command line output from handles structure
 varargout{1} = handles.output;
 %set(gcf, 'Position', get(0,'Screensize'));
-set(gcf, 'Units', 'normal', 'Position', [0 0 1 1])
+%set(gcf, 'Units', 'normal', 'Position', [0 0 1 1])
+set(gcf, 'WindowState', 'fullscreen');
 set(gcf, 'Toolbar', 'none', 'Menu', 'none');
 
 
@@ -176,22 +178,30 @@ uicalendar('Weekend',[1 0 0 0 0 0 1], ...
 waitfor(handles.stDatoTeknologiOverblik,'String');
 teknologi = fieldnames(handles.Velfaerdsteknologi);
 teknologi = string(teknologi);
-
-D = [handles.Velfaerdsteknologi.(teknologi).Varighedforarbejdsgang];
+Varighed = [handles.Velfaerdsteknologi.(teknologi).Varighedforarbejdsgang];
+tid = [handles.Velfaerdsteknologi.(teknologi).Tidspunkt];
+Medarbejdere = [handles.Velfaerdsteknologi.(teknologi).Medarbejdere];
 %Idet at det er en tid så skal det skrives ud i typen duration med
-%følgende format. 
-infmt = 'mm:ss';
-D = duration(D,'InputFormat',infmt); 
-
-VisData(handles,[handles.Velfaerdsteknologi.(teknologi).Tidspunkt],[handles.Velfaerdsteknologi.(teknologi).Medarbejdere],handles.axesMedarbejdereTeknologiOverblik,'Teknologi');
-VisData(handles,[handles.Velfaerdsteknologi.(teknologi).Tidspunkt],D,handles.axesVarighedTeknologiOverblik,'Teknologi');
-
-    axes(handles.axesMedarbejdereTeknologiOverblik)
-    ylabel('Antal medarbejdere')
-    title('Gennemsnittet af antal medarbejdere ved en arbejdsgang')
-    axes(handles.axesVarighedTeknologiOverblik)
-    ylabel('Varighed i minutter')
-    title('Gennemsnittet af hvor lang tid en arbejdsgang tager')
+%følgende format.
+axMedarbejder = handles.axesMedarbejdereTeknologiOverblik;
+axVarighed = handles.axesVarighedTeknologiOverblik;
+VisOverblikData(handles,tid, Medarbejdere, Varighed, axMedarbejder, axVarighed, 'Teknologi');
+% 
+% D = [handles.Velfaerdsteknologi.(teknologi).Varighedforarbejdsgang];
+% %Idet at det er en tid så skal det skrives ud i typen duration med
+% %følgende format. 
+% infmt = 'mm:ss';
+% D = duration(D,'InputFormat',infmt); 
+% 
+% VisData(handles,[handles.Velfaerdsteknologi.(teknologi).Tidspunkt],[handles.Velfaerdsteknologi.(teknologi).Medarbejdere],handles.axesMedarbejdereTeknologiOverblik,'Teknologi');
+% VisData(handles,[handles.Velfaerdsteknologi.(teknologi).Tidspunkt],D,handles.axesVarighedTeknologiOverblik,'Teknologi');
+% 
+%     axes(handles.axesMedarbejdereTeknologiOverblik)
+%     ylabel('Antal medarbejdere')
+%     title('Gennemsnittet af antal medarbejdere ved en arbejdsgang')
+%     axes(handles.axesVarighedTeknologiOverblik)
+%     ylabel('Varighed i minutter')
+%     title('Gennemsnittet af hvor lang tid en arbejdsgang tager')
 
 
 
@@ -201,20 +211,25 @@ function btngroupRedigerGrafTeknologioverblik_SelectionChangedFcn(hObject, event
 % hObject    handle to the selected object in btngroupRedigerGrafTeknologioverblik 
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-
 teknologi = fieldnames(handles.Velfaerdsteknologi);
 teknologi = string(teknologi);
-D = [handles.Velfaerdsteknologi.(teknologi).Varighedforarbejdsgang];
+Varighed = [handles.Velfaerdsteknologi.(teknologi).Varighedforarbejdsgang];
+tid = [handles.Velfaerdsteknologi.(teknologi).Tidspunkt];
+Medarbejdere = [handles.Velfaerdsteknologi.(teknologi).Medarbejdere];
 %Idet at det er en tid så skal det skrives ud i typen duration med
 %følgende format. 
-infmt = 'mm:ss';
-D = duration(D,'InputFormat',infmt); 
-VisData(handles,[handles.Velfaerdsteknologi.(teknologi).Tidspunkt],[handles.Velfaerdsteknologi.(teknologi).Medarbejdere],handles.axesMedarbejdereTeknologiOverblik,'Teknologi');
-VisData(handles,[handles.Velfaerdsteknologi.(teknologi).Tidspunkt],D,handles.axesVarighedTeknologiOverblik,'Teknologi');
-axes(handles.axesMedarbejdereTeknologiOverblik)
-ylabel('Antal medarbejdere')
-axes(handles.axesVarighedTeknologiOverblik)
-ylabel('Varighed i minutter')
+axMedarbejder = handles.axesMedarbejdereTeknologiOverblik;
+axVarighed = handles.axesVarighedTeknologiOverblik;
+VisOverblikData(handles,tid, Medarbejdere, Varighed, axMedarbejder, axVarighed, 'Teknologi')
+% 
+% infmt = 'mm:ss';
+% D = duration(D,'InputFormat',infmt); 
+% VisData(handles,[handles.Velfaerdsteknologi.(teknologi).Tidspunkt],[handles.Velfaerdsteknologi.(teknologi).Medarbejdere],handles.axesMedarbejdereTeknologiOverblik,'Teknologi');
+% VisData(handles,[handles.Velfaerdsteknologi.(teknologi).Tidspunkt],D,handles.axesVarighedTeknologiOverblik,'Teknologi');
+% axes(handles.axesMedarbejdereTeknologiOverblik)
+% ylabel('Antal medarbejdere')
+% axes(handles.axesVarighedTeknologiOverblik)
+% ylabel('Varighed i minutter')
 
 
 
@@ -225,4 +240,19 @@ function rbAar_Callback(hObject, eventdata, handles)
 % handles    structure with handles and user data (see GUIDATA)
 % Hint: get(hObject,'Value') returns toggle state of rbAar
 
+
+
+
+% --- Executes on button press in btnAfslutSystem.
+function btnAfslutSystem_Callback(hObject, eventdata, handles)
+% hObject    handle to btnAfslutSystem (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+spoergsmaal=sprintf('Ønsker du at afslutte programmet: ?');
+svar=questdlg(spoergsmaal,'Afslut',...
+'Ja', 'Nej', 'Nej'); %den sidste gem er default værdien
+switch svar
+    case 'Ja'
+        close(GUITeknologioverblik)
+end
 

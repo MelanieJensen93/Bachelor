@@ -22,7 +22,7 @@ function varargout = GUISensordataoverblik(varargin)
 
 % Edit the above text to modify the response to help GUISensordataoverblik
 
-% Last Modified by GUIDE v2.5 08-Nov-2018 11:08:47
+% Last Modified by GUIDE v2.5 12-Nov-2018 15:10:28
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -55,6 +55,7 @@ function GUISensordataoverblik_OpeningFcn(hObject, eventdata, handles, varargin)
 
 % Choose default command line output for GUISensordataoverblik
 handles.output = hObject;
+set(gcf, 'WindowState', 'fullscreen');
 if ~isempty(varargin) && ischar(varargin{1}) && strcmp(varargin{1},'exit')
     close;
 else
@@ -96,15 +97,21 @@ else
         udskrift = sprintf('Carendo %s', string(sensor));
         set(handles.txtValgtteknologiSensorOverblik, 'String', udskrift);
         Varighed = [handles.Velfaerdsteknologi.CarendoSensor.(string(sensor)).Varighedforarbejdsgang];
+        tid = [handles.Velfaerdsteknologi.CarendoSensor.(string(sensor)).Tidspunkt];
         %Idet at det er en tid så skal det skrives ud i typen duration med
         %følgende format. 
-        infmt = 'mm:ss';
-        Varighed = duration(Varighed,'InputFormat',infmt); 
+        %infmt = 'mm:ss';
+        %Varighed = duration(Varighed,'InputFormat',infmt); 
+        Medarbejder = [handles.Velfaerdsteknologi.CarendoSensor.(string(sensor)).Medarbejdere];
+        axMedarbejder = handles.axesMedarbejderSensorDataVindue; 
+        axVarighed = handles.axesVarighedSensorDataVindue;
         
-        [startDato,slutDato] =  VisData(handles,[handles.Velfaerdsteknologi.CarendoSensor.(string(sensor)).Tidspunkt],[handles.Velfaerdsteknologi.CarendoSensor.(string(sensor)).Medarbejdere],handles.axesMedarbejderSensorDataVindue,'Sensor');
-        [~,stringDato] =  VisData(handles,[handles.Velfaerdsteknologi.CarendoSensor.(string(sensor)).Tidspunkt],Varighed,handles.axesVarighedSensorDataVindue,'Sensor');
+        [startDato, slutDato] = VisOverblikData(handles,tid, Medarbejder, Varighed, axMedarbejder, axVarighed,'Sensor');
+        guidata(hObject,handles);
+        %[startDato,slutDato] =  VisData(handles,[handles.Velfaerdsteknologi.CarendoSensor.(string(sensor)).Tidspunkt],[handles.Velfaerdsteknologi.CarendoSensor.(string(sensor)).Medarbejdere],handles.axesMedarbejderSensorDataVindue,'Sensor');
+        %[~,stringDato] =  VisData(handles,[handles.Velfaerdsteknologi.CarendoSensor.(string(sensor)).Tidspunkt],Varighed,handles.axesVarighedSensorDataVindue,'Sensor');
         
-        stringDato = string(stringDato);
+        stringDato = string(slutDato);
         set(handles.stDatoSensorOverblik, 'String', stringDato)
         
         axes(handles.axesMedarbejderSensorDataVindue)
@@ -139,8 +146,9 @@ function varargout = GUISensordataoverblik_OutputFcn(hObject, eventdata, handles
 
 % Get default command line output from handles structure
 varargout{1} = handles.output;
-set(gcf, 'Position', get(0,'Screensize'));
-set(gcf, 'units','normalized','outerposition',[0 0 1 1]);
+set(gcf, 'WindowState', 'fullscreen');
+% set(gcf, 'Position', get(0,'Screensize'));
+% set(gcf, 'units','normalized','outerposition',[0 0 1 1]);
 
 
 % --- Executes on button press in btnTilojbemaerkningSensordatavindue.
@@ -191,21 +199,30 @@ teknologi = handles.field;
 sensorer=fieldnames(handles.Velfaerdsteknologi.(teknologi));
 sensor = string(sensorer(handles.Velfaerdsteknologi.BrugerValgtSensor));
 Varighed = [handles.Velfaerdsteknologi.(teknologi).(sensor).Varighedforarbejdsgang];
+tid = [handles.Velfaerdsteknologi.(teknologi).(sensor).Tidspunkt];
+Medarbejder = [handles.Velfaerdsteknologi.(teknologi).(sensor).Medarbejdere];
+axMedarbejder = handles.axesMedarbejderSensorDataVindue;
+axVarighed =handles.axesVarighedSensorDataVindue;
 %Idet at det er en tid så skal det skrives ud i typen duration med
 %følgende format. 
-infmt = 'mm:ss';
-Varighed = duration(Varighed,'InputFormat',infmt); 
-[startDato, slutDato] = VisData(handles,[handles.Velfaerdsteknologi.(teknologi).(sensor).Tidspunkt],[handles.Velfaerdsteknologi.(teknologi).(sensor).Medarbejdere],handles.axesMedarbejderSensorDataVindue,'Sensor');
-[~, ~] = VisData(handles,[handles.Velfaerdsteknologi.(teknologi).(sensor).Tidspunkt],Varighed,handles.axesVarighedSensorDataVindue,'Sensor');
+[startDato, slutDato] = VisOverblikData(handles,tid, Medarbejder, Varighed, axMedarbejder, axVarighed,'Sensor');
 guidata(hObject,handles);
+%handles=OpdaterListboxmedBemaerkning(handles,startDato, slutDato);
+OpdaterBemaerkningSensorOverblik(handles,startDato,slutDato)
+
+% infmt = 'mm:ss';
+% Varighed = duration(Varighed,'InputFormat',infmt); 
+% [startDato, slutDato] = VisData(handles,[handles.Velfaerdsteknologi.(teknologi).(sensor).Tidspunkt],[handles.Velfaerdsteknologi.(teknologi).(sensor).Medarbejdere],handles.axesMedarbejderSensorDataVindue,'Sensor');
+% [~, ~] = VisData(handles,[handles.Velfaerdsteknologi.(teknologi).(sensor).Tidspunkt],Varighed,handles.axesVarighedSensorDataVindue,'Sensor');
+% guidata(hObject,handles);
 %handles=OpdaterListboxmedBemaerkning(handles, startDato, slutDato);
-OpdaterBemaerkningSensorOverblik(handles, startDato, slutDato)
-axes(handles.axesMedarbejderSensorDataVindue)
-ylabel('Antal medarbejdere')
-title('Gennemsnittet af antal medarbejdere ved en arbejdsgang')
-axes(handles.axesVarighedSensorDataVindue)
-ylabel('Varighed i minutter')
-title('Gennemsnittet af hvor lang tid en arbejdsgang tager')
+%OpdaterBemaerkningSensorOverblik(handles, startDato, slutDato)
+% axes(handles.axesMedarbejderSensorDataVindue)
+% ylabel('Antal medarbejdere')
+% title('Gennemsnittet af antal medarbejdere ved en arbejdsgang')
+% axes(handles.axesVarighedSensorDataVindue)
+% ylabel('Varighed i minutter')
+% title('Gennemsnittet af hvor lang tid en arbejdsgang tager')
 
 % --- Executes on button press in etDatoSensor.
 function etDatoSensor_Callback(hObject, eventdata, handles)
@@ -232,21 +249,27 @@ teknologi = handles.field;
 sensorer=fieldnames(handles.Velfaerdsteknologi.(teknologi));
 sensor = string(sensorer(handles.Velfaerdsteknologi.BrugerValgtSensor));
 Varighed = [handles.Velfaerdsteknologi.(teknologi).(sensor).Varighedforarbejdsgang];
-%Idet at det er en tid så skal det skrives ud i typen duration med
-%følgende format. 
-infmt = 'mm:ss';
-Varighed = duration(Varighed,'InputFormat',infmt); 
-[startDato, slutDato]= VisData(handles,[handles.Velfaerdsteknologi.(teknologi).(sensor).Tidspunkt],[handles.Velfaerdsteknologi.(teknologi).(sensor).Medarbejdere],handles.axesMedarbejderSensorDataVindue,'Sensor');
-[~,~]=VisData(handles,[handles.Velfaerdsteknologi.(teknologi).(sensor).Tidspunkt],Varighed,handles.axesVarighedSensorDataVindue,'Sensor');
+tid = [handles.Velfaerdsteknologi.(teknologi).(sensor).Tidspunkt];
+Medarbejder = [handles.Velfaerdsteknologi.(teknologi).(sensor).Medarbejdere];
+axMedarbejder = handles.axesMedarbejderSensorDataVindue;
+axVarighed =handles.axesVarighedSensorDataVindue;
+
+% %Idet at det er en tid så skal det skrives ud i typen duration med
+% %følgende format. 
+% infmt = 'mm:ss';
+% Varighed = duration(Varighed,'InputFormat',infmt); 
+% [startDato, slutDato]= VisData(handles,[handles.Velfaerdsteknologi.(teknologi).(sensor).Tidspunkt],[handles.Velfaerdsteknologi.(teknologi).(sensor).Medarbejdere],handles.axesMedarbejderSensorDataVindue,'Sensor');
+% [~,~]=VisData(handles,[handles.Velfaerdsteknologi.(teknologi).(sensor).Tidspunkt],Varighed,handles.axesVarighedSensorDataVindue,'Sensor');
+[startDato, slutDato] = VisOverblikData(handles,tid, Medarbejder, Varighed, axMedarbejder, axVarighed,'Sensor');
 guidata(hObject,handles);
 %handles=OpdaterListboxmedBemaerkning(handles,startDato, slutDato);
 OpdaterBemaerkningSensorOverblik(handles,startDato,slutDato)
-axes(handles.axesMedarbejderSensorDataVindue)
-title('Gennemsnittet af antal medarbejdere ved en arbejdsgang')
-ylabel('Antal medarbejdere')
-axes(handles.axesVarighedSensorDataVindue)
-ylabel('Varighed i minutter')
-title('Gennemsnittet af hvor lang tid en arbejdsgang tager')
+% axes(handles.axesMedarbejderSensorDataVindue)
+% title('Gennemsnittet af antal medarbejdere ved en arbejdsgang')
+% ylabel('Antal medarbejdere')
+% axes(handles.axesVarighedSensorDataVindue)
+% ylabel('Varighed i minutter')
+% title('Gennemsnittet af hvor lang tid en arbejdsgang tager')
 
 % --- Executes on button press in btnTilbageSensorDataoverblik.
 function btnTilbageSensorDataoverblik_Callback(hObject, eventdata, handles)
@@ -266,3 +289,19 @@ function GUISensorDataOverbliksVindue_CloseRequestFcn(hObject, eventdata, handle
 % handles    structure with handles and user data (see GUIDATA)
  % Hint: delete(hObject) closes the figure
 delete(hObject);
+
+
+% --- Executes on button press in btnAfslutSystem.
+function btnAfslutSystem_Callback(hObject, eventdata, handles)
+% hObject    handle to btnAfslutSystem (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+%Stammer fra : https://se.mathworks.com/help/matlab/ref/questdlg.html
+spoergsmaal=sprintf('Ønsker du at afslutte programmet: ?');
+svar=questdlg(spoergsmaal,'Afslut',...
+'Ja', 'Nej', 'Nej'); %den sidste gem er default værdien
+switch svar
+    case 'Ja'
+        GUISensordataoverblik_OpeningFcn(hObject, eventdata, handles, 'exit')
+end

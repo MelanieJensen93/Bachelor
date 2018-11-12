@@ -22,7 +22,7 @@ function varargout = GUIYderligereData(varargin)
 
 % Edit the above text to modify the response to help GUIYderligereData
 
-% Last Modified by GUIDE v2.5 09-Nov-2018 16:35:31
+% Last Modified by GUIDE v2.5 12-Nov-2018 15:11:38
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -54,7 +54,7 @@ function GUIYderligereData_OpeningFcn(hObject, eventdata, handles, varargin)
 
 % Choose default command line output for GUIYderligereData
 handles.output = hObject;
-
+set(gcf, 'WindowState', 'fullscreen');
 if ~isempty(varargin) && ischar(varargin{1}) && strcmp(varargin{1},'exit')
     close;
 else
@@ -130,8 +130,9 @@ function varargout = GUIYderligereData_OutputFcn(hObject, eventdata, handles)
 
 % Get default command line output from handles structure
 varargout{1} = handles.output;
-set(gcf, 'Position', get(0,'Screensize'));
-set(gcf, 'units','normalized','outerposition',[0 0 1 1]);
+set(gcf, 'WindowState', 'fullscreen');
+% set(gcf, 'Position', get(0,'Screensize'));
+% set(gcf, 'units','normalized','outerposition',[0 0 1 1]);
 
 
 % --- Executes on button press in btnVaelgDatoYderligereData.
@@ -212,3 +213,17 @@ handles.Velfaerdsteknologi.Yderligere = [];
 handles.Velfaerdsteknologi=rmfield(handles.Velfaerdsteknologi,'Yderligere');
 datatogo = handles.Velfaerdsteknologi;
 GUITeknologioverblik(datatogo); 
+
+
+% --- Executes on button press in btnAfslutSystem.
+function btnAfslutSystem_Callback(hObject, eventdata, handles)
+% hObject    handle to btnAfslutSystem (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+spoergsmaal=sprintf('Ønsker du at afslutte programmet: ?');
+svar=questdlg(spoergsmaal,'Afslut',...
+'Ja', 'Nej', 'Nej'); %den sidste gem er default værdien
+switch svar
+    case 'Ja'
+        close(GUIYderligereData)
+end

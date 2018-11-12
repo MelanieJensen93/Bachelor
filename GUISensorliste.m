@@ -22,7 +22,7 @@ function varargout = GUISensorliste(varargin)
 
 % Edit the above text to modify the response to help GUISensorliste
 
-% Last Modified by GUIDE v2.5 18-Oct-2018 11:26:11
+% Last Modified by GUIDE v2.5 12-Nov-2018 15:13:12
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -54,7 +54,7 @@ function GUISensorliste_OpeningFcn(hObject, eventdata, handles, varargin)
 
 % Choose default command line output for GUISensorliste
 handles.output = hObject;
-
+set(gcf, 'WindowState', 'fullscreen');
 if ~isempty(varargin) && ischar(varargin{1}) && strcmp(varargin{1},'exit')
     close;
 else
@@ -107,8 +107,9 @@ function varargout = GUISensorliste_OutputFcn(hObject, eventdata, handles)
 
 % Get default command line output from handles structure
 varargout{1} = handles.output;
-set(gcf, 'Position', get(0,'Screensize'));
-set(gcf, 'units','normalized','outerposition',[0 0 1 1]);
+set(gcf, 'WindowState', 'fullscreen');
+% set(gcf, 'Position', get(0,'Screensize'));
+% set(gcf, 'units','normalized','outerposition',[0 0 1 1]);
 
 
 % --- Executes on button press in btnTilbageSensorliste.
@@ -148,3 +149,13 @@ if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgr
     set(hObject,'BackgroundColor','white');
     
 end
+
+
+% --- Executes on button press in btnAfslutSystem.
+function btnAfslutSystem_Callback(hObject, eventdata, handles)
+% hObject    handle to btnAfslutSystem (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+GUISensorliste_OpeningFcn(hObject, eventdata, handles, 'exit');
+
+

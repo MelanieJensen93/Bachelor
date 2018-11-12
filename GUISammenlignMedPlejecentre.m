@@ -22,7 +22,7 @@ function varargout = GUISammenlignMedPlejecentre(varargin)
 
 % Edit the above text to modify the response to help GUISammenlignMedPlejecentre
 
-% Last Modified by GUIDE v2.5 10-Nov-2018 10:25:16
+% Last Modified by GUIDE v2.5 12-Nov-2018 19:11:54
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -54,6 +54,7 @@ function GUISammenlignMedPlejecentre_OpeningFcn(hObject, eventdata, handles, var
 
 % Choose default command line output for GUISammenlignMedPlejecentre
 handles.output = hObject;
+set(gcf, 'WindowState', 'fullscreen');
 if ~isempty(varargin) && ischar(varargin{1}) && strcmp(varargin{1},'exit')
     close;
 else
@@ -112,8 +113,9 @@ function varargout = GUISammenlignMedPlejecentre_OutputFcn(hObject, eventdata, h
 
 % Get default command line output from handles structure
 varargout{1} = handles.output;
-set(gcf, 'Position', get(0,'Screensize'));
-set(gcf, 'units', 'normalized', 'outerposition', [0 0 1 1])
+set(gcf, 'WindowState', 'fullscreen');
+% set(gcf, 'Position', get(0,'Screensize'));
+% set(gcf, 'units', 'normalized', 'outerposition', [0 0 1 1])
 
 
 % --- Executes on button press in btnVaelgDatoPlejecentre.
@@ -205,3 +207,17 @@ function btngroupRedigergrafPlejecentre_SizeChangedFcn(hObject, eventdata, handl
 % hObject    handle to btngroupRedigergrafPlejecentre (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
+
+
+% --- Executes on button press in btnAfslutSystem.
+function btnAfslutSystem_Callback(hObject, eventdata, handles)
+% hObject    handle to btnAfslutSystem (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+spoergsmaal=sprintf('Ønsker du at afslutte programmet: ?');
+svar=questdlg(spoergsmaal,'Afslut',...
+'Ja', 'Nej', 'Nej'); %den sidste gem er default værdien
+switch svar
+    case 'Ja'
+        close(GUIGUISammenlignMedPlejecentre)
+end
