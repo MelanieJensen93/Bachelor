@@ -193,3 +193,36 @@ VisData(handles,[handles.Velfaerdsteknologi.(teknologi).Tidspunkt],D,handles.axe
     ylabel('Varighed i minutter')
     title('Gennemsnittet af hvor lang tid en arbejdsgang tager')
 
+
+
+
+% --- Executes when selected object is changed in btngroupRedigerGrafTeknologioverblik.
+function btngroupRedigerGrafTeknologioverblik_SelectionChangedFcn(hObject, eventdata, handles)
+% hObject    handle to the selected object in btngroupRedigerGrafTeknologioverblik 
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+teknologi = fieldnames(handles.Velfaerdsteknologi);
+teknologi = string(teknologi);
+D = [handles.Velfaerdsteknologi.(teknologi).Varighedforarbejdsgang];
+%Idet at det er en tid så skal det skrives ud i typen duration med
+%følgende format. 
+infmt = 'mm:ss';
+D = duration(D,'InputFormat',infmt); 
+VisData(handles,[handles.Velfaerdsteknologi.(teknologi).Tidspunkt],[handles.Velfaerdsteknologi.(teknologi).Medarbejdere],handles.axesMedarbejdereTeknologiOverblik,'Teknologi');
+VisData(handles,[handles.Velfaerdsteknologi.(teknologi).Tidspunkt],D,handles.axesVarighedTeknologiOverblik,'Teknologi');
+axes(handles.axesMedarbejdereTeknologiOverblik)
+ylabel('Antal medarbejdere')
+axes(handles.axesVarighedTeknologiOverblik)
+ylabel('Varighed i minutter')
+
+
+
+% --- Executes on button press in rbAar.
+function rbAar_Callback(hObject, eventdata, handles)
+% hObject    handle to rbAar (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+% Hint: get(hObject,'Value') returns toggle state of rbAar
+
+
