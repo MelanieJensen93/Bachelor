@@ -215,7 +215,6 @@ function rbAar_Callback(hObject, eventdata, handles)
 % hObject    handle to rbAar (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-
 % Hint: get(hObject,'Value') returns toggle state of rbAar
 
 
