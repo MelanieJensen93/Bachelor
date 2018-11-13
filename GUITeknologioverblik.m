@@ -176,16 +176,17 @@ uicalendar('Weekend',[1 0 0 0 0 0 1], ...
 'DestinationUI', handles.stDatoTeknologiOverblik);
 
 waitfor(handles.stDatoTeknologiOverblik,'String');
-teknologi = fieldnames(handles.Velfaerdsteknologi);
-teknologi = string(teknologi);
-Varighed = [handles.Velfaerdsteknologi.(teknologi).Varighedforarbejdsgang];
-tid = [handles.Velfaerdsteknologi.(teknologi).Tidspunkt];
-Medarbejdere = [handles.Velfaerdsteknologi.(teknologi).Medarbejdere];
-%Idet at det er en tid så skal det skrives ud i typen duration med
-%følgende format.
-axMedarbejder = handles.axesMedarbejdereTeknologiOverblik;
-axVarighed = handles.axesVarighedTeknologiOverblik;
-VisOverblikData(handles,tid, Medarbejdere, Varighed, axMedarbejder, axVarighed, 'Teknologi');
+% teknologi = fieldnames(handles.Velfaerdsteknologi);
+% teknologi = string(teknologi);
+% Varighed = [handles.Velfaerdsteknologi.(teknologi).Varighedforarbejdsgang];
+% tid = [handles.Velfaerdsteknologi.(teknologi).Tidspunkt];
+% Medarbejdere = [handles.Velfaerdsteknologi.(teknologi).Medarbejdere];
+% %Idet at det er en tid så skal det skrives ud i typen duration med
+% %følgende format.
+% axMedarbejder = handles.axesMedarbejdereTeknologiOverblik;
+% axVarighed = handles.axesVarighedTeknologiOverblik;
+% VisOverblikData(handles,tid, Medarbejdere, Varighed, axMedarbejder, axVarighed, 'Teknologi');
+VisOverblikData(handles,'Teknologi');
 % 
 % D = [handles.Velfaerdsteknologi.(teknologi).Varighedforarbejdsgang];
 % %Idet at det er en tid så skal det skrives ud i typen duration med
@@ -211,16 +212,17 @@ function btngroupRedigerGrafTeknologioverblik_SelectionChangedFcn(hObject, event
 % hObject    handle to the selected object in btngroupRedigerGrafTeknologioverblik 
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-teknologi = fieldnames(handles.Velfaerdsteknologi);
-teknologi = string(teknologi);
-Varighed = [handles.Velfaerdsteknologi.(teknologi).Varighedforarbejdsgang];
-tid = [handles.Velfaerdsteknologi.(teknologi).Tidspunkt];
-Medarbejdere = [handles.Velfaerdsteknologi.(teknologi).Medarbejdere];
+% teknologi = fieldnames(handles.Velfaerdsteknologi);
+% teknologi = string(teknologi);
+% Varighed = [handles.Velfaerdsteknologi.(teknologi).Varighedforarbejdsgang];
+% tid = [handles.Velfaerdsteknologi.(teknologi).Tidspunkt];
+% Medarbejdere = [handles.Velfaerdsteknologi.(teknologi).Medarbejdere];
 %Idet at det er en tid så skal det skrives ud i typen duration med
 %følgende format. 
-axMedarbejder = handles.axesMedarbejdereTeknologiOverblik;
-axVarighed = handles.axesVarighedTeknologiOverblik;
-VisOverblikData(handles,tid, Medarbejdere, Varighed, axMedarbejder, axVarighed, 'Teknologi')
+% axMedarbejder = handles.axesMedarbejdereTeknologiOverblik;
+% axVarighed = handles.axesVarighedTeknologiOverblik;
+VisOverblikData(handles,'Teknologi');
+%VisOverblikData(handles,tid, Medarbejdere, Varighed, axMedarbejder, axVarighed, 'Teknologi')
 % 
 % infmt = 'mm:ss';
 % D = duration(D,'InputFormat',infmt); 
