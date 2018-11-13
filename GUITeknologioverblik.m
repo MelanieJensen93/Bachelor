@@ -78,23 +78,10 @@ else
     end
 
 set(handles.txtAntalGangeTeknologioverblik,'String',num2str(handles.Velfaerdsteknologi.(teknologi)(1).Medarbejdere))
-D = [handles.Velfaerdsteknologi.(teknologi).Varighedforarbejdsgang];
-%Idet at det er en tid så skal det skrives ud i typen duration med
-%følgende format. 
-infmt = 'mm:ss';
-D = duration(D,'InputFormat',infmt); 
-VisData(handles,[handles.Velfaerdsteknologi.(teknologi).Tidspunkt],[handles.Velfaerdsteknologi.(teknologi).Medarbejdere],handles.axesMedarbejdereTeknologiOverblik,'Teknologi');
-[~,stringDato] = VisData(handles,[handles.Velfaerdsteknologi.(teknologi).Tidspunkt],D,handles.axesVarighedTeknologiOverblik,'Teknologi');
+[~, slutDato] = VisOverblikData(handles,'Teknologi')
+slutDato = string(slutDato);
+set(handles.stDatoTeknologiOverblik, 'String', slutDato)
 
-stringDato = string(stringDato);
-set(handles.stDatoTeknologiOverblik, 'String', stringDato)
-
-axes(handles.axesMedarbejdereTeknologiOverblik)
-ylabel('Antal medarbejdere')
-title('Gennemsnittet af antal medarbejdere ved en arbejdsgang')
-axes(handles.axesVarighedTeknologiOverblik)
-ylabel('Varighed i minutter')
-title('Gennemsnittet af hvor lang tid en arbejdsgang tager')
 set(gcf,'Pointer','arrow');
 
 end
@@ -176,63 +163,14 @@ uicalendar('Weekend',[1 0 0 0 0 0 1], ...
 'DestinationUI', handles.stDatoTeknologiOverblik);
 
 waitfor(handles.stDatoTeknologiOverblik,'String');
-% teknologi = fieldnames(handles.Velfaerdsteknologi);
-% teknologi = string(teknologi);
-% Varighed = [handles.Velfaerdsteknologi.(teknologi).Varighedforarbejdsgang];
-% tid = [handles.Velfaerdsteknologi.(teknologi).Tidspunkt];
-% Medarbejdere = [handles.Velfaerdsteknologi.(teknologi).Medarbejdere];
-% %Idet at det er en tid så skal det skrives ud i typen duration med
-% %følgende format.
-% axMedarbejder = handles.axesMedarbejdereTeknologiOverblik;
-% axVarighed = handles.axesVarighedTeknologiOverblik;
-% VisOverblikData(handles,tid, Medarbejdere, Varighed, axMedarbejder, axVarighed, 'Teknologi');
 VisOverblikData(handles,'Teknologi');
-% 
-% D = [handles.Velfaerdsteknologi.(teknologi).Varighedforarbejdsgang];
-% %Idet at det er en tid så skal det skrives ud i typen duration med
-% %følgende format. 
-% infmt = 'mm:ss';
-% D = duration(D,'InputFormat',infmt); 
-% 
-% VisData(handles,[handles.Velfaerdsteknologi.(teknologi).Tidspunkt],[handles.Velfaerdsteknologi.(teknologi).Medarbejdere],handles.axesMedarbejdereTeknologiOverblik,'Teknologi');
-% VisData(handles,[handles.Velfaerdsteknologi.(teknologi).Tidspunkt],D,handles.axesVarighedTeknologiOverblik,'Teknologi');
-% 
-%     axes(handles.axesMedarbejdereTeknologiOverblik)
-%     ylabel('Antal medarbejdere')
-%     title('Gennemsnittet af antal medarbejdere ved en arbejdsgang')
-%     axes(handles.axesVarighedTeknologiOverblik)
-%     ylabel('Varighed i minutter')
-%     title('Gennemsnittet af hvor lang tid en arbejdsgang tager')
-
-
-
 
 % --- Executes when selected object is changed in btngroupRedigerGrafTeknologioverblik.
 function btngroupRedigerGrafTeknologioverblik_SelectionChangedFcn(hObject, eventdata, handles)
 % hObject    handle to the selected object in btngroupRedigerGrafTeknologioverblik 
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-% teknologi = fieldnames(handles.Velfaerdsteknologi);
-% teknologi = string(teknologi);
-% Varighed = [handles.Velfaerdsteknologi.(teknologi).Varighedforarbejdsgang];
-% tid = [handles.Velfaerdsteknologi.(teknologi).Tidspunkt];
-% Medarbejdere = [handles.Velfaerdsteknologi.(teknologi).Medarbejdere];
-%Idet at det er en tid så skal det skrives ud i typen duration med
-%følgende format. 
-% axMedarbejder = handles.axesMedarbejdereTeknologiOverblik;
-% axVarighed = handles.axesVarighedTeknologiOverblik;
 VisOverblikData(handles,'Teknologi');
-%VisOverblikData(handles,tid, Medarbejdere, Varighed, axMedarbejder, axVarighed, 'Teknologi')
-% 
-% infmt = 'mm:ss';
-% D = duration(D,'InputFormat',infmt); 
-% VisData(handles,[handles.Velfaerdsteknologi.(teknologi).Tidspunkt],[handles.Velfaerdsteknologi.(teknologi).Medarbejdere],handles.axesMedarbejdereTeknologiOverblik,'Teknologi');
-% VisData(handles,[handles.Velfaerdsteknologi.(teknologi).Tidspunkt],D,handles.axesVarighedTeknologiOverblik,'Teknologi');
-% axes(handles.axesMedarbejdereTeknologiOverblik)
-% ylabel('Antal medarbejdere')
-% axes(handles.axesVarighedTeknologiOverblik)
-% ylabel('Varighed i minutter')
-
 
 
 % --- Executes on button press in rbAar.

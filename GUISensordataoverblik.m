@@ -68,26 +68,10 @@ else
         sensor = Sensornavn(ValgtSensor);
         udskrift = sprintf('Luna loftlift %s', string(sensor));
         set(handles.txtValgtteknologiSensorOverblik, 'String', udskrift);
-        
-        Varighed = [handles.Velfaerdsteknologi.LunaSensor.(string(sensor)).Varighedforarbejdsgang];
-        %Idet at det er en tid så skal det skrives ud i typen duration med
-        %følgende format. 
-        infmt = 'mm:ss';
-        Varighed = duration(Varighed,'InputFormat',infmt); 
-        [startDato,slutDato] =  VisData(handles,[handles.Velfaerdsteknologi.LunaSensor.(string(sensor)).Tidspunkt],[handles.Velfaerdsteknologi.LunaSensor.(string(sensor)).Medarbejdere],handles.axesMedarbejderSensorDataVindue,'Sensor');
-        [~,stringDato] =  VisData(handles,[handles.Velfaerdsteknologi.LunaSensor.(string(sensor)).Tidspunkt],Varighed,handles.axesVarighedSensorDataVindue,'Sensor');
-        
-        stringDato = string(stringDato);
-        set(handles.stDatoSensorOverblik, 'String', stringDato)
-        
-        axes(handles.axesMedarbejderSensorDataVindue)
-        ylabel('Antal medarbejdere')
-        title('Gennemsnittet af antal medarbejdere ved en arbejdsgang')
-        axes(handles.axesVarighedSensorDataVindue)
-        ylabel('Varighed i minutter')
-        title('Gennemsnittet af hvor lang tid en arbejdsgang tager')
-        
-        
+        [startDato, slutDato] = VisOverblikData(handles,'Sensor');
+        guidata(hObject,handles);
+        stringDato = string(slutDato);
+        set(handles.stDatoSensorOverblik, 'String', stringDato)        
     end 
 
     if isfield(handles.Velfaerdsteknologi, 'CarendoSensor')
@@ -96,31 +80,10 @@ else
         sensor = Sensornavn(ValgtSensor);
         udskrift = sprintf('Carendo %s', string(sensor));
         set(handles.txtValgtteknologiSensorOverblik, 'String', udskrift);
-%         Varighed = [handles.Velfaerdsteknologi.CarendoSensor.(string(sensor)).Varighedforarbejdsgang];
-%         tid = [handles.Velfaerdsteknologi.CarendoSensor.(string(sensor)).Tidspunkt];
-%         %Idet at det er en tid så skal det skrives ud i typen duration med
-%         %følgende format. 
-%         %infmt = 'mm:ss';
-%         %Varighed = duration(Varighed,'InputFormat',infmt); 
-%         Medarbejder = [handles.Velfaerdsteknologi.CarendoSensor.(string(sensor)).Medarbejdere];
-%         axMedarbejder = handles.axesMedarbejderSensorDataVindue; 
-%         axVarighed = handles.axesVarighedSensorDataVindue;
-            [startDato, slutDato] = VisOverblikData(handles,'Sensor');
-%         
-        %[startDato, slutDato] = VisOverblikData(handles,tid, Medarbejder, Varighed, axMedarbejder, axVarighed,'Sensor');
+        [startDato, slutDato] = VisOverblikData(handles,'Sensor');
         guidata(hObject,handles);
-        %[startDato,slutDato] =  VisData(handles,[handles.Velfaerdsteknologi.CarendoSensor.(string(sensor)).Tidspunkt],[handles.Velfaerdsteknologi.CarendoSensor.(string(sensor)).Medarbejdere],handles.axesMedarbejderSensorDataVindue,'Sensor');
-        %[~,stringDato] =  VisData(handles,[handles.Velfaerdsteknologi.CarendoSensor.(string(sensor)).Tidspunkt],Varighed,handles.axesVarighedSensorDataVindue,'Sensor');
-        
         stringDato = string(slutDato);
         set(handles.stDatoSensorOverblik, 'String', stringDato)
-        
-        axes(handles.axesMedarbejderSensorDataVindue)
-        ylabel('Antal medarbejdere')
-        title('Gennemsnittet af antal medarbejdere ved en arbejdsgang')
-        axes(handles.axesVarighedSensorDataVindue)
-        ylabel('Varighed i minutter')
-        title('Gennemsnittet af hvor lang tid en arbejdsgang tager')
     end
     
     AarhusKommuneLogo = imread('AarhusKommuneLogo.jpg');
@@ -196,35 +159,10 @@ uicalendar('Weekend',[1 0 0 0 0 0 1], ...
 'DestinationUI', handles.stDatoSensorOverblik);
 
 waitfor(handles.stDatoSensorOverblik,'String');
-% teknologi = handles.field; 
-% sensorer=fieldnames(handles.Velfaerdsteknologi.(teknologi));
-% sensor = string(sensorer(handles.Velfaerdsteknologi.BrugerValgtSensor));
-% Varighed = [handles.Velfaerdsteknologi.(teknologi).(sensor).Varighedforarbejdsgang];
-% tid = [handles.Velfaerdsteknologi.(teknologi).(sensor).Tidspunkt];
-% Medarbejder = [handles.Velfaerdsteknologi.(teknologi).(sensor).Medarbejdere];
-% axMedarbejder = handles.axesMedarbejderSensorDataVindue;
-% axVarighed =handles.axesVarighedSensorDataVindue;
-%Idet at det er en tid så skal det skrives ud i typen duration med
 %følgende format. 
 [startDato, slutDato] = VisOverblikData(handles,'Sensor');
-%[startDato, slutDato] = VisOverblikData(handles,tid, Medarbejder, Varighed, axMedarbejder, axVarighed,'Sensor');
 guidata(hObject,handles);
-%handles=OpdaterListboxmedBemaerkning(handles,startDato, slutDato);
 OpdaterBemaerkningSensorOverblik(handles,startDato,slutDato)
-
-% infmt = 'mm:ss';
-% Varighed = duration(Varighed,'InputFormat',infmt); 
-% [startDato, slutDato] = VisData(handles,[handles.Velfaerdsteknologi.(teknologi).(sensor).Tidspunkt],[handles.Velfaerdsteknologi.(teknologi).(sensor).Medarbejdere],handles.axesMedarbejderSensorDataVindue,'Sensor');
-% [~, ~] = VisData(handles,[handles.Velfaerdsteknologi.(teknologi).(sensor).Tidspunkt],Varighed,handles.axesVarighedSensorDataVindue,'Sensor');
-% guidata(hObject,handles);
-%handles=OpdaterListboxmedBemaerkning(handles, startDato, slutDato);
-%OpdaterBemaerkningSensorOverblik(handles, startDato, slutDato)
-% axes(handles.axesMedarbejderSensorDataVindue)
-% ylabel('Antal medarbejdere')
-% title('Gennemsnittet af antal medarbejdere ved en arbejdsgang')
-% axes(handles.axesVarighedSensorDataVindue)
-% ylabel('Varighed i minutter')
-% title('Gennemsnittet af hvor lang tid en arbejdsgang tager')
 
 % --- Executes on button press in etDatoSensor.
 function etDatoSensor_Callback(hObject, eventdata, handles)
@@ -247,22 +185,6 @@ function btngroupRedigerGrafSensoroverblik_SelectionChangedFcn(hObject, eventdat
 % hObject    handle to the selected object in btngroupRedigerGrafSensoroverblik 
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-% teknologi = handles.field; 
-% sensorer=fieldnames(handles.Velfaerdsteknologi.(teknologi));
-% sensor = string(sensorer(handles.Velfaerdsteknologi.BrugerValgtSensor));
-% Varighed = [handles.Velfaerdsteknologi.(teknologi).(sensor).Varighedforarbejdsgang];
-% tid = [handles.Velfaerdsteknologi.(teknologi).(sensor).Tidspunkt];
-% Medarbejder = [handles.Velfaerdsteknologi.(teknologi).(sensor).Medarbejdere];
-% axMedarbejder = handles.axesMedarbejderSensorDataVindue;
-% axVarighed =handles.axesVarighedSensorDataVindue;
-
-% %Idet at det er en tid så skal det skrives ud i typen duration med
-% %følgende format. 
-% infmt = 'mm:ss';
-% Varighed = duration(Varighed,'InputFormat',infmt); 
-% [startDato, slutDato]= VisData(handles,[handles.Velfaerdsteknologi.(teknologi).(sensor).Tidspunkt],[handles.Velfaerdsteknologi.(teknologi).(sensor).Medarbejdere],handles.axesMedarbejderSensorDataVindue,'Sensor');
-% [~,~]=VisData(handles,[handles.Velfaerdsteknologi.(teknologi).(sensor).Tidspunkt],Varighed,handles.axesVarighedSensorDataVindue,'Sensor');
-%[startDato, slutDato] = VisOverblikData(handles,tid, Medarbejder, Varighed, axMedarbejder, axVarighed,'Sensor');
 [startDato, slutDato] = VisOverblikData(handles,'Sensor');
 guidata(hObject,handles);
 OpdaterBemaerkningSensorOverblik(handles,startDato,slutDato)

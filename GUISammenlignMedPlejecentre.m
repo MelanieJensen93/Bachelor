@@ -181,9 +181,6 @@ hold off
 axes(handles.axMedarbejderePlejecentre)
 ylabel('Antal medarbejdere')
 title('Gennemsnittet af antal medarbejdere ved en arbejdsgang')
-
-
-
 VisData(handles,[handles.Velfaerdsteknologi.(teknologi).Tidspunkt],VarighedPlejecenter,handles.axVarighedPlejecentre,'Plejecentre');
 hold on 
 VisData(handles,[handles.TeknologiOverblik.(teknologi).Tidspunkt],VarighedTeknologi,handles.axVarighedPlejecentre,'Plejecentre');
