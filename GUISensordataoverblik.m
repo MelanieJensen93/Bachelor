@@ -85,7 +85,10 @@ else
         stringDato = string(slutDato);
         set(handles.stDatoSensorOverblik, 'String', stringDato)
     end
-    
+    sensor = string(sensor);
+    if isempty(handles.Velfaerdsteknologi.(handles.field).(sensor))
+        msgbox('Data for den valgte velfærdsteknologi eksisterer ikke');
+    end
     AarhusKommuneLogo = imread('AarhusKommuneLogo.jpg');
     axes(handles.axAarhusLogo);
     imshow(AarhusKommuneLogo);
