@@ -78,7 +78,7 @@ else
     end
 
 set(handles.txtAntalGangeTeknologioverblik,'String',num2str(handles.Velfaerdsteknologi.(teknologi)(1).Medarbejdere))
-[~, slutDato] = VisOverblikData(handles,'Teknologi')
+[~, slutDato] = VisOverblikData(handles,'Teknologi');
 slutDato = string(slutDato);
 set(handles.stDatoTeknologiOverblik, 'String', slutDato)
 
