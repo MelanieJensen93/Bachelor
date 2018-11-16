@@ -3,13 +3,9 @@ function output = VelfaerdsteknologiIndeling(SensorDataFil,teknologi)
 %   Detailed explanation goes here
 CntRowTeknologi = 1; 
 
-
 for CntRow = 1:size(SensorDataFil,1)
-    d=1;
     if strcmp(SensorDataFil.Velfaerdsteknologi(CntRow),teknologi)==1
-        d=1;
         handles.Velfaerdsteknologi.(teknologi)(CntRowTeknologi).ID=SensorDataFil.ID(CntRow);
-        d=1;
         handles.Velfaerdsteknologi.(teknologi)(CntRowTeknologi).Tidspunkt=SensorDataFil.Tidspunkt(CntRow);
         handles.Velfaerdsteknologi.(teknologi)(CntRowTeknologi).Omsorgsfunktion=SensorDataFil.Omsorgsfunktion(CntRow);
         handles.Velfaerdsteknologi.(teknologi)(CntRowTeknologi).Komfortfunktion=SensorDataFil.Komfortfunktion(CntRow);
@@ -31,6 +27,5 @@ for CntRow = 1:size(SensorDataFil,1)
 end
 
 output = handles.Velfaerdsteknologi.(teknologi);
-d=1; 
 end
 

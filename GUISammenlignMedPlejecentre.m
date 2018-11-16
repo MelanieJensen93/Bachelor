@@ -74,6 +74,12 @@ else
     guidata(hObject,handles);
 
     teknologi = string(handles.teknologi);
+    if handles.TeknologiOverblik.(teknologi)(1).Tidspunkt<handles.Velfaerdsteknologi.(teknologi)(1).Tidspunkt
+        handles.StringDato = handles.Velfaerdsteknologi.(teknologi)(1).Tidspunkt;
+    else 
+        handles.StringDato = handles.TeknologiOverblik.(teknologi)(1).Tidspunkt;
+    end
+    
     VarighedPlejecenter = [handles.Velfaerdsteknologi.(teknologi).Varighedforarbejdsgang];
     VarighedTeknologi = [handles.TeknologiOverblik.(teknologi).Varighedforarbejdsgang];
     %Idet at det er en tid så skal det skrives ud i typen duration med
@@ -84,21 +90,29 @@ else
     axMedarbejdere = handles.axMedarbejderePlejecentre;
     VisData(handles,[handles.Velfaerdsteknologi.(teknologi).Tidspunkt],[handles.Velfaerdsteknologi.(teknologi).Medarbejdere],axMedarbejdere,'Plejecentre');
     hold on 
-    VisData(handles,[handles.TeknologiOverblik.(teknologi).Tidspunkt],[handles.TeknologiOverblik.(teknologi).Medarbejdere],axMedarbejdere,'Plejecentre');
+    VisData(handles,[handles.TeknologiOverblik.(teknologi).Tidspunkt],[handles.TeknologiOverblik.(teknologi).Medarbejdere],axMedarbejdere,'Plejecentre',1);
     hold off 
-    %axMedarbejdere(1).YColor = [0.69, 0.49, 0];
-    %axMedarbejdere(2).YColor = [0.69, 0, 0.21];
     axes(handles.axMedarbejderePlejecentre)
     ylabel('Antal medarbejdere')
     title('Gennemsnittet af antal medarbejdere ved en arbejdsgang')
+    legend('Ensøgård','Havkær');
 
     VisData(handles,[handles.Velfaerdsteknologi.(teknologi).Tidspunkt],VarighedPlejecenter,handles.axVarighedPlejecentre,'Plejecentre');
     hold on 
-    VisData(handles,[handles.TeknologiOverblik.(teknologi).Tidspunkt],VarighedTeknologi,handles.axVarighedPlejecentre,'Plejecentre');
+    [~,slutDato,DataEksisterer]=VisData(handles,[handles.TeknologiOverblik.(teknologi).Tidspunkt],VarighedTeknologi,handles.axVarighedPlejecentre,'Plejecentre',1);
     hold off 
     axes(handles.axVarighedPlejecentre)
     ylabel('Varighed i minutter')
     title('Gennemsnittet af hvor lang tid en arbejdsgang tager')
+    legend('Ensøgård','Havkær');
+    
+    stringDato = string(slutDato);
+    set(handles.stDatoPlejecentre, 'String', stringDato)
+    
+    if DataEksisterer == 1
+        msgbox('Der er ikke data for den valgte periode');
+    end
+    
 end
 % UIWAIT makes GUISammenlignMedPlejecentre wait for user response (see UIRESUME)
 % uiwait(handles.figure1);
@@ -141,22 +155,25 @@ VarighedTeknologi = duration(VarighedTeknologi,'InputFormat',infmt);
 axMedarbejdere = handles.axMedarbejderePlejecentre;
 VisData(handles,[handles.Velfaerdsteknologi.(teknologi).Tidspunkt],[handles.Velfaerdsteknologi.(teknologi).Medarbejdere],axMedarbejdere,'Plejecentre');
 hold on 
-VisData(handles,[handles.TeknologiOverblik.(teknologi).Tidspunkt],[handles.TeknologiOverblik.(teknologi).Medarbejdere],axMedarbejdere,'Plejecentre');
+[~,~,DataEksisterer]=VisData(handles,[handles.TeknologiOverblik.(teknologi).Tidspunkt],[handles.TeknologiOverblik.(teknologi).Medarbejdere],axMedarbejdere,'Plejecentre',1);
 hold off 
-%axMedarbejdere(1).YColor = [0.69, 0.49, 0];
-%axMedarbejdere(2).YColor = [0.69, 0, 0.21];
 axes(handles.axMedarbejderePlejecentre)
 ylabel('Antal medarbejdere')
 title('Gennemsnittet af antal medarbejdere ved en arbejdsgang')
+legend('Ensøgård','Havkær');
 
 VisData(handles,[handles.Velfaerdsteknologi.(teknologi).Tidspunkt],VarighedPlejecenter,handles.axVarighedPlejecentre,'Plejecentre');
 hold on 
-VisData(handles,[handles.TeknologiOverblik.(teknologi).Tidspunkt],VarighedTeknologi,handles.axVarighedPlejecentre,'Plejecentre');
+VisData(handles,[handles.TeknologiOverblik.(teknologi).Tidspunkt],VarighedTeknologi,handles.axVarighedPlejecentre,'Plejecentre',1);
 hold off 
 axes(handles.axVarighedPlejecentre)
 ylabel('Varighed i minutter')
 title('Gennemsnittet af hvor lang tid en arbejdsgang tager')
+legend('Ensøgård','Havkær');
 
+if DataEksisterer == 1
+   msgbox('Der er ikke data for den valgte periode');
+end
 
 % --- Executes when selected object is changed in btngroupRedigergrafPlejecentre.
 function btngroupRedigergrafPlejecentre_SelectionChangedFcn(hObject, eventdata, handles)
@@ -174,20 +191,23 @@ VarighedTeknologi = duration(VarighedTeknologi,'InputFormat',infmt);
 axMedarbejdere = handles.axMedarbejderePlejecentre;
 VisData(handles,[handles.Velfaerdsteknologi.(teknologi).Tidspunkt],[handles.Velfaerdsteknologi.(teknologi).Medarbejdere],axMedarbejdere,'Plejecentre');
 hold on 
-VisData(handles,[handles.TeknologiOverblik.(teknologi).Tidspunkt],[handles.TeknologiOverblik.(teknologi).Medarbejdere],axMedarbejdere,'Plejecentre');
+VisData(handles,[handles.TeknologiOverblik.(teknologi).Tidspunkt],[handles.TeknologiOverblik.(teknologi).Medarbejdere],axMedarbejdere,'Plejecentre',1);
 hold off 
-%axMedarbejdere(1).YColor = [0.69, 0.49, 0];
-%axMedarbejdere(2).YColor = [0.69, 0, 0.21];
 axes(handles.axMedarbejderePlejecentre)
 ylabel('Antal medarbejdere')
 title('Gennemsnittet af antal medarbejdere ved en arbejdsgang')
+legend('Ensøgård','Havkær');
 VisData(handles,[handles.Velfaerdsteknologi.(teknologi).Tidspunkt],VarighedPlejecenter,handles.axVarighedPlejecentre,'Plejecentre');
 hold on 
-VisData(handles,[handles.TeknologiOverblik.(teknologi).Tidspunkt],VarighedTeknologi,handles.axVarighedPlejecentre,'Plejecentre');
+[~,~,DataEksisterer]=VisData(handles,[handles.TeknologiOverblik.(teknologi).Tidspunkt],VarighedTeknologi,handles.axVarighedPlejecentre,'Plejecentre',1);
 hold off 
 axes(handles.axVarighedPlejecentre)
 ylabel('Varighed i minutter')
 title('Gennemsnittet af hvor lang tid en arbejdsgang tager')
+legend('Ensøgård','Havkær');
+if DataEksisterer == 1
+   msgbox('Der er ikke data for den valgte periode');
+end
 
 % --- Executes on button press in btnTilbageSammenlignmedandreplejecentre.
 function btnTilbageSammenlignmedandreplejecentre_Callback(hObject, eventdata, handles)
@@ -216,5 +236,5 @@ svar=questdlg(spoergsmaal,'Afslut',...
 'Ja', 'Nej', 'Nej'); %den sidste gem er default værdien
 switch svar
     case 'Ja'
-        close(GUIGUISammenlignMedPlejecentre)
+        GUISammenlignMedPlejecentre_OpeningFcn(hObject, eventdata, handles, 'exit');
 end

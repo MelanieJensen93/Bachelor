@@ -87,7 +87,7 @@ else
     end
     sensor = string(sensor);
     if isempty(handles.Velfaerdsteknologi.(handles.field).(sensor))
-        msgbox('Data for den valgte velfærdsteknologi eksisterer ikke');
+        msgbox('Data for den valgte sensor eksisterer ikke');
     end
     AarhusKommuneLogo = imread('AarhusKommuneLogo.jpg');
     axes(handles.axAarhusLogo);

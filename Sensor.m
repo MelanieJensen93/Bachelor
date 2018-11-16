@@ -25,8 +25,7 @@ if isfield(handles.Velfaerdsteknologi,'Carendo')
         end
        CntRowSensor = 1; 
    end
-   
-   d=1;              
+            
 end
 handles.Velfaerdsteknologi.Carendo = []; 
 handles.Velfaerdsteknologi=rmfield(handles.Velfaerdsteknologi,'Carendo');

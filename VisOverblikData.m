@@ -25,10 +25,14 @@ end
 infmt = 'mm:ss';
 varighed = duration(Varighed,'InputFormat',infmt); 
 VisData(handles,tid,Medarbejder,axMedarbejder,Vindue);
-[startDato,slutDato] = VisData(handles,tid,varighed,axVarighed,Vindue);
+[startDato,slutDato,DataEksistere] = VisData(handles,tid,varighed,axVarighed,Vindue);
 axes(axMedarbejder)
 ylabel('Antal medarbejdere')
 axes(axVarighed)
 ylabel('Varighed i minutter')
+
+    if DataEksistere == 1
+        msgbox('Der er ikke data for den valgte periode');
+    end
 end
 

@@ -81,13 +81,13 @@ else
 end
 
 
-
-if ~isfield(handles.Velfaerdsteknologi.(teknologi).(Sensornavn),'TilfoejBemaerkning')
-    if ~isfield(handles.Velfaerdsteknologi.(teknologi).(Sensornavn)(ii).TilfoejBemaerkning,'Bemaerkning')
-    msgbox('Vælg venligst dato, tidspunkt og type af bemærkning');
-    return 
-    end
-end 
+% 
+% if ~isfield(handles.Velfaerdsteknologi.(teknologi).(Sensornavn),'TilfoejBemaerkning')
+%     if ~isfield(handles.Velfaerdsteknologi.(teknologi).(Sensornavn)(ii).TilfoejBemaerkning,'Bemaerkning')
+%     msgbox('Vælg venligst dato, tidspunkt og type af bemærkning');
+%     return 
+%     end
+% end 
 
 
 % if ~isfield(handles.Velfaerdsteknologi.(teknologi).(Sensornavn).TilfoejBemaerkning.Bemaerkning, 'bemaerkning')

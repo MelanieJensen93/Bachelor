@@ -1,4 +1,4 @@
-function [sumAnvendelse,Begraensning,x] = DagInddeling(slutDato,stringDato, tt,axesTeknologi)
+function [sumAnvendelse,Begraensning,x,DataEksisterer] = DagInddeling(slutDato,stringDato, tt,axesTeknologi)
     slutTidspunkt = datetime([datestr(stringDato,'dd-mm-yyyy') ' 05:00:00']);
     % startDato findes vha. slutDato og trækker en dag fra. 
     startDato = datetime(slutDato.Year,slutDato.Month,slutDato.Day+1);
@@ -84,6 +84,12 @@ function [sumAnvendelse,Begraensning,x] = DagInddeling(slutDato,stringDato, tt,a
         meanData(CntSum) = mean(data);
         CntSum = CntSum +1;       
     end  
+    
+    if ~any(data)
+        DataEksisterer =1; 
+    else
+        DataEksisterer =2; 
+    end
     
     axes(axesTeknologi)
     %x-aksen vil sortere det i kategorisk rækkefølge, derfor anvendes

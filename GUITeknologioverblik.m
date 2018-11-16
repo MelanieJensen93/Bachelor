@@ -61,7 +61,6 @@ else
     if ~isfield(handles, 'Velfaerdsteknologi')
         handles.Velfaerdsteknologi = varargin{1}; %henter handles fra GUIValgafteknologi
     end
-
     AarhusKommuneLogo = imread('AarhusKommuneLogo.jpg');
     axes(handles.axAarhusLogo);
     imshow(AarhusKommuneLogo);
@@ -97,7 +96,11 @@ function varargout = GUITeknologioverblik_OutputFcn(hObject, eventdata, handles)
 % handles    structure with handles and user data (see GUIDATA)
 
 % Get default command line output from handles structure
-varargout{1} = handles.output;
+if ~isempty(handles) 
+    varargout{1} = handles.output;
+else
+    varargout{1} = [];
+end
 %set(gcf, 'Position', get(0,'Screensize'));
 %set(gcf, 'Units', 'normal', 'Position', [0 0 1 1])
 set(gcf, 'WindowState', 'fullscreen');
@@ -193,6 +196,6 @@ svar=questdlg(spoergsmaal,'Afslut',...
 'Ja', 'Nej', 'Nej'); %den sidste gem er default værdien
 switch svar
     case 'Ja'
-        close(GUITeknologioverblik)
+        GUITeknologioverblik_OpeningFcn(hObject, eventdata, handles, 'exit')
 end
 

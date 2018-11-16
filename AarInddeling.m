@@ -1,5 +1,5 @@
 function [xData, match, tt, sumAnvendelse,Begraensning, startDato] = AarInddeling(slutDato,tt)
-        startDato = datetime(slutDato.Year-1,slutDato.Month+1,slutDato.Day);
+        startDato = datetime(slutDato.Year-1,slutDato.Month,slutDato.Day);
         slutDato = datetime(slutDato.Year,slutDato.Month,slutDato.Day+1);
         Begraensning = timerange (startDato,slutDato);    
         tt = tt(Begraensning,:);

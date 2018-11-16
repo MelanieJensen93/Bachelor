@@ -236,6 +236,7 @@ function btnTilfoejBemaerkningTilfoejBemaerkning_Callback(hObject, eventdata, ha
 % hObject    handle to btnTilfoejBemaerkningTilfoejBemaerkning (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
+ValgtDato = get(handles.etDatoTilfoejBemaerkning, 'String');
 
 rbEkstraPersonaleTilstede = get(handles.rbEkstraPersonaleTilstedeTilfoejBemaerkning, 'Value');
 rbBorgerKraeverToPersonaler = get(handles.rbBorgerKraeverToPersonalerTilfoejBemaerkning, 'Value');
@@ -249,16 +250,12 @@ if rbBorgerKraeverToPersonaler==1 || rbEkstraPersonaleTilstede==1 || ~isempty(et
     datatogo = handles.Velfaerdsteknologi;
     GUISensordataoverblik(datatogo);
 else
-    uiwait(msgbox('Vælg venligst hvilken bemærkning du ønsker at tilføje. Hvis du ønsker at tilføje en bemærkning til feltet "Andet" skal du skrive hvad andet dækker over i feltet til højre.', 'Error', 'error', 'modal'));
+    if isempty(ValgtDato)
+        uiwait(msgbox('Vælg venligst et tidspunkt og hvilken bemærkning du ønsker at tilføje. Hvis du ønsker at tilføje en bemærkning til feltet "Andet" skal du skrive hvad andet dækker over i feltet til højre.', 'Error', 'error', 'modal'));
+    else
+        uiwait(msgbox('Vælg venligst hvilken bemærkning du ønsker at tilføje. Hvis du ønsker at tilføje en bemærkning til feltet "Andet" skal du skrive hvad andet dækker over i feltet til højre.', 'Error', 'error', 'modal'));
+    end
 end
-
-
-
-
-
-
- 
-
 
 
 function etAndetTilfoejBemaerkning_Callback(hObject, eventdata, handles)

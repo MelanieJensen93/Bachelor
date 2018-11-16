@@ -137,7 +137,7 @@ if isfield(handles.Velfaerdsteknologi ,'Carendo')
     datatogo = handles.Velfaerdsteknologi;
     guidata(hObject, handles);
     close(GUIValgafteknologi);
-    GUITeknologioverblik(datatogo);
+    GUITeknologioverblik(datatogo); 
 else
     msgbox('Data for den valgte velfærdsteknologi eksisterer ikke');
 end

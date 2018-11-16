@@ -59,7 +59,11 @@ if ~isempty(varargin) && ischar(varargin{1}) && strcmp(varargin{1},'exit')
     close;
 else
     set(gcf,'Pointer','watch');
+ 
     handles.Velfaerdsteknologi = varargin{1}; %henter handles fra GUIValgafteknologi
+    if isempty(handles.Velfaerdsteknologi)
+        msgbox('Yderligere data eksisterer ikke for den valgte teknologi'); 
+    end
     handles = YderligereData(handles);
     guidata(hObject,handles);
     
@@ -70,19 +74,20 @@ else
     teknologi = fieldnames(handles.Velfaerdsteknologi);
     handles.teknologi = string(teknologi);
 
-        if strcmp(handles.teknologi,'Carendo')==1
-           set(handles.txtLunaMedCarendoYderligere, 'Visible', 'off');
-           set(handles.txtValgtTeknologiYderligereData, 'String', 'Carendo');
-        end
-        if strcmp(teknologi,'Luna')==1
-            set(handles.txtVariabel, 'String', 'Anvendelse af Luna med Carendo'); 
-            set(handles.txtStringKomfort, 'Visible', 'off');
-            set(handles.txtStringHaeveSaenke, 'Visible', 'off');
-            set(handles.txtOmsorgsfunktionYderligere, 'Visible', 'off');
-            set(handles.txtKomfortfunktionYderligere, 'Visible', 'off');
-            set(handles.txtHaeveSaenkefunktionYderligere, 'Visible', 'off');
-            set(handles.txtValgtTeknologiYderligereData, 'String', 'Luna loftlift');
-        end
+    if strcmp(handles.teknologi,'Carendo')==1
+       set(handles.txtLunaMedCarendoYderligere, 'Visible', 'off');
+       set(handles.txtValgtTeknologiYderligereData, 'String', 'Carendo');
+    end
+    
+    if strcmp(teknologi,'Luna')==1
+        set(handles.txtVariabel, 'String', 'Anvendelse af Luna med Carendo'); 
+        set(handles.txtStringKomfort, 'Visible', 'off');
+        set(handles.txtStringHaeveSaenke, 'Visible', 'off');
+        set(handles.txtOmsorgsfunktionYderligere, 'Visible', 'off');
+        set(handles.txtKomfortfunktionYderligere, 'Visible', 'off');
+        set(handles.txtHaeveSaenkefunktionYderligere, 'Visible', 'off');
+        set(handles.txtValgtTeknologiYderligereData, 'String', 'Luna loftlift');
+    end
     
     handles.Velfaerdsteknologi.Yderligere.Dato = handles.Velfaerdsteknologi.(handles.teknologi)(1).Tidspunkt;
     guidata(hObject,handles);
@@ -96,12 +101,14 @@ else
     VarighedAlmindelig = duration(VarighedAlmindelig,'InputFormat',infmt);
     DirekteTid = duration(DirekteTid,'InputFormat',infmt);
 
-    [~, stringDato] = VisData(handles,[handles.SuperBruger.Tidspunkt],VarighedSuperbruger,handles.axSuperBrugerYderligereData,'Yderligere');
+    [~, stringDato, DataEksisterer] = VisData(handles,[handles.SuperBruger.Tidspunkt],VarighedSuperbruger,handles.axSuperBrugerYderligereData,'Yderligere');
     VisData(handles,[handles.Almindelig.Tidspunkt],VarighedAlmindelig,handles.axAlmindeligYderligereData,'Yderligere');
     VisData(handles,[handles.Velfaerdsteknologi.(handles.teknologi).Tidspunkt],DirekteTid,handles.axDirekteTidYderligereData,'Yderligere');
     stringDato.Format = 'dd-MMM-yyyy';
     stringDato = string(stringDato);
-    set(handles.stDatoYderligere, 'String', stringDato)
+    set(handles.stDatoYderligere, 'String', stringDato);
+    
+    
     
     axes(handles.axSuperBrugerYderligereData)
     ylabel('Varighed i minutter')
@@ -113,6 +120,9 @@ else
     ylabel('Varighed i minutter')
     title('Gennemsnitlig tid med borger')
     
+    if DataEksisterer == 1
+        msgbox('Der er ikke data for den valgte periode');
+    end
     % Update handles structure
     guidata(hObject, handles);
     set(gcf,'Pointer','arrow');
@@ -160,7 +170,7 @@ DirekteTid = duration(DirekteTid,'InputFormat',infmt);
 
 VisData(handles,[handles.SuperBruger.Tidspunkt],VarighedSuperbruger,handles.axSuperBrugerYderligereData,'Yderligere');
 VisData(handles,[handles.Almindelig.Tidspunkt],VarighedAlmindelig,handles.axAlmindeligYderligereData,'Yderligere');
-VisData(handles,[handles.Velfaerdsteknologi.(teknologi).Tidspunkt],DirekteTid,handles.axDirekteTidYderligereData,'Yderligere');
+[~,~,DataEksisterer] = VisData(handles,[handles.Velfaerdsteknologi.(teknologi).Tidspunkt],DirekteTid,handles.axDirekteTidYderligereData,'Yderligere');
 
 axes(handles.axSuperBrugerYderligereData)
 ylabel('Varighed i minutter')
@@ -171,6 +181,10 @@ title('Gennemsnitlig tid af arbejdsgang for almindeligt personale')
 axes(handles.axDirekteTidYderligereData)
 ylabel('Varighed i minutter')
 title('Gennemsnitlig tid med borger')
+
+if DataEksisterer == 1
+    msgbox('Der er ikke data for den valgte periode');
+end
 
 % --- Executes when selected object is changed in btngroupRedigergrafYderligere.
 function btngroupRedigergrafYderligere_SelectionChangedFcn(hObject, eventdata, handles)
@@ -190,7 +204,7 @@ VarighedAlmindelig = duration(VarighedAlmindelig,'InputFormat',infmt);
 DirekteTid = duration(DirekteTid,'InputFormat',infmt); 
 VisData(handles,[handles.SuperBruger.Tidspunkt],VarighedSuperbruger,handles.axSuperBrugerYderligereData,'Yderligere');
 VisData(handles,[handles.Almindelig.Tidspunkt],VarighedAlmindelig,handles.axAlmindeligYderligereData,'Yderligere');
-VisData(handles,[handles.Velfaerdsteknologi.(teknologi).Tidspunkt],DirekteTid,handles.axDirekteTidYderligereData,'Yderligere');
+[~,~,DataEksisterer]=VisData(handles,[handles.Velfaerdsteknologi.(teknologi).Tidspunkt],DirekteTid,handles.axDirekteTidYderligereData,'Yderligere');
 
 axes(handles.axSuperBrugerYderligereData)
 ylabel('Varighed i minutter')
@@ -201,6 +215,10 @@ title('Gennemsnitlig tid af arbejdsgang for almindeligt personale')
 axes(handles.axDirekteTidYderligereData)
 ylabel('Varighed i minutter')
 title('Gennemsnitlig tid med borger')
+
+if DataEksisterer == 1
+    msgbox('Der er ikke data for den valgte periode');
+end
 
 
 % --- Executes on button press in bntTilbageYderligerData.
@@ -225,5 +243,5 @@ svar=questdlg(spoergsmaal,'Afslut',...
 'Ja', 'Nej', 'Nej'); %den sidste gem er default værdien
 switch svar
     case 'Ja'
-        close(GUIYderligereData)
+        GUIYderligereData_OpeningFcn(hObject, eventdata, handles, 'exit');
 end

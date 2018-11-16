@@ -13,5 +13,5 @@ elseif isfield(handles.Velfaerdsteknologi,'Luna')
     imshow('lunaloftliftmanual.png');   
 
 else
-    msgbox('Det er i øjeblikket ingen brugermanual ', 'Brugermanul mangler', 'error');
+    msgbox('Det er i øjeblikket ingen brugermanual ', 'Brugermanual mangler', 'error');
 end

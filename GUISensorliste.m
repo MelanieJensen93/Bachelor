@@ -78,6 +78,7 @@ else
            axes(handles.axTeknologiMedSensorSensorliste);
            imshow(CarendoBilledeMedSensor);
         end
+        
         if isfield(handles.Velfaerdsteknologi, 'LunaSensor')
             set(handles.txtValgtteknologiSensorliste, 'String', 'Luna loftlift');
             LunaBilledeMedSensor = imread('LunaMedSensor.png');
@@ -88,11 +89,14 @@ else
     AarhusKommuneLogo = imread('AarhusKommuneLogo.jpg');
     axes(handles.axAarhusLogo);
     imshow(AarhusKommuneLogo);
-
-
+    
     % Update handles structure
     guidata(hObject, handles);
     set(gcf,'Pointer','arrow');
+    if ~isfield(varargin{1,1}, 'TilbageKnap')
+        GUITeknologioverblik('exit');
+    end
+    
 end
 % UIWAIT makes GUISensorliste wait for user response (see UIRESUME)
 % uiwait(handles.figure1);
@@ -120,7 +124,11 @@ function btnTilbageSensorliste_Callback(hObject, eventdata, handles)
 
 GUISensorliste_OpeningFcn(hObject, eventdata, handles, 'exit');
 %datatogo = handles.Velfaerdsteknologi;
-GUITeknologioverblik;
+teknologi = fieldnames(handles.Velfaerdsteknologi);
+teknologi = string(teknologi);
+sensor=fieldnames(teknologi(1));
+%sensor = string(sensorer(handles.Velfaerdsteknologi.BrugerValgtSensor));
+GUITeknologioverblik(sensor);
 
 
 % --- Executes on selection change in lbSensorliste.

@@ -1,4 +1,4 @@
-function [startDato, stringDato] = VisData(handles, xData, yData, axesTeknologi,Vindue)
+function [startDato, stringDato, DataEksisterer] = VisData(handles, xData, yData, axesTeknologi,Vindue,box2)
 %VISDATA plotter data i en graf og udskriver antal gange en teknologi eller
 %   sensor er blevet brugt. Hvis yderligere data kalder funktionen vil den
 %   istedet udskrive yderligere data.
@@ -15,11 +15,24 @@ function [startDato, stringDato] = VisData(handles, xData, yData, axesTeknologi,
 %   startDato = Dato hvor data skal startes vises fra. 
 %   stringDato = Dato hvor data skal stal vises til. Pr. default er det den
 %   dato hvor der den seneste data fra, ellers er dette brugervalgt. 
+if nargin<6
+    box2=0;
+end
 
-      
-teknologi = fieldnames(handles.Velfaerdsteknologi);
-teknologi = string(teknologi(1));
+if strcmp(Vindue, 'Plejecentre')
+    if nargin == 6
+        teknologi = fieldnames(handles.TeknologiOverblik);
+        teknologi = string(teknologi(1));
+    else 
+        teknologi = string(handles.teknologi);
+    end    
+else 
+    teknologi = fieldnames(handles.Velfaerdsteknologi);
+    teknologi = string(teknologi(1));
+end
+
 times = xData';
+  
     
     switch Vindue
         case 'Teknologi'
@@ -81,10 +94,13 @@ if isempty(stringDato)
     %stringDato = handles.Velfaerdsteknologi.(teknologi)(1).Tidspunkt;
     if strcmp(Vindue,'Yderligere')==1
         stringDato = handles.Velfaerdsteknologi.Yderligere.Dato;
-    else 
+    elseif strcmp(Vindue,'Plejecentre')==1
+        stringDato = handles.StringDato;
+        stringDato = datetime(datestr(stringDato,'dd-mm-yyyy'));
+    else
         stringDato = datetime(datestr(xData(1),'dd-mm-yyyy'));
-        
     end
+    
 end
 
 %Konvertere dato til en datetime 
@@ -94,7 +110,7 @@ slutDato = datetime(stringDato,'InputFormat','dd-MM-yyyy');
 tt = timetable(times,yData','VariableNames',{'Data'});
 
 if strcmp(periode, 'Dag')==1
-    [sumAnvendelse,Begraensning,slutDato] = DagInddeling(slutDato,stringDato,tt,axesTeknologi);
+    [sumAnvendelse,Begraensning,slutDato, DataEksisterer] = DagInddeling(slutDato,stringDato,tt,axesTeknologi);
     startDato = stringDato; 
 end
 
@@ -110,6 +126,7 @@ if strcmp(periode, 'Dag')==0
 
     CntRow = 1; 
     ii=1; 
+    Data = 0;
     for i=1:length(match)
         if match(i) ==1  
             if isduration(tt.Data)==1 
@@ -125,38 +142,69 @@ if strcmp(periode, 'Dag')==0
     end
   
     axes(axesTeknologi)
-%     
-%     if strcmp(periode, 'År')==1   
-%         axes(axesTeknologi)
-%         datetick('x','mmm','keepticks')
-%     end 
-        
+    
+    
     if strcmp(Vindue,'Plejecentre')==0
-       bar(xData,Data);  
+       if strcmp(periode, 'År')==1   
+            bar(xData,Data); 
+            axesTeknologi.XTick =xData; 
+            datetick('x','mmm','keepticks')
+       elseif strcmp(periode,'Måned')==1
+            bar(xData,Data); 
+            xDataDag = linspace(startDato,slutDato,7);
+            axesTeknologi.XTick =xDataDag; 
+            datetick('x','dd-mmm','keepticks')
+       else
+           bar(xData,Data); 
+       end               
     end
     
     if strcmp(Vindue,'Plejecentre')==1
-        plot(xData,Data,'-o','LineWidth',2);
+        colorspec = {[0.69, 0.49, 0]; [0.69, 0, 0.21]};
         
+        if nargin == 6
+            plot(xData,Data,'-o','Color',colorspec{1},'LineWidth',2);
+        else 
+            plot(xData,Data,'-o','Color',colorspec{2},'LineWidth',2);
+        end
+        if strcmp(periode, 'År')==1   
+            axesTeknologi.XTick =xData; 
+            datetick('x','mmm','keepticks')
+        elseif strcmp(periode,'Måned')==1
+            xDataDag = linspace(startDato,slutDato,7);
+            axesTeknologi.XTick =xDataDag; 
+            datetick('x','dd-mmm','keepticks')
+        end
     end 
-    
-    %datetick('x','mmm-yy','keeplimits')  
+
 end
     if strcmp(Vindue,'Yderligere')==0
-       textFormat = "%s er brugt %s gange";
-       if strcmp(Vindue,'Teknologi')==1 
-           str = sprintf(textFormat,teknologi,string(sumAnvendelse));
-           set(txtAntal,'String',str);
+       %textFormat = "%s er brugt %s gange";
+       if strcmp(Vindue,'Teknologi')==1 || strcmp(Vindue,'Plejecentre')==1
+           %str = sprintf(textFormat,teknologi,string(sumAnvendelse));
+           if box2==0
+               set(txtAntal,'String',string(sumAnvendelse));
+           else
+               set(handles.txtTeknologiOverblikPlejecenter,'String',string(sumAnvendelse));
+           end
        else 
-           Sensor = string(fieldnames(handles.Velfaerdsteknologi.(teknologi)(1)));
-           nr = handles.Velfaerdsteknologi.BrugerValgtSensor;
-           str = sprintf(textFormat,Sensor(nr),string(sumAnvendelse));
-           set(txtAntal,'String',str);
+           %Sensor = string(fieldnames(handles.Velfaerdsteknologi.(teknologi)(1)));
+           %nr = handles.Velfaerdsteknologi.BrugerValgtSensor;
+           %str = sprintf(textFormat,Sensor(nr),string(sumAnvendelse));
+           set(txtAntal,'String',string(sumAnvendelse));
        end
     end
     
     if strcmp(Vindue,'Yderligere')==1
         YderligereDataFunktioner(handles,ttYderligere,teknologi, Begraensning);
     end
-
+    
+    if strcmp(periode, 'Dag')==0
+        if  ~any(Data)
+            DataEksisterer = 1; 
+            %msgbox('Der er ikke data for den valgte periode');
+        else 
+            DataEksisterer = 2; 
+        end
+    end
 end
