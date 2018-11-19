@@ -6,19 +6,22 @@ function YderligereDataFunktioner(handles,ttYderligere, teknologi, Begraensning)
             Komfortfunktion = (sum(ttYderligere.Var2)/length(ttYderligere.Var2))*100;
             Haevesaenkefunktion = (sum(ttYderligere.Var3)/length(ttYderligere.Var3))*100;
             if ~isnan(Omsorgsfunktion)
-                set(handles.txtOmsorgsfunktionYderligere,'String',string(round(Omsorgsfunktion)));
+                textLabel = sprintf('%s %%', string(round(Omsorgsfunktion)));
+                set(handles.txtOmsorgsfunktionYderligere,'String',textLabel);
             else
                 set(handles.txtOmsorgsfunktionYderligere,'String','Ingen Data');
             end
             
             if ~isnan(Komfortfunktion)
-                set(handles.txtKomfortfunktionYderligere,'String',string(round(Komfortfunktion)));
+                textLabel = sprintf('%s %%', string(round(Komfortfunktion)));
+                set(handles.txtKomfortfunktionYderligere,'String',textLabel);
             else
                 set(handles.txtKomfortfunktionYderligere,'String','Ingen Data');
             end
             
             if ~isnan(Haevesaenkefunktion)
-                set(handles.txtHaeveSaenkefunktionYderligere,'String',string(round(Haevesaenkefunktion)));
+                textLabel = sprintf('%s %%', string(round(Haevesaenkefunktion)));
+                set(handles.txtHaeveSaenkefunktionYderligere,'String',textLabel);
             else 
                 set(handles.txtHaeveSaenkefunktionYderligere,'String','Ingen Data');
             end
@@ -26,7 +29,8 @@ function YderligereDataFunktioner(handles,ttYderligere, teknologi, Begraensning)
             LunaMedCarendo = (sum(ttYderligere.Var1)/length(ttYderligere.Var1))*100;
             
             if ~isnan(LunaMedCarendo)
-                set(handles.txtLunaMedCarendoYderligere,'String',string(round(LunaMedCarendo)));
+                textLabel = sprintf('%s %%', string(round(LunaMedCarendo)));
+                set(handles.txtLunaMedCarendoYderligere,'String',textLabel);
             else
                 set(handles.txtLunaMedCarendoYderligere,'String','Ingen Data');
             end

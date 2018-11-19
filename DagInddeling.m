@@ -85,7 +85,7 @@ function [sumAnvendelse,Begraensning,x,DataEksisterer] = DagInddeling(slutDato,s
         CntSum = CntSum +1;       
     end  
     
-    if ~any(data)
+    if ~any(meanData)
         DataEksisterer =1; 
     else
         DataEksisterer =2; 

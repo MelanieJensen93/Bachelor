@@ -4,7 +4,7 @@ function handles = IndlaesVelfaerdsteknologi(handles,fil)
 
 %SensorDataFil = importfile('SensorDataFil.xlsx','Ark1');
 if nargin ==1
-    SensorDataFil = indlaesSensorData('SensorDataFil.xlsx','Ark1');
+    SensorDataFil = indlaesSensorData('SensorDataFilVers1.xlsx','Ark1');
 end
 
 if nargin ==2
