@@ -1,6 +1,16 @@
-function handles = ValgtafTidspunkt(handles,datatogo)
-%UNTITLED Summary of this function goes here
-%   Detailed explanation goes here
+function handles = ValgtafTidspunkt(handles)
+%VALGTAFTIDSPUNKT aktiveres når brugren i "'Tilføj bemærkning"'-vinduet har
+%   valgt hvilken dato og hvilket tidspunkt på dagen bemærkningen skal
+%   tilføjes til. Det funktionen gør at er udskriver den valgt dato og 
+%   tidspunkt, samt hvilken sensor brugeren er ved at tilføje en bemærkning
+%   til. 
+%   
+%   INPUT: 
+%   handles = handle til elementer i GUI. 
+%
+%   OUTPUT: 
+%   handles = handle til elementer i GUI. 
+
 teknologi = fieldnames(handles.Velfaerdsteknologi(1));
 teknologi = string(teknologi(1));
 
@@ -42,8 +52,7 @@ if isfield(handles.Velfaerdsteknologi, 'ValgtTidspunktPaaDato')
                     tidspunktKunDato = handles.Velfaerdsteknologi.(teknologi).(Sensornavn)(ii).Tidspunkt;
                     tidspunktKunDato.Format = 'dd-MMM-yyyy';
                     tidspunktKunDato = string(tidspunktKunDato);
-                    %udskrift = string(handles.Velfaerdsteknologi.(teknologi).(Sensornavn)(ii).Tidspunkt);
-                    udskrift = sprintf("%s %s %s", Sensornavn, tidspunktKunDato, TidspunktPaaDagen_Data);
+                     udskrift = sprintf("%s %s %s", Sensornavn, tidspunktKunDato, TidspunktPaaDagen_Data);
                     set(handles.txtValgtTidspunkt, 'String', udskrift);
                    end
             end

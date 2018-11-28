@@ -1,9 +1,23 @@
-function handles = ValgAfDatapunkt(handles,datatogo, ValgtDato, ValgtDatoDatetime)
-%UNTITLED Summary of this function goes here
-%   Detailed explanation goes here
+function handles = ValgAfDatapunkt(handles,datatogo, ValgtDatoDatetime)
+%VALGAFDATAPUNKT kigger i handles efter hvilke datapunkter der er til
+%   den valgte dato i "'Tilføj bemærkning"'. Funktionen ændre tidspunktet
+%   sådan at klokkeslettet ikke bliver udskrevet, i stedet står der "'Morgen,
+%   Formiddag, Middag, Eftermiddag, Aften eller Nat"' i listenboksen hvor 
+%   brugeren skal vælge hvilke tidspunkt han/hun ønsker at tilføje en 
+%   bemærkning til.
+%   
+%   INPUT: 
+%   handles = handle til elementer i GUI. 
+%   datatogo = handle til de elementer der ligger i
+%   handles.Velfærdsteknolgi fra andre GUI's.
+%   ValgDatoDatetime = datetime for den dato der er valgt i GUI "Tilføj
+%   bemærkning".
 
-%ValgtDato = get(handles.etDatoTilfoejBemaerkning, 'String');
-%ValgtDatoDatetime = datetime(ValgtDato, 'InputFormat', 'dd-MM-yyyy');
+%   OUTPUT: 
+%   handles = handle til elementer i GUI. 
+%   
+
+
 handles.Velfaerdsteknologi.ValgtDatoDatetime = ValgtDatoDatetime;
 %Vi skal bruge navnet på den valgte teknologi og det står i række 1
 teknologi = fieldnames(handles.Velfaerdsteknologi(1));
