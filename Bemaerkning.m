@@ -1,6 +1,26 @@
 function [handles,datatogo,svar] = Bemaerkning(handles, datatogo)
+%BEMAERKNING aktiveres når brugren trykker på "'+ Tilføj bemærkning"'-knappen.
+%   Funktionen tjekker om brugeren har valgt dato og bemærkning, hvis 
+%   brugeren har valgt dato og bemærkning åbnes et vindue, hvor brugren skal
+%   vælge om han/hun ønsker at tilføje at bemærkningen. Hvis brugren trykker
+%   "'Ja"', gemmes bemærkningen i handles og "'Sensor Overblik Skærm"' vises
+%   mens "'Tilføj bemærkning"'- vinduet lukker. Hvis brugren trykker
+%   "'Annuller"' lukker meddelelsesvinduet og brugren har mulighed for at
+%   ændre på datoen og bemærkningen eller lukke "'Tilføj bemærkning"'
+%   -vinduetned. 
+%   
+%   INPUT: 
+%   handles = handle til elementer i GUI.
+%   datatogo = handle til de elementer der ligger i
+%   handles.Velfærdsteknolgi fra andre GUI's.
+%   
+%   OUTPUT: 
+%   handles = handle til elementer i GUI. 
+%   datatogo = handle der sender de elementer der ligger i
+%   handles.Velfærdsteknologi med til andre GUI's
+%   svar = brugerens svar på hvor han/hun ønsker at tilføje bemærkningen
 
-%GUITilfoejBemaerkning(datatogo)
+
 %Henter alle filnavne i handles.Velfaerdsteknologi, første kolonne
 %indeholder den valgte teknologi og derfor udvælges denne. 
 teknologi = fieldnames(handles.Velfaerdsteknologi(1));
@@ -54,12 +74,8 @@ if isfield(handles.Velfaerdsteknologi,'ValgtTidspunktPaaDato')
                         switch svar
                             case 'Gem'
                                 disp([svar ' gemt'])
-                                GemBemaerkningiFil(handles);
-                                %handles.Velfaerdsteknologi.SvarGemt = 'Gemt'; 
+                                GemBemaerkningiFil(handles); 
                                 datatogo = handles.Velfaerdsteknologi;
-                                %GUITilfoejBemaerkning_OpeningFcn(hObject, eventdata, handles, 'exit');
-                                %GUISensordataoverblik(datatogo);
-                                %close(GUITilfoejBemaerkning);
                                 GUITilfoejBemaerkning(datatogo);
                                 break
                             case 'Annuller'
@@ -81,44 +97,10 @@ else
 end
 
 
-% 
-% if ~isfield(handles.Velfaerdsteknologi.(teknologi).(Sensornavn),'TilfoejBemaerkning')
-%     if ~isfield(handles.Velfaerdsteknologi.(teknologi).(Sensornavn)(ii).TilfoejBemaerkning,'Bemaerkning')
-%     msgbox('Vælg venligst dato, tidspunkt og type af bemærkning');
-%     return 
-%     end
-% end 
 
-
-% if ~isfield(handles.Velfaerdsteknologi.(teknologi).(Sensornavn).TilfoejBemaerkning.Bemaerkning, 'bemaerkning')
-%     msgbox('Vælg venligst en bemærkning');
-%     return;
-% end
-
-% if isfield(handles.Velfaerdsteknologi.(teknologi).(Sensornavn)(ii).TilfoejBemaerkning,'Bemaerkning')
-%     % Stammer fra : https://se.mathworks.com/help/matlab/ref/questdlg.html
-%     spoergsmaal=sprintf('Ønsker du at tilføje bemærkningen: %s %s ?',...
-%         handles.Velfaerdsteknologi.(teknologi).(Sensornavn)(ii).TilfoejBemaerkning.Bemaerkning(idx).bemaerkning,...
-%         handles.Velfaerdsteknologi.(teknologi).(Sensornavn)(ii).TilfoejBemaerkning.Bemaerkning(idx).tidspunkt);
-%     svar=questdlg(spoergsmaal,'Tilføj bemærkning',...
-%         'Gem', 'Annuller', 'Gem'); %den sidste gem er default værdien
-%     switch svar
-%         case 'Gem'
-%             disp([svar ' gemt'])
-%             GemBemaerkningiFil(handles);
-%             %handles.Velfaerdsteknologi.SvarGemt = 'Gemt'; 
-%             datatogo = handles.Velfaerdsteknologi;
-%             %GUITilfoejBemaerkning_OpeningFcn(hObject, eventdata, handles, 'exit');
-%             %GUISensordataoverblik(datatogo);
-%             %close(GUITilfoejBemaerkning);
-%             GUITilfoejBemaerkning(datatogo);
-%         case 'Annuller'
-%             disp([svar ' annulleret'])
-%              
-%     end 
 end
 
-%OpdaterListboxmedBemaerkning(handles);
+
 
 
    

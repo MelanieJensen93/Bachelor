@@ -1,14 +1,17 @@
-function handles = GemBemaerkningiFil(handles,inputArg2)
-%UNTITLED Summary of this function goes here
-%   Detailed explanation goes here
-% teknologi = fieldnames(handles.Velfaerdsteknologi(1));
-% teknologi = string(teknologi(1));
-% 
-% FilNavn = fullfile('C:\Users\Bruger\Documents\Sundhedsteknologi\7. Semester\Bachelor\MatLab',...
-%     'BemaerkningsFil.mat')
-% %delete(FilNavn)
-% save(FilNavn, '-struct', 'handles', 'Velfaerdsteknologi')
-% d=1;
+function handles = GemBemaerkningiFil(handles)
+%GEMBEMAERKNINGIFIL Funktionen GemBemaerkningifil læser først
+%   bemærkningsfilen, og indlæser data i handles. Det gøres for at den nye 
+%   bemærkning der er ved at blive tilføjet, også kan blive tilføjet i
+%   handles, som den sidste bemærkning i listen over bemærkninger i handles.
+%   Efterfølgende oprettes en tabel med alle bemærkningerne fra handles,
+%   sammen med oplysninger om hvilken sensor, dato og tidspunkt bemærkningen
+%   tilhører. Til sidste gemmes tablen i "'Bemærknings-filen". 
+%   
+%   INPUT: 
+%   handles = handle til elementer i GUI. 
+%   
+%   OUTPUT: 
+%   handles = handle til elementer i GUI. 
 
 teknologi = fieldnames(handles.Velfaerdsteknologi(1));
 teknologi = string(teknologi(1));
