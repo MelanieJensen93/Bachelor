@@ -9,5 +9,6 @@ function [xData, match, tt, sumAnvendelse,Begraensning, startDato] = AarInddelin
         count =  [(month(slutDato))+1:12, 1:(month(slutDato))]; 
         match = ismember(count,month(tt.times)); 
         
-        xData = linspace(startDato,slutDato,12);     
+        tempStart = datetime(startDato.Year,startDato.Month+1,startDato.Day);
+        xData = linspace(tempStart,slutDato,12);     
 end

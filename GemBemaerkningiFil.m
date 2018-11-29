@@ -14,7 +14,12 @@ teknologi = fieldnames(handles.Velfaerdsteknologi(1));
 teknologi = string(teknologi(1));
 
 Antalfravalgtdato = 0;
-DatafraBemaerkningsFil = readtable('BemaerkningsFil.xlsx');
+%if ~exist('BemaerkningsFilEfterInstall.xlsx','File')
+    DatafraBemaerkningsFil = readtable('BemaerkningsFil.xlsx');
+%else
+ %   DatafraBemaerkningsFil = readtable('BemaerkningsFilEfterInstall.xlsx');
+%end
+
 handles.Velfaerdsteknologi.BemaerkningsFilLaengde = height(DatafraBemaerkningsFil);
 
 if isfield(handles.Velfaerdsteknologi,'ValgtTidspunktPaaDato')

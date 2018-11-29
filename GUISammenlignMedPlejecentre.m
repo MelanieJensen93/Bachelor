@@ -97,9 +97,9 @@ else
     title('Gennemsnittet af antal medarbejdere ved en arbejdsgang')
     legend('Ensøgård','Havkær');
 
-    VisData(handles,[handles.Velfaerdsteknologi.(teknologi).Tidspunkt],VarighedPlejecenter,handles.axVarighedPlejecentre,'Plejecentre');
+    [~,~,DataEksisterer2]=VisData(handles,[handles.Velfaerdsteknologi.(teknologi).Tidspunkt],VarighedPlejecenter,handles.axVarighedPlejecentre,'Plejecentre');
     hold on 
-    [~,slutDato,DataEksisterer]=VisData(handles,[handles.TeknologiOverblik.(teknologi).Tidspunkt],VarighedTeknologi,handles.axVarighedPlejecentre,'Plejecentre',1);
+    [~,slutDato,DataEksisterer1]=VisData(handles,[handles.TeknologiOverblik.(teknologi).Tidspunkt],VarighedTeknologi,handles.axVarighedPlejecentre,'Plejecentre',1);
     hold off 
     axes(handles.axVarighedPlejecentre)
     ylabel('Varighed i minutter')
@@ -109,7 +109,7 @@ else
     stringDato = string(slutDato);
     set(handles.stDatoPlejecentre, 'String', stringDato)
     
-    if DataEksisterer == 1
+    if DataEksisterer1 == 1 && DataEksisterer2 ==2 
         msgbox('Der er ikke data for den valgte periode');
     end
     
@@ -153,9 +153,9 @@ VarighedPlejecenter = duration(VarighedPlejecenter,'InputFormat',infmt);
 VarighedTeknologi = duration(VarighedTeknologi,'InputFormat',infmt);
 
 axMedarbejdere = handles.axMedarbejderePlejecentre;
-VisData(handles,[handles.Velfaerdsteknologi.(teknologi).Tidspunkt],[handles.Velfaerdsteknologi.(teknologi).Medarbejdere],axMedarbejdere,'Plejecentre');
+[~,~,DataEksisterer2]=VisData(handles,[handles.Velfaerdsteknologi.(teknologi).Tidspunkt],[handles.Velfaerdsteknologi.(teknologi).Medarbejdere],axMedarbejdere,'Plejecentre');
 hold on 
-[~,~,DataEksisterer]=VisData(handles,[handles.TeknologiOverblik.(teknologi).Tidspunkt],[handles.TeknologiOverblik.(teknologi).Medarbejdere],axMedarbejdere,'Plejecentre',1);
+[~,~,DataEksisterer1]=VisData(handles,[handles.TeknologiOverblik.(teknologi).Tidspunkt],[handles.TeknologiOverblik.(teknologi).Medarbejdere],axMedarbejdere,'Plejecentre',1);
 hold off 
 axes(handles.axMedarbejderePlejecentre)
 ylabel('Antal medarbejdere')
@@ -171,7 +171,7 @@ ylabel('Varighed i minutter')
 title('Gennemsnittet af hvor lang tid en arbejdsgang tager')
 legend('Ensøgård','Havkær');
 
-if DataEksisterer == 1
+if DataEksisterer1 == 1 && DataEksisterer2==1
    msgbox('Der er ikke data for den valgte periode');
 end
 
@@ -197,15 +197,15 @@ axes(handles.axMedarbejderePlejecentre)
 ylabel('Antal medarbejdere')
 title('Gennemsnittet af antal medarbejdere ved en arbejdsgang')
 legend('Ensøgård','Havkær');
-VisData(handles,[handles.Velfaerdsteknologi.(teknologi).Tidspunkt],VarighedPlejecenter,handles.axVarighedPlejecentre,'Plejecentre');
+[~,~,DataEksisterer2]=VisData(handles,[handles.Velfaerdsteknologi.(teknologi).Tidspunkt],VarighedPlejecenter,handles.axVarighedPlejecentre,'Plejecentre');
 hold on 
-[~,~,DataEksisterer]=VisData(handles,[handles.TeknologiOverblik.(teknologi).Tidspunkt],VarighedTeknologi,handles.axVarighedPlejecentre,'Plejecentre',1);
+[~,~,DataEksisterer1]=VisData(handles,[handles.TeknologiOverblik.(teknologi).Tidspunkt],VarighedTeknologi,handles.axVarighedPlejecentre,'Plejecentre',1);
 hold off 
 axes(handles.axVarighedPlejecentre)
 ylabel('Varighed i minutter')
 title('Gennemsnittet af hvor lang tid en arbejdsgang tager')
 legend('Ensøgård','Havkær');
-if DataEksisterer == 1
+if DataEksisterer1 == 1 && DataEksisterer2 == 1
    msgbox('Der er ikke data for den valgte periode');
 end
 
@@ -231,7 +231,7 @@ function btnAfslutSystem_Callback(hObject, eventdata, handles)
 % hObject    handle to btnAfslutSystem (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-spoergsmaal=sprintf('Ønsker du at afslutte programmet: ?');
+spoergsmaal=sprintf('Ønsker du at afslutte programmet?');
 svar=questdlg(spoergsmaal,'Afslut',...
 'Ja', 'Nej', 'Nej'); %den sidste gem er default værdien
 switch svar

@@ -179,18 +179,13 @@ if strcmp(periode, 'Dag')==0
 
 end
     if strcmp(Vindue,'Yderligere')==0
-       %textFormat = "%s er brugt %s gange";
        if strcmp(Vindue,'Teknologi')==1 || strcmp(Vindue,'Plejecentre')==1
-           %str = sprintf(textFormat,teknologi,string(sumAnvendelse));
            if box2==0
                set(txtAntal,'String',string(sumAnvendelse));
            else
                set(handles.txtTeknologiOverblikPlejecenter,'String',string(sumAnvendelse));
-           end
+           end 
        else 
-           %Sensor = string(fieldnames(handles.Velfaerdsteknologi.(teknologi)(1)));
-           %nr = handles.Velfaerdsteknologi.BrugerValgtSensor;
-           %str = sprintf(textFormat,Sensor(nr),string(sumAnvendelse));
            set(txtAntal,'String',string(sumAnvendelse));
        end
     end

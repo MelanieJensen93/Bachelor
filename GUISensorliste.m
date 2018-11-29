@@ -164,6 +164,15 @@ function btnAfslutSystem_Callback(hObject, eventdata, handles)
 % hObject    handle to btnAfslutSystem (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-GUISensorliste_OpeningFcn(hObject, eventdata, handles, 'exit');
+spoergsmaal=sprintf('Ønsker du at afslutte programmet: ?');
+svar=questdlg(spoergsmaal,'Afslut',...
+'Ja', 'Nej', 'Nej'); %den sidste gem er default værdien
+switch svar
+    case 'Ja'
+        GUISensorliste_OpeningFcn(hObject, eventdata, handles, 'exit');
+end
+
+
+
 
 

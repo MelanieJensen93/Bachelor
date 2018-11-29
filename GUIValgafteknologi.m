@@ -22,7 +22,7 @@ function varargout = GUIValgafteknologi(varargin)
 
 % Edit the above text to modify the response to help GUIValgafteknologi
 
-% Last Modified by GUIDE v2.5 12-Nov-2018 17:25:24
+% Last Modified by GUIDE v2.5 22-Nov-2018 20:43:40
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -151,10 +151,10 @@ function btnAfslutSystem_Callback(hObject, eventdata, handles)
 % hObject    handle to btnAfslutSystem (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-spoergsmaal=sprintf('Ønsker du at afslutte programmet: ?');
+spoergsmaal=sprintf('Ønsker du at afslutte programmet?');
 svar=questdlg(spoergsmaal,'Afslut',...
 'Ja', 'Nej', 'Nej'); %den sidste gem er default værdien
 switch svar
     case 'Ja'
-        close(GUIValgafteknologi)
+        close(GUIValgafteknologi);
 end
