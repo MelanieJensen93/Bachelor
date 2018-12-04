@@ -110,7 +110,7 @@ slutDato = datetime(stringDato,'InputFormat','dd-MM-yyyy');
 tt = timetable(times,yData','VariableNames',{'Data'});
 
 if strcmp(periode, 'Dag')==1
-    [sumAnvendelse,Begraensning,slutDato, DataEksisterer] = DagInddeling(slutDato,stringDato,tt,axesTeknologi);
+    [sumAnvendelse,Begraensning, DataEksisterer] = DagInddeling(slutDato,stringDato,tt,axesTeknologi);
     startDato = stringDato; 
 end
 

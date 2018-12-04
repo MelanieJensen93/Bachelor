@@ -3,11 +3,12 @@ function [xData, match, tt, sumAnvendelse,Begraensning, startDato] = MaanedIndde
     slutDato = datetime(slutDato.Year,slutDato.Month,slutDato.Day);
     Begraensning = timerange ( startDato,slutDato+1);
     tt = tt(Begraensning,:);
-    sumAnvendelse = length(tt.times);
+    xData = startDato: day(1):slutDato;
+    sumAnvendelse = length(tt.times)/length(xData);
     tt = retime(tt,'daily',@mean);
     tt = rmmissing(tt);
             
-    xData = startDato: day(1):slutDato;
+
     match = ismember(xData,tt.times);
     
 end

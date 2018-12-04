@@ -1,5 +1,20 @@
-function [sumAnvendelse,Begraensning,x,DataEksisterer] = DagInddeling(slutDato,stringDato, tt,axesTeknologi)
-    slutTidspunkt = datetime([datestr(stringDato,'dd-mm-yyyy') ' 05:00:00']);
+function [sumAnvendelse,Begraensning,DataEksisterer] = DagInddeling(slutDato,stringDato, tt,axesTeknologi)
+%DagInddeling begrænser data for en dag og plotter det samt viser data for
+%antal gange en teknologi er anvendt. 
+%   
+%   INPUT: 
+%   slutDato = Den dato, data skal vises fra i datetime.
+%   stringDato = Den dato, data skal vises fra i string
+%   tt = Data der skal op af y-aksen. 
+%   axesTeknologi = Aksen hvor data skal plottes. 
+%
+%   OUTPUT: 
+%   sumAnvendelse = Antal gange teknologien er anvendt 
+%   Begraensning = Begrænser timetable til en dag. 
+%   dato hvor der den seneste data fra, ellers er dette brugervalgt.  
+%   DataEksisterer = 1, hvis data ikke eksisterer og 2 hvis det eksisterer. 
+
+slutTidspunkt = datetime([datestr(stringDato,'dd-mm-yyyy') ' 05:00:00']);
     % startDato findes vha. slutDato og trækker en dag fra. 
     startDato = datetime(slutDato.Year,slutDato.Month,slutDato.Day+1);
     %Definere data mellem startTidspunkt og slutTidspunkt
@@ -8,6 +23,7 @@ function [sumAnvendelse,Begraensning,x,DataEksisterer] = DagInddeling(slutDato,s
     Begraensning = timerange(char(slutTidspunkt),char(startTidspunkt));    
     tt = tt(Begraensning,:);
     % Antal angiver, antal gange systemet har været i brug om dagen. 
+    
     sumAnvendelse = length(tt.Data);
     % Finder gennemsnittet af hver time og sletter rækker hvor der er ingen
     % data
