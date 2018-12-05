@@ -1,4 +1,10 @@
 function tableout = indlaesSensorData(workbookFile,sheetName,startRow,endRow)
+%Funktionen indlaesSensorData importerer data fra en excelfil(workbookFile), og gemmer dette i en struct kaldet tableout. 
+%WorkbookFile er SensorData-filen og SensorDataSammenlign-filen. Denne sikrer, at alle værdierne gemmes i den rette type.
+%   INPUT
+%   workbookFile = Filen der skal indlæses data fra 
+%   OUTPUT
+%   tableout = tabel af data gemt i et struct. 
 %IMPORTFILE1 Import data from a spreadsheet
 %   DATA = IMPORTFILE1(FILE) reads data from the first worksheet in the
 %   Microsoft Excel spreadsheet file named FILE and returns the data as a

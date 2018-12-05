@@ -1,8 +1,13 @@
 function handles = IndlaesVelfaerdsteknologi(handles,fil)
-%HENTDATAFRASENSORDATAFIL Summary of this function goes here
-%   Detailed explanation goes here
-
-%SensorDataFil = importfile('SensorDataFil.xlsx','Ark1');
+%INDLAESVELFAERSTEKNOLOGI indlæser data fra filen og inddeler data i
+%velfærdsteknologier, og gemmer dette i handles. 
+%   
+%   INPUT: 
+%   handles = handle til elementer i GUI. 
+%   fil = angiver om SammenlignMedPlejecentre skal læses. 
+%
+%   OUTPUT: 
+%   handles = handle til elementer i GUI.  
 if nargin ==1
     SensorDataFil = indlaesSensorData('SensorDataFilVers1.xlsx','Ark1');
 end
