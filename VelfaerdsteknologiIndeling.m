@@ -1,6 +1,11 @@
 function output = VelfaerdsteknologiIndeling(SensorDataFil,teknologi)
-%UNTITLED3 Summary of this function goes here
-%   Detailed explanation goes here
+%VELFAERDSTEKNOLOGIINDELING inddeler data i velfærdsteknologier. 
+%   INPUT: 
+%   SensorDataFil = Data, som indeholder data for teknologier. 
+%   teknologi = Den teknologi, der ønskes at sorteres for. 
+%  
+%   OUTPUT: 
+%   handles = handle til data for en teknologi  
 CntRowTeknologi = 1; 
 
 for CntRow = 1:size(SensorDataFil,1)

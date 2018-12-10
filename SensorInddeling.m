@@ -1,4 +1,10 @@
 function handles = SensorInddeling(handles)
+%SENSORINDDELING finder de unikke sensorer, som der er data for, og sorterer data i de enkelte sensorer, således at en sensor har en tabel af data. Disse gemmes i handles, som den modtager som input. De opdaterede handles sendes som output.
+%   INPUT: 
+%   handles = handle til elementer i GUI. 
+%
+%   OUTPUT: 
+%   handles = handle til elementer i GUI.  
 
 teknologi = fieldnames(handles.Velfaerdsteknologi);
 teknologi = string(teknologi);

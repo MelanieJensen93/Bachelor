@@ -1,5 +1,5 @@
 function [handles,datatogo,svar] = Bemaerkning(handles, datatogo)
-%BEMAERKNING aktiveres når brugren trykker på "'+ Tilføj bemærkning"'-knappen.
+%BEMAERKNING aktiveres når brugeren trykker på "'+ Tilføj bemærkning"'-knappen.
 %   Funktionen tjekker om brugeren har valgt dato og bemærkning, hvis 
 %   brugeren har valgt dato og bemærkning åbnes et vindue, hvor brugren skal
 %   vælge om han/hun ønsker at tilføje at bemærkningen. Hvis brugren trykker
@@ -93,7 +93,7 @@ if isfield(handles.Velfaerdsteknologi,'ValgtTidspunktPaaDato')
 
     
 else
-    uiwait(msgbox('Vælg venligst en dato', 'Error', 'error', 'modal'));
+  uiwait(msgbox('Vælg venligst en dato', 'Error', 'error', 'modal'));
 end
 
 

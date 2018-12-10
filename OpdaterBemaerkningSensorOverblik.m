@@ -1,5 +1,12 @@
 function OpdaterBemaerkningSensorOverblik(handles,startDato,slutDato)
-% Inlæs bemærkningsfil 
+%OpdaterBemaerkningSensorOverblik udskriver bemærkninger for den valgte
+%periode og dato i listen i "Sensor Overblik Skærm". 
+%   INPUT: 
+%   startDato = fra denne dato skal bemærkninger vises. 
+%   slutDato = til denne dato skal bemærkninger vises. 
+%   handles = handle til elementer i GUI. 
+ 
+%Indlæs bemærkningsfil 
 DatafraBemaerkningsFil = readtable('BemaerkningsFil.xlsx');
 handles.Velfaerdsteknologi.Bemaerkninger = DatafraBemaerkningsFil;
 %Finder teknologien og den afkrydsede periode
@@ -48,8 +55,6 @@ for i=1:height(SensorBemaerkning)
     end
     
     tidspunktBemaerkning = datetime(datestr(tidspunktBemaerkning,'dd-mm-yyyy'));
-    %tidspunktBemaerkning.Format = 'dd-MMM-yyyy';
-    %tidspunktBemaerkning = string(tidspunktBemaerkning);
     % udskriv = 0, hvis ikke den skal udskrives for den givne periode
     udskriv =0;
     

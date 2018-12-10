@@ -1,13 +1,18 @@
 function [xData, match, tt, sumAnvendelse,Begraensning, startDato] = MaanedInddeling(slutDato,tt)
-%MaanedInddeling begrænser data for en måned.
+%MAANEDINDDELING begrænser data for en måned.
 %   INPUT: 
 %   slutDato = fra denne dato skal den begrænse data fra. 
-%   tt = Data der skal op af y-aksen. 
+%   tt = Data, der skal op af y-aksen. 
 %
 %   OUTPUT: 
-%   xData = Dato hvor data skal startes vises fra. 
-%   stringDato = Dato hvor data skal stal vises til. Pr. default er det den
-%   dato hvor der den seneste data fra, ellers er dette brugervalgt. 
+%   xData = Data hen af x-aksen for en måned. 
+%   startDato = Dato, hvor data skal stal vises fra. 
+%   match = Array fyldt med 0 og 1. Den har størrelsen for antal dage på en
+%   måned. 1 svarer til der er data for den dag og omvendt for 0. 
+%   tt = Data, der skal op af y-aksen for en måned. 
+%   Begraensning = Interval, som data skal begrænses til. 
+%   sumAnvendelse = Antal gange teknologien bliver anvendt.
+
     startDato = datetime(slutDato.Year,slutDato.Month-1,slutDato.Day);
     slutDato = datetime(slutDato.Year,slutDato.Month,slutDato.Day);
     Begraensning = timerange ( startDato,slutDato+1);

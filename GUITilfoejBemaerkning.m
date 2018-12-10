@@ -115,10 +115,12 @@ function btnVealgDatoTilfoejBemearkning_Callback(hObject, eventdata, handles)
 'DestinationUI', handles.etDatoTilfoejBemaerkning));
 
 ValgtDato = get(handles.etDatoTilfoejBemaerkning, 'String');
-ValgtDatoDatetime = datetime(ValgtDato, 'InputFormat', 'dd-MM-yyyy');
+if ~isempty(ValgtDato)
+    ValgtDatoDatetime = datetime(ValgtDato, 'InputFormat', 'dd-MM-yyyy');
 
-datatogo = handles.Velfaerdsteknologi;
-ValgAfDatapunkt(handles,datatogo, ValgtDato, ValgtDatoDatetime);
+    datatogo = handles.Velfaerdsteknologi;
+    ValgAfDatapunkt(handles,datatogo, ValgtDatoDatetime);
+end
 
 % --- Executes on button press in rbMiddagTilfoejBemaerkning.
 %function rbMiddagTilfoejBemaerkning_Callback(hObject, eventdata, handles)

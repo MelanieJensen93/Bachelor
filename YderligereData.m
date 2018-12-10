@@ -1,4 +1,10 @@
 function handles = YderligereData(handles)
+%YDERLIGEREDATA Funktionen YderligereData sorterer teknologiens data, og udtrækker værdier for varighed af arbejdsgang for superbruger samt for alment personale, som senere skal vises på "Yderligere Data Skærm"
+%   INPUT: 
+%   handles = handle til elementer i GUI. 
+%
+%   OUTPUT: 
+%   handles = handle til elementer i GUI.  
 teknologi = fieldnames(handles.Velfaerdsteknologi);
 teknologi = string(teknologi);
 

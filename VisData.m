@@ -15,6 +15,8 @@ function [startDato, stringDato, DataEksisterer] = VisData(handles, xData, yData
 %   startDato = Dato hvor data skal startes vises fra. 
 %   stringDato = Dato hvor data skal stal vises til. Pr. default er det den
 %   dato hvor der den seneste data fra, ellers er dette brugervalgt. 
+%   DataEksisterer = Varibel der er 1, hvis der ikke er data, og er 2, hvis
+%   der er data. 
 if nargin<6
     box2=0;
 end

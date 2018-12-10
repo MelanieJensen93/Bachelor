@@ -1,5 +1,9 @@
 function OpdaterListboxSensorOverblik(handles)
+%OPDATERLISTBOXSENSOROVERBLIK udskriver sensornavn for den valgte teknologi i en liste. 
 %Udskriver sensorer for valgt teknologi
+%   INPUT: 
+%   handles = handles til elementer i GUI. 
+
 teknologi = fieldnames(handles.Velfaerdsteknologi(1));
 teknologi = string(teknologi(1));
 Sensorer = string(fieldnames(handles.Velfaerdsteknologi.(teknologi)));

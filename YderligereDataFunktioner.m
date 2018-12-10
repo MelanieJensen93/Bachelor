@@ -1,4 +1,13 @@
 function YderligereDataFunktioner(handles,ttYderligere, teknologi, Begraensning)
+%YDERLIGEREDATAFUNKTIONER begrænser data for en måned samt beregner
+%procenter for en af teknologiens aktiviteter ud af den samlede teknologis
+%aktivitet 
+%
+%   INPUT: 
+%   handles = handles til elementer i GUI. 
+%   ttYderligere = Data for yderligere data, der skal begrænses. 
+%   teknologi = Den teknologi den skal beregne procenter for. 
+%   Begraesning = Intervalt, ttYderligere bliver begrænset til. 
 
         ttYderligere = ttYderligere(Begraensning,:);
         if strcmp(teknologi,'Carendo')==1 

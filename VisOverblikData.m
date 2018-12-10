@@ -1,5 +1,17 @@
 function [startDato, slutDato] = VisOverblikData(handles,Vindue)
-
+%VISOVERBLIKDATA plotter data i en graf og udskriver antal gange en teknologi eller
+%   sensor er blevet brugt. Den inddeler data i den valgte periode, for
+%   derefter at plotte dem. Denne funktion plotter kun på "Teknologi
+%   Overblik Skærm" og "Sensor Overblik Skærm". 
+%   
+%   INPUT: 
+%   handles = handle til elementer i GUI. 
+%   Vindue = Det vindue/skærm data skal plottes i
+%
+%   OUTPUT: 
+%   startDato = Dato, hvor data skal startes vises fra. 
+%   slutDato = Dato, hvor data skal stal vises til. Pr. default er det den
+%   dato, hvor der den seneste data fra, ellers er dette brugervalgt. 
 teknologi = fieldnames(handles.Velfaerdsteknologi);
 teknologi = string(teknologi);
 switch Vindue 
