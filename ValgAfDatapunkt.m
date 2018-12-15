@@ -53,6 +53,9 @@ if isfield(handles.Velfaerdsteknologi,teknologi)
                     else %hour(tidspunkt)==23 || hour(tidspunkt)<5
                             TidspunktPaaDagen_Data= TidspunktPaaDagen(6);
                     end
+                    
+                %Udskriver datapunkterne til den valgt dato i en listbox på
+                %Vælg tidspunkt vinduet. 
                 listboxDataforvalgtdato = GUIDatafravalgtdato(datatogo, handles);
                 tidspunktKunDato = handles.Velfaerdsteknologi.(teknologi).(Sensornavn)(ii).Tidspunkt;
                 tidspunktKunDato.Format = 'dd-MMM-yyyy';

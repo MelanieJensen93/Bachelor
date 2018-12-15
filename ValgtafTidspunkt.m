@@ -15,15 +15,22 @@ teknologi = fieldnames(handles.Velfaerdsteknologi(1));
 teknologi = string(teknologi(1));
 
 Antalfravalgtdato = 0;
-
+%Henter oplysninger om hvilken, sensor og tidspunkt/periode brugeren har
+%valgt
 if isfield(handles.Velfaerdsteknologi, 'ValgtTidspunktPaaDato')
     Sensornr = getfield(handles.Velfaerdsteknologi, 'BrugerValgtSensor');
     Valuefromlistbox = getfield(handles.Velfaerdsteknologi, 'ValgtTidspunktPaaDato');
+    %Løber alle elementer af velfærdsteknologi i gennem
     for i = 1:length(fieldnames(handles.Velfaerdsteknologi.(teknologi)))
         if Sensornr == i 
           Sensor = fieldnames(handles.Velfaerdsteknologi.(teknologi));
           Sensornavn = string(Sensor(i));
+          %Løber alle sensorerne i gennem
           for ii = 1:length(handles.Velfaerdsteknologi.(teknologi).(Sensornavn))
+              %Henter tidspunkt brugeren har valgt og henter tidspunkt fra
+              %handles der tilhører datapunktet. Sammenligner de to
+              %tidspunkter, hvis de er ens udskrives bemærkningen på
+              %Sensor Overblik Skærm 
               ValgtTidspunkt = get(handles.etDatoTilfoejBemaerkning, 'String');
               tidspunkt = handles.Velfaerdsteknologi.(teknologi).(Sensornavn)(ii).Tidspunkt;
               tidspunkt.Format = 'dd-MMM-yyyy';

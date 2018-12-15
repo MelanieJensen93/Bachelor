@@ -17,12 +17,11 @@ teknologi = fieldnames(handles.Velfaerdsteknologi(1));
 teknologi = string(teknologi(1));
 
 Antalfravalgtdato = 0;
-%if ~exist('BemaerkningsFilEfterInstall.xlsx','File')
-    DatafraBemaerkningsFil = readtable('BemaerkningsFil.xlsx');
-%else
- %   DatafraBemaerkningsFil = readtable('BemaerkningsFilEfterInstall.xlsx');
-%end
 
+%Læser fra fil
+DatafraBemaerkningsFil = readtable('BemaerkningsFil.xlsx');
+
+%Henter længden af bemærkningsfilen
 handles.Velfaerdsteknologi.BemaerkningsFilLaengde = height(DatafraBemaerkningsFil);
 
 if isfield(handles.Velfaerdsteknologi,'ValgtTidspunktPaaDato')
@@ -42,10 +41,14 @@ if isfield(handles.Velfaerdsteknologi,'ValgtTidspunktPaaDato')
                   Antalfravalgtdato = Antalfravalgtdato+1;
                   if Antalfravalgtdato == Valuefromlistbox
                      for iii = 1:length(handles.Velfaerdsteknologi.(teknologi).(Sensornavn)(ii).TilfoejBemaerkning) 
+                         %Opretter en tabel med bemærkningsoplysningerne
+                         %hentet fra handles. 
                          T = table(teknologi, Sensornavn,handles.Velfaerdsteknologi.(teknologi).(Sensornavn)(ii).Tidspunkt ,...
                              handles.Velfaerdsteknologi.(teknologi).(Sensornavn)(ii).TilfoejBemaerkning(iii).Bemaerkning().bemaerkning);
                          laengdeafBemaerkningsfil = handles.Velfaerdsteknologi.BemaerkningsFilLaengde+2;
+                         %Opstiller udskriv til bemærkningsfil.
                          udskrift = sprintf('A%1.f:D%1.f', laengdeafBemaerkningsfil, laengdeafBemaerkningsfil);
+                         %Skriver tabel i bemærkningsfilen. 
                         writetable(T, 'BemaerkningsFil.xlsx', 'Sheet', 1,'Range', udskrift, 'WriteVariableNames', false);            
                      end
                   end
