@@ -12,6 +12,8 @@ function handles = Brugermanual(handles)
 %   OUTPUT: 
 %   handles = handle til elementer i GUI.
 
+%Tjekker hvilket felt der eksister i handles, og tilpasser billedet efter
+%det
 if isfield(handles.Velfaerdsteknologi,'Carendo')
     set(handles.txtValgtteknologiBrugermanualvindue,'String', 'Carendo');
     axes(handles.axValgtteknologiBrugermanualVindue)
@@ -22,6 +24,7 @@ elseif isfield(handles.Velfaerdsteknologi,'Luna')
     axes(handles.axValgtteknologiBrugermanualVindue)
     imshow('lunaloftliftmanual.png');   
 
+%Hvis der er nogen brugermanualer, udskrives fejlmeddelelsen
 else
     msgbox('Det er i øjeblikket ingen brugermanual ', 'Brugermanual mangler', 'error');
 end

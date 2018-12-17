@@ -43,7 +43,10 @@ if isfield(handles.Velfaerdsteknologi,'ValgtTidspunktPaaDato')
               tidspunkt = string(tidspunkt);
             if handles.Velfaerdsteknologi.ValgtTidspunkt == tidspunkt 
                   Antalfravalgtdato = Antalfravalgtdato+1;
-                  if Antalfravalgtdato == Valuefromlistbox                        
+                  if Antalfravalgtdato == Valuefromlistbox 
+                      %Tjekker om det er første bemærkning der oprettes til
+                      %dette tidspunkt, ellers gå den i else og finde ud af
+                      %hvilken nr. bemærkning det så er. 
                     if ~isfield(handles.Velfaerdsteknologi.(teknologi).(Sensornavn),'TilfoejBemaerkning') || isempty(handles.Velfaerdsteknologi.(teknologi).(Sensornavn)(ii).TilfoejBemaerkning)
                         idx=1; 
                         handles.Velfaerdsteknologi.(teknologi).(Sensornavn)(ii).TilfoejBemaerkning.Bemaerkning(idx).tidspunkt= get(handles.etDatoTilfoejBemaerkning,'String');
@@ -63,6 +66,9 @@ if isfield(handles.Velfaerdsteknologi,'ValgtTidspunktPaaDato')
                         handles.Velfaerdsteknologi.(teknologi).(Sensornavn)(ii).TilfoejBemaerkning.Bemaerkning(idx).bemaerkning =  AndetBemaerkning;
                     end
                     
+                    %Spørg brugeren om han/hun ønsker at tilføje en
+                    %bemærkning, men de oplysninger de har valgt på tilføj
+                    %bemærknings vinduet. 
                     if isfield(handles.Velfaerdsteknologi.(teknologi).(Sensornavn)(ii).TilfoejBemaerkning,'Bemaerkning')
                         % Stammer fra : https://se.mathworks.com/help/matlab/ref/questdlg.html
                         spoergsmaal=sprintf('Ønsker du at tilføje bemærkningen: %s %s til %s?',...
@@ -72,12 +78,18 @@ if isfield(handles.Velfaerdsteknologi,'ValgtTidspunktPaaDato')
                         svar=questdlg(spoergsmaal,'Tilføj bemærkning',...
                             'Gem', 'Annuller', 'Gem'); %den sidste gem er default værdien
                         switch svar
+                            %Hvis brugeren trykker på "Gem" tilføjes
+                            %bemærkningen bemærkningsfilen, ved at kalde
+                            %funktionen GemBemaerkningiFil. 
                             case 'Gem'
                                 disp([svar ' gemt'])
                                 GemBemaerkningiFil(handles); 
                                 datatogo = handles.Velfaerdsteknologi;
                                 GUITilfoejBemaerkning(datatogo);
                                 break
+                                %Hvis brugeren trykker på "Annuller",
+                                %lukker spørgsmålet og brugeren vender
+                                %tilbage til Tilføj bemærkning vinduet. 
                             case 'Annuller'
                                 disp([svar ' annulleret'])
 
@@ -91,7 +103,7 @@ if isfield(handles.Velfaerdsteknologi,'ValgtTidspunktPaaDato')
     end
        
 
-    
+    %Hvis ikke der er valgt en dato udskrives denne fejlmeddelelse. 
 else
   uiwait(msgbox('Vælg venligst en dato', 'Error', 'error', 'modal'));
 end
