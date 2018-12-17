@@ -53,6 +53,7 @@ function GUIValgafteknologi_OpeningFcn(hObject, eventdata, handles, varargin)
 % varargin   command line arguments to GUIValgafteknologi (see VARARGIN)
 
 % Choose default command line output for GUIValgafteknologi
+% Stammer fra: https://stackoverflow.com/questions/15286458/automatically-maximize-a-figure
 set(gcf, 'WindowState', 'fullscreen');
 handles.output = hObject;
 
@@ -93,6 +94,7 @@ function varargout = GUIValgafteknologi_OutputFcn(hObject, eventdata, handles)
 
 % Get default command line output from handles structure
 varargout{1} = handles.output;
+% Stammer fra: https://stackoverflow.com/questions/15286458/automatically-maximize-a-figure
 set(gcf, 'WindowState', 'fullscreen');
 %set(gcf, 'Position', get(0,'Screensize'));
 %set(gcf, 'units','normalized','outerposition',[0 0 1 1]);
@@ -151,6 +153,7 @@ function btnAfslutSystem_Callback(hObject, eventdata, handles)
 % hObject    handle to btnAfslutSystem (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
+%https://se.mathworks.com/help/matlab/ref/questdlg.html
 spoergsmaal=sprintf('Ønsker du at afslutte programmet?');
 svar=questdlg(spoergsmaal,'Afslut',...
 'Ja', 'Nej', 'Nej'); %den sidste gem er default værdien

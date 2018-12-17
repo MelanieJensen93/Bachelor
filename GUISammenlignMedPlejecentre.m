@@ -54,7 +54,9 @@ function GUISammenlignMedPlejecentre_OpeningFcn(hObject, eventdata, handles, var
 
 % Choose default command line output for GUISammenlignMedPlejecentre
 handles.output = hObject;
+% Stammer fra: https://stackoverflow.com/questions/15286458/automatically-maximize-a-figure
 set(gcf, 'WindowState', 'fullscreen');
+% Stammer fra: https://se.mathworks.com/matlabcentral/answers/95732-how-can-i-cleanly-exit-from-the-openingfcn-of-a-gui-if-a-certain-condition-is-met
 if ~isempty(varargin) && ischar(varargin{1}) && strcmp(varargin{1},'exit')
     close;
 else
@@ -63,23 +65,29 @@ else
     imshow(AarhusKommuneLogo);
 
     handles.TeknologiOverblik = varargin{1};
+    
     handles.teknologi = fieldnames(handles.TeknologiOverblik);
     %guidata(hObject, handles);
     set(handles.txtValgtTeknologiSammenlignmedandreplejecentre, 'String',handles.teknologi)
     % Update handles structure
     
     guidata(hObject, handles);
-
+    
+    % Indlæser data for teknologien i filen Plejecentre
     handles = IndlaesVelfaerdsteknologi(handles, 'Plejecentre');
     guidata(hObject,handles);
-
+    % Hvis ikke der er data, vil der komme en fejlmeddelelse
+    if isempty(handles.Velfaerdsteknologi)
+        msgbox('Der er intet data at sammenligne med.'); 
+    end
     teknologi = string(handles.teknologi);
     if handles.TeknologiOverblik.(teknologi)(1).Tidspunkt<handles.Velfaerdsteknologi.(teknologi)(1).Tidspunkt
         handles.StringDato = handles.Velfaerdsteknologi.(teknologi)(1).Tidspunkt;
     else 
         handles.StringDato = handles.TeknologiOverblik.(teknologi)(1).Tidspunkt;
     end
-    
+    % Plotter data for hhv. varighed og antal medarbejder for de
+    % plejecentre. 
     VarighedPlejecenter = [handles.Velfaerdsteknologi.(teknologi).Varighedforarbejdsgang];
     VarighedTeknologi = [handles.TeknologiOverblik.(teknologi).Varighedforarbejdsgang];
     %Idet at det er en tid så skal det skrives ud i typen duration med
@@ -94,7 +102,7 @@ else
     hold off 
     axes(handles.axMedarbejderePlejecentre)
     ylabel('Antal medarbejdere')
-    title('Gennemsnittet af antal medarbejdere ved en arbejdsgang')
+    %title('Gennemsnittet af antal medarbejdere ved en arbejdsgang')
     legend('Ensøgård','Havkær');
 
     [~,~,DataEksisterer2]=VisData(handles,[handles.Velfaerdsteknologi.(teknologi).Tidspunkt],VarighedPlejecenter,handles.axVarighedPlejecentre,'Plejecentre');
@@ -103,7 +111,7 @@ else
     hold off 
     axes(handles.axVarighedPlejecentre)
     ylabel('Varighed i minutter')
-    title('Gennemsnittet af hvor lang tid en arbejdsgang tager')
+    %title('Gennemsnittet af hvor lang tid en arbejdsgang tager')
     legend('Ensøgård','Havkær');
     
     stringDato = string(slutDato);
@@ -137,12 +145,15 @@ function btnVaelgDatoPlejecentre_Callback(hObject, eventdata, handles)
 % hObject    handle to btnVaelgDatoPlejecentre (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
+
+%https://se.mathworks.com/help/finance/uicalendar.html
 uicalendar('Weekend',[1 0 0 0 0 0 1], ...  
 'SelectionType', 1, ...  
 'DestinationUI', handles.stDatoPlejecentre);
 
 waitfor(handles.stDatoPlejecentre,'String');
-
+% Plotter data for hhv. varighed og antal medarbejder for de
+% plejecentre. 
 teknologi = string(handles.teknologi);
 VarighedPlejecenter = [handles.Velfaerdsteknologi.(teknologi).Varighedforarbejdsgang];
 VarighedTeknologi = [handles.TeknologiOverblik.(teknologi).Varighedforarbejdsgang];
@@ -159,7 +170,7 @@ hold on
 hold off 
 axes(handles.axMedarbejderePlejecentre)
 ylabel('Antal medarbejdere')
-title('Gennemsnittet af antal medarbejdere ved en arbejdsgang')
+%title('Gennemsnittet af antal medarbejdere ved en arbejdsgang')
 legend('Ensøgård','Havkær');
 
 VisData(handles,[handles.Velfaerdsteknologi.(teknologi).Tidspunkt],VarighedPlejecenter,handles.axVarighedPlejecentre,'Plejecentre');
@@ -168,7 +179,7 @@ VisData(handles,[handles.TeknologiOverblik.(teknologi).Tidspunkt],VarighedTeknol
 hold off 
 axes(handles.axVarighedPlejecentre)
 ylabel('Varighed i minutter')
-title('Gennemsnittet af hvor lang tid en arbejdsgang tager')
+%title('Gennemsnittet af hvor lang tid en arbejdsgang tager')
 legend('Ensøgård','Havkær');
 
 if DataEksisterer1 == 1 && DataEksisterer2==1
@@ -180,6 +191,8 @@ function btngroupRedigergrafPlejecentre_SelectionChangedFcn(hObject, eventdata, 
 % hObject    handle to the selected object in btngroupRedigergrafPlejecentre 
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
+% Plotter data for hhv. varighed og antal medarbejder for de
+% plejecentre. 
 teknologi = string(handles.teknologi);
 VarighedPlejecenter = [handles.Velfaerdsteknologi.(teknologi).Varighedforarbejdsgang];
 VarighedTeknologi = [handles.TeknologiOverblik.(teknologi).Varighedforarbejdsgang];
@@ -195,7 +208,7 @@ VisData(handles,[handles.TeknologiOverblik.(teknologi).Tidspunkt],[handles.Tekno
 hold off 
 axes(handles.axMedarbejderePlejecentre)
 ylabel('Antal medarbejdere')
-title('Gennemsnittet af antal medarbejdere ved en arbejdsgang')
+%title('Gennemsnittet af antal medarbejdere ved en arbejdsgang')
 legend('Ensøgård','Havkær');
 [~,~,DataEksisterer2]=VisData(handles,[handles.Velfaerdsteknologi.(teknologi).Tidspunkt],VarighedPlejecenter,handles.axVarighedPlejecentre,'Plejecentre');
 hold on 
@@ -203,7 +216,7 @@ hold on
 hold off 
 axes(handles.axVarighedPlejecentre)
 ylabel('Varighed i minutter')
-title('Gennemsnittet af hvor lang tid en arbejdsgang tager')
+%title('Gennemsnittet af hvor lang tid en arbejdsgang tager')
 legend('Ensøgård','Havkær');
 if DataEksisterer1 == 1 && DataEksisterer2 == 1
    msgbox('Der er ikke data for den valgte periode');
@@ -231,6 +244,8 @@ function btnAfslutSystem_Callback(hObject, eventdata, handles)
 % hObject    handle to btnAfslutSystem (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
+
+% https://se.mathworks.com/help/matlab/ref/questdlg.html
 spoergsmaal=sprintf('Ønsker du at afslutte programmet?');
 svar=questdlg(spoergsmaal,'Afslut',...
 'Ja', 'Nej', 'Nej'); %den sidste gem er default værdien

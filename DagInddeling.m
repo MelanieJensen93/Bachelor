@@ -14,13 +14,14 @@ function [sumAnvendelse,Begraensning,DataEksisterer] = DagInddeling(slutDato,str
 %   dato hvor der den seneste data fra, ellers er dette brugervalgt.  
 %   DataEksisterer = 1, hvis data ikke eksisterer og 2 hvis det eksisterer. 
 
-slutTidspunkt = datetime([datestr(stringDato,'dd-mm-yyyy') ' 05:00:00']);
+    slutTidspunkt = datetime([datestr(stringDato,'dd-mm-yyyy') ' 05:00:00']);
     % startDato findes vha. slutDato og trækker en dag fra. 
     startDato = datetime(slutDato.Year,slutDato.Month,slutDato.Day+1);
     %Definere data mellem startTidspunkt og slutTidspunkt
     startTidspunkt = startDato + '05:00:00';
-    %slutTidspunkt = slutDato + '05:00:00';
-    Begraensning = timerange(char(slutTidspunkt),char(startTidspunkt));    
+    %https://se.mathworks.com/help/matlab/ref/timerange.html
+    Begraensning = timerange(char(slutTidspunkt),char(startTidspunkt));
+    % https://se.mathworks.com/help/matlab/timetables.html
     tt = tt(Begraensning,:);
     % Antal angiver, antal gange systemet har været i brug om dagen. 
     
@@ -38,7 +39,7 @@ slutTidspunkt = datetime([datestr(stringDato,'dd-mm-yyyy') ' 05:00:00']);
     matchDay = ismember(x,tt.times);
     
     Dag = zeros(1,length(x));
-    %Hvis der er data skal data ligges ind i et array eller skal det være lig med 0.  
+    %Hvis der er data, skal denne data ligges ind i et array eller skal det være lig med 0.  
     CntRowDag=1; 
     i_ttData=1; 
     for i=1:length(matchDay)
@@ -101,6 +102,8 @@ slutTidspunkt = datetime([datestr(stringDato,'dd-mm-yyyy') ' 05:00:00']);
         CntSum = CntSum +1;       
     end  
     
+    % Hvis der er tal, der ikke er lig med 0, så vil DataEksistere være
+    % lige med 1, ellers vil den være lig med 2. 
     if ~any(meanData)
         DataEksisterer =1; 
     else

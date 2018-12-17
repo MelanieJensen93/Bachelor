@@ -164,6 +164,8 @@ function btnAfslutSystem_Callback(hObject, eventdata, handles)
 % hObject    handle to btnAfslutSystem (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
+
+%https://se.mathworks.com/help/matlab/ref/questdlg.html
 spoergsmaal=sprintf('Ønsker du at afslutte programmet: ?');
 svar=questdlg(spoergsmaal,'Afslut',...
 'Ja', 'Nej', 'Nej'); %den sidste gem er default værdien

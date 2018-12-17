@@ -10,6 +10,7 @@ teknologi = fieldnames(handles.Velfaerdsteknologi);
 teknologi = string(teknologi);
 
 if isfield(handles.Velfaerdsteknologi,teknologi)
+    % Finder de unikke værdier i ID i den valgte teknologi. 
    [uniqvalue,~, ~] = unique([handles.Velfaerdsteknologi.(teknologi).ID]);   
    
    CntRowSensor = 1; 
@@ -17,28 +18,24 @@ if isfield(handles.Velfaerdsteknologi,teknologi)
    teknologisensor = teknologi + 'Sensor';
    for ii = 1:max(uniqvalue)
         for CntRow = 1:length(handles.Velfaerdsteknologi.(teknologi))
-       
+           %Under denne variabel skal et struct gemmes med de rækker fra teknologi, der
+           %tilhører den pågældende sensor. 
            id = ['Sensor' num2str(ii)];            
            
            if  handles.Velfaerdsteknologi.(teknologi)(CntRow).ID == ii           
-
+               %handles gemmes i denne sensor. 
                handles.Velfaerdsteknologi.(teknologisensor).(id)(CntRowSensor).ID = handles.Velfaerdsteknologi.(teknologi)(CntRow).ID;
                handles.Velfaerdsteknologi.(teknologisensor).(id)(CntRowSensor).Omsorgsfunktion = handles.Velfaerdsteknologi.(teknologi)(CntRow).Omsorgsfunktion; 
                handles.Velfaerdsteknologi.(teknologisensor).(id)(CntRowSensor).Komfortfunktion = handles.Velfaerdsteknologi.(teknologi)(CntRow).Komfortfunktion;
                handles.Velfaerdsteknologi.(teknologisensor).(id)(CntRowSensor).Haevesaenkefunktion = handles.Velfaerdsteknologi.(teknologi)(CntRow).Haevesaenkefunktion;
                handles.Velfaerdsteknologi.(teknologisensor).(id)(CntRowSensor).Tidspunkt = handles.Velfaerdsteknologi.(teknologi)(CntRow).Tidspunkt;
                handles.Velfaerdsteknologi.(teknologisensor).(id)(CntRowSensor).Varighedforarbejdsgang = handles.Velfaerdsteknologi.(teknologi)(CntRow).Varighedforarbejdsgang;
-               %handles.Velfaerdsteknologi.(teknologisensor).(id)(CntRowSensor).Varighedm2medarbejdere = handles.Velfaerdsteknologi.(teknologi)(CntRow).Varighedm2medarbejdere;
-               %handles.Velfaerdsteknologi.(teknologisensor).(id)(CntRowSensor).Varighedm1medarbejdere = handles.Velfaerdsteknologi.(teknologi)(CntRow).Varighedm1medarbejdere;
-               %handles.Velfaerdsteknologi.(teknologisensor).(id)(CntRowSensor).Varighedm0medarbejdere = handles.Velfaerdsteknologi.(teknologi)(CntRow).Varighedm0medarbejdere;
                handles.Velfaerdsteknologi.(teknologisensor).(id)(CntRowSensor).LunaMedCarendo = handles.Velfaerdsteknologi.(teknologi)(CntRow).LunaMedCarendo;
-               %handles.Velfaerdsteknologi.(teknologisensor).(id)(CntRowSensor).Arbejdsgang = handles.Velfaerdsteknologi.(teknologi)(CntRow).Arbejdsgang;
                handles.Velfaerdsteknologi.(teknologisensor).(id)(CntRowSensor).Medarbejdere= handles.Velfaerdsteknologi.(teknologi)(CntRow).Medarbejdere;
                handles.Velfaerdsteknologi.(teknologisensor).(id)(CntRowSensor).Tidmedborger = handles.Velfaerdsteknologi.(teknologi)(CntRow).Tidmedborger;
                handles.Velfaerdsteknologi.(teknologisensor).(id)(CntRowSensor).Superbruger = handles.Velfaerdsteknologi.(teknologi)(CntRow).Superbruger;
                handles.Velfaerdsteknologi.(teknologisensor).(id)(CntRowSensor).Almindeligtpersonale = handles.Velfaerdsteknologi.(teknologi)(CntRow).Almindeligtpersonale;
-               %handles.Velfaerdsteknologi.(teknologisensor).(id)(CntRowSensor).Afloeser = handles.Velfaerdsteknologi.(teknologi)(CntRow).Afloeser;
-        
+               %Herefter kan handles for den næste sensor findes. 
                CntRowSensor = CntRowSensor +1; 
            end
             
@@ -47,14 +44,16 @@ if isfield(handles.Velfaerdsteknologi,teknologi)
        
         
    end
-   %Udskriver sensorer for valgt teknologi
+   %Udskriver sensorer for valgt teknologi på Sensor Liste Skærm 
    for ii=1:length(uniqvalue)
-       idx=1;       
+       idx=1;  
+       %Udskriver følgende tekst.
        udskrift = sprintf("Sensor nr. %s", num2str(uniqvalue(ii)));
        str_part = udskrift; 
-       old_str = get(handles.lbSensorliste,'String'); 
-       new_str=strvcat(char(old_str),char(str_part));
-       set(handles.lbSensorliste,'String',new_str);
+       % Henter de eksisterende udskrifter
+       gml_str = get(handles.lbSensorliste,'String'); 
+       ny_str=strvcat(char(gml_str),char(str_part));
+       set(handles.lbSensorliste,'String',ny_str);
        
    end        
        

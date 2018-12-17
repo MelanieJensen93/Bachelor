@@ -9,13 +9,16 @@ function handles = IndlaesVelfaerdsteknologi(handles,fil)
 %   OUTPUT: 
 %   handles = handle til elementer i GUI.  
 if nargin ==1
+    % Læser data ind i "SensorDataFil" varibel i en struct. 
     SensorDataFil = indlaesSensorData('SensorDataFilVers1.xlsx','Ark1');
 end
 
 if nargin ==2
-    SensorDataFil = indlaesSensorData('Plejecentre.xlsx','Ark1');
+    % Læser data ind i "SensorDataFil" varibel i en struct. 
+    SensorDataFil = indlaesSensorData('SensorDataSammenlignFil.xlsx','Ark1');
 end
 
+% Data inddeles i de to mulige teknologier.
 handles.Velfaerdsteknologi.Carendo = VelfaerdsteknologiIndeling(SensorDataFil,"Carendo");
 handles.Velfaerdsteknologi.Luna = VelfaerdsteknologiIndeling(SensorDataFil,"Luna");
  

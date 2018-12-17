@@ -55,13 +55,16 @@ function GUISensordataoverblik_OpeningFcn(hObject, eventdata, handles, varargin)
 
 % Choose default command line output for GUISensordataoverblik
 handles.output = hObject;
+% Stammer fra: https://stackoverflow.com/questions/15286458/automatically-maximize-a-figure
 set(gcf, 'WindowState', 'fullscreen');
+% Stammer fra: https://se.mathworks.com/matlabcentral/answers/95732-how-can-i-cleanly-exit-from-the-openingfcn-of-a-gui-if-a-certain-condition-is-met
 if ~isempty(varargin) && ischar(varargin{1}) && strcmp(varargin{1},'exit')
     close;
 else
     set(gcf,'Pointer','watch');
     handles.Velfaerdsteknologi = varargin{1};
     ValgtSensor = handles.Velfaerdsteknologi.BrugerValgtSensor;
+    % Hente sensor og skrive den ud og plotte data for denne. 
     if isfield(handles.Velfaerdsteknologi, 'LunaSensor')
         handles.field = 'LunaSensor'; 
         Sensornavn = fieldnames(handles.Velfaerdsteknologi.LunaSensor);
@@ -113,6 +116,7 @@ function varargout = GUISensordataoverblik_OutputFcn(hObject, eventdata, handles
 
 % Get default command line output from handles structure
 varargout{1} = handles.output;
+% Stammer fra: https://stackoverflow.com/questions/15286458/automatically-maximize-a-figure
 set(gcf, 'WindowState', 'fullscreen');
 % set(gcf, 'Position', get(0,'Screensize'));
 % set(gcf, 'units','normalized','outerposition',[0 0 1 1]);
@@ -157,12 +161,14 @@ function btnVaelgDatoSensorDataOverblik_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
+%https://se.mathworks.com/help/finance/uicalendar.html
 uicalendar('Weekend',[1 0 0 0 0 0 1], ...  
 'SelectionType', 1, ...  
 'DestinationUI', handles.stDatoSensorOverblik);
 
 waitfor(handles.stDatoSensorOverblik,'String');
 %følgende format. 
+% Plotter data for sensor for hhv. antal medarbejder og varighed 
 [startDato, slutDato] = VisOverblikData(handles,'Sensor');
 guidata(hObject,handles);
 OpdaterBemaerkningSensorOverblik(handles,startDato,slutDato)
@@ -188,6 +194,7 @@ function btngroupRedigerGrafSensoroverblik_SelectionChangedFcn(hObject, eventdat
 % hObject    handle to the selected object in btngroupRedigerGrafSensoroverblik 
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
+% Plotter data for sensor for hhv. antal medarbejder og varighed 
 [startDato, slutDato] = VisOverblikData(handles,'Sensor');
 guidata(hObject,handles);
 OpdaterBemaerkningSensorOverblik(handles,startDato,slutDato)

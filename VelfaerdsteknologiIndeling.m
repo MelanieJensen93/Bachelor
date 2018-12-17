@@ -8,7 +8,10 @@ function output = VelfaerdsteknologiIndeling(SensorDataFil,teknologi)
 %   handles = handle til data for en teknologi  
 CntRowTeknologi = 1; 
 
+%Løber alle rækker i filens data igennem 
 for CntRow = 1:size(SensorDataFil,1)
+    % Hvis rækken er lig med teknologiens navn vil den gemme rækken i
+    % handles. 
     if strcmp(SensorDataFil.Velfaerdsteknologi(CntRow),teknologi)==1
         handles.Velfaerdsteknologi.(teknologi)(CntRowTeknologi).ID=SensorDataFil.ID(CntRow);
         handles.Velfaerdsteknologi.(teknologi)(CntRowTeknologi).Tidspunkt=SensorDataFil.Tidspunkt(CntRow);
@@ -17,19 +20,15 @@ for CntRow = 1:size(SensorDataFil,1)
         handles.Velfaerdsteknologi.(teknologi)(CntRowTeknologi).Haevesaenkefunktion=SensorDataFil.Haevesaenkefunktion(CntRow);
         handles.Velfaerdsteknologi.(teknologi)(CntRowTeknologi).LunaMedCarendo=SensorDataFil.LunaMedCarendo(CntRow);
         handles.Velfaerdsteknologi.(teknologi)(CntRowTeknologi).Varighedforarbejdsgang=SensorDataFil.Varighedforarbejdsgang(CntRow);
-        %handles.Velfaerdsteknologi.(teknologi)(CntRowTeknologi).Varighedm2medarbejdere=SensorDataFil.Varighedm2medarbejdere(CntRow);
-        %handles.Velfaerdsteknologi.(teknologi)(CntRowTeknologi).Varighedm1medarbejdere=SensorDataFil.Varighedm1medarbejder(CntRow);
-        %handles.Velfaerdsteknologi.(teknologi)(CntRowTeknologi).Varighedm0medarbejdere=SensorDataFil.Varighedm0medarbejder(CntRow);
-        %handles.Velfaerdsteknologi.(teknologi)(CntRowTeknologi).Arbejdsgang=SensorDataFil.Arbejdsgang(CntRow);
         handles.Velfaerdsteknologi.(teknologi)(CntRowTeknologi).Medarbejdere=SensorDataFil.Medarbejdere(CntRow);
         handles.Velfaerdsteknologi.(teknologi)(CntRowTeknologi).Tidmedborger=SensorDataFil.Tidmedborger(CntRow);
         handles.Velfaerdsteknologi.(teknologi)(CntRowTeknologi).Superbruger=SensorDataFil.Superbruger(CntRow);
         handles.Velfaerdsteknologi.(teknologi)(CntRowTeknologi).Almindeligtpersonale=SensorDataFil.Almindeligtpersonale(CntRow);
-        %handles.Velfaerdsteknologi.(teknologi)(CntRowTeknologi).Afloeser=SensorDataFil.Afloeser(CntRow);
         CntRowTeknologi= CntRowTeknologi+1; 
 
     end
 end
+% output er et struct af data for den teknologi der er sendt med som input.
 
 output = handles.Velfaerdsteknologi.(teknologi);
 end

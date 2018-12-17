@@ -72,6 +72,7 @@ for i=1:height(SensorBemaerkning)
     
     % Hvis der skal udskrives 
     if udskriv ==1 
+        % Stammer fra: https://www.youtube.com/watch?v=TBegsdnwJbA 
         % Følgende tekst skal udskrives 
         ny_udskrift= sprintf("%s %s %s %s", Sensornavn, tidspunktBemaerkning, TidspunktPaaDagen_Data, ...
         string(SensorBemaerkning.Bemaerkning(i))); 

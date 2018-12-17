@@ -54,7 +54,9 @@ function GUIYderligereData_OpeningFcn(hObject, eventdata, handles, varargin)
 
 % Choose default command line output for GUIYderligereData
 handles.output = hObject;
+% Stammer fra: https://stackoverflow.com/questions/15286458/automatically-maximize-a-figure
 set(gcf, 'WindowState', 'fullscreen');
+% Stammer fra: https://se.mathworks.com/matlabcentral/answers/95732-how-can-i-cleanly-exit-from-the-openingfcn-of-a-gui-if-a-certain-condition-is-met
 if ~isempty(varargin) && ischar(varargin{1}) && strcmp(varargin{1},'exit')
     close;
 else
@@ -91,6 +93,7 @@ else
     
     handles.Velfaerdsteknologi.Yderligere.Dato = handles.Velfaerdsteknologi.(handles.teknologi)(1).Tidspunkt;
     guidata(hObject,handles);
+    % Kalder VisData for at plotte yderligere data 
     VarighedSuperbruger = [handles.SuperBruger.Varighedforarbejdsgang];
     VarighedAlmindelig = [handles.Almindelig.Varighedforarbejdsgang];
     DirekteTid = [handles.Velfaerdsteknologi.(handles.teknologi).Tidmedborger];
@@ -112,13 +115,13 @@ else
     
     axes(handles.axSuperBrugerYderligereData)
     ylabel('Varighed i minutter')
-    title('Gennemsnitlig tid af arbejdsgang for superbruger ')
+    %title('Gennemsnitlig tid af arbejdsgang for superbruger ')
     axes(handles.axAlmindeligYderligereData)
     ylabel('Varighed i minutter')
-    title('Gennemsnitlig tid af arbejdsgang for alment personale')
+    %title('Gennemsnitlig tid af arbejdsgang for alment personale')
     axes(handles.axDirekteTidYderligereData)
     ylabel('Varighed i minutter')
-    title('Gennemsnitlig tid med borger')
+    %title('Gennemsnitlig tid med borger')
     
     if DataEksisterer == 1
         msgbox('Der er ikke data for den valgte periode');
@@ -140,6 +143,7 @@ function varargout = GUIYderligereData_OutputFcn(hObject, eventdata, handles)
 
 % Get default command line output from handles structure
 varargout{1} = handles.output;
+% Stammer fra: https://stackoverflow.com/questions/15286458/automatically-maximize-a-figure
 set(gcf, 'WindowState', 'fullscreen');
 % set(gcf, 'Position', get(0,'Screensize'));
 % set(gcf, 'units','normalized','outerposition',[0 0 1 1]);
@@ -151,11 +155,13 @@ function btnVaelgDatoYderligereData_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 % handles    structure with handles and user data (see GUIDATA)
+%https://se.mathworks.com/help/finance/uicalendar.html
 uicalendar('Weekend',[1 0 0 0 0 0 1], ...  
 'SelectionType', 1, ...  
 'DestinationUI', handles.stDatoYderligere);
 
 waitfor(handles.stDatoYderligere,'String');
+% Kalder VisData for at plotte yderligere data 
 teknologi = fieldnames(handles.Velfaerdsteknologi);
 teknologi = string(teknologi(1));
 VarighedSuperbruger = [handles.SuperBruger.Varighedforarbejdsgang];
@@ -172,15 +178,16 @@ VisData(handles,[handles.SuperBruger.Tidspunkt],VarighedSuperbruger,handles.axSu
 VisData(handles,[handles.Almindelig.Tidspunkt],VarighedAlmindelig,handles.axAlmindeligYderligereData,'Yderligere');
 [~,~,DataEksisterer] = VisData(handles,[handles.Velfaerdsteknologi.(teknologi).Tidspunkt],DirekteTid,handles.axDirekteTidYderligereData,'Yderligere');
 
+%Definere y-akser
 axes(handles.axSuperBrugerYderligereData)
 ylabel('Varighed i minutter')
-title('Gennemsnitlig tid af arbejdsgang for superbruger ')
+
 axes(handles.axAlmindeligYderligereData)
 ylabel('Varighed i minutter')
-title('Gennemsnitlig tid af arbejdsgang for almindeligt personale')
+
 axes(handles.axDirekteTidYderligereData)
 ylabel('Varighed i minutter')
-title('Gennemsnitlig tid med borger')
+
 
 if DataEksisterer == 1
     msgbox('Der er ikke data for den valgte periode');
@@ -191,6 +198,8 @@ function btngroupRedigergrafYderligere_SelectionChangedFcn(hObject, eventdata, h
 % hObject    handle to the selected object in btngroupRedigergrafYderligere 
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
+
+% Kalder VisData for at plotte yderligere data 
 teknologi = fieldnames(handles.Velfaerdsteknologi);
 teknologi = string(teknologi(1));
 VarighedSuperbruger = [handles.SuperBruger.Varighedforarbejdsgang];
@@ -206,15 +215,16 @@ VisData(handles,[handles.SuperBruger.Tidspunkt],VarighedSuperbruger,handles.axSu
 VisData(handles,[handles.Almindelig.Tidspunkt],VarighedAlmindelig,handles.axAlmindeligYderligereData,'Yderligere');
 [~,~,DataEksisterer]=VisData(handles,[handles.Velfaerdsteknologi.(teknologi).Tidspunkt],DirekteTid,handles.axDirekteTidYderligereData,'Yderligere');
 
+% Definere y-akser 
 axes(handles.axSuperBrugerYderligereData)
 ylabel('Varighed i minutter')
-title('Gennemsnitlig tid af arbejdsgang for superbruger ')
+
 axes(handles.axAlmindeligYderligereData)
 ylabel('Varighed i minutter')
-title('Gennemsnitlig tid af arbejdsgang for almindeligt personale')
+
 axes(handles.axDirekteTidYderligereData)
 ylabel('Varighed i minutter')
-title('Gennemsnitlig tid med borger')
+
 
 if DataEksisterer == 1
     msgbox('Der er ikke data for den valgte periode');
@@ -238,6 +248,9 @@ function btnAfslutSystem_Callback(hObject, eventdata, handles)
 % hObject    handle to btnAfslutSystem (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
+
+% Spørger om de vil afslutte 
+%Stammer fra : https://se.mathworks.com/help/matlab/ref/questdlg.html
 spoergsmaal=sprintf('Ønsker du at afslutte programmet: ?');
 svar=questdlg(spoergsmaal,'Afslut',...
 'Ja', 'Nej', 'Nej'); %den sidste gem er default værdien

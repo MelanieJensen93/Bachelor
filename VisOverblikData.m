@@ -15,6 +15,7 @@ function [startDato, slutDato] = VisOverblikData(handles,Vindue)
 teknologi = fieldnames(handles.Velfaerdsteknologi);
 teknologi = string(teknologi);
 switch Vindue 
+    % Definere de forskellige komponenter på skærmene 
     case 'Teknologi'
         tid = [handles.Velfaerdsteknologi.(teknologi).Tidspunkt];
         Varighed = [handles.Velfaerdsteknologi.(teknologi).Varighedforarbejdsgang];
@@ -36,13 +37,16 @@ end
 %følgende format. 
 infmt = 'mm:ss';
 varighed = duration(Varighed,'InputFormat',infmt); 
+% kalder VisData for antal medarbejder der skal plottes. 
 VisData(handles,tid,Medarbejder,axMedarbejder,Vindue);
+% kalder VisData for antal medarbejder der skal plottes. 
 [startDato,slutDato,DataEksistere] = VisData(handles,tid,varighed,axVarighed,Vindue);
 axes(axMedarbejder)
 ylabel('Antal medarbejdere')
 axes(axVarighed)
 ylabel('Varighed i minutter')
-
+    % Hvis DataEksistere lig med 1, hvilket betyder der er ingen data, så
+    % vil fejlmeddelelse fremkomme. 
     if DataEksistere == 1
         msgbox('Der er ikke data for den valgte periode');
     end

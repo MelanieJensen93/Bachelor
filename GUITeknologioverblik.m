@@ -103,6 +103,7 @@ else
 end
 %set(gcf, 'Position', get(0,'Screensize'));
 %set(gcf, 'Units', 'normal', 'Position', [0 0 1 1])
+% Stammer fra: https://stackoverflow.com/questions/15286458/automatically-maximize-a-figure
 set(gcf, 'WindowState', 'fullscreen');
 set(gcf, 'Toolbar', 'none', 'Menu', 'none');
 
@@ -161,6 +162,8 @@ function btnVaelgDatoTeknologioverblik_Callback(hObject, eventdata, handles)
 % hObject    handle to btnVaelgDatoTeknologioverblik (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
+
+%https://se.mathworks.com/help/finance/uicalendar.html
 uicalendar('Weekend',[1 0 0 0 0 0 1], ...  
 'SelectionType', 1, ...  
 'DestinationUI', handles.stDatoTeknologiOverblik);
@@ -191,6 +194,8 @@ function btnAfslutSystem_Callback(hObject, eventdata, handles)
 % hObject    handle to btnAfslutSystem (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
+
+% https://se.mathworks.com/help/matlab/ref/questdlg.html
 spoergsmaal=sprintf('Ønsker du at afslutte programmet: ?');
 svar=questdlg(spoergsmaal,'Afslut',...
 'Ja', 'Nej', 'Nej'); %den sidste gem er default værdien
