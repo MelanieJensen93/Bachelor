@@ -10,7 +10,7 @@ function handles = IndlaesVelfaerdsteknologi(handles,fil)
 %   handles = handle til elementer i GUI.  
 if nargin ==1
     % Læser data ind i "SensorDataFil" varibel i en struct. 
-    SensorDataFil = indlaesSensorData('SensorDataFilVers1.xlsx','Ark1');
+    SensorDataFil = indlaesSensorData('SensorDataFilVers2.xlsx','Ark1');
 end
 
 if nargin ==2
