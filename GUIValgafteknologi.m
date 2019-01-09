@@ -134,7 +134,6 @@ if isfield(handles.Velfaerdsteknologi ,'Luna')
     handles.Velfaerdsteknologi=rmfield(handles.Velfaerdsteknologi,'Luna');
 end
 
-
 if isfield(handles.Velfaerdsteknologi ,'Carendo')
     datatogo = handles.Velfaerdsteknologi;
     guidata(hObject, handles);
