@@ -15,7 +15,7 @@ end
 
 if nargin ==2
     % Læser data ind i "SensorDataFil" varibel i en struct. 
-    SensorDataFil = indlaesSensorData('SensorDataSammenlignFil.xlsx','Ark1');
+    SensorDataFil = indlaesSensorData('SammenlignDataFilVersion2.xlsx','Ark1');
 end
 
 % Data inddeles i de to mulige teknologier.
